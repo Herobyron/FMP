@@ -133,6 +133,80 @@ public class MonsterScript : MonoBehaviour
     [SerializeField]
     private List<BeneficialEffects> EffectsBeneficial = new List<BeneficialEffects>();
 
+    [Tooltip("a list of the names for all of the runes the monster has equiped")]
+    [SerializeField]
+    private List<string> RuneNames = new List<string>();
+
+    [Tooltip("the Maximum amount of effects that the monster is able to hold")]
+    [SerializeField]
+    private int MaxEffects;
+
+    [Tooltip("the leader skill that you want the monster to be able to use (this is a special skill that affects the stats of all monsters)")]
+    [SerializeField]
+    private Skillsscript LeaderSkill = null;
+
+    [Tooltip("the string to determine who owns the monster wether it be the player or the AI")]
+    [SerializeField]
+    private string OwnerName = null;
+
+    [Tooltip("a bool to determine if it is the monsters turn or not used for when the monster is battling")]
+    [SerializeField]
+    private bool CurrentTurn;
+
+    [Tooltip("how important it is for when the Ai is controlling the monster to use the first skill (the higher the number the more important the skill is)")]
+    [SerializeField]
+    private int SkillOneImportance = 0;
+
+    [Tooltip("how important it is for when the Ai is controlling the monster to use the second skill (the higher the number the more important the skill is)")]
+    [SerializeField]
+    private int SkillTwoImportance = 0;
+
+    [Tooltip("how important it is for when the Ai is controlling the monster to use the third skill (the higher the number the more important the skill is)")]
+    [SerializeField]
+    private int SkillThreeImportance = 0;
+
+    [Tooltip("the skill cooldown for the second skill the monster has")]
+    [SerializeField]
+    private int SkillTwoCoolDown = 0;
+
+    [Tooltip("The skill cooldown for the third skill the monster has")]
+    [SerializeField]
+    private int SkillThreeCoolDown = 0;
+
+    [Tooltip("a bool to determine if the first runes have been applied to the monsters base stats")]
+    [SerializeField]
+    private bool RuneOneApplied = false;
+
+    [Tooltip("a bool to determine if the second rune has been applied to the monsters base stats ")]
+    [SerializeField]
+    private bool RuneTwoApplied = false;
+
+    [Tooltip("a bool to determine if the third rune has been applied to the monsters base stats")]
+    [SerializeField]
+    private bool RuneThreeApplied = false;
+
+    [Tooltip("a bool to determine if the fourth rune has been applied to the monsters base stats")]
+    [SerializeField]
+    private bool RunefourApplied = false;
+
+    [Tooltip("a bool to determine if the fifth rune has been applied to the monsters base stats")]
+    [SerializeField]
+    private bool RuneFiveApplied = false;
+
+    [Tooltip("a bool to determine if the sixth rune has been applied to the monsters base stats")]
+    [SerializeField]
+    private bool RuneSixApplied = false;
+
+ 
+    //commment it 
+    private enum Monsterstate {idle };
+
+    [Tooltip("a enum to determine the monsters current state")]
+    [SerializeField]
+    private Monsterstate state = Monsterstate.idle;
+
+
+
 
 
 
