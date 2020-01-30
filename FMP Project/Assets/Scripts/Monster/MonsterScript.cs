@@ -110,6 +110,10 @@ public class MonsterScript : MonoBehaviour
     [SerializeField]
     private RuneScript RuneSix = null;
 
+    //this is a list of all of the runes that are equiped on to this monster (i may change this to serilised so that in stead of equiping each rune seperalty it just stores in this list)
+    //this list is for storing the runes so that it can be used in a function later on
+    private List<RuneScript> Runes = new List<RuneScript>();
+
     // these are the Skills that the monster can have
     // this will need testing to see wether it needs to be a gameobject or not
 
@@ -199,21 +203,26 @@ public class MonsterScript : MonoBehaviour
 
  
     //commment it 
-    private enum Monsterstate {idle };
+    // this is the enum for what type of state the monster is in
+    // idle means they are just standing there and will not be battling any time soon
+    // Battle means the monster is in combat and will be attacking or taking damage
+    private enum Monsterstate {Idle, Battle };
 
     [Tooltip("a enum to determine the monsters current state")]
     [SerializeField]
-    private Monsterstate state = Monsterstate.idle;
-
-
-
+    private Monsterstate state = Monsterstate.Idle;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Runes.Add(RuneOne);
+        Runes.Add(RuneTwo);
+        Runes.Add(RuneThree);
+        Runes.Add(RuneFour);
+        Runes.Add(RuneFive);
+        Runes.Add(RuneSix);
     }
 
     // Update is called once per frame
@@ -223,6 +232,174 @@ public class MonsterScript : MonoBehaviour
     }
 
 
+    // this function is to apply damage to this monster. 
+    // apply damage will particularly be used when a monster attacks this one and that skill function will call apply damage when necisary
+    //Variables :
+    // - the float is the other monsters attack as this will be the main component for the math calculation
+    // - the first list is the beneficail effects that are applied on the monster that is attacking this one
+    // - the second list is the harmful effects that are apllied on the monster that is attacking this one
+    public void ApplyDamage(float OtherMonsterAttack, List<BeneficialEffects> OtherMonsterBeneficialEffects, List<HarmfulEffects> OtherMonsterHarmfulEffects)
+    {
 
+    }
 
+    //this is the function that will apply a heal to this monster
+    // the skill that is using the heal will calculate how much health to heal and will 
+    // Variables :
+    // - the float is how much health will be given to this monster when they are healed
+    public void ApplyHeal(float HealAmount)
+    {
+
+    }
+
+    // this is the function that will apply the rune effects and stats to the monster when one is equiped
+    public void ApplyRuneEffects()
+    {
+
+    }
+
+    // this function is used to unequip runes. this will also decrease the stats accordingly when the rune is unequiped
+    //Variables : 
+    // - the name is the name of the rune that is going to be unequiped
+    public void UnequipRune(string RuneName)
+    {
+
+    }
+
+    // this function will return the rune that has the same name as the rune name given in the variables
+    //Variables : 
+    // - the name of the rune that will be returned
+    public RuneScript ReturnRune(string RuneName)
+    {
+        return Runes[0];
+    }
+
+    // this function will use the rune and equip it to the monster and will also use the applyRuneEffect function to apply that runes stats to the monster
+    // the rune already has what slot it needs to be equiped in so it can be determined what rune slot it needs to go in
+    // Variables :
+    // - the rune that you want equiped to the monster
+    public void EquipRune(RuneScript TheRune)
+    {
+
+    }
+
+    // this is a function that will be returning this monsters base health stat
+    public float ReturnBaseHealth()
+    {
+        return BaseHealth;
+    }
+
+    // this is a function that will return the base damage of the monster
+    public float ReturnBaseDamage()
+    {
+        return BaseDamage;
+    }
+
+    // this function will return the base speed of the monster
+    public float ReturnBaseSpeed()
+    {
+        return BaseSpeed;
+    }
+
+    // this function will return the base Defence of the monster
+    public float ReturnBaseDefence()
+    {
+        return BaseDefence;
+    }
+
+    // this function will return the base crit rate of the monster
+    public float ReturnBaseCritRate()
+    {
+        return BaseCritRate;
+    }
+
+    // this function will return the base crit damage of the monster
+    public float ReturnBaseCritDamage()
+    {
+        return BaseCritDamage;
+    }
+
+    // this function will return the base Accuracy of the monster
+    public float ReturnBaseAccuracy()
+    {
+        return BaseAccuracy;
+    }
+
+    // this function will return the base Resistance of the monster
+    public float ReturnBaseResistance()
+    {
+        return BaseResistance;
+    }
+
+    // this function will return the monsters current Health
+    public float ReturnCurrentHealth()
+    {
+        return CurrentHealth;
+    }
+
+    //this function will use the skill that has the same name as the one specified in the variable
+    //Variables : 
+    // - the string is the name of the skill that you want to be used withhin this function
+    public void UseSkill(string SkillName)
+    {
+
+    }
+
+    // this function is used to set the skill cool down of the second skill
+    //Variables :
+    // - the float is to determine how much you want to set this skill cooldown by
+    public void SetSkillTwoCoolDown(int CoolDown)
+    {
+
+    }
+
+    // this function is used to get the skill cooldown of the second skill
+    public int ReturnSkillTwoCoolDown()
+    {
+        return SkillTwoCoolDown;
+    }
+
+    // this function is used to set the skill cooldown of the third skill
+    //Variables : 
+    // - the float is to determine how much you want to set this skill cooldown by
+    public void SetSkillThreeCoolDown(int CoolDown)
+    {
+        
+    }
+
+    //this function is used to get the current skill cooldown of the third skill 
+    public int ReturnSkillThreeCoolDown()
+    {
+        return SkillThreeCoolDown;
+    }
+
+    // this function is used to add beneficial effects to the monster
+    //Variables : 
+    // - the effect that you want to be added to the monster
+    public void AddBeneficialEffect(BeneficialEffects BeneficialEffect)
+    {
+
+    }
+
+    //this function is used to remove beneficial effects from the monster
+    // this will work by checking all of the beneficial effects timers and removing all the ones at zero
+    public void RemoveBeneficialEffects()
+    {
+
+    }
+
+    // this function is used to add Harmful Effects to the monster 
+    //Variables :
+    // - the effect that you want to be added to the monster
+    public void AddHarmfulEffects(HarmfulEffects HarmfulEffect)
+    {
+
+    }
+
+    // this function is used to remove harmfull effects from the monster
+    // this will work by checking all of the harmful effects timers and removing all the ones at zero
+    public void RemoveHarmfulEffects()
+    {
+
+    }
 }
