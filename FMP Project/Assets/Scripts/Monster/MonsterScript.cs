@@ -130,12 +130,10 @@ public class MonsterScript : MonoBehaviour
     private Skillsscript SkillThree = null;
 
     [Tooltip("this is the list of harmful effects that can be applied on the monster")]
-    [SerializeField]
-    private List<HarmfulEffects> EffectsHarmful = new List<HarmfulEffects>();
+    public List<HarmfulEffects> EffectsHarmful = new List<HarmfulEffects>();
 
     [Tooltip("this is the list of Beneficial effects that can be applied on the monster")]
-    [SerializeField]
-    private List<BeneficialEffects> EffectsBeneficial = new List<BeneficialEffects>();
+    public List<BeneficialEffects> EffectsBeneficial = new List<BeneficialEffects>();
 
     [Tooltip("a list of the names for all of the runes the monster has equiped")]
     [SerializeField]
@@ -202,7 +200,6 @@ public class MonsterScript : MonoBehaviour
     private bool RuneSixApplied = false;
 
  
-    //commment it 
     // this is the enum for what type of state the monster is in
     // idle means they are just standing there and will not be battling any time soon
     // Battle means the monster is in combat and will be attacking or taking damage
@@ -240,6 +237,80 @@ public class MonsterScript : MonoBehaviour
     // - the second list is the harmful effects that are apllied on the monster that is attacking this one
     public void ApplyDamage(float OtherMonsterAttack, List<BeneficialEffects> OtherMonsterBeneficialEffects, List<HarmfulEffects> OtherMonsterHarmfulEffects)
     {
+
+        // this step of set all of the numbers and bools ready for the damage calculation step
+
+        bool MissAttack = false;
+        bool CritBuff = false;
+        int AttackDown = 0;
+        int AttackUp = 0;
+        int DefenceDown = 0;
+        int DefenceUp = 0;
+
+        if(EffectsHarmful.Count > 0)
+        {
+            foreach(HarmfulEffects H in EffectsHarmful)
+            {
+                if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.MissDeBuff)
+                {
+                    MissAttack = true;
+                }
+
+                if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.AttackDeBuff)
+                {
+                    AttackDown = 500;
+                }
+            }
+
+        }
+
+        if(EffectsBeneficial.Count > 0)
+        {
+            foreach(BeneficialEffects B in EffectsBeneficial)
+            {
+                if(B.ReturnBuffType() == BeneficialEffects.Bufftype.CritRateBuff)
+                {
+                    CritBuff = true;
+                }
+
+                if(B.ReturnBuffType() == BeneficialEffects.Bufftype.AttackBuff)
+                {
+                    AttackUp = 500;
+                }
+            }
+        }
+
+        if(OtherMonsterHarmfulEffects.Count > 0)
+        {
+            foreach(HarmfulEffects H in OtherMonsterHarmfulEffects)
+            {
+                if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.DefenceDeBuff)
+                {
+                    DefenceDown = 500;
+                }
+
+            }
+        }
+
+        if(OtherMonsterBeneficialEffects.Count > 0)
+        {
+            foreach(BeneficialEffects B in OtherMonsterBeneficialEffects)
+            {
+                if(B.ReturnBuffType() == BeneficialEffects.Bufftype.DefenceBuff)
+                {
+                    DefenceUp = 500;
+                }
+            }
+        }
+
+
+        // this is the step for calculating the actual damage to be applied to the monster
+        // need to check for miss and crit rate and then do the calculation of the damage after
+
+        if(MissAttack)
+        {
+
+        }
 
     }
 
@@ -393,7 +464,7 @@ public class MonsterScript : MonoBehaviour
     // - the effect that you want to be added to the monster
     public void AddHarmfulEffects(HarmfulEffects HarmfulEffect)
     {
-
+        EffectsHarmful.Add(HarmfulEffect);
     }
 
     // this function is used to remove harmfull effects from the monster
