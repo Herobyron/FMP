@@ -40,7 +40,6 @@ public class MonsterScript : MonoBehaviour
     [SerializeField]
     private float BaseResistance = 0.0f;
 
-
     [Tooltip("This is the monsters current health during the game (the monsters current health)")]
     [SerializeField]
     private float CurrentHealth = 0.0f;
@@ -370,24 +369,227 @@ public class MonsterScript : MonoBehaviour
 
     }
 
+    // this function i want to change as i feel there is a better way of doing this so for now the function has been put on hold tille a better way of doing it is found
+    // a good thing to research
     // this is the function that will apply the rune effects and stats to the monster when one is equiped
-    public void ApplyRuneEffects()
+    public void ApplyRuneEffects(int RuneNumber)
     {
-        if(!RuneOneApplied)
+        if(RuneNumber == 1)
         {
-            if(RuneOne)
+            if (!RuneOneApplied)
             {
-                RuneOne.ReturnRuneStatOne();
+                if (RuneOne)
+                {
+                    switch(RuneOne.ReturnRuneStatOneType())
+                    {
+                        case ("Health"):
+                            {
+                                BaseHealth += BaseHealth * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Damage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Defence"):
+                            {
+                                BaseDefence += BaseDefence * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Speed"):
+                            {
+                                BaseSpeed += BaseSpeed * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritRate"):
+                            {
+                                BaseCritRate += BaseCritRate * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritDamage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Accuracy"):
+                            {
+                                BaseAccuracy += BaseAccuracy * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Resistance"):
+                            {
+                                BaseResistance += BaseResistance * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                    }
+
+
+                    switch (RuneOne.ReturnRuneStatTwoType())
+                    {
+                        case ("Health"):
+                            {
+                                BaseHealth += BaseHealth * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Damage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Defence"):
+                            {
+                                BaseDefence += BaseDefence * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Speed"):
+                            {
+                                BaseSpeed += BaseSpeed * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritRate"):
+                            {
+                                BaseCritRate += BaseCritRate * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritDamage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Accuracy"):
+                            {
+                                BaseAccuracy += BaseAccuracy * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Resistance"):
+                            {
+                                BaseResistance += BaseResistance * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                    }
+
+
+                    switch (RuneOne.ReturnRuneStatThreeType())
+                    {
+                        case ("Health"):
+                            {
+                                BaseHealth += BaseHealth * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Damage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Defence"):
+                            {
+                                BaseDefence += BaseDefence * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Speed"):
+                            {
+                                BaseSpeed += BaseSpeed * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritRate"):
+                            {
+                                BaseCritRate += BaseCritRate * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritDamage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Accuracy"):
+                            {
+                                BaseAccuracy += BaseAccuracy * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Resistance"):
+                            {
+                                BaseResistance += BaseResistance * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                    }
+
+
+                    switch (RuneOne.ReturnRuneStatFourType())
+                    {
+                        case ("Health"):
+                            {
+                                BaseHealth += BaseHealth * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Damage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Defence"):
+                            {
+                                BaseDefence += BaseDefence * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Speed"):
+                            {
+                                BaseSpeed += BaseSpeed * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritRate"):
+                            {
+                                BaseCritRate += BaseCritRate * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("CritDamage"):
+                            {
+                                BaseDamage += BaseDamage * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Accuracy"):
+                            {
+                                BaseAccuracy += BaseAccuracy * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                        case ("Resistance"):
+                            {
+                                BaseResistance += BaseResistance * RuneOne.ReturnRuneStatOne();
+                                break;
+                            }
+                    }
+                }
             }
         }
+        else if(RuneNumber == 2)
+        {
+
+        }
+        else if(RuneNumber == 3)
+        {
+
+        }
+        else if(RuneNumber == 4)
+        {
+
+        }
+        else if(RuneNumber == 5)
+        {
+
+        }
+        else if(RuneNumber == 6)
+        {
+
+        }
+        
     }
 
     // this function is used to unequip runes. this will also decrease the stats accordingly when the rune is unequiped
     //Variables : 
-    // - the name is the name of the rune that is going to be unequiped
-    public void UnequipRune(string RuneName)
+    // - the number is to determine which rune is going to be unequiped
+    public void UnequipRune(int RuneNumber)
     {
-
+        
     }
 
     // this function will return the rune that has the same name as the rune name given in the variables
