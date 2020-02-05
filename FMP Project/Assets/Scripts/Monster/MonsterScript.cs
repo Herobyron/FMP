@@ -141,7 +141,7 @@ public class MonsterScript : MonoBehaviour
 
     [Tooltip("the Maximum amount of effects that the monster is able to hold")]
     [SerializeField]
-    private int MaxEffects;
+    private int MaxEffects = 10;
 
     [Tooltip("the leader skill that you want the monster to be able to use (this is a special skill that affects the stats of all monsters)")]
     [SerializeField]
@@ -239,17 +239,19 @@ public class MonsterScript : MonoBehaviour
     {
 
         // this step of set all of the numbers and bools ready for the damage calculation step
+        // all the attacking type buffs and defubs are calculated by enemy monster
+        // all of the defence type buffs and debuffs are calculated by this monster
 
         bool MissAttack = false;
         bool CritBuff = false;
-        int AttackDown = 0;
-        int AttackUp = 0;
-        int DefenceDown = 0;
-        int DefenceUp = 0;
+        float AttackDown = 0.0f;
+        float AttackUp = 0.0f;
+        float DefenceDown = 0.0f;
+        float DefenceUp = 0.0f;
 
-        if(EffectsHarmful.Count > 0)
+        if(OtherMonsterHarmfulEffects.Count > 0)
         {
-            foreach(HarmfulEffects H in EffectsHarmful)
+            foreach(HarmfulEffects H in OtherMonsterHarmfulEffects)
             {
                 if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.MissDeBuff)
                 {
@@ -260,13 +262,14 @@ public class MonsterScript : MonoBehaviour
                 {
                     AttackDown = 500;
                 }
+
             }
 
         }
 
-        if(EffectsBeneficial.Count > 0)
+        if(OtherMonsterBeneficialEffects.Count > 0)
         {
-            foreach(BeneficialEffects B in EffectsBeneficial)
+            foreach(BeneficialEffects B in OtherMonsterBeneficialEffects)
             {
                 if(B.ReturnBuffType() == BeneficialEffects.Bufftype.CritRateBuff)
                 {
@@ -280,21 +283,9 @@ public class MonsterScript : MonoBehaviour
             }
         }
 
-        if(OtherMonsterHarmfulEffects.Count > 0)
+        if(EffectsBeneficial.Count > 0)
         {
-            foreach(HarmfulEffects H in OtherMonsterHarmfulEffects)
-            {
-                if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.DefenceDeBuff)
-                {
-                    DefenceDown = 500;
-                }
-
-            }
-        }
-
-        if(OtherMonsterBeneficialEffects.Count > 0)
-        {
-            foreach(BeneficialEffects B in OtherMonsterBeneficialEffects)
+            foreach(BeneficialEffects B in EffectsBeneficial)
             {
                 if(B.ReturnBuffType() == BeneficialEffects.Bufftype.DefenceBuff)
                 {
@@ -303,13 +294,63 @@ public class MonsterScript : MonoBehaviour
             }
         }
 
+        if(EffectsHarmful.Count > 0)
+        {
+            foreach(HarmfulEffects H in EffectsHarmful)
+            {
+                if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.DefenceDeBuff)
+                {
+                    DefenceDown = 500;
+                }
+            }
+        }
+   
+
 
         // this is the step for calculating the actual damage to be applied to the monster
         // need to check for miss and crit rate and then do the calculation of the damage after
 
         if(MissAttack)
         {
-
+            // if the number is greater then 20 attack missed
+           if(Random.Range(0, 100) >= 20)
+           {
+               float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown ;
+               TempDamage *= 0.7f;
+               CurrentHealth -= TempDamage;
+           }
+           else // else the attack has hit with the debuff and now check crit
+           {
+                if(CritBuff) // the crit rate buff gives and extra 30% chance to the crit rate
+                {
+                    if(Random.Range(0,100) >= (BaseCritRate + 30)) // if the random range is greater then the base crit rate + the extra chance then its regular damage
+                    {
+                        CurrentHealth -= OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    }
+                    else // else if the number isnt bigger then the attack landed as a crit
+                    {
+                        float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                        TempDamage += TempDamage + (TempDamage * BaseCritDamage);
+                        CurrentHealth -= TempDamage;
+                    }
+                }
+           }
+        }
+        else //if there is no miss debuff then it goes strait to checking crit rate
+        {
+            if (CritBuff) // the crit rate buff gives and extra 30% chance to the crit rate
+            {
+                if (Random.Range(0, 100) >= (BaseCritRate + 30)) // if the random range is greater then the base crit rate + the extra chance then its regular damage
+                {
+                    CurrentHealth -= OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                }
+                else // else if the number isnt bigger then the attack landed as a crit
+                {
+                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    TempDamage += TempDamage + (TempDamage * BaseCritDamage);
+                    CurrentHealth -= TempDamage;
+                }
+            }
         }
 
     }
@@ -320,13 +361,25 @@ public class MonsterScript : MonoBehaviour
     // - the float is how much health will be given to this monster when they are healed
     public void ApplyHeal(float HealAmount)
     {
+        CurrentHealth += HealAmount;
+
+        if(CurrentHealth > BaseHealth)
+        {
+            CurrentHealth = BaseHealth;
+        }
 
     }
 
     // this is the function that will apply the rune effects and stats to the monster when one is equiped
     public void ApplyRuneEffects()
     {
-
+        if(!RuneOneApplied)
+        {
+            if(RuneOne)
+            {
+                RuneOne.ReturnRuneStatOne();
+            }
+        }
     }
 
     // this function is used to unequip runes. this will also decrease the stats accordingly when the rune is unequiped
@@ -449,6 +502,24 @@ public class MonsterScript : MonoBehaviour
     // - the effect that you want to be added to the monster
     public void AddBeneficialEffect(BeneficialEffects BeneficialEffect)
     {
+        bool TempAffectApplied = false;
+
+        foreach(BeneficialEffects B in EffectsBeneficial)
+        {
+            if(B == BeneficialEffect)
+            {
+                TempAffectApplied = true;
+                B.SetTurns(3);
+            }
+        }
+
+        if(!TempAffectApplied)
+        {
+            if((EffectsBeneficial.Count + EffectsHarmful.Count) < MaxEffects)
+            {
+                EffectsBeneficial.Add(BeneficialEffect);
+            }
+        }
 
     }
 
@@ -456,7 +527,13 @@ public class MonsterScript : MonoBehaviour
     // this will work by checking all of the beneficial effects timers and removing all the ones at zero
     public void RemoveBeneficialEffects()
     {
-
+        foreach(BeneficialEffects B in EffectsBeneficial)
+        {
+            if(B.ReturnTurnsLeft() <= 0)
+            {
+                EffectsBeneficial.Remove(B);
+            }
+        }
     }
 
     // this function is used to add Harmful Effects to the monster 
@@ -464,13 +541,37 @@ public class MonsterScript : MonoBehaviour
     // - the effect that you want to be added to the monster
     public void AddHarmfulEffects(HarmfulEffects HarmfulEffect)
     {
-        EffectsHarmful.Add(HarmfulEffect);
+        bool TempAffectApplied = false;
+
+        foreach(HarmfulEffects H in EffectsHarmful)
+        {
+            if(H == HarmfulEffect)
+            {
+                TempAffectApplied = true;
+                H.SetTurns(3);
+            }
+        }
+
+        if(!TempAffectApplied)
+        {
+            if((EffectsBeneficial.Count + EffectsHarmful.Count) < MaxEffects)
+            {
+                EffectsHarmful.Add(HarmfulEffect);
+            }
+        }
+
     }
 
     // this function is used to remove harmfull effects from the monster
     // this will work by checking all of the harmful effects timers and removing all the ones at zero
     public void RemoveHarmfulEffects()
     {
-
+        foreach(HarmfulEffects H in EffectsHarmful)
+        {
+            if(H.ReturnturnsLeft() <=- 0)
+            {
+                EffectsHarmful.Remove(H);
+            }
+        }
     }
 }

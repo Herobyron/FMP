@@ -130,4 +130,7 @@ public class RuneScript : MonoBehaviour
         return RuneStatFour;
     }
 
+    
+
+
 }
