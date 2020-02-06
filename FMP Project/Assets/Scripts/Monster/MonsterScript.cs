@@ -219,6 +219,10 @@ public class MonsterScript : MonoBehaviour
         Runes.Add(RuneFour);
         Runes.Add(RuneFive);
         Runes.Add(RuneSix);
+
+        SkillOne = new BasicSkill();
+
+
     }
 
     // Update is called once per frame
@@ -369,7 +373,7 @@ public class MonsterScript : MonoBehaviour
 
     }
 
-    // this function i want to change as i feel there is a better way of doing this so for now the function has been put on hold tille a better way of doing it is found
+    // this function i want to change as i feel there is a better way of doing this so for now the function has been put on hold until a better way of doing it is found
     // a good thing to research
     // this is the function that will apply the rune effects and stats to the monster when one is equiped
     public void ApplyRuneEffects(int RuneNumber)
@@ -775,5 +779,15 @@ public class MonsterScript : MonoBehaviour
                 EffectsHarmful.Remove(H);
             }
         }
+    }
+
+    public List<BeneficialEffects> ReturnBeneficialEffects()
+    {
+        return EffectsBeneficial;
+    }
+
+    public List<HarmfulEffects> ReturnHarmfulEffects()
+    {
+        return EffectsHarmful;
     }
 }

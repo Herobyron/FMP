@@ -158,7 +158,29 @@ public class RuneScript : MonoBehaviour
 
                if(RuneLevel == 6 && CurrentRuneStats >= 2)
                {
-
+                    switch (Random.Range(0, CurrentRuneStats))
+                    {
+                        case (0):
+                            {
+                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (1):
+                            {
+                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (2):
+                            {
+                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (3):
+                            {
+                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                    }
                }
                else if(RuneLevel == 6 && CurrentRuneStats <= 1)
                {
@@ -168,7 +190,29 @@ public class RuneScript : MonoBehaviour
 
                if (RuneLevel == 9 && CurrentRuneStats >= 3)
                {
-
+                    switch (Random.Range(0, CurrentRuneStats))
+                    {
+                        case (0):
+                            {
+                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (1):
+                            {
+                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (2):
+                            {
+                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (3):
+                            {
+                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                    }
                }
                else if(RuneLevel == 9 && CurrentRuneStats <= 2)
                {
@@ -178,7 +222,29 @@ public class RuneScript : MonoBehaviour
 
                if(RuneLevel == 12 && CurrentRuneStats == 4)
                {
-
+                    switch (Random.Range(0, CurrentRuneStats))
+                    {
+                        case (0):
+                            {
+                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (1):
+                            {
+                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (2):
+                            {
+                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                        case (3):
+                            {
+                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                break;
+                            }
+                    }
                }
                else
                {
