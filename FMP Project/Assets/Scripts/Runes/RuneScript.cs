@@ -411,5 +411,16 @@ public class RuneScript : MonoBehaviour
 
     }
 
+    // this function returns what rune slot this rune should be equiped to 
+    public int ReturnRuneNumber()
+    {
+        return RuneSlot;
+    }
+
+    // returns the bool that determines wether this rune is equiped to the monster or not
+    public bool ReturnRuneEquiped()
+    {
+        return RuneEquiped;
+    }
 
 }
