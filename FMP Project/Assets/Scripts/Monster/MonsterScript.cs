@@ -719,7 +719,7 @@ public class MonsterScript : MonoBehaviour
     // - the rune that you want equiped to the monster
     public void EquipRune(RuneObject TheRune)
     {
-        //checks to see if the rune is already equiped on something
+        // checks to see if the rune is already equiped on something
         // then finds what number this rune is and applied it to that rune slot
 
         if(!TheRune.ReturnRuneEquiped())
