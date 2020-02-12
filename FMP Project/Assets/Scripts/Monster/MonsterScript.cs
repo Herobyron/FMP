@@ -87,31 +87,31 @@ public class MonsterScript : MonoBehaviour
 
     [Tooltip("This is the First rune that the monster can equip")]
     [SerializeField]
-    private RuneScript RuneOne = null;
+    private RuneObject RuneOne = null;
 
     [Tooltip("This is the second rune that the monster can equip")]
     [SerializeField]
-    private RuneScript RuneTwo = null;
+    private RuneObject RuneTwo = null;
 
     [Tooltip("this is the third rune that the monster can equip")]
     [SerializeField]
-    private RuneScript RuneThree = null;
+    private RuneObject RuneThree = null;
 
     [Tooltip("this is the fourth rune that the monster can equip")]
     [SerializeField]
-    private RuneScript RuneFour = null;
+    private RuneObject RuneFour = null;
 
     [Tooltip("this is the fifth rune that the monster can equip")]
     [SerializeField]
-    private RuneScript RuneFive = null;
+    private RuneObject RuneFive = null;
 
     [Tooltip("this is the sixth rune that the monster can equip")]
     [SerializeField]
-    private RuneScript RuneSix = null;
+    private RuneObject RuneSix = null;
 
     //this is a list of all of the runes that are equiped on to this monster (i may change this to serilised so that in stead of equiping each rune seperalty it just stores in this list)
     //this list is for storing the runes so that it can be used in a function later on
-    private List<RuneScript> Runes = new List<RuneScript>();
+    private List<RuneObject> Runes = new List<RuneObject>();
 
     // these are the Skills that the monster can have
     // this will need testing to see wether it needs to be a gameobject or not
@@ -450,7 +450,7 @@ public class MonsterScript : MonoBehaviour
     // this function is used to apply the stats that are held on the rune to the monsters base stats
     // Parameters:
     // - the rune that will be checked for what stats it has and also apply it to the monster
-    private void RuneStatIncrease(RuneScript TheRune)
+    private void RuneStatIncrease(RuneObject TheRune)
     {
         // the function first checks to make sure that the rune has a stat on it (so if the rune stat two is zero then it dosent have two stats and shouldnt try to apply it)
         // then it will go through all of the stats and find which type of stats are on the rune
@@ -708,16 +708,16 @@ public class MonsterScript : MonoBehaviour
     // this function will return the rune that has the same name as the rune name given in the variables
     //Variables : 
     // - the name of the rune that will be returned
-    public RuneScript ReturnRune(string RuneName)
+    public RuneObject ReturnRune(int RuneNumber)
     {
-        return Runes[0];
+        return Runes[RuneNumber];
     }
 
     // this function will use the rune and equip it to the monster and will also use the applyRuneEffect function to apply that runes stats to the monster
     // the rune already has what slot it needs to be equiped in so it can be determined what rune slot it needs to go in
     // Variables :
     // - the rune that you want equiped to the monster
-    public void EquipRune(RuneScript TheRune)
+    public void EquipRune(RuneObject TheRune)
     {
         //checks to see if the rune is already equiped on something
         // then finds what number this rune is and applied it to that rune slot
