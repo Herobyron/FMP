@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(fileName = "Skill", menuName = "ScriptableObjects/SkillObject", order = 2)]
 public class SkillObject : ScriptableObject
 {
     [Tooltip("This is to determine wether this skill is an AOE - Area of Effect Skill or not")]
@@ -35,7 +37,15 @@ public class SkillObject : ScriptableObject
 
     }
 
-    // this function is what will happen when this skill is an AOE. this will effect all of the monsters that is put into the list 
+    // this function is what will happen when this skill is an AOE. this will effect all of the monsters that is put into the list and will use the skill on each of them
+    //Parameters : 
+    // the first monster is for the monster that is using the skill
+    // the second is a list of monsters that will have the effect of the skill used against them
+    public virtual void SkillActionAOE(MonsterScript ThisMonster, List<MonsterScript> TargetMonsters)
+    {
+
+    }
+
 
     // this function will allow the skill to apply effects on the monster and the allies in battle if this skill is a specific type
     public virtual void ApplyLeaderSkill(MonsterScript ThisMonster)
