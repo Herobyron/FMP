@@ -118,15 +118,15 @@ public class MonsterScript : MonoBehaviour
 
     [Tooltip("This is the first skill that the monster is able to use")]
     [SerializeField]
-    private Skillsscript SkillOne = null;
+    private SkillObject SkillOne = null;
 
     [Tooltip("This is the second skill that the monster is able to use")]
     [SerializeField]
-    private Skillsscript SkillTwo = null;
+    private SkillObject SkillTwo = null;
 
     [Tooltip("This is the third skill that the monster is able to use")]
     [SerializeField]
-    private Skillsscript SkillThree = null;
+    private SkillObject SkillThree = null;
 
     [Tooltip("this is the list of harmful effects that can be applied on the monster")]
     public List<HarmfulEffects> EffectsHarmful = new List<HarmfulEffects>();
@@ -220,7 +220,9 @@ public class MonsterScript : MonoBehaviour
         Runes.Add(RuneFive);
         Runes.Add(RuneSix);
 
-        SkillOne = new BasicSkill();
+        //SkillOne = new BasicSkill();
+
+
 
         
     }
