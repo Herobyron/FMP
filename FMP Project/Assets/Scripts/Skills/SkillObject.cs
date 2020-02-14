@@ -70,4 +70,9 @@ public class SkillObject : ScriptableObject
     {
         CoolDownTurns = turns;
     }
+
+    public bool ReturnAOEBool()
+    {
+        return ISAOE;
+    }
 }

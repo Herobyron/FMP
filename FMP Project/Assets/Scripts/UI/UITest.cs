@@ -14,6 +14,10 @@ public class UITest : MonoBehaviour
     public Text RuneStatOneNumber;
 
 
+    public GameObject TestDummy;
+    public Text DummyHealth;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +30,7 @@ public class UITest : MonoBehaviour
         RuneLevelText.text = "Rune Level: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel();
         RuneStatOne.text = "Rune Stat One: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType();
         RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
-
+        DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
     }
 
 
@@ -37,6 +41,12 @@ public class UITest : MonoBehaviour
         Monster.GetComponent<MonsterScript>().ReturnRune(0).UpgradeRune();
     }
 
-
+    public void UseMonstersSkillTwo()
+    {
+        //Monster.GetComponent<MonsterScript>().UseSkill()
+        //{
+        //
+        //}
+    }
 
 }

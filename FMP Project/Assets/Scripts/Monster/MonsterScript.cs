@@ -10,6 +10,8 @@ public class MonsterScript : MonoBehaviour
 {
 
     // this is the monsters base health (the monsters health stat)
+    [Tooltip("This is the base health of the monster that it will start out with")]
+    [SerializeField]
     private float BaseHealth = 0.0f;
 
     [Tooltip("this is the base damage that the monster will have (monsters attack stat)")]
@@ -221,7 +223,7 @@ public class MonsterScript : MonoBehaviour
         Runes.Add(RuneSix);
 
         //SkillOne = new BasicSkill();
-
+        CurrentHealth = BaseHealth;
 
 
         
@@ -836,8 +838,29 @@ public class MonsterScript : MonoBehaviour
     //this function will use the skill that has the same name as the one specified in the variable
     //Variables : 
     // - the string is the name of the skill that you want to be used withhin this function
-    public void UseSkill(string SkillName)
+    // - this function will return what skill that is going to be used (this will need looking at when the game manager is implemented
+
+    public SkillObject UseSkill(int SkillNumber)
     {
+        switch (SkillNumber)
+        {
+            case (1):
+                {
+                    return SkillOne;
+                    
+                }
+            case (2):
+                {
+                    return SkillTwo;
+                }
+            case (3):
+                {
+                    return SkillThree;
+                }
+
+        }
+
+        return SkillOne;
 
     }
 
