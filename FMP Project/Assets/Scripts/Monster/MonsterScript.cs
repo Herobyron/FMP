@@ -222,7 +222,7 @@ public class MonsterScript : MonoBehaviour
 
         SkillOne = new BasicSkill();
 
-
+        
     }
 
     // Update is called once per frame
