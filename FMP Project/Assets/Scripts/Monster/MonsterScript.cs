@@ -358,6 +358,19 @@ public class MonsterScript : MonoBehaviour
                     CurrentHealth -= TempDamage;
                 }
             }
+            else
+            {
+                if (Random.Range(0, 100) >= BaseCritRate) // if the random range is greater then the base crit rate + the extra chance then its regular damage
+                {
+                    CurrentHealth -= OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                }
+                else // else if the number isnt bigger then the attack landed as a crit
+                {
+                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    TempDamage += TempDamage + (TempDamage * BaseCritDamage);
+                    CurrentHealth -= TempDamage;
+                }
+            }
         }
 
     }
@@ -835,10 +848,10 @@ public class MonsterScript : MonoBehaviour
         return CurrentHealth;
     }
 
-    //this function will use the skill that has the same name as the one specified in the variable
+    // - this function will return what skill that is going to be used (this will need looking at when the game manager is implemented
     //Variables : 
     // - the string is the name of the skill that you want to be used withhin this function
-    // - this function will return what skill that is going to be used (this will need looking at when the game manager is implemented
+
 
     public SkillObject UseSkill(int SkillNumber)
     {

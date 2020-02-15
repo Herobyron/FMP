@@ -17,6 +17,9 @@ public class UITest : MonoBehaviour
     public GameObject TestDummy;
     public Text DummyHealth;
 
+    public Text DummyBuffs;
+    public Text DummyNerfs;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,9 @@ public class UITest : MonoBehaviour
         RuneStatOne.text = "Rune Stat One: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType();
         RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
         DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
+
+
+        //UpdatingBuffsText();
     }
 
 
@@ -43,10 +49,34 @@ public class UITest : MonoBehaviour
 
     public void UseMonstersSkillTwo()
     {
-        //Monster.GetComponent<MonsterScript>().UseSkill()
-        //{
-        //
-        //}
+        Monster.GetComponent<MonsterScript>().UseSkill(2).SkillAction(Monster.GetComponent<MonsterScript>(), TestDummy.GetComponent<MonsterScript>()); 
     }
+
+    public void UseMonsterSkillOne()
+    {
+        Monster.GetComponent<MonsterScript>().UseSkill(1).SkillAction(Monster.GetComponent<MonsterScript>(), TestDummy.GetComponent<MonsterScript>());
+        UpdatingBuffsText();
+    }
+
+    public void UseMonsterSkillThree()
+    {
+        Monster.GetComponent<MonsterScript>().UseSkill(3).SkillAction(Monster.GetComponent<MonsterScript>(), TestDummy.GetComponent<MonsterScript>());
+    }
+
+
+    public void UpdatingBuffsText()
+    {
+        foreach(BeneficialEffects B in TestDummy.GetComponent<MonsterScript>().ReturnBeneficialEffects())
+        {
+            DummyBuffs.text += B.name + ", ";
+        }
+
+        foreach(HarmfulEffects H in TestDummy.GetComponent<MonsterScript>().ReturnHarmfulEffects())
+        {
+            DummyNerfs.text += H.name + ", ";
+        }
+    }
+
+   
 
 }

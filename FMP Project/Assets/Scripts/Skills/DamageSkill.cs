@@ -20,6 +20,7 @@ public class DamageSkill : SkillObject
     // the second parameter is the monster that will have the damage applied to them
     public override void SkillAction(MonsterScript ThisMonster, MonsterScript TargetMonster)
     {
+    
         float TempDamage = SkillDamage + (SkillDamage * SkillMultiplier);
         TempDamage += ThisMonster.ReturnBaseDamage();
 

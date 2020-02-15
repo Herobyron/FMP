@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RuneName: TestRune1
   RuneEquiped: 0
-  RuneLevel: 3
+  RuneLevel: 0
   RuneSlot: 1
   MaxRuneStats: 4
-  CurrentRuneStats: 1
+  CurrentRuneStats: 0
   RuneMaxLevel: 15
   RuneCurrentLevel: 0
-  RuneStatOne: 1.1169016
+  RuneStatOne: 0
   StatsOne: 2
   RuneStatTwo: 0
   StatsTwo: 0

@@ -247,7 +247,7 @@ public class RuneScript : MonoBehaviour
                     }
                }
                else if (RuneLevel == 12 && CurrentRuneStats <= 3)
-               {
+                {
                     GenerateRuneStat(4);
                }
 

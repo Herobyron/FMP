@@ -18,6 +18,7 @@ MonoBehaviour:
   MaxCoolDown: 5
   SkillName: DevloperEffect
   BeneficialEffectsToBeApplied:
-  - {fileID: 0}
+  - {fileID: 4586599549824059864, guid: 8afc0915e1da5914887833704de0af4a, type: 3}
+  - {fileID: 6956857032133254486, guid: b2428e29e3e0a5041ae1f93699323f8c, type: 3}
   HarmfulEffectsToBeApplied: []
   SkillEffect: 1
