@@ -2345,7 +2345,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11400000, guid: d9be322ec31bf7840b0b88475ee4f09a, type: 2}
         m_MethodName: UpgradeRune
         m_Mode: 1
         m_Arguments:
