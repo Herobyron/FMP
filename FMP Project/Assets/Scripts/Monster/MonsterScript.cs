@@ -87,6 +87,10 @@ public class MonsterScript : MonoBehaviour
     // these are the runes that the monster can have equiped
     // this will need testing to see wether it needs to be a gameobject or not
 
+    [Tooltip("This is a testing rune and will be the lead of progress as working on how runes interact")]
+    [SerializeField]
+    private RuneScript RuneOneTest = null;
+
     [Tooltip("This is the First rune that the monster can equip")]
     [SerializeField]
     private RuneObject RuneOne = null;

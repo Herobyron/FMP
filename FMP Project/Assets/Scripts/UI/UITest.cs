@@ -36,7 +36,9 @@ public class UITest : MonoBehaviour
         DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
 
 
-        //UpdatingBuffsText();
+        Debug.Log(Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel());
+        Debug.Log(Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType());
+
     }
 
 
@@ -66,7 +68,10 @@ public class UITest : MonoBehaviour
 
     public void UpdatingBuffsText()
     {
-        foreach(BeneficialEffects B in TestDummy.GetComponent<MonsterScript>().ReturnBeneficialEffects())
+        DummyBuffs.text = "Buffs on Dummy : ";
+        DummyNerfs.text = "Debuffs on Dummy : ";
+
+        foreach (BeneficialEffects B in TestDummy.GetComponent<MonsterScript>().ReturnBeneficialEffects())
         {
             DummyBuffs.text += B.name + ", ";
         }

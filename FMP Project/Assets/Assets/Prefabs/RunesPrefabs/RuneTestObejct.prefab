@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8422656573205802030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3058515078826370792}
+  - component: {fileID: -5458150414714528188}
+  m_Layer: 0
+  m_Name: RuneTestObejct
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3058515078826370792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422656573205802030}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 496.6277, y: 334.62762, z: -254.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5458150414714528188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8422656573205802030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a8d744a4a05374db9cebc1f910fcb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RuneName: 
+  RuneEquiped: 0
+  RuneLevel: 0
+  RuneSlot: 0
+  MaxRuneStats: 0
+  CurrentRuneStats: 0
+  RuneMaxLevel: 15
+  RuneCurrentLevel: 0
+  RuneStatOne: 0
+  StatsOne: 0
+  RuneStatTwo: 0
+  StatsTwo: 0
+  RuneStatThree: 0
+  StatsThree: 0
+  RuneStatFour: 0
+  StatsFour: 0

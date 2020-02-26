@@ -34,6 +34,7 @@ public class EffectSkill : SkillObject
             {
                     foreach(BeneficialEffects B in BeneficialEffectsToBeApplied)
                     {
+                        
                         TargetMonster.AddBeneficialEffect(B);
                     }
                     break;

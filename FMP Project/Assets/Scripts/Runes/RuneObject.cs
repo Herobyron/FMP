@@ -35,13 +35,20 @@ public class RuneObject : ScriptableObject
     [SerializeField]
     private int RuneMaxLevel = 15;
 
-    [Tooltip("this is the current level that the rune is at.")]
-    [SerializeField]
-    private int RuneCurrentLevel = 0;
-
     // this is the enum to hold the differnt types of stats that can be on the rune. depending on the type depends on what it affects on the monsters stats
     // the stats that can be there are all of the monsters base stats included in the monster class
     public enum RuneStats { Health, Defence, Attack, Speed, CritRate, CritDamage, Accuracy, Resistance };
+
+    [Tooltip("this is the main stat of the rune that will be upgraded with every level")]
+    [SerializeField]
+    private float MainRuneStat = 0.0f;
+
+    [Tooltip("the thye of stat that is applied for the main stat")]
+    [SerializeField]
+    private RuneStats MainStat = RuneStats.Attack;
+
+    // this is a private string that holds the name of the type of stat for the main stat on the rune. used to help display to the user and outside the rune class
+    private string MainStatType = "";
 
     [Tooltip("the first rune stat number")]
     [SerializeField]
@@ -97,10 +104,12 @@ public class RuneObject : ScriptableObject
     // Start is called before the first frame update
     void Start()
     {
-        StatOneType = UpdateStatsType(RuneStatOne, StatsOne);
-        StatTwoType = UpdateStatsType(RuneStatTwo, StatsTwo);
-        StatThreeType = UpdateStatsType(RuneStatThree, StatsThree);
-        StatFourType = UpdateStatsType(RuneStatFour, StatsFour);
+        UpdateStatsType(RuneStatOne, StatsOne, StatOneType);
+        UpdateStatsType(RuneStatTwo, StatsTwo, StatTwoType);
+        UpdateStatsType(RuneStatThree, StatsThree, StatThreeType);
+        UpdateStatsType(RuneStatFour, StatsFour, StatFourType);
+
+        GenerateMainRuneStat();
 
     }
 
@@ -119,6 +128,7 @@ public class RuneObject : ScriptableObject
             if (Random.Range(0, 100) > UpgradeNumber) // does the check to see if upgrade was sucessful. if it is then it increases the level
             {
                 RuneLevel++;
+
 
                 if (RuneLevel == 3 && CurrentRuneStats == 1)
                 {
@@ -270,7 +280,7 @@ public class RuneObject : ScriptableObject
                     StatsOne = (RuneStats)Random.Range(0, 7);
                     RuneStatOne = Random.Range(0.0f, 5.0f);
                     //RuneStatOne = Mathf.Round
-                    StatOneType = UpdateStatsType(RuneStatOne, StatsOne);
+                    UpdateStatsType(RuneStatOne, StatsOne, StatOneType);
                     CurrentRuneStats++;
                     break;
                 }
@@ -278,7 +288,7 @@ public class RuneObject : ScriptableObject
                 {
                     StatsTwo = (RuneStats)Random.Range(0, 7);
                     RuneStatTwo = Random.Range(0.0f, 5.0f);
-                    StatTwoType = UpdateStatsType(RuneStatTwo, StatsTwo);
+                    UpdateStatsType(RuneStatTwo, StatsTwo, StatTwoType);
                     CurrentRuneStats++;
                     break;
                 }
@@ -286,7 +296,7 @@ public class RuneObject : ScriptableObject
                 {
                     StatsThree = (RuneStats)Random.Range(0, 7);
                     RuneStatThree = Random.Range(0.0f, 5.0f);
-                    StatThreeType = UpdateStatsType(RuneStatThree, StatsThree);
+                    UpdateStatsType(RuneStatThree, StatsThree, StatThreeType);
                     CurrentRuneStats++;
                     break;
                 }
@@ -294,11 +304,32 @@ public class RuneObject : ScriptableObject
                 {
                     StatsFour = (RuneStats)Random.Range(0, 7);
                     RuneStatFour = Random.Range(0.0f, 5.0f);
-                    StatFourType = UpdateStatsType(RuneStatFour, StatsFour);
+                    UpdateStatsType(RuneStatFour, StatsFour, StatFourType);
                     CurrentRuneStats++;
                     break;
                 }
         }
+    }
+
+    // this function will create the main stat that this rune will have. this stat is only created at the start
+    public void GenerateMainRuneStat()
+    {
+        MainStat = (RuneStats)Random.Range(0, 7);
+        MainRuneStat = Random.Range(1, 60);
+        UpdateStatsType(MainRuneStat, MainStat, MainStatType);
+
+    }
+
+    // a function that returns the stat for the main stat on the rune
+    public float ReturnMainStat()
+    {
+        return MainRuneStat;
+    }
+
+    // this function will return the type of stat that the main stat is on the rune
+    public string ReturnMainStatType()
+    {
+        return MainStatType;
     }
 
     // a function that returns the stat for the first slot on the rune
@@ -354,11 +385,10 @@ public class RuneObject : ScriptableObject
     // params :
     // - the float runestats is the stats that you are checking. each rune has four stats and this float is one of those four stats depending on which stat you are updating
     // - the RuneStats is the stat that you are updating. example. if you are updating the first stat then you would put in stat one
+    // - the string parameter is the string that needs to know what type that stat is. so when the type is updated this string is updated to know the type
     // Returns : this returns a string which will update the private string used to determine what type of stats are on the rune
-    public string UpdateStatsType(float runestats, RuneStats TheRuneStats)
+    public string UpdateStatsType(float runestats, RuneStats TheRuneStats, string RuneTypeToUpdate)
     {
-        string TypeToSet = "";
-
         // if a rune stat has a higher value then 0 it means that the stat has been generated allready
         if (runestats > 0)
         {
@@ -366,42 +396,43 @@ public class RuneObject : ScriptableObject
             {
                 case (RuneStats.Accuracy):
                     {
-                        TypeToSet = "Accuracy";
+                        RuneTypeToUpdate = "Accuracy";
+
                         break;
                     }
                 case (RuneStats.Attack):
                     {
-                        TypeToSet = "Attack";
+                        RuneTypeToUpdate = "Attack";
                         break;
                     }
                 case (RuneStats.CritDamage):
                     {
-                        TypeToSet = "CritDamage";
+                        RuneTypeToUpdate = "CritDamage";
                         break;
                     }
                 case (RuneStats.CritRate):
                     {
-                        TypeToSet = "CritRate";
+                        RuneTypeToUpdate = "CritRate";
                         break;
                     }
                 case (RuneStats.Defence):
                     {
-                        TypeToSet = "Defence";
+                        RuneTypeToUpdate = "Defence";
                         break;
                     }
                 case (RuneStats.Health):
                     {
-                        TypeToSet = "Health";
+                        RuneTypeToUpdate = "Health";
                         break;
                     }
                 case (RuneStats.Resistance):
                     {
-                        TypeToSet = "Resistance";
+                        RuneTypeToUpdate = "Resistance";
                         break;
                     }
                 case (RuneStats.Speed):
                     {
-                        TypeToSet = "Speed";
+                        RuneTypeToUpdate = "Speed";
                         break;
                     }
             }
@@ -409,7 +440,7 @@ public class RuneObject : ScriptableObject
         }
 
 
-        return TypeToSet;
+        return RuneTypeToUpdate;
 
     }
 
@@ -428,6 +459,6 @@ public class RuneObject : ScriptableObject
     // this function is used to return the runes current level
     public int ReturnRuneLevel()
     {
-        return RuneCurrentLevel;
+        return RuneLevel;
     }
 }

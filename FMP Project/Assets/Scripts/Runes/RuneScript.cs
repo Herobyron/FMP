@@ -16,6 +16,21 @@ public class RuneScript : MonoBehaviour
     [SerializeField]
     private int RuneLevel = 0;
 
+    [Tooltip("this is the amount of stars that the rune has")]
+    [SerializeField]
+    private int RuneStars = 0;
+
+    // this is the rarity that the runes can be 
+    public enum RuneRarity {common, Uncommon, Rare, Epic, Legendary };
+
+    [Tooltip("this is the grade of the rune which will have. this will change how much the runes stats are upgraded")]
+    [SerializeField]
+    private RuneRarity Rarity = RuneRarity.common;
+
+    // this is the name of the rarity this rune is. the reason for this is so other scripts can tell what rarity the rune is
+    private string RuneRarityName = "";
+
+
     // this int is to determine what slot this rune can be equiped to. this means it cant be equiped in other slots
     // if another rune is in the slot that this one is specified for then the player will have to replace it.
     [Tooltip("the rune slot that this rune will be equiped in (a rune can only be equiped to a specific slot")]
@@ -34,13 +49,20 @@ public class RuneScript : MonoBehaviour
     [SerializeField]
     private int RuneMaxLevel = 15;
 
-    [Tooltip("this is the current level that the rune is at.")]
-    [SerializeField]
-    private int RuneCurrentLevel = 0;
-
     // this is the enum to hold the differnt types of stats that can be on the rune. depending on the type depends on what it affects on the monsters stats
     // the stats that can be there are all of the monsters base stats included in the monster class
-    public enum RuneStats {Health, Defence, Attack, Speed, CritRate, CritDamage, Accuracy, Resistance };
+    public enum RuneStats {Health, Defence, Attack, Speed, CritRate, CritDamage, Accuracy, Resistance, HealthPer, DefencePer, AttackPer };
+
+    [Tooltip("this is the main stat of the rune that will be upgraded with every level")]
+    [SerializeField]
+    private float MainRuneStat = 0.0f;
+
+    [Tooltip("the type of stat that is applied for the main stat")]
+    [SerializeField]
+    private RuneStats MainStat = RuneStats.Attack;
+
+    // this is a private string that holds the name of the type of stat for the main stat on the rune. used to help display to the user and outside the rune class
+    private string MainStatType = "";
 
     [Tooltip("the first rune stat number")]
     [SerializeField]
@@ -96,10 +118,10 @@ public class RuneScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StatOneType = UpdateStatsType(RuneStatOne, StatsOne);
-        StatTwoType = UpdateStatsType(RuneStatTwo, StatsTwo);
-        StatThreeType = UpdateStatsType(RuneStatThree, StatsThree);
-        StatFourType = UpdateStatsType(RuneStatFour, StatsFour);
+        UpdateStatsType(RuneStatOne, StatsOne, StatOneType);
+        UpdateStatsType(RuneStatTwo, StatsTwo, StatTwoType);
+        UpdateStatsType(RuneStatThree, StatsThree, StatThreeType);
+        UpdateStatsType(RuneStatFour, StatsFour, StatFourType);
 
     }
 
@@ -247,7 +269,7 @@ public class RuneScript : MonoBehaviour
                     }
                }
                else if (RuneLevel == 12 && CurrentRuneStats <= 3)
-                {
+               {
                     GenerateRuneStat(4);
                }
 
@@ -266,39 +288,190 @@ public class RuneScript : MonoBehaviour
         {
             case (1):
                 {
-                    StatsOne = (RuneStats)Random.Range(0, 7);
-                    RuneStatOne = Random.Range(0.0f, 5.0f);
-                    RuneStatOne = Mathf.Round(RuneStatOne * 1000);
-                    StatOneType = UpdateStatsType(RuneStatOne, StatsOne);
+                    StatsOne = (RuneStats)Random.Range(0, 10);
+
+                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    {
+                        RuneStatOne = Random.Range(0, 5);
+                    }
+                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    {
+                        RuneStatOne = Random.Range(0, 20);
+                    }
+                    UpdateStatsType(RuneStatOne, StatsOne, StatOneType);
                     CurrentRuneStats++;
                     break;
                 }
             case (2):
                 {
-                    StatsTwo = (RuneStats)Random.Range(0, 7);
-                    RuneStatTwo = Random.Range(0.0f, 5.0f);
-                    StatTwoType = UpdateStatsType(RuneStatTwo, StatsTwo);
+                    StatsTwo = (RuneStats)Random.Range(0, 10);
+
+                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    {
+                        RuneStatOne = Random.Range(0, 5);
+                    }
+                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    {
+                        RuneStatOne = Random.Range(0, 20);
+                    }
+
+                    UpdateStatsType(RuneStatTwo, StatsTwo, StatTwoType);
                     CurrentRuneStats++;
                     break;
                 }
             case (3):
                 {
-                    StatsThree = (RuneStats)Random.Range(0, 7);
-                    RuneStatThree = Random.Range(0.0f, 5.0f);
-                    StatThreeType = UpdateStatsType(RuneStatThree, StatsThree);
+                    StatsThree = (RuneStats)Random.Range(0, 10);
+
+                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    {
+                        RuneStatOne = Random.Range(0, 5);
+                    }
+                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    {
+                        RuneStatOne = Random.Range(0, 20);
+                    }
+
+                    UpdateStatsType(RuneStatThree, StatsThree, StatThreeType);
                     CurrentRuneStats++;
                     break;
                 }
             case (4):
                 {
-                    StatsFour = (RuneStats)Random.Range(0, 7);
-                    RuneStatFour = Random.Range(0.0f, 5.0f);
-                    StatFourType = UpdateStatsType(RuneStatFour, StatsFour);
+                    StatsFour = (RuneStats)Random.Range(0, 10);
+
+                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    {
+                        RuneStatOne = Random.Range(0, 5);
+                    }
+                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    {
+                        RuneStatOne = Random.Range(0, 20);
+                    }
+
+                    UpdateStatsType(RuneStatFour, StatsFour, StatFourType);
                     CurrentRuneStats++;
                     break;
                 }
         }
     }
+
+    // this function will create the main stat this rune will have. this stat is online created at the start
+    public void GenerateMainRuneStat()
+    {
+        if(RuneSlot == 1)
+        {
+            MainStat = RuneStats.Attack;
+            GenerateMainStatNumber();
+
+        }
+        else if(RuneSlot == 3)
+        {
+            MainStat = RuneStats.Health;
+            GenerateMainStatNumber();
+        }
+        else if (RuneSlot == 5)
+        {
+            MainStat = RuneStats.Defence;
+            GenerateMainStatNumber();
+        }
+        else
+        {
+            MainStat = (RuneStats)Random.Range(0, 10);
+            if((int)MainStat >= 4) // this is for the stats that are percentage
+            {
+                GenerateMainStatNumberPercentage();
+            }
+            else if((int)MainStat <= 3) // this is for the stats that are non percentage
+            {
+                GenerateMainRuneStat();
+            }
+        }
+
+        UpdateStatsType(MainRuneStat, MainStat, MainStatType);
+
+    }
+
+    // this function generates main stat for the rune depending on the stars of the rune 
+    // this function will only be used for stats that are not using percentages
+    public void GenerateMainStatNumber()
+    {
+        switch (RuneStars)
+        {
+            case (1):
+                {
+                    MainRuneStat = Random.Range(1, 20);
+                    break;
+                }
+            case (2):
+                {
+                    MainRuneStat = Random.Range(21, 40);
+                    break;
+                }
+            case (3):
+                {
+                    MainRuneStat = Random.Range(41, 60);
+                    break;
+                }
+            case (4):
+                {
+                    MainRuneStat = Random.Range(61, 80);
+                    break;
+                }
+            case (5):
+                {
+                    MainRuneStat = Random.Range(81, 100);
+                    break;
+                }
+            case (6):
+                {
+                    MainRuneStat = Random.Range(101, 120);
+                    break;
+                }
+        }
+    }
+
+
+    // this function generates the main stat for the rune depending on the stars of the rune
+    // this function will only be used for stats that are using percentages
+    public void GenerateMainStatNumberPercentage()
+    {
+        switch (RuneStars)
+        {
+            case (1):
+                {
+                    MainRuneStat = Random.Range(1, 2);
+                    break;
+                }
+            case (2):
+                {
+                    MainRuneStat = Random.Range(3, 4);
+                    break;
+                }
+            case (3):
+                {
+                    MainRuneStat = Random.Range(5, 6);
+                    break;
+                }
+            case (4):
+                {
+                    MainRuneStat = Random.Range(7, 8);
+                    break;
+                }
+            case (5):
+                {
+                    MainRuneStat = Random.Range(9, 10);
+                    break;
+                }
+            case (6):
+                {
+                    MainRuneStat = Random.Range(11, 12);
+                    break;
+                }
+        }
+
+    }
+
 
     // a function that returns the stat for the first slot on the rune
     public float ReturnRuneStatOne()
@@ -353,10 +526,11 @@ public class RuneScript : MonoBehaviour
     // params :
     // - the float runestats is the stats that you are checking. each rune has four stats and this float is one of those four stats depending on which stat you are updating
     // - the RuneStats is the stat that you are updating. example. if you are updating the first stat then you would put in stat one
+    // - the string parameter is the string that needs to knwo what type that stat is.
     // Returns : this returns a string which will update the private string used to determine what type of stats are on the rune
-    public string UpdateStatsType(float runestats, RuneStats TheRuneStats)
+    public string UpdateStatsType(float runestats, RuneStats TheRuneStats, string RuneTypeToUpdate)
     {
-        string TypeToSet = "";
+        //string TypeToSet = "";
 
         // if a rune stat has a higher value then 0 it means that the stat has been generated allready
         if(runestats > 0)
@@ -365,42 +539,57 @@ public class RuneScript : MonoBehaviour
             {
                 case (RuneStats.Accuracy):
                     {
-                        TypeToSet = "Accuracy";
+                        RuneTypeToUpdate = "Accuracy";
                         break;
                     }
                 case (RuneStats.Attack):
                     {
-                        TypeToSet = "Attack";
+                        RuneTypeToUpdate = "Attack";
                         break;
                     }
                 case (RuneStats.CritDamage):
                     {
-                        TypeToSet = "CritDamage";
+                        RuneTypeToUpdate = "CritDamage";
                         break;
                     }
                 case (RuneStats.CritRate):
                     {
-                        TypeToSet = "CritRate";
+                        RuneTypeToUpdate = "CritRate";
                         break;
                     }
                 case (RuneStats.Defence):
                     {
-                        TypeToSet = "Defence";
+                        RuneTypeToUpdate = "Defence";
                         break;
                     }
                 case (RuneStats.Health):
                     {
-                        TypeToSet = "Health";
+                        RuneTypeToUpdate = "Health";
                         break;
                     }
                 case (RuneStats.Resistance):
                     {
-                        TypeToSet = "Resistance";
+                        RuneTypeToUpdate = "Resistance";
                         break;
                     }
                 case (RuneStats.Speed):
                     {
-                        TypeToSet = "Speed";
+                        RuneTypeToUpdate = "Speed";
+                        break;
+                    }
+                case (RuneStats.AttackPer):
+                    {
+                        RuneTypeToUpdate = "AttackPercentage";
+                        break;
+                    }
+                case (RuneStats.HealthPer):
+                    {
+                        RuneTypeToUpdate = "HealthPercentage";
+                        break;
+                    }
+                case (RuneStats.DefencePer):
+                    {
+                        RuneTypeToUpdate = "DefencePercentage";
                         break;
                     }
             }
@@ -408,9 +597,42 @@ public class RuneScript : MonoBehaviour
         }
 
 
-        return TypeToSet;
+        return RuneTypeToUpdate;
 
     }
+
+    public void UpdateRarityType()
+    {
+        switch(Rarity)
+        {
+            case (RuneRarity.common):
+                {
+                    RuneRarityName = "Common";
+                    break;
+                }
+            case (RuneRarity.Uncommon):
+                {
+                    RuneRarityName = "Uncommon";
+                    break;
+                }
+            case (RuneRarity.Rare):
+                {
+                    RuneRarityName = "Rare";
+                    break;
+                }
+            case (RuneRarity.Epic):
+                {
+                    RuneRarityName = "Epic";
+                    break;
+                }
+            case (RuneRarity.Legendary):
+                {
+                    RuneRarityName = "Legendary";
+                    break;
+                }
+        }
+    }
+
 
     // this function returns what rune slot this rune should be equiped to 
     public int ReturnRuneNumber()
@@ -427,8 +649,73 @@ public class RuneScript : MonoBehaviour
     // this function is used to return the runes current level
     public int ReturnRuneLevel()
     {
-        return RuneCurrentLevel;
+        return RuneLevel;
     }
 
+    // function to set the amount of stars 
+    public void SetRuneStars(int Stars)
+    {
+        RuneStars = Stars;
+    }
+
+    // a function to return the amount of stars this rune has
+    public int ReturnAmountOfStars()
+    {
+        return RuneStars;
+    }
+
+    // a function to return the type of rarity that this rune is
+    public string ReturnRuneRarity()
+    {
+        return RuneRarityName;
+    }
+
+    // a function used to set the rarity of the rune depending on the number that has been put in
+    // - the int is the number that determines what rarity the rune will be 
+    public void SetRuneRarty(int RuneRarityNumber)
+    {
+        switch (RuneRarityNumber)
+        {
+            case (1):
+                {
+                    Rarity = RuneRarity.common;
+                    RuneRarityName = "Common";
+                    break;
+                }
+            case (2):
+                {
+                    Rarity = RuneRarity.Uncommon;
+                    RuneRarityName = "Uncommon";
+                    break;
+                }
+            case (3):
+                {
+                    Rarity = RuneRarity.Rare;
+                    RuneRarityName = "Rare";
+                    break;
+                }
+            case (4):
+                {
+                    Rarity = RuneRarity.Epic;
+                    RuneRarityName = "Epic";
+                    break;
+                }
+            case (5):
+                {
+                    Rarity = RuneRarity.Legendary;
+                    RuneRarityName = "Legendary";
+                    break;
+                }
+
+        }
+
+    }
+
+
+    // a function that sets the number of the rune slot that this rune can be
+    public void SetRuneSlot(int RuneSlotNumber)
+    {
+        RuneSlot = RuneSlotNumber;
+    }
 
 }
