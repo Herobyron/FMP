@@ -20,6 +20,10 @@ public class RuneScript : MonoBehaviour
     [SerializeField]
     private int RuneStars = 0;
 
+    [Tooltip("this is the runes owner")]
+    [SerializeField]
+    private string RuneOwnerName;
+
     // this is the rarity that the runes can be 
     public enum RuneRarity {common, Uncommon, Rare, Epic, Legendary };
 
@@ -73,7 +77,7 @@ public class RuneScript : MonoBehaviour
     private RuneStats StatsOne = RuneStats.Health;
 
     //this is a private string that holds the name of the type of stat for the First stat, to be returned when the type is needed outside the class
-    private string StatOneType = "";
+    public string StatOneType = "";
 
     [Tooltip("the second rune stat number")]
     [SerializeField]
@@ -84,7 +88,7 @@ public class RuneScript : MonoBehaviour
     private RuneStats StatsTwo = RuneStats.Health;
 
     //this is a private string that holds the name of the type of stat for the Second stat, to be returned when the type is needed outside the class
-    private string StatTwoType = "";
+    public string StatTwoType = "";
 
     [Tooltip("the thrid rune stat number")]
     [SerializeField]
@@ -95,7 +99,7 @@ public class RuneScript : MonoBehaviour
     private RuneStats StatsThree = RuneStats.Health;
 
     //this is a private string that holds the name of the type of stat for the Thrid stat, to be returned when the type is needed outside the class
-    private string StatThreeType = "";
+    public string StatThreeType = "";
 
     [Tooltip("the fouth rune stat number")]
     [SerializeField]
@@ -106,7 +110,7 @@ public class RuneScript : MonoBehaviour
     private RuneStats StatsFour = RuneStats.Health;
 
     // this is a private string that holds the name of the type of stat for the fourth stat, to be returned when the type is needed outside the class
-    private string StatFourType = "";
+    public string StatFourType = "";
 
 
     // this is the number that is given to each rune to derermine wether or not the rune will upgrade
@@ -118,10 +122,10 @@ public class RuneScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateStatsType(RuneStatOne, StatsOne, StatOneType);
-        UpdateStatsType(RuneStatTwo, StatsTwo, StatTwoType);
-        UpdateStatsType(RuneStatThree, StatsThree, StatThreeType);
-        UpdateStatsType(RuneStatFour, StatsFour, StatFourType);
+        UpdateStatsType(RuneStatOne, StatsOne, 1);
+        UpdateStatsType(RuneStatTwo, StatsTwo, 2);
+        UpdateStatsType(RuneStatThree, StatsThree, 3);
+        UpdateStatsType(RuneStatFour, StatsFour, 4);
 
     }
 
@@ -296,9 +300,9 @@ public class RuneScript : MonoBehaviour
                     }
                     else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
                     {
-                        RuneStatOne = Random.Range(0, 20);
+                        RuneStatOne = Random.Range(10, 30);
                     }
-                    UpdateStatsType(RuneStatOne, StatsOne, StatOneType);
+                    UpdateStatsType(RuneStatOne, StatsOne, 1);
                     CurrentRuneStats++;
                     break;
                 }
@@ -308,14 +312,14 @@ public class RuneScript : MonoBehaviour
 
                     if ((int)StatsOne >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatOne = Random.Range(0, 5);
+                        RuneStatTwo = Random.Range(0, 5);
                     }
                     else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
                     {
-                        RuneStatOne = Random.Range(0, 20);
+                        RuneStatTwo = Random.Range(10, 30);
                     }
 
-                    UpdateStatsType(RuneStatTwo, StatsTwo, StatTwoType);
+                    UpdateStatsType(RuneStatTwo, StatsTwo, 2);
                     CurrentRuneStats++;
                     break;
                 }
@@ -325,14 +329,14 @@ public class RuneScript : MonoBehaviour
 
                     if ((int)StatsOne >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatOne = Random.Range(0, 5);
+                        RuneStatThree = Random.Range(0, 5);
                     }
                     else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
                     {
-                        RuneStatOne = Random.Range(0, 20);
+                        RuneStatThree = Random.Range(10, 30);
                     }
 
-                    UpdateStatsType(RuneStatThree, StatsThree, StatThreeType);
+                    UpdateStatsType(RuneStatThree, StatsThree, 3);
                     CurrentRuneStats++;
                     break;
                 }
@@ -342,14 +346,14 @@ public class RuneScript : MonoBehaviour
 
                     if ((int)StatsOne >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatOne = Random.Range(0, 5);
+                        RuneStatFour = Random.Range(0, 5);
                     }
                     else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
                     {
-                        RuneStatOne = Random.Range(0, 20);
+                        RuneStatFour = Random.Range(10, 30);
                     }
 
-                    UpdateStatsType(RuneStatFour, StatsFour, StatFourType);
+                    UpdateStatsType(RuneStatFour, StatsFour, 4);
                     CurrentRuneStats++;
                     break;
                 }
@@ -388,7 +392,7 @@ public class RuneScript : MonoBehaviour
             }
         }
 
-        UpdateStatsType(MainRuneStat, MainStat, MainStatType);
+        UpdateStatsType(MainRuneStat, MainStat, 0);
 
     }
 
@@ -526,9 +530,9 @@ public class RuneScript : MonoBehaviour
     // params :
     // - the float runestats is the stats that you are checking. each rune has four stats and this float is one of those four stats depending on which stat you are updating
     // - the RuneStats is the stat that you are updating. example. if you are updating the first stat then you would put in stat one
-    // - the string parameter is the string that needs to knwo what type that stat is.
+    // - the int determines what stat is bieng updated (0 is main stat and the others are self explanitory
     // Returns : this returns a string which will update the private string used to determine what type of stats are on the rune
-    public string UpdateStatsType(float runestats, RuneStats TheRuneStats, string RuneTypeToUpdate)
+    public void UpdateStatsType(float runestats, RuneStats TheRuneStats, int StatsNumber)
     {
         //string TypeToSet = "";
 
@@ -539,57 +543,375 @@ public class RuneScript : MonoBehaviour
             {
                 case (RuneStats.Accuracy):
                     {
-                        RuneTypeToUpdate = "Accuracy";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "Accuracy";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "Accuracy";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "Accuracy";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "Accuracy";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "Accuracy";
+                                    break;
+                                }
+
+                        }
+                      
                         break;
                     }
                 case (RuneStats.Attack):
                     {
-                        RuneTypeToUpdate = "Attack";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "Attack";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "Attack";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "Attack";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "Attack";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "Attack";
+                                    break;
+                                }
+
+                        }
                         break;
                     }
                 case (RuneStats.CritDamage):
                     {
-                        RuneTypeToUpdate = "CritDamage";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "CritDamage";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "CritDamage";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "CritDamage";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "CritDamage";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "CritDamage";
+                                    break;
+                                }
+
+                        }
+                       
                         break;
                     }
                 case (RuneStats.CritRate):
                     {
-                        RuneTypeToUpdate = "CritRate";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "CritRate";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "CritRate";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "CritRate";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "CritRate";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "CritRate";
+                                    break;
+                                }
+
+                        }
+                        
                         break;
                     }
                 case (RuneStats.Defence):
                     {
-                        RuneTypeToUpdate = "Defence";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "Defence";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "Defence";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "Defence";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "Defence";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "Defence";
+                                    break;
+                                }
+
+                        }
+                       
                         break;
                     }
                 case (RuneStats.Health):
                     {
-                        RuneTypeToUpdate = "Health";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "Health";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "Health";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "Health";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "Health";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "Health";
+                                    break;
+                                }
+
+                        }
+                        
                         break;
                     }
                 case (RuneStats.Resistance):
                     {
-                        RuneTypeToUpdate = "Resistance";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "Resistance";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "Resistance";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "Resistance";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "Resistance";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "Resistance";
+                                    break;
+                                }
+
+                        }
+   
                         break;
                     }
                 case (RuneStats.Speed):
                     {
-                        RuneTypeToUpdate = "Speed";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "Speed";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "Speed";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "Speed";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "Speed";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "Speed";
+                                    break;
+                                }
+
+                        }
+                        
                         break;
                     }
                 case (RuneStats.AttackPer):
                     {
-                        RuneTypeToUpdate = "AttackPercentage";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "AttackPercentage";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "AttackPercentage";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "AttackPercentage";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "AttackPercentage";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "AttackPercentage";
+                                    break;
+                                }
+
+                        }
+       
                         break;
                     }
                 case (RuneStats.HealthPer):
                     {
-                        RuneTypeToUpdate = "HealthPercentage";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "HealthPercentage";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "HealthPercentage";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "HealthPercentage";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "HealthPercentage";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "HealthPercentage";
+                                    break;
+                                }
+
+                        }
+
                         break;
                     }
                 case (RuneStats.DefencePer):
                     {
-                        RuneTypeToUpdate = "DefencePercentage";
+                        switch (StatsNumber)
+                        {
+                            case (0):
+                                {
+                                    MainStatType = "DefencePercentage";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    StatOneType = "DefencePercentage";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    StatTwoType = "DefencePercentage";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    StatThreeType = "DefencePercentage";
+                                    break;
+                                }
+                            case (4):
+                                {
+                                    StatFourType = "DefencePercentage";
+                                    break;
+                                }
+
+                        }
+
                         break;
                     }
             }
@@ -597,7 +919,7 @@ public class RuneScript : MonoBehaviour
         }
 
 
-        return RuneTypeToUpdate;
+        
 
     }
 
@@ -716,6 +1038,31 @@ public class RuneScript : MonoBehaviour
     public void SetRuneSlot(int RuneSlotNumber)
     {
         RuneSlot = RuneSlotNumber;
+    }
+
+    public int ReturnRuneSlot()
+    {
+        return RuneSlot;
+    }
+
+    public void SetRuneName(string Name)
+    {
+        RuneName = Name;
+    }
+
+    public void SetRuneOwner(string Owner)
+    {
+        RuneOwnerName = Owner;
+    }
+
+    public float ReturnMainRuneStat()
+    {
+        return MainRuneStat;
+    }
+
+    public string ReturnMainRuneStatType()
+    {
+        return MainStatType;
     }
 
 }

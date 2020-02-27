@@ -1,18 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 public class UITest : MonoBehaviour
 {
+    // this is all temporary as this ui will not be used in final vertical slice
 
     // this is the monster that is holding the rune that i want to test the upgrading on
     public GameObject Monster;
 
     public Text RuneLevelText;
+    public Text RuneStatOneType;
     public Text RuneStatOne;
-    public Text RuneStatOneNumber;
 
+    public Text RuneStar;
+    public Text RuneGrade;
+    public Text RuneSlot;
+
+    public Text MainRuneStat;
+    public Text MainRuneStatType;
+
+    public Text RuneStatTwoType;
+    public Text RuneStatTwo;
+
+    public Text RuneStatThreeType;
+    public Text RuneStatThree;
+
+    public Text RuneStatFourType;
+    public Text RuneStatFour;
 
     public GameObject TestDummy;
     public Text DummyHealth;
@@ -20,6 +37,9 @@ public class UITest : MonoBehaviour
     public Text DummyBuffs;
     public Text DummyNerfs;
 
+    public GameObject loadedrune;
+    public bool LoadTheRuneOnce = false;
+    public RuneScript RuneBiengUsed = null;
 
     // Start is called before the first frame update
     void Start()
@@ -30,14 +50,37 @@ public class UITest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RuneLevelText.text = "Rune Level: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel();
-        RuneStatOne.text = "Rune Stat One: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType();
-        RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
+        
+
+
+        //RuneLevelText.text = "Rune Level: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel();
+        //RuneStatOne.text = "Rune Stat One: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType();
+        //RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
         DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
 
+        if(RuneBiengUsed)
+        {
+            RuneLevelText.text = "Rune Level : " + RuneBiengUsed.ReturnRuneLevel();
+            RuneStar.text = "Rune star : " + RuneBiengUsed.ReturnAmountOfStars();
+            RuneGrade.text = "Rune Grade : " + RuneBiengUsed.ReturnRuneRarity();
+            RuneSlot.text = "Rune Slot : " + RuneBiengUsed.ReturnRuneSlot();
 
-        Debug.Log(Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel());
-        Debug.Log(Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType());
+            MainRuneStat.text = "Main Rune Stat : " + RuneBiengUsed.ReturnMainRuneStat();
+            MainRuneStatType.text = "Main Rune Stat Type : " + RuneBiengUsed.ReturnMainRuneStatType();
+
+            RuneStatOne.text = "Rune Stat one : " + RuneBiengUsed.ReturnRuneStatOne();
+            RuneStatOneType.text = "Rune Stat one Type" + RuneBiengUsed.ReturnRuneStatOneType();
+
+            RuneStatTwo.text = "Rune Stat Two : " + RuneBiengUsed.ReturnRuneStatTwo();
+            RuneStatTwoType.text = "Rune Stat Two Type : " + RuneBiengUsed.ReturnRuneStatTwoType();
+
+            RuneStatThree.text = "Rune Stat Three : " + RuneBiengUsed.ReturnRuneStatThree();
+            RuneStatThreeType.text = "Rune Stat Three Type : " + RuneBiengUsed.ReturnRuneStatThreeType();
+
+            RuneStatFour.text = "Rune Stat Four : " + RuneBiengUsed.ReturnRuneStatFour();
+            RuneStatFourType.text = "Rune stat Four Type : " + RuneBiengUsed.ReturnRuneStatFourType();
+        }
+      
 
     }
 
@@ -46,7 +89,10 @@ public class UITest : MonoBehaviour
     // so that this getcomponent is not constantly called
     public void UpgradeRune()
     {
-        Monster.GetComponent<MonsterScript>().ReturnRune(0).UpgradeRune();
+        if(RuneBiengUsed)
+        {
+            RuneBiengUsed.UpgradeRune();
+        }
     }
 
     public void UseMonstersSkillTwo()
@@ -82,6 +128,14 @@ public class UITest : MonoBehaviour
         }
     }
 
-   
+   public void LoadRuneTest()
+   {
+        
+        loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
+
+        RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
+        Debug.Log(RuneBiengUsed.ReturnMainRuneStatType());
+   }
+
 
 }
