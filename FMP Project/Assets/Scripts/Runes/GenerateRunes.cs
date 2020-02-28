@@ -14,7 +14,10 @@ public class GenerateRunes : MonoBehaviour
     [SerializeField]
     private GameObject RuneBase;
 
-    private RuneScript RuneScriptGenerated;
+    public RuneScript RuneScriptGenerated;
+
+    // this is to access the game managment to add the players rune to thier data
+    public GameManagment TheManager;
 
     // Start is called before the first frame update
     void Start()
@@ -30,37 +33,54 @@ public class GenerateRunes : MonoBehaviour
 
 
     // this function creates the new rune and makes the rune a prefab
-    public void CreateRune()
+    // this function can only be used in editpr and may be useful for making a tool to make runes
+    public void CreateRuneTool()
     {
         GameObject NewRune = new GameObject();
 
         
-        RuneScriptGenerated = NewRune.AddComponent<RuneScript>();
+        //RuneScriptGenerated = NewRune.AddComponent<RuneScript>();
        
          
 
-        string Path = "Assets/Assets/Prefabs/RunesPrefabs/ " + NewRune.name + ".prefab";
-        Path = AssetDatabase.GenerateUniqueAssetPath(Path);
-
+        //string Path = "Assets/Assets/Prefabs/RunesPrefabs/ " + NewRune.name + ".prefab";
+        //Path = AssetDatabase.GenerateUniqueAssetPath(Path);
+        //
+        //
+        //
+        //GenerateRune();
+        //
+        //
+        //NewRune.name = "Rune " + NewRune.GetComponent<RuneScript>().ReturnRuneSlot();
+        //NewRune.GetComponent<RuneScript>().SetRuneName(NewRune.name);
+        //NewRune.GetComponent<RuneScript>().SetRuneOwner("Player");
+        //
+        //
+        ////PrefabUtility.SaveAsPrefabAssetAndConnect(NewRune, Path, InteractionMode.UserAction);
+        //PrefabUtility.SaveAsPrefabAsset(NewRune, Path);
+        //
+        //AssetDatabase.Refresh();
+        //AssetDatabase.RenameAsset(Path, "Rune");
+        //AssetDatabase.SaveAssets();
         
+
+
+
+    }
+
+    // this function creates the rune and adds it to the players inventory (if specified)
+    // this rune will then be stored in a script which can be saved later on and accessed later on
+    // still in progress (as i need to test)
+    public void CreateRune()
+    {
+        RuneScriptGenerated = new RuneScript();
+
 
         GenerateRune();
-        
+        RuneScriptGenerated.SetRuneName("Rune 1");
+        RuneScriptGenerated.SetRuneOwner("Player");
 
-        NewRune.name = "Rune " + NewRune.GetComponent<RuneScript>().ReturnRuneSlot();
-        NewRune.GetComponent<RuneScript>().SetRuneName(NewRune.name);
-        NewRune.GetComponent<RuneScript>().SetRuneOwner("Player");
-
-
-        //PrefabUtility.SaveAsPrefabAssetAndConnect(NewRune, Path, InteractionMode.UserAction);
-        PrefabUtility.SaveAsPrefabAsset(NewRune, Path);
-
-        AssetDatabase.Refresh();
-        AssetDatabase.RenameAsset(Path, "Rune");
-        AssetDatabase.SaveAssets();
-        
-
-
+        TheManager.AddRuneToData(RuneScriptGenerated);
 
     }
 

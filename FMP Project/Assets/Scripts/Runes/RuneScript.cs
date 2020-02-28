@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class RuneScript : MonoBehaviour
 {
     [Tooltip("The name that you want the rune to be callled")]
@@ -119,21 +120,21 @@ public class RuneScript : MonoBehaviour
 
     
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        UpdateStatsType(RuneStatOne, StatsOne, 1);
-        UpdateStatsType(RuneStatTwo, StatsTwo, 2);
-        UpdateStatsType(RuneStatThree, StatsThree, 3);
-        UpdateStatsType(RuneStatFour, StatsFour, 4);
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    UpdateStatsType(RuneStatOne, StatsOne, 1);
+    //    UpdateStatsType(RuneStatTwo, StatsTwo, 2);
+    //    UpdateStatsType(RuneStatThree, StatsThree, 3);
+    //    UpdateStatsType(RuneStatFour, StatsFour, 4);
+    //
+    //}
+    //
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    
+    //}
 
 
     // this function will be run when the player wants to upgrade a rune and will increase the level of the rune depending on a random percentage

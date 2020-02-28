@@ -58,7 +58,7 @@ public class UITest : MonoBehaviour
         //RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
         DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
 
-        if(RuneBiengUsed)
+        if(RuneBiengUsed != null)
         {
             RuneLevelText.text = "Rune Level : " + RuneBiengUsed.ReturnRuneLevel();
             RuneStar.text = "Rune star : " + RuneBiengUsed.ReturnAmountOfStars();
@@ -89,7 +89,7 @@ public class UITest : MonoBehaviour
     // so that this getcomponent is not constantly called
     public void UpgradeRune()
     {
-        if(RuneBiengUsed)
+        if(RuneBiengUsed != null)
         {
             RuneBiengUsed.UpgradeRune();
         }
