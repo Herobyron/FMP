@@ -19,7 +19,8 @@ public class GameManagment : MonoBehaviour
         BinaryFormatter BinFormatter = new BinaryFormatter();
         FileStream DataFile = File.Create(Application.persistentDataPath + "/PlayerData.dat");
         
-
+        // this part will need to be changed to find the players runes and save them not just find the generated rune
+        // if there is no generated rune it will saveit as null
         GameData.Rune1 = FindObjectOfType<GenerateRunes>().RuneScriptGenerated;
 
         BinFormatter.Serialize(DataFile, GameData);
@@ -45,6 +46,16 @@ public class GameManagment : MonoBehaviour
         GameData.Rune1 = RuneAdded;
     }
 
+    // function used to clear players data to load in the rune for testing
+    public void ClearData()
+    {
+        GameData.Rune1 = null;
+    }
+
+    public void LoadRuneIn()
+    {
+        FindObjectOfType<UITest>().RuneBiengUsed = GameData.Rune1;
+    }
 }
 
 
