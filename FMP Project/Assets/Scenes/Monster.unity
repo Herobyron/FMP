@@ -744,8 +744,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 199.93, y: -66.315}
-  m_SizeDelta: {x: -399.86, y: -405.3}
+  m_AnchoredPosition: {x: 200.6, y: -77.958}
+  m_SizeDelta: {x: -399.9, y: -369.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &323186422
 CanvasRenderer:
@@ -1166,8 +1166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -111.35, y: 96}
-  m_SizeDelta: {x: -607.6, y: -407.1}
+  m_AnchoredPosition: {x: -111.65, y: 89.556}
+  m_SizeDelta: {x: -607.6, y: -378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &768170243
 CanvasRenderer:
@@ -1245,8 +1245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 103.5, y: -192.27}
-  m_SizeDelta: {x: -516.7, y: -407.1}
+  m_AnchoredPosition: {x: -43, y: -183.8}
+  m_SizeDelta: {x: -516.7, y: -367.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &773196097
 CanvasRenderer:
@@ -1854,8 +1854,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -199.85, y: -109.59}
-  m_SizeDelta: {x: -399.70007, y: -399.5}
+  m_AnchoredPosition: {x: -199.65, y: -85.25}
+  m_SizeDelta: {x: -399.7, y: -359.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1007258614
 CanvasRenderer:
@@ -1975,8 +1975,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 200.09, y: -152.8}
-  m_SizeDelta: {x: -399.86, y: -405.3}
+  m_AnchoredPosition: {x: 200.6, y: -143.91}
+  m_SizeDelta: {x: -399.9, y: -373.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1038953389
 GameObject:
@@ -2361,7 +2361,31 @@ MonoBehaviour:
   AwakenMultiplier: 0.3
   StarsMultiplier: 0.3
   BaseStars: 1
-  RuneOneTest: {fileID: 0}
+  RuneOneTest:
+    RuneName: 
+    RuneEquiped: 0
+    RuneLevel: 0
+    RuneStars: 0
+    RuneOwnerName: 
+    Rarity: 0
+    RuneSlot: 0
+    MaxRuneStats: 0
+    CurrentRuneStats: 0
+    RuneMaxLevel: 15
+    MainRuneStat: 0
+    MainStat: 2
+    RuneStatOne: 0
+    StatsOne: 0
+    StatOneType: 
+    RuneStatTwo: 0
+    StatsTwo: 0
+    StatTwoType: 
+    RuneStatThree: 0
+    StatsThree: 0
+    StatThreeType: 
+    RuneStatFour: 0
+    StatsFour: 0
+    StatFourType: 
   RuneOne: {fileID: 0}
   RuneTwo: {fileID: 0}
   RuneThree: {fileID: 0}
@@ -2761,8 +2785,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200.16002, y: -23.1}
-  m_SizeDelta: {x: -399.7, y: -399.5}
+  m_AnchoredPosition: {x: -200.16003, y: -12.588989}
+  m_SizeDelta: {x: -399.7, y: -378.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1383186273
 MonoBehaviour:
@@ -2840,8 +2864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200.24, y: -66.343}
-  m_SizeDelta: {x: -399.86, y: -405.3}
+  m_AnchoredPosition: {x: -200.25, y: -42.954}
+  m_SizeDelta: {x: -399.9, y: -368.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1457648016
 MonoBehaviour:
@@ -2919,8 +2943,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 200.5, y: -109.56}
-  m_SizeDelta: {x: -399.70007, y: -399.5}
+  m_AnchoredPosition: {x: 200.5, y: -112.1}
+  m_SizeDelta: {x: -399.7, y: -369.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1480115152
 CanvasRenderer:
@@ -3383,7 +3407,31 @@ MonoBehaviour:
   DummyNerfs: {fileID: 1377314113}
   loadedrune: {fileID: 0}
   LoadTheRuneOnce: 0
-  RuneBiengUsed: {fileID: 0}
+  RuneBiengUsed:
+    RuneName: 
+    RuneEquiped: 0
+    RuneLevel: 0
+    RuneStars: 0
+    RuneOwnerName: 
+    Rarity: 0
+    RuneSlot: 0
+    MaxRuneStats: 0
+    CurrentRuneStats: 0
+    RuneMaxLevel: 15
+    MainRuneStat: 0
+    MainStat: 2
+    RuneStatOne: 0
+    StatsOne: 0
+    StatOneType: 
+    RuneStatTwo: 0
+    StatsTwo: 0
+    StatTwoType: 
+    RuneStatThree: 0
+    StatsThree: 0
+    StatThreeType: 
+    RuneStatFour: 0
+    StatsFour: 0
+    StatFourType: 
 --- !u!114 &1605560272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3398,7 +3446,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RuneBase: {fileID: 8422656573205802030, guid: 04a7755f8f3aa6f4b8cb1a63d9b1b6ed,
     type: 3}
-  RuneScriptGenerated: {fileID: 0}
+  RuneScriptGenerated:
+    RuneName: 
+    RuneEquiped: 0
+    RuneLevel: 0
+    RuneStars: 0
+    RuneOwnerName: 
+    Rarity: 0
+    RuneSlot: 0
+    MaxRuneStats: 0
+    CurrentRuneStats: 0
+    RuneMaxLevel: 15
+    MainRuneStat: 0
+    MainStat: 2
+    RuneStatOne: 0
+    StatsOne: 0
+    StatOneType: 
+    RuneStatTwo: 0
+    StatsTwo: 0
+    StatTwoType: 
+    RuneStatThree: 0
+    StatsThree: 0
+    StatThreeType: 
+    RuneStatFour: 0
+    StatsFour: 0
+    StatFourType: 
   TheManager: {fileID: 1506256429}
 --- !u!1 &1634997684
 GameObject:
@@ -3513,8 +3585,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -304.1, y: -192.24}
-  m_SizeDelta: {x: -607.6, y: -407.1}
+  m_AnchoredPosition: {x: -298, y: -178.87}
+  m_SizeDelta: {x: -607.6, y: -380.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1775242301
 CanvasRenderer:
@@ -3592,8 +3664,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -199.85, y: -152.83}
-  m_SizeDelta: {x: -399.86, y: -405.3}
+  m_AnchoredPosition: {x: -199.55, y: -120.61}
+  m_SizeDelta: {x: -399.9, y: -377.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1821988413
 CanvasRenderer:
@@ -3671,8 +3743,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -303.8, y: 96}
-  m_SizeDelta: {x: -607.6, y: -407.1}
+  m_AnchoredPosition: {x: -303.87, y: 88.405975}
+  m_SizeDelta: {x: -607.9, y: -375.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846529611
 MonoBehaviour:
@@ -3750,8 +3822,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 200.5, y: -23.072}
-  m_SizeDelta: {x: -399.70007, y: -399.5}
+  m_AnchoredPosition: {x: 200.5, y: -40.86299}
+  m_SizeDelta: {x: -399.7, y: -363.92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1934226200
 CanvasRenderer:
@@ -4067,7 +4139,31 @@ MonoBehaviour:
   AwakenMultiplier: 0.3
   StarsMultiplier: 0.3
   BaseStars: 1
-  RuneOneTest: {fileID: 0}
+  RuneOneTest:
+    RuneName: 
+    RuneEquiped: 0
+    RuneLevel: 0
+    RuneStars: 0
+    RuneOwnerName: 
+    Rarity: 0
+    RuneSlot: 0
+    MaxRuneStats: 0
+    CurrentRuneStats: 0
+    RuneMaxLevel: 15
+    MainRuneStat: 0
+    MainStat: 2
+    RuneStatOne: 0
+    StatsOne: 0
+    StatOneType: 
+    RuneStatTwo: 0
+    StatsTwo: 0
+    StatTwoType: 
+    RuneStatThree: 0
+    StatsThree: 0
+    StatThreeType: 
+    RuneStatFour: 0
+    StatsFour: 0
+    StatFourType: 
   RuneOne: {fileID: 0}
   RuneTwo: {fileID: 0}
   RuneThree: {fileID: 0}

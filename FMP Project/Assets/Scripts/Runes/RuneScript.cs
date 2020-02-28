@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class RuneScript : MonoBehaviour
+[System.Serializable]
+public class RuneScript
 {
     [Tooltip("The name that you want the rune to be callled")]
     [SerializeField]
