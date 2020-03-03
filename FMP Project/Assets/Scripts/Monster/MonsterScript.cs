@@ -8,6 +8,9 @@ using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
 {
+    [Tooltip("this is the monsters name. used to identify the monsters as well as to help with sorting and data management")]
+    [SerializeField]
+    private string MonsterName = "Blank";
 
     // this is the monsters base health (the monsters health stat)
     [Tooltip("This is the base health of the monster that it will start out with")]
@@ -1010,5 +1013,10 @@ public class MonsterScript : MonoBehaviour
     public List<HarmfulEffects> ReturnHarmfulEffects()
     {
         return EffectsHarmful;
+    }
+
+    public string ReturnMonsterName()
+    {
+        return MonsterName;
     }
 }

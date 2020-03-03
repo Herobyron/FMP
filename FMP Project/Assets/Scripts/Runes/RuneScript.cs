@@ -26,7 +26,7 @@ public class RuneScript
     private string RuneOwnerName;
 
     // this is the rarity that the runes can be 
-    public enum RuneRarity {common, Uncommon, Rare, Epic, Legendary };
+    public enum RuneRarity { common, Uncommon, Rare, Epic, Legendary };
 
     [Tooltip("this is the grade of the rune which will have. this will change how much the runes stats are upgraded")]
     [SerializeField]
@@ -56,7 +56,7 @@ public class RuneScript
 
     // this is the enum to hold the differnt types of stats that can be on the rune. depending on the type depends on what it affects on the monsters stats
     // the stats that can be there are all of the monsters base stats included in the monster class
-    public enum RuneStats {Health, Defence, Attack, Speed, CritRate, CritDamage, Accuracy, Resistance, HealthPer, DefencePer, AttackPer };
+    public enum RuneStats { Health, Defence, Attack, Speed, CritRate, CritDamage, Accuracy, Resistance, HealthPer, DefencePer, AttackPer };
 
     [Tooltip("this is the main stat of the rune that will be upgraded with every level")]
     [SerializeField]
@@ -118,7 +118,7 @@ public class RuneScript
     // this number is increased after every sucessful level up to change the probablity of an upgrade
     private int UpgradeNumber = 0;
 
-    
+
 
     //// Start is called before the first frame update
     //void Start()
@@ -140,18 +140,18 @@ public class RuneScript
     // this function will be run when the player wants to upgrade a rune and will increase the level of the rune depending on a random percentage
     public void UpgradeRune()
     {
-        if(RuneLevel < RuneMaxLevel) // check to make sure that the rune level is not higher then the max level
+        if (RuneLevel < RuneMaxLevel) // check to make sure that the rune level is not higher then the max level
         {
-            if(Random.Range(0,100) > UpgradeNumber) // does the check to see if upgrade was sucessful. if it is then it increases the level
+            if (Random.Range(0, 100) > UpgradeNumber) // does the check to see if upgrade was sucessful. if it is then it increases the level
             {
                 RuneLevel++;
 
-               if(RuneLevel == 3 && CurrentRuneStats == 1)
-               {
+                if (RuneLevel == 3 && CurrentRuneStats == 1)
+                {
                     RuneStatOne += Random.Range(0.0f, 5.0f);
-               }
-               else if(RuneLevel == 3 && CurrentRuneStats > 1) 
-               {
+                }
+                else if (RuneLevel == 3 && CurrentRuneStats > 1)
+                {
                     switch (Random.Range(0, CurrentRuneStats))
                     {
                         case (0):
@@ -176,15 +176,15 @@ public class RuneScript
                             }
                     }
 
-               }
-               else if(RuneLevel == 3 && CurrentRuneStats <= 0) // this generates a random stat from the enum and then adds this to the first stat of the rune.
-               {
+                }
+                else if (RuneLevel == 3 && CurrentRuneStats <= 0) // this generates a random stat from the enum and then adds this to the first stat of the rune.
+                {
                     GenerateRuneStat(1);
-               }
+                }
 
 
-               if(RuneLevel == 6 && CurrentRuneStats >= 2)
-               {
+                if (RuneLevel == 6 && CurrentRuneStats >= 2)
+                {
                     switch (Random.Range(0, CurrentRuneStats))
                     {
                         case (0):
@@ -208,15 +208,15 @@ public class RuneScript
                                 break;
                             }
                     }
-               }
-               else if(RuneLevel == 6 && CurrentRuneStats <= 1)
-               {
+                }
+                else if (RuneLevel == 6 && CurrentRuneStats <= 1)
+                {
                     GenerateRuneStat(2);
-               }
+                }
 
 
-               if (RuneLevel == 9 && CurrentRuneStats >= 3)
-               {
+                if (RuneLevel == 9 && CurrentRuneStats >= 3)
+                {
                     switch (Random.Range(0, CurrentRuneStats))
                     {
                         case (0):
@@ -240,15 +240,15 @@ public class RuneScript
                                 break;
                             }
                     }
-               }
-               else if(RuneLevel == 9 && CurrentRuneStats <= 2)
-               {
+                }
+                else if (RuneLevel == 9 && CurrentRuneStats <= 2)
+                {
                     GenerateRuneStat(3);
-               }
+                }
 
 
-               if(RuneLevel == 12 && CurrentRuneStats == 4)
-               {
+                if (RuneLevel == 12 && CurrentRuneStats == 4)
+                {
                     switch (Random.Range(0, CurrentRuneStats))
                     {
                         case (0):
@@ -272,11 +272,11 @@ public class RuneScript
                                 break;
                             }
                     }
-               }
-               else if (RuneLevel == 12 && CurrentRuneStats <= 3)
-               {
+                }
+                else if (RuneLevel == 12 && CurrentRuneStats <= 3)
+                {
                     GenerateRuneStat(4);
-               }
+                }
 
             }
         }
@@ -289,7 +289,7 @@ public class RuneScript
     // the variable is to determine what stat is bieng generated on the rune
     public void GenerateRuneStat(int StatNumber)
     {
-        switch(StatNumber)
+        switch (StatNumber)
         {
             case (1):
                 {
@@ -364,13 +364,13 @@ public class RuneScript
     // this function will create the main stat this rune will have. this stat is online created at the start
     public void GenerateMainRuneStat()
     {
-        if(RuneSlot == 1)
+        if (RuneSlot == 1)
         {
             MainStat = RuneStats.Attack;
             GenerateMainStatNumber();
 
         }
-        else if(RuneSlot == 3)
+        else if (RuneSlot == 3)
         {
             MainStat = RuneStats.Health;
             GenerateMainStatNumber();
@@ -383,11 +383,11 @@ public class RuneScript
         else
         {
             MainStat = (RuneStats)Random.Range(0, 10);
-            if((int)MainStat >= 4) // this is for the stats that are percentage
+            if ((int)MainStat >= 4) // this is for the stats that are percentage
             {
                 GenerateMainStatNumberPercentage();
             }
-            else if((int)MainStat <= 3) // this is for the stats that are non percentage
+            else if ((int)MainStat <= 3) // this is for the stats that are non percentage
             {
                 GenerateMainRuneStat();
             }
@@ -538,7 +538,7 @@ public class RuneScript
         //string TypeToSet = "";
 
         // if a rune stat has a higher value then 0 it means that the stat has been generated allready
-        if(runestats > 0)
+        if (runestats > 0)
         {
             switch (TheRuneStats)
             {
@@ -573,7 +573,7 @@ public class RuneScript
                                 }
 
                         }
-                      
+
                         break;
                     }
                 case (RuneStats.Attack):
@@ -640,7 +640,7 @@ public class RuneScript
                                 }
 
                         }
-                       
+
                         break;
                     }
                 case (RuneStats.CritRate):
@@ -674,7 +674,7 @@ public class RuneScript
                                 }
 
                         }
-                        
+
                         break;
                     }
                 case (RuneStats.Defence):
@@ -708,7 +708,7 @@ public class RuneScript
                                 }
 
                         }
-                       
+
                         break;
                     }
                 case (RuneStats.Health):
@@ -742,7 +742,7 @@ public class RuneScript
                                 }
 
                         }
-                        
+
                         break;
                     }
                 case (RuneStats.Resistance):
@@ -776,7 +776,7 @@ public class RuneScript
                                 }
 
                         }
-   
+
                         break;
                     }
                 case (RuneStats.Speed):
@@ -810,7 +810,7 @@ public class RuneScript
                                 }
 
                         }
-                        
+
                         break;
                     }
                 case (RuneStats.AttackPer):
@@ -844,7 +844,7 @@ public class RuneScript
                                 }
 
                         }
-       
+
                         break;
                     }
                 case (RuneStats.HealthPer):
@@ -920,13 +920,13 @@ public class RuneScript
         }
 
 
-        
+
 
     }
 
     public void UpdateRarityType()
     {
-        switch(Rarity)
+        switch (Rarity)
         {
             case (RuneRarity.common):
                 {
@@ -1064,6 +1064,11 @@ public class RuneScript
     public string ReturnMainRuneStatType()
     {
         return MainStatType;
+    }
+
+    public string ReturnRuneName()
+    {
+        return RuneName;
     }
 
 }
