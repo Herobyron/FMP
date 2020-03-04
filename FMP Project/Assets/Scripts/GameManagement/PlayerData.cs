@@ -23,6 +23,38 @@ public class PlayerData
 
 // Functions
 
+    // this function will allow to add a rune to the list of rune scripts. only after checking to make sure it is not a duplicate rune
+    // Params:
+    // - TheRune : this is the rune that is going to be checked and then added to the players rune list
+    public void AddSelectedRune(RuneScript TheRune)
+    {
+        bool RuneSeen = false;
+
+        foreach(RuneScript R in PlayerRunes)
+        {
+            if(R.ReturnRuneName() == TheRune.ReturnRuneName())
+            {
+                RuneSeen = true;
+            }
+        }
+
+
+        if(!RuneSeen)
+        {
+            PlayerRunes.Add(TheRune);
+        }
+    }
+
+
+    // this function will allow to add monsters to the list of monsters. this function will no go through a check as the player will be able to have as many monsters as they want
+    //Params:
+    // - TheMonster : this is the monster that is going to be added to the players monster list
+    public void AddSelectedMonster(MonsterScript TheMonster)
+    {
+        PlayerMonsters.Add(TheMonster);
+    }
+
+
     // this allows to return a selected rune with a certain name
     // Params: 
     // - RuneName : this is the rune that you want to try to find within the runes the player owns

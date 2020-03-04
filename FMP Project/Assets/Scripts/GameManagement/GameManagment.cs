@@ -8,6 +8,7 @@ using System.IO;
 public class GameManagment : MonoBehaviour
 {
     Data GameData;
+    public MonsterScript TestSaveMonster;
 
     void Start()
     {
@@ -21,7 +22,10 @@ public class GameManagment : MonoBehaviour
         
         // this part will need to be changed to find the players runes and save them not just find the generated rune
         // if there is no generated rune it will saveit as null
-        GameData.Rune1 = FindObjectOfType<GenerateRunes>().RuneScriptGenerated;
+        //GameData.Rune1 = FindObjectOfType<GenerateRunes>().RuneScriptGenerated;
+
+
+
 
         BinFormatter.Serialize(DataFile, GameData);
         DataFile.Close();
@@ -43,9 +47,9 @@ public class GameManagment : MonoBehaviour
     // a function specifically made to add Runes to the players information
     public void AddRuneToData(RuneScript RuneAdded)
     {
-        GameData.Rune1 = RuneAdded;
-
-
+        //GameData.Rune1 = RuneAdded;
+        GameData.PlayerInformation.AddSelectedRune(RuneAdded);
+        GameData.PlayerInformation.AddSelectedMonster(TestSaveMonster);
 
     }
 
@@ -53,11 +57,12 @@ public class GameManagment : MonoBehaviour
     public void ClearData()
     {
         GameData.Rune1 = null;
+
     }
 
     public void LoadRuneIn()
     {
-        FindObjectOfType<UITest>().RuneBiengUsed = GameData.Rune1;
+        FindObjectOfType<UITest>().RuneBiengUsed = GameData.PlayerInformation.ReturnSelectedRune(1);
     }
 }
 
@@ -68,6 +73,6 @@ public class GameManagment : MonoBehaviour
 [System.Serializable]
 class Data
 {
-    public PlayerData PlayerInformation;
+    public PlayerData PlayerInformation = new PlayerData();
     public RuneScript Rune1;
 }
