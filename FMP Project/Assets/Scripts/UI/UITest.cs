@@ -37,9 +37,12 @@ public class UITest : MonoBehaviour
     public Text DummyBuffs;
     public Text DummyNerfs;
 
+    public Text MonsterName;
+
     public GameObject loadedrune;
     public bool LoadTheRuneOnce = false;
     public RuneScript RuneBiengUsed = null;
+    public MonsterData MonsterBiengUsed = null;
 
     // Start is called before the first frame update
     void Start()
@@ -50,13 +53,14 @@ public class UITest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
+        FindObjectOfType<Image>().gameObject.SetActive(true);
 
         //RuneLevelText.text = "Rune Level: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel();
         //RuneStatOne.text = "Rune Stat One: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType();
         //RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
         DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
+        
 
         if(RuneBiengUsed != null)
         {
@@ -79,8 +83,16 @@ public class UITest : MonoBehaviour
 
             RuneStatFour.text = "Rune Stat Four : " + RuneBiengUsed.ReturnRuneStatFour();
             RuneStatFourType.text = "Rune stat Four Type : " + RuneBiengUsed.ReturnRuneStatFourType();
+
+            
         }
       
+
+        if(MonsterBiengUsed != null)
+        {
+            Debug.Log("yes");
+            MonsterName.text = MonsterBiengUsed.ReturnMonsterName();
+        }
 
     }
 

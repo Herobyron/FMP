@@ -8,6 +8,10 @@ using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
 {
+    // this is the monsters data. this will store all of the important information on the monster so it can be stored and saved
+    [SerializeField]
+    private MonsterData ThisData = new MonsterData();
+
     [Tooltip("this is the monsters name. used to identify the monsters as well as to help with sorting and data management")]
     [SerializeField]
     private string MonsterName = "Blank";
@@ -59,6 +63,10 @@ public class MonsterScript : MonoBehaviour
     [Tooltip("this is the monsters type that has been selected frrm the enum (what type do you want this monster to be)")]
     [SerializeField]
     private MonsterType Type = MonsterType.Attack;
+
+    [Tooltip("this is the monsters type but displayed as a string for use of information transfer")]
+    [SerializeField]
+    private string TheMonsterType = "";
 
     [Tooltip("the level that you want the monster to be")]
     [SerializeField]
@@ -231,8 +239,8 @@ public class MonsterScript : MonoBehaviour
 
         //SkillOne = new BasicSkill();
         CurrentHealth = BaseHealth;
-
-
+        
+        ThisData.SetMonsterName("Blank");
         
     }
 
@@ -1018,5 +1026,10 @@ public class MonsterScript : MonoBehaviour
     public string ReturnMonsterName()
     {
         return MonsterName;
+    }
+
+    public MonsterData ReturnMonsterData()
+    {
+        return ThisData;
     }
 }

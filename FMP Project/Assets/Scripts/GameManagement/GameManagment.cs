@@ -40,7 +40,7 @@ public class GameManagment : MonoBehaviour
             Data data = (Data)BinFormatter.Deserialize(DataFile);
             DataFile.Close();
 
-            GameData.Rune1 = data.Rune1;
+            GameData.PlayerInformation = data.PlayerInformation;
         }
     }
 
@@ -49,8 +49,8 @@ public class GameManagment : MonoBehaviour
     {
         //GameData.Rune1 = RuneAdded;
         GameData.PlayerInformation.AddSelectedRune(RuneAdded);
-        GameData.PlayerInformation.AddSelectedMonster(TestSaveMonster);
-
+        GameData.PlayerInformation.AddSelectedMonster(TestSaveMonster.ReturnMonsterData());
+        Save();
     }
 
     // function used to clear players data to load in the rune for testing
@@ -62,7 +62,14 @@ public class GameManagment : MonoBehaviour
 
     public void LoadRuneIn()
     {
-        FindObjectOfType<UITest>().RuneBiengUsed = GameData.PlayerInformation.ReturnSelectedRune(1);
+       
+        FindObjectOfType<UITest>().RuneBiengUsed = GameData.PlayerInformation.ReturnSelectedRune(0);
+    }
+
+
+    public void LoadInMOnsterName()
+    {
+        FindObjectOfType<UITest>().MonsterBiengUsed = GameData.PlayerInformation.ReturnSelectedMonster(0);
     }
 }
 

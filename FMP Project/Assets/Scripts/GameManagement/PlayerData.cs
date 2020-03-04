@@ -12,7 +12,7 @@ public class PlayerData
     private List<RuneScript> PlayerRunes = new List<RuneScript>();
 
     // this is a list of the players monsters
-    private List<MonsterScript> PlayerMonsters = new List<MonsterScript>();
+    private List<MonsterData> PlayerMonsters = new List<MonsterData>();
 
     // this is the amount of Mana that the player has
     private int PlayerMana;
@@ -49,7 +49,7 @@ public class PlayerData
     // this function will allow to add monsters to the list of monsters. this function will no go through a check as the player will be able to have as many monsters as they want
     //Params:
     // - TheMonster : this is the monster that is going to be added to the players monster list
-    public void AddSelectedMonster(MonsterScript TheMonster)
+    public void AddSelectedMonster(MonsterData TheMonster)
     {
         PlayerMonsters.Add(TheMonster);
     }
@@ -84,9 +84,9 @@ public class PlayerData
     // a function that allows you to return the monster depending on the name 
     // Params: 
     // - MonsterName : this is the monster that you want to try to find within the monsters that the player owns 
-    public MonsterScript ReturnSelectedMonster(string MonsterName)
+    public MonsterData ReturnSelectedMonster(string MonsterName)
     {
-        foreach(MonsterScript M in PlayerMonsters)
+        foreach(MonsterData M in PlayerMonsters)
         {
             if(M.ReturnMonsterName() == MonsterName)
             {
@@ -102,7 +102,7 @@ public class PlayerData
     // this function returns the monster at a certain point within the players list
     // Params:
     // - MonsterNumber : this is the number in which monster will be selected from the list
-    public MonsterScript ReturnSelectedMonster(int MonsterNumber)
+    public MonsterData ReturnSelectedMonster(int MonsterNumber)
     {
         return PlayerMonsters[MonsterNumber];
     }
