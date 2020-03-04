@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 // this script is for storing the data that will be based around the player and thie rrunes and monsters 
 public class PlayerData 
 {

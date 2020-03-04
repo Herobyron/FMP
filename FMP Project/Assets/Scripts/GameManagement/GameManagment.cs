@@ -44,6 +44,9 @@ public class GameManagment : MonoBehaviour
     public void AddRuneToData(RuneScript RuneAdded)
     {
         GameData.Rune1 = RuneAdded;
+
+
+
     }
 
     // function used to clear players data to load in the rune for testing
@@ -65,5 +68,6 @@ public class GameManagment : MonoBehaviour
 [System.Serializable]
 class Data
 {
+    public PlayerData PlayerInformation;
     public RuneScript Rune1;
 }

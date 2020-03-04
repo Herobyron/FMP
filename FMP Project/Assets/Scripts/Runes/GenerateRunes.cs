@@ -36,7 +36,7 @@ public class GenerateRunes : MonoBehaviour
     // this function can only be used in editpr and may be useful for making a tool to make runes
     public void CreateRuneTool()
     {
-        GameObject NewRune = new GameObject();
+       // GameObject NewRune = new GameObject();
 
         
         //RuneScriptGenerated = NewRune.AddComponent<RuneScript>();
