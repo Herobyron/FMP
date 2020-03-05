@@ -55,13 +55,14 @@ public class UITest : MonoBehaviour
     {
         TheManager = FindObjectOfType<GameManagment>();
         Runes.Add("NoRune");
+        RuneDisplay.ClearOptions();
+        RuneDisplay.AddOptions(Runes);
     }
 
     // Update is called once per frame
     void Update()
     {
-        RuneDisplay.ClearOptions();
-        RuneDisplay.AddOptions(Runes);
+        
 
         FindObjectOfType<Image>().gameObject.SetActive(true);
 
@@ -170,12 +171,23 @@ public class UITest : MonoBehaviour
         RuneDisplay.ClearOptions();
         RuneDisplay.AddOptions(Runes);
         RuneDisplay.value = 0;
+        RuneDisplay.Select();
         RuneDisplay.RefreshShownValue();
+
+
    }
 
     public void ChangedValue()
     {
-       RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value );
+        if(RuneDisplay.value > TheManager.ReturnRuneNames().Count)
+        {
+            RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value - 1);
+        }
+        else if(RuneDisplay.value == 0)
+        {
+            RuneBiengUsed = null;
+        }
+       
     }
 
 

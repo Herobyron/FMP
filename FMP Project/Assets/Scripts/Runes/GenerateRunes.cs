@@ -19,10 +19,13 @@ public class GenerateRunes : MonoBehaviour
     // this is to access the game managment to add the players rune to thier data
     public GameManagment TheManager;
 
+    //this is the number of rune at which the player is at (if one rune is created the number is one)
+    private int RuneNumberAt;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        RuneNumberAt = TheManager.ReturnRuneCount();
     }
 
     // Update is called once per frame
@@ -73,15 +76,16 @@ public class GenerateRunes : MonoBehaviour
     // still in progress (as i need to test)
     public void CreateRune()
     {
+        RuneNumberAt = TheManager.ReturnRuneCount();
         RuneScriptGenerated = new RuneScript();
 
 
         GenerateRune();
-        RuneScriptGenerated.SetRuneName("Rune 1");
+        RuneScriptGenerated.SetRuneName("Rune " + RuneNumberAt);
         RuneScriptGenerated.SetRuneOwner("Player");
 
         TheManager.AddRuneToData(RuneScriptGenerated);
-
+        RuneNumberAt++;
     }
 
 

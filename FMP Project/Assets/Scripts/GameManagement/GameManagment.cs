@@ -96,6 +96,12 @@ public class GameManagment : MonoBehaviour
         return RuneNames;
     }
 
+    // a function to return the number of runes within the players inventory
+    public int ReturnRuneCount()
+    {
+        return GameData.PlayerInformation.ReturnAllPlayerRunes().Count;
+    }
+
 
     // this function will load the new rune that has been selected from the drop down menu
     // this function may need to change to find the name of the rune with that number then find the rune that has that name (testing needed)
