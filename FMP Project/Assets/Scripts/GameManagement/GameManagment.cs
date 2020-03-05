@@ -7,8 +7,15 @@ using System.IO;
 
 public class GameManagment : MonoBehaviour
 {
+    // the games data for the player
     Data GameData;
+
+    // this is a test monster and will be removed later on
     public MonsterScript TestSaveMonster;
+
+    // a rpivate list of the runes that the player currently owns
+    private List<string> RuneNames = new List<string>();
+
 
     void Start()
     {
@@ -56,7 +63,8 @@ public class GameManagment : MonoBehaviour
     // function used to clear players data to load in the rune for testing
     public void ClearData()
     {
-        GameData.Rune1 = null;
+        GameData.PlayerInformation.ClearRunes();
+        GameData.PlayerInformation.ClearMonsters();
 
     }
 
@@ -64,6 +72,7 @@ public class GameManagment : MonoBehaviour
     {
        
         FindObjectOfType<UITest>().RuneBiengUsed = GameData.PlayerInformation.ReturnSelectedRune(0);
+
     }
 
 
@@ -71,6 +80,31 @@ public class GameManagment : MonoBehaviour
     {
         FindObjectOfType<UITest>().MonsterBiengUsed = GameData.PlayerInformation.ReturnSelectedMonster(0);
     }
+
+    // this function is made to get all of the names of runes the playuer currently posses
+    public void GetAllRunes()
+    {
+        foreach(RuneScript R in GameData.PlayerInformation.ReturnAllPlayerRunes())
+        {
+            RuneNames.Add(R.ReturnRuneName());
+        }
+    }
+
+    //function to return the runes
+    public List<string> ReturnRuneNames()
+    {
+        return RuneNames;
+    }
+
+
+    // this function will load the new rune that has been selected from the drop down menu
+    // this function may need to change to find the name of the rune with that number then find the rune that has that name (testing needed)
+    public RuneScript SelectedDropDownRuneLoad(int DropDownValue)
+    {
+        return GameData.PlayerInformation.ReturnSelectedRune(DropDownValue );
+    }
+
+
 }
 
 

@@ -142,9 +142,12 @@ public class RuneScript
     {
         if (RuneLevel < RuneMaxLevel) // check to make sure that the rune level is not higher then the max level
         {
+            UpgradeNumber = (RuneStars * RuneLevel); // checks the runes levels and stars to determine if the rune upgrade is successful
+
             if (Random.Range(0, 100) > UpgradeNumber) // does the check to see if upgrade was sucessful. if it is then it increases the level
             {
                 RuneLevel++;
+                UpgradeMainRuneStat();
 
                 if (RuneLevel == 3 && CurrentRuneStats == 1)
                 {
@@ -282,6 +285,87 @@ public class RuneScript
         }
     }
 
+    public void UpgradeMainRuneStat()
+    {
+        switch (RuneStars)
+        {
+            case (1):
+                {
+                    if ((int)MainStat >= 4) // this is for the stats that are percentage
+                    {
+                        MainRuneStat += Random.Range(2, 5);
+                    }
+                    else if ((int)MainStat <= 3) // this is for the stats that are non percentage
+                    {
+                        MainRuneStat += Random.Range(10, 30);
+                    }
+                    break;
+                }
+            case (2):
+                {
+                    if ((int)MainStat >= 4) // this is for the stats that are percentage
+                    {
+                        MainRuneStat += Random.Range(3, 6);
+                    }
+                    else if ((int)MainStat <= 3) // this is for the stats that are non percentage
+                    {
+                        MainRuneStat += Random.Range(20, 60);
+                    }
+                    break;
+                }
+            case (3):
+                {
+                    if ((int)MainStat >= 4) // this is for the stats that are percentage
+                    {
+                        MainRuneStat += Random.Range(4, 7);
+                    }
+                    else if ((int)MainStat <= 3) // this is for the stats that are non percentage
+                    {
+                        MainRuneStat += Random.Range(30, 90);
+                    }
+                    break;
+                }
+            case (4):
+                {
+                    if ((int)MainStat >= 4) // this is for the stats that are percentage
+                    {
+                        MainRuneStat += Random.Range(5, 8);
+                    }
+                    else if ((int)MainStat <= 3) // this is for the stats that are non percentage
+                    {
+                        MainRuneStat += Random.Range(40, 120);
+                    }
+                    break;
+                }
+            case (5):
+                {
+                    if ((int)MainStat >= 4) // this is for the stats that are percentage
+                    {
+                        MainRuneStat += Random.Range(6, 9);
+                    }
+                    else if ((int)MainStat <= 3) // this is for the stats that are non percentage
+                    {
+                        MainRuneStat += Random.Range(50, 150);
+                    }
+                    break;
+                }
+            case (6):
+                {
+                    if ((int)MainStat >= 4) // this is for the stats that are percentage
+                    {
+                        MainRuneStat += Random.Range(7, 10);
+                    }
+                    else if ((int)MainRuneStat <= 3) // this is for the stats that are non percentage
+                    {
+                        MainRuneStat += Random.Range(60, 180);
+                    }
+                    break;
+                }
+        }
+    }
+
+
+
     //this function is called when a upgrade is sucessful. it will select one of the stats an generate a stat randomly 
     // this function is specific as its only called when it needs to get a new rune every 3 levels.
     // if there is already a stat in the position it would go in then it will upgrade a current stat
@@ -311,11 +395,11 @@ public class RuneScript
                 {
                     StatsTwo = (RuneStats)Random.Range(0, 10);
 
-                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    if ((int)StatsTwo >= 4) // this is for the stats that are percentage
                     {
                         RuneStatTwo = Random.Range(0, 5);
                     }
-                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    else if ((int)StatsTwo <= 3) // this is for the stats that are non percentage
                     {
                         RuneStatTwo = Random.Range(10, 30);
                     }
@@ -328,11 +412,11 @@ public class RuneScript
                 {
                     StatsThree = (RuneStats)Random.Range(0, 10);
 
-                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    if ((int)StatsThree >= 4) // this is for the stats that are percentage
                     {
                         RuneStatThree = Random.Range(0, 5);
                     }
-                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    else if ((int)StatsThree <= 3) // this is for the stats that are non percentage
                     {
                         RuneStatThree = Random.Range(10, 30);
                     }
@@ -345,11 +429,11 @@ public class RuneScript
                 {
                     StatsFour = (RuneStats)Random.Range(0, 10);
 
-                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    if ((int)StatsFour >= 4) // this is for the stats that are percentage
                     {
                         RuneStatFour = Random.Range(0, 5);
                     }
-                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    else if ((int)StatsFour <= 3) // this is for the stats that are non percentage
                     {
                         RuneStatFour = Random.Range(10, 30);
                     }

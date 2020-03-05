@@ -137,4 +137,32 @@ public class PlayerData
     {
         PlayerScrolls -= ScrollAmount;
     }
+
+
+    // this function will allow for the list of runes to be completyly cleared.
+    public void ClearRunes()
+    {
+        PlayerRunes.Clear();
+    }
+
+
+    // this function will allow for the list of monsters to be completly cleared
+    public void ClearMonsters()
+    {
+        PlayerMonsters.Clear();
+    }
+
+
+    // this function returns all of the players runes that have been saved
+    public List<RuneScript> ReturnAllPlayerRunes()
+    {
+        return PlayerRunes;
+    }
+
+
+    // this function returns all of the players monsters that have been saved
+    public List<MonsterData> ReturnAllPlayerMonsters()
+    {
+        return PlayerMonsters;
+    }
 }

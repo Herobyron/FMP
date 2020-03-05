@@ -44,15 +44,24 @@ public class UITest : MonoBehaviour
     public RuneScript RuneBiengUsed = null;
     public MonsterData MonsterBiengUsed = null;
 
+    public Dropdown RuneDisplay = null;
+
+    private GameManagment TheManager;
+
+    private List<string> Runes = new List<string>();
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        TheManager = FindObjectOfType<GameManagment>();
+        Runes.Add("NoRune");
     }
 
     // Update is called once per frame
     void Update()
     {
+        RuneDisplay.ClearOptions();
+        RuneDisplay.AddOptions(Runes);
 
         FindObjectOfType<Image>().gameObject.SetActive(true);
 
@@ -146,8 +155,28 @@ public class UITest : MonoBehaviour
         loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
 
         RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
-        Debug.Log(RuneBiengUsed.ReturnMainRuneStatType());
+        
    }
+
+
+   public void RuneDisplayFunc()
+   {
+        Debug.Log(TheManager.ReturnRuneNames()[0]);
+        
+        for(int i = 0; i < TheManager.ReturnRuneNames().Count; i++)
+        {
+            Runes.Add(TheManager.ReturnRuneNames()[i]);
+        }
+        RuneDisplay.ClearOptions();
+        RuneDisplay.AddOptions(Runes);
+        RuneDisplay.value = 0;
+        RuneDisplay.RefreshShownValue();
+   }
+
+    public void ChangedValue()
+    {
+       RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value );
+    }
 
 
 }
