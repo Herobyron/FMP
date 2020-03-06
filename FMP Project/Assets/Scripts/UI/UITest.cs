@@ -179,13 +179,17 @@ public class UITest : MonoBehaviour
 
     public void ChangedValue()
     {
-        if(RuneDisplay.value > TheManager.ReturnRuneNames().Count)
+        if(RuneDisplay.value == 0)
+        {
+            RuneBiengUsed = null;
+        }
+        if(RuneDisplay.value >= TheManager.ReturnRuneNames().Count)
         {
             RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value - 1);
         }
-        else if(RuneDisplay.value == 0)
+        else
         {
-            RuneBiengUsed = null;
+            RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value - 1);
         }
        
     }
