@@ -99,7 +99,11 @@ public class GameManagment : MonoBehaviour
     // a function to return the number of runes within the players inventory
     public int ReturnRuneCount()
     {
-        return GameData.PlayerInformation.ReturnAllPlayerRunes().Count;
+        if(GameData != null)
+        {
+            return GameData.PlayerInformation.ReturnAllPlayerRunes().Count;
+        }
+        return 0;
     }
 
 

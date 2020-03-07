@@ -11,43 +11,35 @@ public class UITest : MonoBehaviour
     // this is the monster that is holding the rune that i want to test the upgrading on
     public GameObject Monster;
 
-    public Text RuneLevelText;
-    public Text RuneStatOneType;
-    public Text RuneStatOne;
+    // this is the text for the runes (this is for demonstration of UI may be used later on or may need to be serilised)
+    public Text RuneOneStat;
+    public Text RuneTwoStat;
+    public Text RuneThreeStat;
+    public Text RuneFourStat;
+    public Text MainRuneStat;
 
+    // other texts displaying other information on the rune
+    public Text RuneLevelText;
     public Text RuneStar;
     public Text RuneGrade;
     public Text RuneSlot;
 
-    public Text MainRuneStat;
-    public Text MainRuneStatType;
+    // this is the drop down that is used to display the rune information
+    public Dropdown RuneDisplay = null;
 
-    public Text RuneStatTwoType;
-    public Text RuneStatTwo;
+    public Image NoRuneUsed = null;
 
-    public Text RuneStatThreeType;
-    public Text RuneStatThree;
-
-    public Text RuneStatFourType;
-    public Text RuneStatFour;
-
-    public GameObject TestDummy;
-    public Text DummyHealth;
-
-    public Text DummyBuffs;
-    public Text DummyNerfs;
-
-    public Text MonsterName;
-
+    // other infromation bits
     public GameObject loadedrune;
     public bool LoadTheRuneOnce = false;
     public RuneScript RuneBiengUsed = null;
     public MonsterData MonsterBiengUsed = null;
 
-    public Dropdown RuneDisplay = null;
-
+    
+    // this is the manager that holds all of the information 
     private GameManagment TheManager;
 
+    // list of the runes names to be used for sorting through differnt runes
     private List<string> Runes = new List<string>();
 
     // Start is called before the first frame update
@@ -62,48 +54,8 @@ public class UITest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         FindObjectOfType<Image>().gameObject.SetActive(true);
-
-        //RuneLevelText.text = "Rune Level: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneLevel();
-        //RuneStatOne.text = "Rune Stat One: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOneType();
-        //RuneStatOneNumber.text = "Rune Stat One Number: " + Monster.GetComponent<MonsterScript>().ReturnRune(0).ReturnRuneStatOne();
-        DummyHealth.text = "Dummy Health : " + TestDummy.GetComponent<MonsterScript>().ReturnCurrentHealth();
-        
-
-        if(RuneBiengUsed != null)
-        {
-            RuneLevelText.text = "Rune Level : " + RuneBiengUsed.ReturnRuneLevel();
-            RuneStar.text = "Rune star : " + RuneBiengUsed.ReturnAmountOfStars();
-            RuneGrade.text = "Rune Grade : " + RuneBiengUsed.ReturnRuneRarity();
-            RuneSlot.text = "Rune Slot : " + RuneBiengUsed.ReturnRuneSlot();
-
-            MainRuneStat.text = "Main Rune Stat : " + RuneBiengUsed.ReturnMainRuneStat();
-            MainRuneStatType.text = "Main Rune Stat Type : " + RuneBiengUsed.ReturnMainRuneStatType();
-
-            RuneStatOne.text = "Rune Stat one : " + RuneBiengUsed.ReturnRuneStatOne();
-            RuneStatOneType.text = "Rune Stat one Type" + RuneBiengUsed.ReturnRuneStatOneType();
-
-            RuneStatTwo.text = "Rune Stat Two : " + RuneBiengUsed.ReturnRuneStatTwo();
-            RuneStatTwoType.text = "Rune Stat Two Type : " + RuneBiengUsed.ReturnRuneStatTwoType();
-
-            RuneStatThree.text = "Rune Stat Three : " + RuneBiengUsed.ReturnRuneStatThree();
-            RuneStatThreeType.text = "Rune Stat Three Type : " + RuneBiengUsed.ReturnRuneStatThreeType();
-
-            RuneStatFour.text = "Rune Stat Four : " + RuneBiengUsed.ReturnRuneStatFour();
-            RuneStatFourType.text = "Rune stat Four Type : " + RuneBiengUsed.ReturnRuneStatFourType();
-
-            
-        }
-      
-
-        if(MonsterBiengUsed != null)
-        {
-            Debug.Log("yes");
-            MonsterName.text = MonsterBiengUsed.ReturnMonsterName();
-        }
-
+        ChangeUI();
     }
 
 
@@ -117,44 +69,11 @@ public class UITest : MonoBehaviour
         }
     }
 
-    public void UseMonstersSkillTwo()
-    {
-        Monster.GetComponent<MonsterScript>().UseSkill(2).SkillAction(Monster.GetComponent<MonsterScript>(), TestDummy.GetComponent<MonsterScript>()); 
-    }
-
-    public void UseMonsterSkillOne()
-    {
-        Monster.GetComponent<MonsterScript>().UseSkill(1).SkillAction(Monster.GetComponent<MonsterScript>(), TestDummy.GetComponent<MonsterScript>());
-        UpdatingBuffsText();
-    }
-
-    public void UseMonsterSkillThree()
-    {
-        Monster.GetComponent<MonsterScript>().UseSkill(3).SkillAction(Monster.GetComponent<MonsterScript>(), TestDummy.GetComponent<MonsterScript>());
-    }
-
-
-    public void UpdatingBuffsText()
-    {
-        DummyBuffs.text = "Buffs on Dummy : ";
-        DummyNerfs.text = "Debuffs on Dummy : ";
-
-        foreach (BeneficialEffects B in TestDummy.GetComponent<MonsterScript>().ReturnBeneficialEffects())
-        {
-            DummyBuffs.text += B.name + ", ";
-        }
-
-        foreach(HarmfulEffects H in TestDummy.GetComponent<MonsterScript>().ReturnHarmfulEffects())
-        {
-            DummyNerfs.text += H.name + ", ";
-        }
-    }
 
    public void LoadRuneTest()
    {
         
         loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
-
         RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
         
    }
@@ -183,7 +102,7 @@ public class UITest : MonoBehaviour
         {
             RuneBiengUsed = null;
         }
-        if(RuneDisplay.value >= TheManager.ReturnRuneNames().Count)
+        else if(RuneDisplay.value >= TheManager.ReturnRuneNames().Count)
         {
             RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value - 1);
         }
@@ -194,5 +113,28 @@ public class UITest : MonoBehaviour
        
     }
 
+
+    public void ChangeUI()
+    {
+        if(RuneBiengUsed == null)
+        {
+            NoRuneUsed.gameObject.SetActive(true);
+        }
+        else 
+        {
+            RuneLevelText.text = "Rune Level : " + RuneBiengUsed.ReturnRuneLevel();
+            RuneStar.text = "Rune star : " + RuneBiengUsed.ReturnAmountOfStars();
+            RuneGrade.text = "Rune Grade : " + RuneBiengUsed.ReturnRuneRarity();
+            RuneSlot.text = "Rune Slot : " + RuneBiengUsed.ReturnRuneSlot();
+
+            MainRuneStat.text = "Main Rune Stat : " + RuneBiengUsed.ReturnMainRuneStat();
+            RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": " + RuneBiengUsed.ReturnRuneStatOne();
+            RuneTwoStat.text = RuneBiengUsed.ReturnRuneStatTwoType() + ": " + RuneBiengUsed.ReturnRuneStatTwo();
+            RuneThreeStat.text = RuneBiengUsed.ReturnRuneStatThreeType() + ": " + RuneBiengUsed.ReturnRuneStatThree();
+            RuneFourStat.text = RuneBiengUsed.ReturnRuneStatFourType() + ": " + RuneBiengUsed.ReturnRuneStatFour();
+
+            NoRuneUsed.gameObject.SetActive(false);
+        }
+    }
 
 }
