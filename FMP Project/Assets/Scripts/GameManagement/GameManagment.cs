@@ -70,8 +70,8 @@ public class GameManagment : MonoBehaviour
 
     public void LoadRuneIn()
     {
-       
-        FindObjectOfType<UITest>().RuneBiengUsed = GameData.PlayerInformation.ReturnSelectedRune(0);
+
+        FindObjectOfType<UITest>().SetRuneBiengUsed(GameData.PlayerInformation.ReturnSelectedRune(0));
 
     }
 
@@ -114,6 +114,10 @@ public class GameManagment : MonoBehaviour
         return GameData.PlayerInformation.ReturnSelectedRune(DropDownValue );
     }
 
+    public void ExitApplication()
+    {
+        Application.Quit();
+    }
 
 }
 

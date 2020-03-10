@@ -151,30 +151,66 @@ public class RuneScript
 
                 if (RuneLevel == 3 && CurrentRuneStats == 1)
                 {
-                    RuneStatOne += Random.Range(0.0f, 5.0f);
+                    if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                    {
+                        RuneStatOne += Random.Range(1, 5);
+                    }
+                    else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                    {
+                        RuneStatOne += Random.Range(10, 30);
+                    }
+
                 }
                 else if (RuneLevel == 3 && CurrentRuneStats > 1)
                 {
-                    switch (Random.Range(0, CurrentRuneStats))
+                    switch (Random.Range(0, (CurrentRuneStats - 1)))
                     {
                         case (0):
                             {
-                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatOne += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatOne += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (1):
                             {
-                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsTwo >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatTwo += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsTwo <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatTwo += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (2):
                             {
-                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsThree >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatThree += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsThree <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatThree += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (3):
                             {
-                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsFour >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatFour += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsFour <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatFour += Random.Range(10, 30);
+                                }
                                 break;
                             }
                     }
@@ -188,26 +224,54 @@ public class RuneScript
 
                 if (RuneLevel == 6 && CurrentRuneStats >= 2)
                 {
-                    switch (Random.Range(0, CurrentRuneStats))
+                    switch (Random.Range(0, (CurrentRuneStats - 1)))
                     {
                         case (0):
                             {
-                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatOne += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatOne += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (1):
                             {
-                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsTwo >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatTwo += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsTwo <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatTwo += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (2):
                             {
-                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsThree >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatThree += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsThree <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatThree += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (3):
                             {
-                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsFour >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatFour += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsFour <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatFour += Random.Range(10, 30);
+                                }
                                 break;
                             }
                     }
@@ -220,26 +284,54 @@ public class RuneScript
 
                 if (RuneLevel == 9 && CurrentRuneStats >= 3)
                 {
-                    switch (Random.Range(0, CurrentRuneStats))
+                    switch (Random.Range(0, (CurrentRuneStats - 1)))
                     {
                         case (0):
                             {
-                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatOne += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatOne += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (1):
                             {
-                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsTwo >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatTwo += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsTwo <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatTwo += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (2):
                             {
-                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsThree >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatThree += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsThree <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatThree += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (3):
                             {
-                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsFour >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatFour += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsFour <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatFour += Random.Range(10, 30);
+                                }
                                 break;
                             }
                     }
@@ -252,26 +344,54 @@ public class RuneScript
 
                 if (RuneLevel == 12 && CurrentRuneStats == 4)
                 {
-                    switch (Random.Range(0, CurrentRuneStats))
+                    switch (Random.Range(0, (CurrentRuneStats - 1)))
                     {
                         case (0):
                             {
-                                RuneStatOne += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsOne >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatOne += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatOne += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (1):
                             {
-                                RuneStatTwo += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsTwo >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatTwo += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsTwo <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatTwo += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (2):
                             {
-                                RuneStatThree += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsThree >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatThree += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsThree <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatThree += Random.Range(10, 30);
+                                }
                                 break;
                             }
                         case (3):
                             {
-                                RuneStatFour += Random.Range(0.0f, 5.0f);
+                                if ((int)StatsFour >= 4) // this is for the stats that are percentage
+                                {
+                                    RuneStatFour += Random.Range(1, 5);
+                                }
+                                else if ((int)StatsFour <= 3) // this is for the stats that are non percentage
+                                {
+                                    RuneStatFour += Random.Range(10, 30);
+                                }
                                 break;
                             }
                     }
@@ -381,7 +501,7 @@ public class RuneScript
 
                     if ((int)StatsOne >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatOne = Random.Range(0, 5);
+                        RuneStatOne = Random.Range(1, 5);
                     }
                     else if ((int)StatsOne <= 3) // this is for the stats that are non percentage
                     {
@@ -397,7 +517,7 @@ public class RuneScript
 
                     if ((int)StatsTwo >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatTwo = Random.Range(0, 5);
+                        RuneStatTwo = Random.Range(1, 5);
                     }
                     else if ((int)StatsTwo <= 3) // this is for the stats that are non percentage
                     {
@@ -414,7 +534,7 @@ public class RuneScript
 
                     if ((int)StatsThree >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatThree = Random.Range(0, 5);
+                        RuneStatThree = Random.Range(1, 5);
                     }
                     else if ((int)StatsThree <= 3) // this is for the stats that are non percentage
                     {
@@ -431,7 +551,7 @@ public class RuneScript
 
                     if ((int)StatsFour >= 4) // this is for the stats that are percentage
                     {
-                        RuneStatFour = Random.Range(0, 5);
+                        RuneStatFour = Random.Range(1, 5);
                     }
                     else if ((int)StatsFour <= 3) // this is for the stats that are non percentage
                     {

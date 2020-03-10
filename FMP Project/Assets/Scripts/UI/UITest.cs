@@ -23,6 +23,7 @@ public class UITest : MonoBehaviour
     public Text RuneStar;
     public Text RuneGrade;
     public Text RuneSlot;
+    public Text RuneName;
 
     // this is the drop down that is used to display the rune information
     public Dropdown RuneDisplay = null;
@@ -32,7 +33,10 @@ public class UITest : MonoBehaviour
     // other infromation bits
     public GameObject loadedrune;
     public bool LoadTheRuneOnce = false;
-    public RuneScript RuneBiengUsed = null;
+
+    
+    private RuneScript RuneBiengUsed = null;
+
     public MonsterData MonsterBiengUsed = null;
 
     
@@ -49,12 +53,15 @@ public class UITest : MonoBehaviour
         Runes.Add("NoRune");
         RuneDisplay.ClearOptions();
         RuneDisplay.AddOptions(Runes);
+        NoRuneUsed.gameObject.SetActive(true);
+        RuneBiengUsed = null;
     }
 
     // Update is called once per frame
     void Update()
     {
-        FindObjectOfType<Image>().gameObject.SetActive(true);
+        //FindObjectOfType<Image>().gameObject.SetActive(true);
+        
         ChangeUI();
     }
 
@@ -70,13 +77,13 @@ public class UITest : MonoBehaviour
     }
 
 
-   public void LoadRuneTest()
-   {
-        
-        loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
-        RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
-        
-   }
+   //public void LoadRuneTest()
+   //{
+   //     
+   //     loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
+   //     RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
+   //     
+   //}
 
 
    public void RuneDisplayFunc()
@@ -87,9 +94,10 @@ public class UITest : MonoBehaviour
         {
             Runes.Add(TheManager.ReturnRuneNames()[i]);
         }
+
         RuneDisplay.ClearOptions();
         RuneDisplay.AddOptions(Runes);
-        RuneDisplay.value = 0;
+        RuneDisplay.value = 1;
         RuneDisplay.Select();
         RuneDisplay.RefreshShownValue();
 
@@ -120,14 +128,15 @@ public class UITest : MonoBehaviour
         {
             NoRuneUsed.gameObject.SetActive(true);
         }
-        else 
+        else if(RuneBiengUsed != null)
         {
+            RuneName.text = "Rune Name : " + RuneBiengUsed.ReturnRuneName();
             RuneLevelText.text = "Rune Level : " + RuneBiengUsed.ReturnRuneLevel();
             RuneStar.text = "Rune star : " + RuneBiengUsed.ReturnAmountOfStars();
             RuneGrade.text = "Rune Grade : " + RuneBiengUsed.ReturnRuneRarity();
             RuneSlot.text = "Rune Slot : " + RuneBiengUsed.ReturnRuneSlot();
 
-            MainRuneStat.text = "Main Rune Stat : " + RuneBiengUsed.ReturnMainRuneStat();
+            MainRuneStat.text = RuneBiengUsed.ReturnMainRuneStatType() + ": " + RuneBiengUsed.ReturnMainRuneStat();
             RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": " + RuneBiengUsed.ReturnRuneStatOne();
             RuneTwoStat.text = RuneBiengUsed.ReturnRuneStatTwoType() + ": " + RuneBiengUsed.ReturnRuneStatTwo();
             RuneThreeStat.text = RuneBiengUsed.ReturnRuneStatThreeType() + ": " + RuneBiengUsed.ReturnRuneStatThree();
@@ -136,5 +145,12 @@ public class UITest : MonoBehaviour
             NoRuneUsed.gameObject.SetActive(false);
         }
     }
+
+
+    public void SetRuneBiengUsed(RuneScript TheRune)
+    {
+        RuneBiengUsed = TheRune;
+    }
+
 
 }

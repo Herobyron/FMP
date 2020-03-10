@@ -1118,6 +1118,7 @@ RectTransform:
   - {fileID: 3502001568766430037}
   - {fileID: 3502001568658741564}
   - {fileID: 3502001569004531470}
+  - {fileID: 3502001568051227109}
   m_Father: {fileID: 3502001568777213090}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1346,16 +1347,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3502001568051227110}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3502001568777213090}
-  m_RootOrder: 3
+  m_Father: {fileID: 3502001567972076713}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 239.89, y: -0.00010681}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.000091552734}
   m_SizeDelta: {x: 479.33, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3502001568051227108
@@ -2665,7 +2666,7 @@ GameObject:
   - component: {fileID: 3502001568777213088}
   - component: {fileID: 3502001568777213091}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI Testing (Runes ONLY)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2685,7 +2686,6 @@ RectTransform:
   - {fileID: 3502001567635815837}
   - {fileID: 3502001567603811790}
   - {fileID: 3502001567972076713}
-  - {fileID: 3502001568051227109}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2776,35 +2776,11 @@ MonoBehaviour:
   RuneStar: {fileID: 3502001568658741562}
   RuneGrade: {fileID: 3502001568734423976}
   RuneSlot: {fileID: 3502001569004531504}
+  RuneName: {fileID: 0}
   RuneDisplay: {fileID: 3502001567603811791}
   NoRuneUsed: {fileID: 3502001568051227111}
   loadedrune: {fileID: 0}
   LoadTheRuneOnce: 0
-  RuneBiengUsed:
-    RuneName: 
-    RuneEquiped: 0
-    RuneLevel: 0
-    RuneStars: 0
-    RuneOwnerName: 
-    Rarity: 0
-    RuneSlot: 0
-    MaxRuneStats: 0
-    CurrentRuneStats: 0
-    RuneMaxLevel: 15
-    MainRuneStat: 0
-    MainStat: 2
-    RuneStatOne: 0
-    StatsOne: 0
-    StatOneType: 
-    RuneStatTwo: 0
-    StatsTwo: 0
-    StatTwoType: 
-    RuneStatThree: 0
-    StatsThree: 0
-    StatThreeType: 
-    RuneStatFour: 0
-    StatsFour: 0
-    StatFourType: 
 --- !u!114 &3502001568777213091
 MonoBehaviour:
   m_ObjectHideFlags: 0
