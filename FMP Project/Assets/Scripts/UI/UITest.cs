@@ -77,20 +77,20 @@ public class UITest : MonoBehaviour
     }
 
 
-   //public void LoadRuneTest()
-   //{
-   //     
-   //     loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
-   //     RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
-   //     
-   //}
+    //public void LoadRuneTest()
+    //{
+    //     
+    //     loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
+    //     RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
+    //     
+    //}
 
 
-   public void RuneDisplayFunc()
-   {
+    public void RuneDisplayFunc()
+    {
         Debug.Log(TheManager.ReturnRuneNames()[0]);
-        
-        for(int i = 0; i < TheManager.ReturnRuneNames().Count; i++)
+        Runes.Clear();
+        for (int i = 0; i < TheManager.ReturnRuneNames().Count; i++)
         {
             Runes.Add(TheManager.ReturnRuneNames()[i]);
         }
@@ -102,7 +102,7 @@ public class UITest : MonoBehaviour
         RuneDisplay.RefreshShownValue();
 
 
-   }
+    }
 
     public void ChangedValue()
     {

@@ -84,6 +84,7 @@ public class GameManagment : MonoBehaviour
     // this function is made to get all of the names of runes the playuer currently posses
     public void GetAllRunes()
     {
+        RuneNames.Clear();
         foreach(RuneScript R in GameData.PlayerInformation.ReturnAllPlayerRunes())
         {
             RuneNames.Add(R.ReturnRuneName());
