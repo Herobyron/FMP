@@ -73,7 +73,6 @@ public class GenerateRunes : MonoBehaviour
 
     // this function creates the rune and adds it to the players inventory (if specified)
     // this rune will then be stored in a script which can be saved later on and accessed later on
-    // still in progress (as i need to test)
     public void CreateRune()
     {
         RuneNumberAt = TheManager.ReturnRuneCount();

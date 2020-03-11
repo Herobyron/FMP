@@ -107,6 +107,16 @@ public class GameManagment : MonoBehaviour
         return 0;
     }
 
+    // a function to return the number of monsters within the player inventory
+    public int ReturnMonsterCount()
+    {
+        if(GameData != null)
+        {
+            return GameData.PlayerInformation.ReturnAllPlayerMonsters().Count;
+        }
+        return 0;
+    }
+
 
     // this function will load the new rune that has been selected from the drop down menu
     // this function may need to change to find the name of the rune with that number then find the rune that has that name (testing needed)
