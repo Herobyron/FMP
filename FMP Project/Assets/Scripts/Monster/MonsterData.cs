@@ -63,14 +63,32 @@ public class MonsterData
     // this is the monsters sixth rune
     private string RuneSixName = "";
 
-    // this is the monsters first skill
-    private string SkillOneName = "";
+    // this is the monsters first skill and first effect
+    private string SkillOneMainEffect = "";
+
+    // this is the monsters secondary effect on skill one
+    private string SkillOneSecondaryEffect = "";
+
+    // a bool to determine if this skill will be an AOE skill
+    private bool SkillOneAOE = false;
 
     // this is the monsters second skill
-    private string SkillTwoName = "";
+    private string SkillTwoMainEffect = "";
 
-    // this is the monsters third name
-    private string SkillThreeName = "";
+    // this is the monsters secondary effect on the second skill
+    private string SkillTwoSecondaryEffect = "";
+
+    //this is the bool to determine wether the second skill is AOE
+    private bool SkillTwoAOE = false;
+
+    // this is the monsters third name and first effect
+    private string SkillThreeMainEffect = "";
+
+    // this is the monsters third skill and secondary effect
+    private string SkillThreeSecondaryEffect = "";
+
+    // this is the monsters third skill aoe to determine if it is AOE
+    private bool SkillThreeAOE = false;
 
     // this is the importance of the first skill
     private int SkillOneImportance = 0;
@@ -81,6 +99,14 @@ public class MonsterData
     // this is the importance of the thirs skill
     private int SkillThreeImportance = 0;
 
+    // this is the effects the monster can apply on thier first skill (for main and secondary effects)
+    private List<string> SkillOneEffects = new List<string>();
+
+    // this is the effects the monster can apply on thier second skill (for main and secondary effects)
+    private List<string> SkillTwoEffects = new List<string>();
+
+    //this is the effects that the monster can apply with third skill (for main and secondary effect)
+    private List<string> SkillThreeEffects = new List<string>();
 
     // this function returns the rune name 
     public string ReturnMonsterName()
@@ -142,14 +168,33 @@ public class MonsterData
     // this function returns the monster saved sixth rune name
     public string ReturnRuneSixName() { return RuneSixName; }
 
-    // this function returns the monster saved skill name one
-    public string ReturnSkillOneName() { return SkillOneName; }
+    // this function returns the monsters main effect of skill one
+    public string ReturnSkillOneMainEffect() { return SkillOneMainEffect; }
 
-    // this function returns the monster saved skill name two
-    public string ReturnSkillTwoName() { return SkillTwoName; }
+    // this function returns the monster secondary effect of skill two
+    public string ReturnSkillOneSecondaryEffect() { return SkillOneSecondaryEffect; }
 
-    // this function returns the monster saved skill name three
-    public string ReturnSkillThreeName() { return SkillThreeName; }
+    // this function returns wether or not the first skill is an AOE skill
+    public bool ReturnSkillOneAOE() { return SkillOneAOE; }
+
+    //this function returns the main effect of the second skill
+    public string ReturnSkillTwoMainEffect() { return SkillTwoMainEffect; }
+
+    // this function returns the secondary effect of the Second Skill
+    public string ReturnSkillTwoSecondaryEffect() { return SkillTwoSecondaryEffect; }
+
+    //this function returns wether the secondary skill is an AOE effect or not
+    public bool ReturnSkillTwoAOE() { return SkillTwoAOE; }
+
+
+    // this function returns the main effect of the third skill
+    public string ReturnSkillThreeMainEffect() { return SkillThreeMainEffect; }
+
+    // this function will return the secondary effect of the third skill
+    public string ReturnSkillThreeSecondaryEffect() { return SkillThreeSecondaryEffect; }
+
+    // this function will return wether or not the third skill is a AOE or not
+    public bool ReturnSkillThreeAOE() { return SkillThreeAOE; }
 
     // this function returns the monsters first skill importance
     public int ReturnSkillOneImportance() { return SkillOneImportance; }
@@ -159,6 +204,16 @@ public class MonsterData
 
     // this function returns the monsters thrid skill importance
     public int ReturnSkillThreeImportance() { return SkillThreeImportance; }
+
+    //this function will return the list of effects that the first skill can use
+    public List<string> ReturnAllSkillOneEffects() { return SkillOneEffects; }
+
+    // this function will return the list of effect that the second skill can use
+    public List<string> ReturnAllSkillTwoEffects() { return SkillTwoEffects; }
+
+    // this function will return the list of effects that the third skill can use
+    public List<string> ReturnAllSkillThreeEffects() { return SkillThreeEffects; }
+
 
     //this function will set the monsters name
     public void SetMonsterName(string Name) { MonsterName = Name; }
@@ -217,14 +272,32 @@ public class MonsterData
     //this will set the rune six name
     public void SetRuneNameSix(string TheRuneSixName) { RuneSixName = TheRuneSixName; }
 
-    //this will set the skill one name
-    public void SetSkillOneName(string SkillName) { SkillOneName = SkillName; }
+    //this will set the the main effect of the first skill
+    public void SetSkillOneMainEffect(string SkillName) { SkillOneMainEffect = SkillName; }
 
-    //this will set the skill two name
-    public void SetSkillTwoName(string SkillName) { SkillTwoName = SkillName; }
+    // this will set the second effect of the first skill
+    public void SetSkillOneSecondaryEffect(string SKillName) { SkillOneSecondaryEffect = SKillName; }
 
-    //this will set the skill three name
-    public void SetSkillThreeName(string SkillName) { SkillThreeName = SkillName; }
+    // this will set wether or not the first skill is an AOE skill
+    public void SetSkillOneAOE(bool ISAOE) { SkillOneAOE = ISAOE; }
+
+    //this will set the main effect of the second skill
+    public void SetSkillTwoMainEffect(string SkillName) { SkillTwoMainEffect = SkillName; }
+
+    // this will set the secondary effect of the second skill
+    public void SetSkillTwoSecondaryEffect(string SkillName) { SkillTwoSecondaryEffect = SkillName; }
+
+    // this will set wether or not the second skill is an AOE skill
+    public void SetSkillTwoAOE(bool ISAOE) { SkillTwoAOE = ISAOE; }
+    
+    //this function sets the main effect of the thrid skill
+    public void SetSkillThreeMainEffect(string SkillName) { SkillThreeMainEffect = SkillName; }
+
+    // this function sets the secondary effect of the third skill
+    public void SetSkillThreeSecondaryEffect(string SkillName) { SkillThreeSecondaryEffect = SkillName; }
+
+    // this function sets wether or not the third skill is an AOE skill
+    public void SetSkillThreeAOE(bool ISAOE) { SkillThreeAOE = ISAOE; }
 
     //this will set the skill one importance
     public void SetSkillOneImportance(int Improtance) { SkillOneImportance = Improtance; }
@@ -234,5 +307,14 @@ public class MonsterData
 
     //this will set the skill three importance
     public void SetSkillthreeImportance(int Importance) { SkillThreeImportance = Importance; }
+
+    // this function will add to the effects the monster can apply on the first skill
+    public void AddEffectFirstSkill(string Effect) { SkillOneEffects.Add(Effect); }
+
+    // this function will add to the effects the monsetr can apply on the second skill
+    public void AddEffectSecondSkill(string Effect) { SkillTwoEffects.Add(Effect); }
+
+    // this function will add to the effects the monster can apply on the third skill
+    public void AddEffectThridSkill(string Effect) { SkillThreeEffects.Add(Effect); }
 
 }

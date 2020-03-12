@@ -108,8 +108,242 @@ public class GenerateMonster : MonoBehaviour
 
         MonsterDataGenerated.SetMonsterHealth(TempHealth);
 
-        
+
         //defence generation for the monster
+
+        int TempDefence = Random.Range(100, 200);
+        TempDefence = (TempDefence * (10 * MonsterDataGenerated.ReturnMonsterStars()));
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Attack"):
+                {
+                    TempDefence -= Random.Range(200, 300);
+                    break;
+                }
+            case ("Defence"):
+                {
+                    TempDefence += Random.Range(300, 400);
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempDefence -= Random.Range(100, 200);
+                    break;
+                }
+        }
+
+        MonsterDataGenerated.SetMonsterDefence(TempDefence);
+
+        // Attack generation for the monster
+
+        int TempAttack = Random.Range(100, 200);
+        TempAttack = (TempAttack * (10 * MonsterDataGenerated.ReturnMonsterStars()));
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Attack"):
+                {
+                    TempAttack += Random.Range(300, 400);
+                    break;
+                }
+            case ("Defence"):
+                {
+                    TempAttack -= Random.Range(100, 200);
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempAttack -= Random.Range(200, 300);
+                    break;
+                }
+        }
+
+        MonsterDataGenerated.SetMonsterAttack(TempAttack);
+
+        // Speed Generation for the monster
+        int TempSpeed = Random.Range(90, 120);
+        TempSpeed = (TempSpeed + (5 + MonsterDataGenerated.ReturnMonsterStars()));
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Attack"):
+                {
+                    TempSpeed += Random.Range(2, 3);
+                    break;
+                }
+            case ("Defence"):
+                {
+                    TempSpeed += Random.Range(1, 3);
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempSpeed += Random.Range(3, 5);
+                    break;
+                }
+        }
+
+        MonsterDataGenerated.SetMonsterSpeed(TempSpeed);
+
+        //Crit Rate Generation for the monster
+        int TempCritRate = Random.Range(10, 30);
+        TempCritRate = (TempCritRate + (5 + MonsterDataGenerated.ReturnMonsterStars()));
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Attack"):
+                {
+                    TempCritRate += Random.Range(3, 5);
+                    break;
+                }
+            case ("Defence"):
+                {
+                    TempCritRate -= Random.Range(3, 5);
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempCritRate -= Random.Range(3, 5);
+                    break;
+                }
+        }
+
+
+        MonsterDataGenerated.SetMonsterCritRate(TempCritRate);
+
+
+        //Crit Damage Generation for the monster
+        int TempCritDamage = Random.Range(80, 110);
+        TempCritDamage = (TempCritDamage + (Random.Range(10, 15) + MonsterDataGenerated.ReturnMonsterStars()));
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Attack"):
+                {
+                    TempCritDamage += Random.Range(5, 10);
+                    break;
+                }
+            case ("Defence"):
+                {
+                    TempCritDamage -= 10;
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempCritDamage -= 10;
+                    break;
+                }
+        }
+
+        MonsterDataGenerated.SetMonsterCritDamage(TempCritDamage);
+
+        //Accuracy Generation for the monster
+        int TempAccuracy = Random.Range(10,20);
+        TempAccuracy = (TempAccuracy + MonsterDataGenerated.ReturnMonsterStars());
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Defence"):
+                {
+                    TempAccuracy += Random.Range(5,10);
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempAccuracy += Random.Range(5, 10);
+                    break;
+                }
+        }
+
+        MonsterDataGenerated.SetMonsterAccuracy(TempAccuracy);
+
+
+        // the Resistance of the monster generation
+        int TempResistance = Random.Range(10, 20);
+        TempResistance = (TempResistance + (3 * MonsterDataGenerated.ReturnMonsterStars()));
+
+        switch (MonsterDataGenerated.ReturnMonsterType())
+        {
+            case ("Defence"):
+                {
+                    TempResistance += Random.Range(1, 5);
+                    break;
+                }
+            case ("Health"):
+                {
+                    TempResistance += Random.Range(1, 5);
+                    break;
+                }
+            case ("Attack"):
+                {
+                    TempResistance -= Random.Range(5, 10);
+                    break;
+                }
+        }
+
+        MonsterDataGenerated.SetMonsterResistance(TempResistance);
+
+        // now the final step is generating the skills for the monster.
+        
+        //first skill 
+        // first skill deciding if its an AOE
+        if(Random.Range(1, 100) > 30)
+        {
+            MonsterDataGenerated.SetSkillOneAOE(false);
+        }
+        else
+        {
+            MonsterDataGenerated.SetSkillOneAOE(true);
+        }
+
+        // determines what type of skill the first skill will be
+        int SKillTemp = Random.Range(1, 100);
+        if (SKillTemp >= 1 && SKillTemp < 33)
+        {
+            MonsterDataGenerated.SetSkillOneMainEffect("Healing");
+        }
+        else if (SKillTemp >= 33 && SKillTemp < 66)
+        {
+            MonsterDataGenerated.SetSkillOneMainEffect("Damage");
+        }
+        else
+        {
+            if(Random.Range(1, 100) > 50)
+            {
+                MonsterDataGenerated.SetSkillOneMainEffect("BeneficialEffect");
+            }
+            else
+            {
+                MonsterDataGenerated.SetSkillOneMainEffect("HarmfulEffect");
+            }
+        }
+
+        //now determins if the first skill will have a secondary effect
+        SKillTemp = Random.Range(1, 2);
+        if(SKillTemp == 1)
+        {
+            SKillTemp = Random.Range(1, 100);
+            if (SKillTemp >= 1 && SKillTemp < 33)
+            {
+                MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+            }
+            else if (SKillTemp >= 33 && SKillTemp < 66)
+            {
+                MonsterDataGenerated.SetSkillOneSecondaryEffect("Damage");
+            }
+            else
+            {
+                if (Random.Range(1, 100) > 50)
+                {
+                    MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                }
+                else
+                {
+                    MonsterDataGenerated.SetSkillOneSecondaryEffect("HarmfulEffect");
+                }
+            }
+        }
 
 
     }

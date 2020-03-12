@@ -97,7 +97,7 @@ public class UITest : MonoBehaviour
 
         RuneDisplay.ClearOptions();
         RuneDisplay.AddOptions(Runes);
-        RuneDisplay.value = 1;
+        RuneDisplay.value = 0;
         RuneDisplay.Select();
         RuneDisplay.RefreshShownValue();
 
@@ -106,19 +106,18 @@ public class UITest : MonoBehaviour
 
     public void ChangedValue()
     {
-        if(RuneDisplay.value == 0)
+        if(TheManager.ReturnRuneCount() == 0)
         {
-            RuneBiengUsed = null;
-        }
-        else if(RuneDisplay.value >= TheManager.ReturnRuneNames().Count)
-        {
-            RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value - 1);
+            NoRuneUsed.gameObject.SetActive(true);
         }
         else
         {
-            RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value - 1);
+            NoRuneUsed.gameObject.SetActive(false);
+            RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value);
         }
-       
+
+        
+
     }
 
 
