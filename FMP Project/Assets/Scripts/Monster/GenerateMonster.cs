@@ -312,10 +312,35 @@ public class GenerateMonster : MonoBehaviour
             if(Random.Range(1, 100) > 50)
             {
                 MonsterDataGenerated.SetSkillOneMainEffect("BeneficialEffect");
+                //adding effects
+                int TempEffects = Random.Range(1, 3);
+
+                for(int i = 0; i < TempEffects; i++)
+                {
+                    int TempChosenEffects = Random.Range(1, 12);
+                    switch (TempChosenEffects)
+                    {
+                        case (1):
+                            {
+                                foreach(string T in MonsterDataGenerated.ReturnAllSkillOneEffects())
+                                {
+                                    if(T != "AttackBuff")
+                                    {
+
+                                    }
+                                }
+                                break;
+                            }
+                    }
+
+                }
+
             }
             else
             {
                 MonsterDataGenerated.SetSkillOneMainEffect("HarmfulEffect");
+                //adding effects
+
             }
         }
 
@@ -323,6 +348,44 @@ public class GenerateMonster : MonoBehaviour
         SKillTemp = Random.Range(1, 2);
         if(SKillTemp == 1)
         {
+
+            switch (MonsterDataGenerated.ReturnSkillOneMainEffect())
+            {
+                case ("Healing"):
+                    {
+                        SKillTemp = Random.Range(1, 100);
+
+                        if(SKillTemp >= 1 && SKillTemp < 50)
+                        {
+                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                        }
+
+                        break;
+                    }
+                case ("Damage"):
+                    {
+
+                        break;
+                    }
+                case ("BeneficialEffect"):
+                    {
+
+                        break;
+                    }
+                case ("HarmfulEffect"):
+                    {
+
+                        break;
+                    }
+            }
+
+
+
+
             SKillTemp = Random.Range(1, 100);
             if (SKillTemp >= 1 && SKillTemp < 33)
             {
