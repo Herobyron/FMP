@@ -53,12 +53,18 @@ public class GameManagment : MonoBehaviour
 
     // a function specifically made to add Runes to the players information
     public void AddRuneToData(RuneScript RuneAdded)
-    {
-        //GameData.Rune1 = RuneAdded;
+    { 
         GameData.PlayerInformation.AddSelectedRune(RuneAdded);
-        GameData.PlayerInformation.AddSelectedMonster(TestSaveMonster.ReturnMonsterData());
         Save();
     }
+
+    //a function specifically made to add monsters to the players infomration
+    public void AddMonsterToData(MonsterData MonsterData)
+    {
+        GameData.PlayerInformation.AddSelectedMonster(MonsterData);
+        Save();
+    }
+
 
     // function used to clear players data to load in the rune for testing
     public void ClearData()

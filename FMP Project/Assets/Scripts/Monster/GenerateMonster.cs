@@ -32,7 +32,9 @@ public class GenerateMonster : MonoBehaviour
         MonsterDataGenerated = new MonsterData();
 
         GenerateMonsterFunc();
-       
+        MonsterDataGenerated.SetMonsterName("Monster" + MonsterNumberAt);
+        MonsterDataGenerated.SetMonsterOwner("Player");
+        MonsterNumberAt++;
     }
 
 
@@ -317,21 +319,68 @@ public class GenerateMonster : MonoBehaviour
 
                 for(int i = 0; i < TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 12);
-                    switch (TempChosenEffects)
+                    int TempChosenEffects = Random.Range(1, 2);
+
+                    switch (i)
                     {
                         case (1):
                             {
-                                foreach(string T in MonsterDataGenerated.ReturnAllSkillOneEffects())
+                                switch (TempChosenEffects)
                                 {
-                                    if(T != "AttackBuff")
-                                    {
-
-                                    }
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("Accuracy");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("Attack");
+                                            break;
+                                        }
                                 }
+
+                                break;
+                            }
+                        case (2):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("CritRate");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("Defence");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (3):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("Immunity");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("Shield");
+                                            break;
+                                        }
+                                }
+
                                 break;
                             }
                     }
+
+                    
+                   
 
                 }
 
@@ -339,7 +388,75 @@ public class GenerateMonster : MonoBehaviour
             else
             {
                 MonsterDataGenerated.SetSkillOneMainEffect("HarmfulEffect");
-                //adding effects
+
+                int TempEffects = Random.Range(1, 3);
+
+                for (int i = 0; i < TempEffects; i++)
+                {
+                    int TempChosenEffects = Random.Range(1, 2);
+
+                    switch (i)
+                    {
+                        case (1):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("AttackDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("CritDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (2):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("DefenceDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("ImmunityDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (3):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("MissDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectFirstSkill("ShieldDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                    }
+
+
+
+
+                }
 
             }
         }
@@ -362,52 +479,1135 @@ public class GenerateMonster : MonoBehaviour
                         else
                         {
                             MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                            int TempEffects = Random.Range(1, 3);
+
+                            for (int i = 0; i < TempEffects; i++)
+                            {
+                                int TempChosenEffects = Random.Range(1, 2);
+
+                                switch (i)
+                                {
+                                    case (1):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectFirstSkill("Accuracy");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectFirstSkill("Attack");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectFirstSkill("CritRate");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectFirstSkill("Defence");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                    case (3):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectFirstSkill("Immunity");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectFirstSkill("Shield");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                }
+
+                            }
                         }
 
                         break;
                     }
                 case ("Damage"):
                     {
+                        SKillTemp = Random.Range(1, 100);
+                        if(SKillTemp >= 1 && SKillTemp < 50)
+                        {
+                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            if (Random.Range(1, 100) > 50)
+                            {
+                                MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                                //adding effects
+                                int TempEffects = Random.Range(1, 3);
+
+                                for (int i = 0; i < TempEffects; i++)
+                                {
+                                    int TempChosenEffects = Random.Range(1, 2);
+
+                                    switch (i)
+                                    {
+                                        case (1):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("Accuracy");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("Attack");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (2):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("CritRate");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("Defence");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (3):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("Immunity");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("Shield");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+
+
+
+
+                                }
+
+                            }
+                            else
+                            {
+                                MonsterDataGenerated.SetSkillOneSecondaryEffect("HarmfulEffect");
+
+                                int TempEffects = Random.Range(1, 3);
+
+                                for (int i = 0; i < TempEffects; i++)
+                                {
+                                    int TempChosenEffects = Random.Range(1, 2);
+
+                                    switch (i)
+                                    {
+                                        case (1):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("AttackDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("CritDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (2):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("DefenceDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("ImmunityDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (3):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("MissDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectFirstSkill("ShieldDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+
+
+
+
+                                }
+
+                            }
+                        }
 
                         break;
                     }
                 case ("BeneficialEffect"):
                     {
-
+                        MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
                         break;
                     }
                 case ("HarmfulEffect"):
                     {
+                        if (Random.Range(1, 2) == 1)
+                        {
+                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Damage");
+                        }
 
                         break;
                     }
             }
 
 
+        }
 
 
-            SKillTemp = Random.Range(1, 100);
-            if (SKillTemp >= 1 && SKillTemp < 33)
+
+
+        //determines the Second skill for the monster and what the second skill will have
+        SKillTemp = Random.Range(1, 100);
+        if (SKillTemp >= 1 && SKillTemp < 33)
+        {
+            MonsterDataGenerated.SetSkillTwoMainEffect("Healing");
+        }
+        else if (SKillTemp >= 33 && SKillTemp < 66)
+        {
+            MonsterDataGenerated.SetSkillTwoMainEffect("Damage");
+        }
+        else
+        {
+            if (Random.Range(1, 100) > 50)
             {
-                MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
-            }
-            else if (SKillTemp >= 33 && SKillTemp < 66)
-            {
-                MonsterDataGenerated.SetSkillOneSecondaryEffect("Damage");
+                MonsterDataGenerated.SetSkillTwoMainEffect("BeneficialEffect");
+                //adding effects
+                int TempEffects = Random.Range(1, 3);
+
+                for (int i = 0; i < TempEffects; i++)
+                {
+                    int TempChosenEffects = Random.Range(1, 2);
+
+                    switch (i)
+                    {
+                        case (1):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("Accuracy");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("Attack");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (2):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("CritRate");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("Defence");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (3):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("Immunity");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("Shield");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                    }
+
+
+
+
+                }
+
             }
             else
             {
-                if (Random.Range(1, 100) > 50)
+                MonsterDataGenerated.SetSkillTwoMainEffect("HarmfulEffect");
+
+                int TempEffects = Random.Range(1, 3);
+
+                for (int i = 0; i < TempEffects; i++)
                 {
-                    MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                    int TempChosenEffects = Random.Range(1, 2);
+
+                    switch (i)
+                    {
+                        case (1):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("AttackDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("CritDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (2):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("DefenceDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("ImmunityDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (3):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("MissDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectSecondSkill("ShieldDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                    }
+
+
+
+
                 }
-                else
-                {
-                    MonsterDataGenerated.SetSkillOneSecondaryEffect("HarmfulEffect");
-                }
+
             }
         }
 
+        //now determins if the first skill will have a secondary effect
+        SKillTemp = Random.Range(1, 2);
+        if (SKillTemp == 1)
+        {
+
+            switch (MonsterDataGenerated.ReturnSkillTwoMainEffect())
+            {
+                case ("Healing"):
+                    {
+                        SKillTemp = Random.Range(1, 100);
+
+                        if (SKillTemp >= 1 && SKillTemp < 50)
+                        {
+                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
+                            int TempEffects = Random.Range(1, 3);
+
+                            for (int i = 0; i < TempEffects; i++)
+                            {
+                                int TempChosenEffects = Random.Range(1, 2);
+
+                                switch (i)
+                                {
+                                    case (1):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectSecondSkill("Accuracy");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectSecondSkill("Attack");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectSecondSkill("CritRate");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectSecondSkill("Defence");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                    case (3):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectSecondSkill("Immunity");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectSecondSkill("Shield");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                }
+
+                            }
+                        }
+
+                        break;
+                    }
+                case ("Damage"):
+                    {
+                        SKillTemp = Random.Range(1, 100);
+                        if (SKillTemp >= 1 && SKillTemp < 50)
+                        {
+                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            if (Random.Range(1, 100) > 50)
+                            {
+                                MonsterDataGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
+                                //adding effects
+                                int TempEffects = Random.Range(1, 3);
+
+                                for (int i = 0; i < TempEffects; i++)
+                                {
+                                    int TempChosenEffects = Random.Range(1, 2);
+
+                                    switch (i)
+                                    {
+                                        case (1):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("Accuracy");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("Attack");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (2):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("CritRate");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("Defence");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (3):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("Immunity");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("Shield");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+
+
+
+
+                                }
+
+                            }
+                            else
+                            {
+                                MonsterDataGenerated.SetSkillTwoSecondaryEffect("HarmfulEffect");
+
+                                int TempEffects = Random.Range(1, 3);
+
+                                for (int i = 0; i < TempEffects; i++)
+                                {
+                                    int TempChosenEffects = Random.Range(1, 2);
+
+                                    switch (i)
+                                    {
+                                        case (1):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("AttackDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("CritDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (2):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("DefenceDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("ImmunityDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (3):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("MissDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectSecondSkill("ShieldDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+
+
+
+
+                                }
+
+                            }
+                        }
+
+                        break;
+                    }
+                case ("BeneficialEffect"):
+                    {
+                        MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                        break;
+                    }
+                case ("HarmfulEffect"):
+                    {
+                        if (Random.Range(1, 2) == 1)
+                        {
+                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Damage");
+                        }
+
+                        break;
+                    }
+            }
+
+
+        }
+
+
+        //determines the third skill and its effects
+        SKillTemp = Random.Range(1, 100);
+        if (SKillTemp >= 1 && SKillTemp < 33)
+        {
+            MonsterDataGenerated.SetSkillThreeMainEffect("Healing");
+        }
+        else if (SKillTemp >= 33 && SKillTemp < 66)
+        {
+            MonsterDataGenerated.SetSkillThreeMainEffect("Damage");
+        }
+        else
+        {
+            if (Random.Range(1, 100) > 50)
+            {
+                MonsterDataGenerated.SetSkillThreeMainEffect("BeneficialEffect");
+                //adding effects
+                int TempEffects = Random.Range(1, 3);
+
+                for (int i = 0; i < TempEffects; i++)
+                {
+                    int TempChosenEffects = Random.Range(1, 2);
+
+                    switch (i)
+                    {
+                        case (1):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("Accuracy");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("Attack");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (2):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("CritRate");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("Defence");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (3):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("Immunity");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("Shield");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                    }
+
+
+
+
+                }
+
+            }
+            else
+            {
+                MonsterDataGenerated.SetSkillThreeMainEffect("HarmfulEffect");
+
+                int TempEffects = Random.Range(1, 3);
+
+                for (int i = 0; i < TempEffects; i++)
+                {
+                    int TempChosenEffects = Random.Range(1, 2);
+
+                    switch (i)
+                    {
+                        case (1):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("AttackDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("CritDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (2):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("DefenceDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("ImmunityDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                        case (3):
+                            {
+                                switch (TempChosenEffects)
+                                {
+                                    case (1):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("MissDeBuff");
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            MonsterDataGenerated.AddEffectThirdSkill("ShieldDeBuff");
+                                            break;
+                                        }
+                                }
+
+                                break;
+                            }
+                    }
+
+
+
+
+                }
+
+            }
+        }
+
+        //now determins if the first skill will have a secondary effect
+        SKillTemp = Random.Range(1, 2);
+        if (SKillTemp == 1)
+        {
+
+            switch (MonsterDataGenerated.ReturnSkillThreeMainEffect())
+            {
+                case ("Healing"):
+                    {
+                        SKillTemp = Random.Range(1, 100);
+
+                        if (SKillTemp >= 1 && SKillTemp < 50)
+                        {
+                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
+                            int TempEffects = Random.Range(1, 3);
+
+                            for (int i = 0; i < TempEffects; i++)
+                            {
+                                int TempChosenEffects = Random.Range(1, 2);
+
+                                switch (i)
+                                {
+                                    case (1):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectThirdSkill("Accuracy");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectThirdSkill("Attack");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                    case (2):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectThirdSkill("CritRate");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectThirdSkill("Defence");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                    case (3):
+                                        {
+                                            switch (TempChosenEffects)
+                                            {
+                                                case (1):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectThirdSkill("Immunity");
+                                                        break;
+                                                    }
+                                                case (2):
+                                                    {
+                                                        MonsterDataGenerated.AddEffectThirdSkill("Shield");
+                                                        break;
+                                                    }
+                                            }
+
+                                            break;
+                                        }
+                                }
+
+                            }
+                        }
+
+                        break;
+                    }
+                case ("Damage"):
+                    {
+                        SKillTemp = Random.Range(1, 100);
+                        if (SKillTemp >= 1 && SKillTemp < 50)
+                        {
+                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            if (Random.Range(1, 100) > 50)
+                            {
+                                MonsterDataGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
+                                //adding effects
+                                int TempEffects = Random.Range(1, 3);
+
+                                for (int i = 0; i < TempEffects; i++)
+                                {
+                                    int TempChosenEffects = Random.Range(1, 2);
+
+                                    switch (i)
+                                    {
+                                        case (1):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("Accuracy");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("Attack");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (2):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("CritRate");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("Defence");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (3):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("Immunity");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("Shield");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+
+
+
+
+                                }
+
+                            }
+                            else
+                            {
+                                MonsterDataGenerated.SetSkillThreeSecondaryEffect("HarmfulEffect");
+
+                                int TempEffects = Random.Range(1, 3);
+
+                                for (int i = 0; i < TempEffects; i++)
+                                {
+                                    int TempChosenEffects = Random.Range(1, 2);
+
+                                    switch (i)
+                                    {
+                                        case (1):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("AttackDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("CritDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (2):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("DefenceDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("ImmunityDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                        case (3):
+                                            {
+                                                switch (TempChosenEffects)
+                                                {
+                                                    case (1):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("MissDeBuff");
+                                                            break;
+                                                        }
+                                                    case (2):
+                                                        {
+                                                            MonsterDataGenerated.AddEffectThirdSkill("ShieldDeBuff");
+                                                            break;
+                                                        }
+                                                }
+
+                                                break;
+                                            }
+                                    }
+
+
+
+
+                                }
+
+                            }
+                        }
+
+                        break;
+                    }
+                case ("BeneficialEffect"):
+                    {
+                        MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                        break;
+                    }
+                case ("HarmfulEffect"):
+                    {
+                        if (Random.Range(1, 2) == 1)
+                        {
+                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                        }
+                        else
+                        {
+                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Damage");
+                        }
+
+                        break;
+                    }
+            }
+
+
+        }
+
+        //final step is to calculate the multiplier of each of the skills. this is a number that will be used in the skill script to determine the effectiveness of each skill
+        MonsterDataGenerated.SetFirstSkillMultiplier(Random.Range(0.1f, 0.4f));
+
+        MonsterDataGenerated.SetSecondSkillMultipler(Random.Range(0.3f, 0.7f));
+
+        MonsterDataGenerated.SetThirdSkillMultiplier(Random.Range(0.8f, 1.2f));
 
     }
 }

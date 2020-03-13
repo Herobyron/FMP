@@ -108,6 +108,18 @@ public class MonsterData
     //this is the effects that the monster can apply with third skill (for main and secondary effect)
     private List<string> SkillThreeEffects = new List<string>();
 
+    // this is the float that stores the multiplier for the monsters first skill
+    private float SkillOneMulitplier = 0.0f;
+
+    // this is the float that stores the multiplier for the monsters second skill
+    private float SkillTwoMultiplier = 0.0f;
+
+    // this is the float that stores the multiplier for the monsters third skill
+    private float SkillThreeMultiplier = 0.0f;
+
+    //this is the owner of the monster
+    private string MonsterOwner;
+
     // this function returns the rune name 
     public string ReturnMonsterName()
     {
@@ -214,6 +226,17 @@ public class MonsterData
     // this function will return the list of effects that the third skill can use
     public List<string> ReturnAllSkillThreeEffects() { return SkillThreeEffects; }
 
+    //this function will return the monsters first skill multiplier
+    public float ReturnMonsterSkillOneMultipler() { return SkillOneMulitplier; }
+    
+    //this function will return the monsters second skill multipler
+    public float ReturnMonsterSkillTwoMultipler() { return SkillTwoMultiplier; }
+    
+    //this function will return the monsters third skill multipler
+    public float ReturnMonsterSkillThreeMultipler() { return SkillThreeMultiplier; }
+
+    //this function will return the monsters owner
+    public string ReturnMonsterOwner() { return MonsterOwner; }
 
     //this function will set the monsters name
     public void SetMonsterName(string Name) { MonsterName = Name; }
@@ -315,6 +338,17 @@ public class MonsterData
     public void AddEffectSecondSkill(string Effect) { SkillTwoEffects.Add(Effect); }
 
     // this function will add to the effects the monster can apply on the third skill
-    public void AddEffectThridSkill(string Effect) { SkillThreeEffects.Add(Effect); }
+    public void AddEffectThirdSkill(string Effect) { SkillThreeEffects.Add(Effect); }
 
+    //this is the function that will set the monsters first skill multipler
+    public void SetFirstSkillMultiplier(float Multiplier) { SkillOneMulitplier = Multiplier; }
+
+    //this is the function that will set the monsters second skill multiplier
+    public void SetSecondSkillMultipler(float Multiplier) { SkillTwoMultiplier = Multiplier; }
+
+    // this is the function that will set the monsters third skill multiplier
+    public void SetThirdSkillMultiplier(float Multiplier) { SkillThreeMultiplier = Multiplier; }
+
+    //this functoin will set the monsters owner
+    public void SetMonsterOwner(string OwnerName) { MonsterOwner = OwnerName; }
 }
