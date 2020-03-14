@@ -5,8 +5,8 @@ using UnityEngine;
 // everything that is not accesible in the inspector will have comments above
 // everything that is accessible within the inspect will have a tool tip to act like a comment both in code and in inspector
 
-
-public class MonsterScript : MonoBehaviour
+[System.Serializable]
+public class MonsterScript 
 {
     // this is the monsters data. this will store all of the important information on the monster so it can be stored and saved
     [SerializeField]
@@ -98,52 +98,115 @@ public class MonsterScript : MonoBehaviour
     // these are the runes that the monster can have equiped
     // this will need testing to see wether it needs to be a gameobject or not
 
-    [Tooltip("This is a testing rune and will be the lead of progress as working on how runes interact")]
-    [SerializeField]
-    private RuneScript RuneOneTest = null;
-
     [Tooltip("This is the First rune that the monster can equip")]
     [SerializeField]
-    private RuneObject RuneOne = null;
+    private RuneScript RuneOne = null;
 
     [Tooltip("This is the second rune that the monster can equip")]
     [SerializeField]
-    private RuneObject RuneTwo = null;
+    private RuneScript RuneTwo = null;
 
     [Tooltip("this is the third rune that the monster can equip")]
     [SerializeField]
-    private RuneObject RuneThree = null;
+    private RuneScript RuneThree = null;
 
     [Tooltip("this is the fourth rune that the monster can equip")]
     [SerializeField]
-    private RuneObject RuneFour = null;
+    private RuneScript RuneFour = null;
 
     [Tooltip("this is the fifth rune that the monster can equip")]
     [SerializeField]
-    private RuneObject RuneFive = null;
+    private RuneScript RuneFive = null;
 
     [Tooltip("this is the sixth rune that the monster can equip")]
     [SerializeField]
-    private RuneObject RuneSix = null;
+    private RuneScript RuneSix = null;
 
     //this is a list of all of the runes that are equiped on to this monster (i may change this to serilised so that in stead of equiping each rune seperalty it just stores in this list)
     //this list is for storing the runes so that it can be used in a function later on
-    private List<RuneObject> Runes = new List<RuneObject>();
+    private List<RuneScript> Runes = new List<RuneScript>();
 
-    // these are the Skills that the monster can have
+    // these are the Skills that the monster can have and the skills information
     // this will need testing to see wether it needs to be a gameobject or not
 
-    [Tooltip("This is the first skill that the monster is able to use")]
+    [Tooltip("this is the main effect that the monsters first skill will do (this will be used to create the monsters skill")]
     [SerializeField]
-    private SkillObject SkillOne = null;
+    private string SkillOneMainEffect = "";
 
-    [Tooltip("This is the second skill that the monster is able to use")]
+    [Tooltip("this is the secondary effect that the monsters first skill will do (this can do nothing or could do something")]
     [SerializeField]
-    private SkillObject SkillTwo = null;
+    private string SkillOneSecondaryEffect = "";
 
-    [Tooltip("This is the third skill that the monster is able to use")]
+    [Tooltip("A bool to determine wether the first skill is an AOE skill")]
+    private bool SkillOneAOE = false;
+
+    [Tooltip("how important it is for when the Ai is controlling the monster to use the first skill (the higher the number the more important the skill is)")]
     [SerializeField]
-    private SkillObject SkillThree = null;
+    private int SkillOneImportance = 0;
+
+    [Tooltip("this is a list of the effects the first skill can apply if it has an effect type skill")]
+    [SerializeField]
+    private List<string> SkillOneEffects = new List<string>();
+
+    [Tooltip("this is the multiplier that affects the skills ")]
+    private float SkillOneMultiplier = 0.0f;
+
+    //this will be wehere the skill script should go when the skill script has been adapted
+
+    [Tooltip("this is the main effect that the monsters first skill will do (this will be used to create the monsters skill")]
+    [SerializeField]
+    private string SkillTwoMainEffect = "";
+
+    [Tooltip("this is the secondary effect that the monsters first skill will do (this can do nothing or could do something")]
+    [SerializeField]
+    private string SkillTwoSecondaryEffect = "";
+
+    [Tooltip("A bool to determine wether the first skill is an AOE skill")]
+    private bool SkillTwoAOE = false;
+
+    [Tooltip("how important it is for when the Ai is controlling the monster to use the first skill (the higher the number the more important the skill is)")]
+    [SerializeField]
+    private int SkillTwoImportance = 0;
+
+    [Tooltip("this is a list of the effects the first skill can apply if it has an effect type skill")]
+    [SerializeField]
+    private List<string> SkillTwoEffects = new List<string>();
+
+    [Tooltip("this is the multiplier that affects the skills ")]
+    private float SkillTwoMultiplier = 0.0f;
+
+    [Tooltip("the skill cooldown for the second skill the monster has")]
+    [SerializeField]
+    private int SkillTwoCoolDown = 0;
+
+    //this will be where the skill script should go when the skill script is adapted 
+
+    [Tooltip("this is the main effect that the monsters first skill will do (this will be used to create the monsters skill")]
+    [SerializeField]
+    private string SkillThreeMainEffect = "";
+
+    [Tooltip("this is the secondary effect that the monsters first skill will do (this can do nothing or could do something")]
+    [SerializeField]
+    private string SkillThreeSecondaryEffect = "";
+
+    [Tooltip("A bool to determine wether the first skill is an AOE skill")]
+    private bool SkillThreeAOE = false;
+
+    [Tooltip("how important it is for when the Ai is controlling the monster to use the first skill (the higher the number the more important the skill is)")]
+    [SerializeField]
+    private int SkillThreeImportance = 0;
+
+    [Tooltip("this is a list of the effects the first skill can apply if it has an effect type skill")]
+    [SerializeField]
+    private List<string> SkillThreeEffects = new List<string>();
+
+    [Tooltip("this is the multiplier that affects the skills ")]
+    private float SkillThreeMultiplier = 0.0f;
+
+    [Tooltip("the skill cooldown for the second skill the monster has")]
+    [SerializeField]
+    private int SkillThreeCoolDown = 0;
+
 
     [Tooltip("this is the list of harmful effects that can be applied on the monster")]
     public List<HarmfulEffects> EffectsHarmful = new List<HarmfulEffects>();
@@ -159,9 +222,9 @@ public class MonsterScript : MonoBehaviour
     [SerializeField]
     private int MaxEffects = 10;
 
-    [Tooltip("the leader skill that you want the monster to be able to use (this is a special skill that affects the stats of all monsters)")]
-    [SerializeField]
-    private Skillsscript LeaderSkill = null;
+    //[Tooltip("the leader skill that you want the monster to be able to use (this is a special skill that affects the stats of all monsters)")]
+    //[SerializeField]
+    //private Skillsscript LeaderSkill = null;
 
     [Tooltip("the string to determine who owns the monster wether it be the player or the AI")]
     [SerializeField]
@@ -170,26 +233,6 @@ public class MonsterScript : MonoBehaviour
     [Tooltip("a bool to determine if it is the monsters turn or not used for when the monster is battling")]
     [SerializeField]
     private bool CurrentTurn;
-
-    [Tooltip("how important it is for when the Ai is controlling the monster to use the first skill (the higher the number the more important the skill is)")]
-    [SerializeField]
-    private int SkillOneImportance = 0;
-
-    [Tooltip("how important it is for when the Ai is controlling the monster to use the second skill (the higher the number the more important the skill is)")]
-    [SerializeField]
-    private int SkillTwoImportance = 0;
-
-    [Tooltip("how important it is for when the Ai is controlling the monster to use the third skill (the higher the number the more important the skill is)")]
-    [SerializeField]
-    private int SkillThreeImportance = 0;
-
-    [Tooltip("the skill cooldown for the second skill the monster has")]
-    [SerializeField]
-    private int SkillTwoCoolDown = 0;
-
-    [Tooltip("The skill cooldown for the third skill the monster has")]
-    [SerializeField]
-    private int SkillThreeCoolDown = 0;
 
     [Tooltip("a bool to determine if the first runes have been applied to the monsters base stats")]
     [SerializeField]
@@ -224,31 +267,6 @@ public class MonsterScript : MonoBehaviour
     [Tooltip("a enum to determine the monsters current state")]
     [SerializeField]
     private Monsterstate state = Monsterstate.Idle;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Runes.Add(RuneOne);
-        Runes.Add(RuneTwo);
-        Runes.Add(RuneThree);
-        Runes.Add(RuneFour);
-        Runes.Add(RuneFive);
-        Runes.Add(RuneSix);
-
-        //SkillOne = new BasicSkill();
-        CurrentHealth = BaseHealth;
-        
-        ThisData.SetMonsterName("Blank");
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 
     // this function is to apply damage to this monster. 
@@ -420,7 +438,7 @@ public class MonsterScript : MonoBehaviour
         {
             if (!RuneOneApplied) 
             {
-                if (RuneOne)  
+                if (RuneOne != null)  
                 {
                     RuneStatIncrease(RuneOne); 
                 }
@@ -430,7 +448,7 @@ public class MonsterScript : MonoBehaviour
         {
             if(!RuneTwoApplied) 
             {
-                if(RuneTwo) 
+                if(RuneTwo != null) 
                 {
                     RuneStatIncrease(RuneTwo);
                 }
@@ -440,7 +458,7 @@ public class MonsterScript : MonoBehaviour
         {
             if(!RuneThreeApplied) 
             {
-                if(RuneThree) 
+                if(RuneThree != null) 
                 {
                     RuneStatIncrease(RuneThree);
                 }
@@ -450,7 +468,7 @@ public class MonsterScript : MonoBehaviour
         {
             if(!RuneFourApplied) 
             {
-                if(RuneFour) 
+                if(RuneFour != null) 
                 {
                     RuneStatIncrease(RuneFour);
                 }
@@ -460,7 +478,7 @@ public class MonsterScript : MonoBehaviour
         {
             if(!RuneFiveApplied) 
             {
-                if(RuneFive)
+                if(RuneFive != null)
                 {
                     RuneStatIncrease(RuneFive);
                 }
@@ -470,7 +488,7 @@ public class MonsterScript : MonoBehaviour
         {
             if(!RuneSixApplied) 
             {
-                if(RuneSix)
+                if(RuneSix != null)
                 {
                     RuneStatIncrease(RuneSix);
                 }
@@ -482,7 +500,7 @@ public class MonsterScript : MonoBehaviour
     // this function is used to apply the stats that are held on the rune to the monsters base stats
     // Parameters:
     // - the rune that will be checked for what stats it has and also apply it to the monster
-    private void RuneStatIncrease(RuneObject TheRune)
+    private void RuneStatIncrease(RuneScript TheRune)
     {
         // the function first checks to make sure that the rune has a stat on it (so if the rune stat two is zero then it dosent have two stats and shouldnt try to apply it)
         // then it will go through all of the stats and find which type of stats are on the rune
@@ -740,7 +758,7 @@ public class MonsterScript : MonoBehaviour
     // this function will return the rune that has the same name as the rune name given in the variables
     //Variables : 
     // - the name of the rune that will be returned
-    public RuneObject ReturnRune(int RuneNumber)
+    public RuneScript ReturnRune(int RuneNumber)
     {
         return Runes[RuneNumber];
     }
@@ -749,7 +767,7 @@ public class MonsterScript : MonoBehaviour
     // the rune already has what slot it needs to be equiped in so it can be determined what rune slot it needs to go in
     // Variables :
     // - the rune that you want equiped to the monster
-    public void EquipRune(RuneObject TheRune)
+    public void EquipRune(RuneScript TheRune)
     {
         // checks to see if the rune is already equiped on something
         // then finds what number this rune is and applied it to that rune slot
@@ -806,7 +824,11 @@ public class MonsterScript : MonoBehaviour
 
     }
 
-    
+    //this is a function that will be returning this monsters name
+    public string ReturnMonsterName()
+    {
+        return MonsterName;
+    }
 
 
     // this is a function that will be returning this monsters base health stat
@@ -863,41 +885,381 @@ public class MonsterScript : MonoBehaviour
         return CurrentHealth;
     }
 
-    // - this function will return what skill that is going to be used (this will need looking at when the game manager is implemented
-    //Variables : 
-    // - the string is the name of the skill that you want to be used withhin this function
-
-
-    public SkillObject UseSkill(int SkillNumber)
+    // this function will return the monsters saved stars
+    public int ReturnMonsterStars()
     {
-        switch (SkillNumber)
-        {
-            case (1):
-                {
-                    return SkillOne;
-                    
-                }
-            case (2):
-                {
-                    return SkillTwo;
-                }
-            case (3):
-                {
-                    return SkillThree;
-                }
-
-        }
-
-        return SkillOne;
-
+        return Stars;
     }
+
+    // this function will return the monsters type
+    public string ReturnMonsterType()
+    {
+        return TheMonsterType;
+    }
+
+    // this function will return the monsters Level
+    public int ReturnMonsterLevel()
+    {
+        return MonsterLevel;
+    }
+
+    // this function will return wether the monster is awakened or not
+    public bool ReturnMonsterAwkaned()
+    {
+        return Awakened;
+    }
+
+    // this function will return the monsters first rune name
+    public string ReturnRuneOneName()
+    {
+        return RuneOne.ReturnRuneName();
+    }
+
+    // this function will return the monsters second rune name
+    public string ReturnRuneTwoName()
+    {
+        return RuneTwo.ReturnRuneName();
+    }
+
+    // this function will return the monsters third rune name
+    public string ReturnRuneThreeName()
+    {
+        return RuneThree.ReturnRuneName();
+    }
+
+    // this function will return the monsters fourth rune name
+    public string ReturnRuneFourthName()
+    {
+        return RuneFour.ReturnRuneName();
+    }
+
+    // this function will return the monsters fith rune name
+    public string ReturnRuneFifthName()
+    {
+        return RuneFive.ReturnRuneName();
+    }
+
+    // this function will return the monsters sixth Rune name
+    public string ReturnRuneSixName()
+    {
+        return RuneSix.ReturnRuneName();
+    }
+
+    //this function returns the monsters main effect of skill one
+    public string ReturnrRuneSkillOneMainEffect()
+    {
+        return SkillOneMainEffect;
+    }
+
+    // this function returns the monster secondary effect of skill two
+    public string ReturnSkillOneSecondaryEffect()
+    {
+        return SkillOneSecondaryEffect;
+    }
+
+    // this function returns wether or not the first skill is an AOE skill
+    public bool ReturnSkillOneAOE()
+    {
+        return SkillOneAOE;
+    }
+
+    //this function returns the main effect of the second skill
+    public string ReturnSkillTwoMainEffect()
+    {
+        return SkillTwoMainEffect;
+    }
+
+    // this function returns the secondary effect of the Second Skill
+    public string ReturnSkillTwoSecondaryEffect()
+    {
+        return SkillTwoSecondaryEffect;
+    }
+
+    //this function returns wether the secondary skill is an AOE effect or not
+    public bool ReturnSkillTwoAOE()
+    {
+        return SkillTwoAOE;
+    }
+
+
+    // this function returns the main effect of the third skill
+    public string ReturnSkillThreeMainEffect()
+    {
+        return SkillThreeMainEffect;
+    }
+
+    // this function will return the secondary effect of the third skill
+    public string ReturnSkillThreeSecondaryEffect()
+    {
+        return SkillThreeSecondaryEffect;
+    }
+
+    // this function will return wether or not the third skill is a AOE or not
+    public bool ReturnSkillThreeAOE()
+    {
+        return SkillThreeAOE;
+    }
+
+    // this function returns the monsters first skill importance
+    public int ReturnSkillOneImportance()
+    {
+        return SkillOneImportance;
+    }
+
+    //this function returns the monsters second skill importance
+    public int ReturnSkillTwoImportance()
+    {
+        return SkillTwoImportance;
+    }
+
+    // this function returns the monsters thrid skill importance
+    public int ReturnSkillThreeImportance()
+    {
+        return SkillThreeImportance;
+    }
+
+    //this function will return the list of effects that the first skill can use
+    public List<string> ReturnAllSkillOneEffects()
+    {
+        return SkillOneEffects;
+    }
+
+    // this function will return the list of effect that the second skill can use
+    public List<string> ReturnAllSkillTwoEffects()
+    {
+        return SkillTwoEffects;
+    }
+
+    // this function will return the list of effects that the third skill can use
+    public List<string> ReturnAllSkillThreeEffects()
+    {
+        return SkillThreeEffects;
+    }
+
+    //this function will return the monsters first skill multiplier
+    public float ReturnMonsterSkillOneMultipler()
+    {
+        return SkillOneMultiplier;
+    }
+
+    //this function will return the monsters second skill multipler
+    public float ReturnMonsterSkillTwoMultipler()
+    {
+        return SkillTwoMultiplier;
+    }
+
+    //this function will return the monsters third skill multipler
+    public float ReturnMonsterSkillThreeMultipler()
+    {
+        return SkillThreeMultiplier;
+    }
+
+    //this function returns the monsters Owner
+    public string ReturnMonsterOwner()
+    {
+        return OwnerName;
+    }
+
+
+    //function that sets the monster name
+    public void SetMonsterName(string Name)
+    {
+        MonsterName = Name;
+    }
+
+    // this function will set the monsters health
+    public void SetMonsterHealth(float Health) { BaseHealth = Health; }
+
+    // this function will set the monsters attack
+    public void SetMonsterAttack(float Attack) { BaseDamage = Attack; }
+
+    // this function will set the monsters defence
+    public void SetMonsterDefence(float Defence) { BaseDefence = Defence; }
+
+    // this function will set the monsters speed
+    public void SetMonsterSpeed(float Speed) { BaseSpeed = Speed; }
+
+    // this function will set the monsters accuracy
+    public void SetMonsterAccuracy(float Accuracy) { BaseAccuracy = Accuracy; }
+
+    // this will set the monsters resistance
+    public void SetMonsterResistance(float Resistance) { BaseResistance = Resistance; }
+
+    // this will set the monsters crit rate
+    public void SetMonsterCritRate(float CritRate) { BaseCritRate = CritRate; }
+
+    // this will set the monsters crit damage
+    public void SetMonsterCritDamage(float CritDamage) { BaseCritDamage = CritDamage; }
+
+    //this will set the monsters star
+    public void SetMonsterStars(int StarsAmount) { Stars = StarsAmount; }
+
+    // this will set the monsters type
+    public void SetMonsterstype(string MonsterType) { TheMonsterType = MonsterType; }
+
+    //this will set the monsters level
+    public void SetMonsterlevel(int level) { MonsterLevel = level; }
+
+    //this will set the monsters awakening
+    public void SetMonsterAwakening(bool IsAwakened) { Awakened = IsAwakened; }
+
+    //this will set the rune one name
+    public void SetRuneNameOne(string TheRuneOneName)
+    {
+        RuneOne.SetRuneName(TheRuneOneName);
+    }
+
+    //this will set the rune two name
+    public void SetRuneNameTwo(string TheRuneTwoName)
+    {
+        RuneTwo.SetRuneName(TheRuneTwoName);
+    }
+
+    //this will set the rune three name
+    public void SetRuneNameThree(string TheRuneThreeName)
+    {
+        RuneThree.SetRuneName(TheRuneThreeName);
+    }
+
+    //this will set the rune four name
+    public void SetRuneNameFour(string TheRuneFourName)
+    {
+        RuneFour.SetRuneName(TheRuneFourName);
+    }
+
+    //this will set the rune five name 
+    public void SetRuneNameFive(string TheRuneFiveName)
+    {
+        RuneFive.SetRuneName(TheRuneFiveName);
+    }
+
+    //this will set the rune six name
+    public void SetRuneNameSix(string TheRuneSixName)
+    {
+        RuneSix.SetRuneName(TheRuneSixName);
+    }
+
+    //this will set the the main effect of the first skill
+    public void SetSkillOneMainEffect(string SkillName)
+    {
+        SkillOneMainEffect = SkillName;
+    }
+
+    // this will set the second effect of the first skill
+    public void SetSkillOneSecondaryEffect(string SKillName)
+    {
+        SkillOneSecondaryEffect = SKillName;
+    }
+
+    // this will set wether or not the first skill is an AOE skill
+    public void SetSkillOneAOE(bool ISAOE)
+    {
+        SkillOneAOE = ISAOE;
+    }
+
+    //this will set the main effect of the second skill
+    public void SetSkillTwoMainEffect(string SkillName)
+    {
+        SkillTwoMainEffect = SkillName;
+    }
+
+    // this will set the secondary effect of the second skill
+    public void SetSkillTwoSecondaryEffect(string SkillName)
+    {
+        SkillTwoSecondaryEffect = SkillName;
+    }
+
+    // this will set wether or not the second skill is an AOE skill
+    public void SetSkillTwoAOE(bool ISAOE)
+    {
+        SkillTwoAOE = ISAOE;
+    }
+
+    //this function sets the main effect of the thrid skill
+    public void SetSkillThreeMainEffect(string SkillName)
+    {
+        SkillThreeMainEffect = SkillName;
+    }
+
+    // this function sets the secondary effect of the third skill
+    public void SetSkillThreeSecondaryEffect(string SkillName)
+    {
+        SkillThreeSecondaryEffect = SkillName;
+    }
+
+    // this function sets wether or not the third skill is an AOE skill
+    public void SetSkillThreeAOE(bool ISAOE)
+    {
+        SkillThreeAOE = ISAOE;
+    }
+
+    //this will set the skill one importance
+    public void SetSkillOneImportance(int Improtance)
+    {
+        SkillOneImportance = Improtance;
+    }
+
+    //this will set the skill two importance
+    public void SetSkillTwoImportance(int Importance)
+    {
+        SkillTwoImportance = Importance;
+    }
+
+    //this will set the skill three importance
+    public void SetSkillthreeImportance(int Importance)
+    {
+        SkillThreeImportance = Importance;
+    }
+
+    // this function will add to the effects the monster can apply on the first skill
+    public void AddEffectFirstSkill(string Effect)
+    {
+        SkillOneEffects.Add(Effect);
+    }
+
+    // this function will add to the effects the monsetr can apply on the second skill
+    public void AddEffectSecondSkill(string Effect)
+    {
+        SkillTwoEffects.Add(Effect);
+    }
+
+    // this function will add to the effects the monster can apply on the third skill
+    public void AddEffectThirdSkill(string Effect)
+    {
+        SkillThreeEffects.Add(Effect);
+    }
+
+    //this is the function that will set the monsters first skill multipler
+    public void SetFirstSkillMultiplier(float Multiplier)
+    {
+        SkillOneMultiplier = Multiplier;
+    }
+
+    //this is the function that will set the monsters second skill multiplier
+    public void SetSecondSkillMultipler(float Multiplier)
+    {
+        SkillTwoMultiplier = Multiplier;
+    }
+
+    // this is the function that will set the monsters third skill multiplier
+    public void SetThirdSkillMultiplier(float Multiplier)
+    {
+        SkillThreeMultiplier = Multiplier;
+    }
+
+    //this function will set the monsters owner to the player
+    public void SetMonsterOwner(string Owner)
+    {
+        OwnerName = Owner;
+    }
+
 
     // this function is used to set the skill cool down of the second skill
     //Variables :
     // - the float is to determine how much you want to set this skill cooldown by
     public void SetSkillTwoCoolDown(int CoolDown)
     {
-
+        SkillTwoCoolDown = CoolDown;
     }
 
     // this function is used to get the skill cooldown of the second skill
@@ -911,7 +1273,7 @@ public class MonsterScript : MonoBehaviour
     // - the float is to determine how much you want to set this skill cooldown by
     public void SetSkillThreeCoolDown(int CoolDown)
     {
-        
+        SkillThreeCoolDown = CoolDown;
     }
 
     //this function is used to get the current skill cooldown of the third skill 
@@ -1021,11 +1383,6 @@ public class MonsterScript : MonoBehaviour
     public List<HarmfulEffects> ReturnHarmfulEffects()
     {
         return EffectsHarmful;
-    }
-
-    public string ReturnMonsterName()
-    {
-        return MonsterName;
     }
 
     public MonsterData ReturnMonsterData()

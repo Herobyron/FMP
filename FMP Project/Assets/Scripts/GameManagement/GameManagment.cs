@@ -13,8 +13,11 @@ public class GameManagment : MonoBehaviour
     // this is a test monster and will be removed later on
     public MonsterScript TestSaveMonster;
 
-    // a rpivate list of the runes that the player currently owns
+    // a private list of the runes that the player currently owns
     private List<string> RuneNames = new List<string>();
+
+    // a private list of the monsters that the player currently owns
+    private List<string> MonsterNames = new List<string>();
 
 
     void Start()
@@ -81,13 +84,12 @@ public class GameManagment : MonoBehaviour
 
     }
 
-
-    public void LoadInMOnsterName()
+    public void LoadInMonsterName()
     {
-        FindObjectOfType<UITest>().MonsterBiengUsed = GameData.PlayerInformation.ReturnSelectedMonster(0);
+        FindObjectOfType<UIMonsterTest>().SetMonsterBiengUsed(GameData.PlayerInformation.ReturnSelectedMonster(0));
     }
 
-    // this function is made to get all of the names of runes the playuer currently posses
+    // this function is made to get all of the names of runes the playuer currently owns
     public void GetAllRunes()
     {
         RuneNames.Clear();
@@ -97,11 +99,28 @@ public class GameManagment : MonoBehaviour
         }
     }
 
+    // this function is made to get all of the names of monsters the player currently owns
+    public void GetAllMonsters()
+    {
+        MonsterNames.Clear();
+        foreach(MonsterData M in GameData.PlayerInformation.ReturnAllPlayerMonsters())
+        {
+            MonsterNames.Add(M.ReturnMonsterName());
+        }
+    }
+
     //function to return the runes
     public List<string> ReturnRuneNames()
     {
         return RuneNames;
     }
+
+    //function to return the monsters
+    public List<string> ReturnMonsterNames()
+    {
+        return MonsterNames;
+    }
+
 
     // a function to return the number of runes within the players inventory
     public int ReturnRuneCount()
@@ -128,7 +147,13 @@ public class GameManagment : MonoBehaviour
     // this function may need to change to find the name of the rune with that number then find the rune that has that name (testing needed)
     public RuneScript SelectedDropDownRuneLoad(int DropDownValue)
     {
-        return GameData.PlayerInformation.ReturnSelectedRune(DropDownValue );
+        return GameData.PlayerInformation.ReturnSelectedRune(DropDownValue);
+    }
+
+    //this function will load the new monster that has been selected from the drop down menu
+    public MonsterData SelectedDropDownMonsterLoad(int DropDownValue)
+    {
+        return GameData.PlayerInformation.ReturnSelectedMonster(DropDownValue);
     }
 
     public void ExitApplication()

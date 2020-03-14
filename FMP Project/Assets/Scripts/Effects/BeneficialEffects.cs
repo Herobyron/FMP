@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeneficialEffects : MonoBehaviour
+public class BeneficialEffects 
 {
 
     [Tooltip("this is the amount of time left on the beneficial effect")]

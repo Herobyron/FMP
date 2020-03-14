@@ -30,10 +30,12 @@ public class GenerateMonster : MonoBehaviour
     {
         MonsterNumberAt = TheManager.ReturnMonsterCount();
         MonsterDataGenerated = new MonsterData();
+        MonsterScriptGenerated = new MonsterScript();
 
         GenerateMonsterFunc();
         MonsterDataGenerated.SetMonsterName("Monster" + MonsterNumberAt);
         MonsterDataGenerated.SetMonsterOwner("Player");
+        
         MonsterNumberAt++;
     }
 
