@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6988436750102727166}
   - component: {fileID: 3174451339170322635}
   - component: {fileID: 3681509093553291750}
+  - component: {fileID: 5574908537892259188}
+  - component: {fileID: 9159193095424568127}
   m_Layer: 5
   m_Name: Monster
   m_TagString: Untagged
@@ -103,6 +105,256 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5574908537892259188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73768766776231334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5bf311a079fc794eb0e3a0c7c2bf543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterName: {fileID: 4486241636861905980}
+  MonsterHealth: {fileID: 520574482190318749}
+  MonsterDefence: {fileID: 3773958454008783942}
+  MonsterAttack: {fileID: 473474122715300087}
+  MonsterSpeed: {fileID: 3271675300316790629}
+  MonsterCritRate: {fileID: 6508957665115478669}
+  MonsterCritDamage: {fileID: 5327889703276854491}
+  MonsterAccuracy: {fileID: 3498952625705636974}
+  MonsterResistance: {fileID: 5362877905949902615}
+  MonsterStars: {fileID: 6994041757111853649}
+  MonsterLevel: {fileID: 8135950743919774319}
+  MonsterAwakened: {fileID: 6518394586133834986}
+  MonsterType: {fileID: 6106136109482950661}
+  RuneOne: {fileID: 8338554601665259617}
+  RuneTwo: {fileID: 5057560266078995610}
+  RuneThree: {fileID: 1705902641959571225}
+  RuneFour: {fileID: 8230090476146488966}
+  RuneFive: {fileID: 5231820669078455124}
+  RuneSix: {fileID: 2501679105720477826}
+  SkillOne: {fileID: 7209707910991103352}
+  SkillTwo: {fileID: 8128727136029861286}
+  SkillThree: {fileID: 1950819376629921204}
+  SkillOneImportance: {fileID: 6353712902795987576}
+  SkillTwoImportance: {fileID: 5594835742442167930}
+  SkillThreeImportance: {fileID: 7126581715775278263}
+  MonsterDisplay: {fileID: 8207500703212696564}
+  SkillImportanceSelectionOne: {fileID: 4525836628117898112}
+  SkillImportanceSelectionTwo: {fileID: 7419585117824343278}
+  SkillImportanceSelectionThree: {fileID: 2223738602262291743}
+  LoadTheRuneOnce: 0
+--- !u!114 &9159193095424568127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73768766776231334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e111ef46ead68304cbdff57ed124eae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MonsterScriptGenerated:
+    MonsterName: Blank
+    BaseHealth: 0
+    BaseDamage: 0
+    BaseDefence: 0
+    BaseSpeed: 0
+    BaseCritRate: 0
+    BaseCritDamage: 0
+    BaseAccuracy: 0
+    BaseResistance: 0
+    CurrentHealth: 0
+    Stars: 0
+    Type: 1
+    TheMonsterType: 
+    MonsterLevel: 0
+    Awakened: 0
+    LevelMultiplier: 0.2
+    AwakenMultiplier: 0.3
+    StarsMultiplier: 0.3
+    BaseStars: 1
+    RuneOne:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneTwo:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneThree:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneFour:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneFive:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneSix:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    SkillOneMainEffect: 
+    SkillOneSecondaryEffect: 
+    SkillOneImportance: 0
+    SkillOneEffects: []
+    SkillTwoMainEffect: 
+    SkillTwoSecondaryEffect: 
+    SkillTwoImportance: 0
+    SkillTwoEffects: []
+    SkillTwoCoolDown: 0
+    SkillThreeMainEffect: 
+    SkillThreeSecondaryEffect: 
+    SkillThreeImportance: 0
+    SkillThreeEffects: []
+    SkillThreeCoolDown: 0
+    RuneNames: []
+    MaxEffects: 10
+    OwnerName: 
+    CurrentTurn: 0
+    RuneOneApplied: 0
+    RuneTwoApplied: 0
+    RuneThreeApplied: 0
+    RuneFourApplied: 0
+    RuneFiveApplied: 0
+    RuneSixApplied: 0
+    state: 0
+  TheManager: {fileID: 0}
 --- !u!1 &188569244165368291
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,7 +673,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7593708324422041729}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: IncreaseStars
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &498492473390109830
@@ -1490,7 +1753,18 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: ChangeSkillThreeImportance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_AlphaFadeSpeed: 0.15
@@ -1760,7 +2034,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4417574388231147954}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: MonsterDisplayFunc
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &2004692549217277117
@@ -2102,7 +2409,18 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: ChangedValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_AlphaFadeSpeed: 0.15
@@ -2118,7 +2436,7 @@ GameObject:
   - component: {fileID: 7044428710925491992}
   - component: {fileID: 5594835742442167930}
   m_Layer: 5
-  m_Name: Skill Two (1)
+  m_Name: Skill Two Importance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4325,7 +4643,18 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: ChangeSkillOneImportance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_AlphaFadeSpeed: 0.15
@@ -6100,7 +6429,18 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: ChangeSkillTwoImportance
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_AlphaFadeSpeed: 0.15
@@ -7514,7 +7854,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3076076854196412021}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: LevelUpMonster
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &8675082078496497614
@@ -8431,6 +8782,17 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7950064209605988572}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5574908537892259188}
+        m_MethodName: AwakenMonster
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null

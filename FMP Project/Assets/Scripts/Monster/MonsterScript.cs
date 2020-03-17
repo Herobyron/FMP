@@ -268,6 +268,83 @@ public class MonsterScript
     [SerializeField]
     private Monsterstate state = Monsterstate.Idle;
 
+    //this function will upgrade the monsters level and will stop it from going further depending on what the stars of the monster is
+    public void LevelUpMonster()
+    {
+        if (MonsterLevel != 40)
+        {
+            switch (Stars)
+            {
+                case (1):
+                    {
+                        if (MonsterLevel < 15)
+                        {
+                            MonsterLevel++;
+                        }
+                        break;
+                    }
+                case (2):
+                    {
+                        if (MonsterLevel < 20)
+                        {
+                            MonsterLevel++;
+                        }
+                        break;
+                    }
+                case (3):
+                    {
+                        if (MonsterLevel < 25)
+                        {
+                            MonsterLevel++;
+                        }
+                        break;
+                    }
+                case (4):
+                    {
+                        if (MonsterLevel < 30)
+                        {
+                            MonsterLevel++;
+                        }
+                        break;
+                    }
+                case (5):
+                    {
+                        if (MonsterLevel < 35)
+                        {
+                            MonsterLevel++;
+                        }
+                        break;
+                    }
+                case (6):
+                    {
+                        if (MonsterLevel < 40)
+                        {
+                            MonsterLevel++;
+                        }
+                        break;
+                    }
+            }
+
+        }
+    }
+
+    // a function that would allow the player to increase the monsters stars
+    public void IncreaseStars()
+    {
+        if(Stars <= 5)
+        {
+            Stars++;
+        }
+    }
+
+    // a function to allow for the monster to be awakened.
+    public void Awaken()
+    {
+        if(!Awakened)
+        {
+            Awakened = true;
+        }
+    }
 
     // this function is to apply damage to this monster. 
     // apply damage will particularly be used when a monster attacks this one and that skill function will call apply damage when necisary
@@ -946,7 +1023,7 @@ public class MonsterScript
     }
 
     //this function returns the monsters main effect of skill one
-    public string ReturnrRuneSkillOneMainEffect()
+    public string ReturnrSkillOneMainEffect()
     {
         return SkillOneMainEffect;
     }

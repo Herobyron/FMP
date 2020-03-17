@@ -49,7 +49,7 @@ public class UIMonsterTest : MonoBehaviour
     public bool LoadTheRuneOnce = false;
 
     // the monster data that has currently been loaded
-    private MonsterData MonsterBiengUsed = null;
+    private MonsterScript MonsterBiengUsed = null;
 
     // the game management
     private GameManagment TheManager;
@@ -83,7 +83,8 @@ public class UIMonsterTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //this was fix for ui not updating
+        ChangeUI();
     }
 
 
@@ -92,7 +93,7 @@ public class UIMonsterTest : MonoBehaviour
         Monsters.Clear();
         for(int i = 0; i < TheManager.ReturnMonsterNames().Count; i++)
         {
-            Monsters.Add(TheManager.ReturnMonsterNames()[1]);
+            Monsters.Add(TheManager.ReturnMonsterNames()[i]);
         }
 
         MonsterDisplay.ClearOptions();
@@ -125,20 +126,20 @@ public class UIMonsterTest : MonoBehaviour
         else if(MonsterBiengUsed != null)
         {
             MonsterName.text = "Monster Name : " + MonsterBiengUsed.ReturnMonsterName();
-            MonsterHealth.text = "Monster Health : " + MonsterBiengUsed.ReturnMonsterBaseHealth();
-            MonsterDefence.text = "Monster Defence : " + MonsterBiengUsed.ReturnMonsterBaseDefence();
-            MonsterAttack.text = "Monster Attack : " + MonsterBiengUsed.ReturnMonsterBaseDamage();
-            MonsterSpeed.text = "Monster Speed : " + MonsterBiengUsed.ReturnMonsterBaseSpeed();
-            MonsterCritRate.text = "Monster CritRate : " + MonsterBiengUsed.ReturnMonsterBaseCritRate();
-            MonsterCritDamage.text = "Monster CritDamage : " + MonsterBiengUsed.ReturnMonsterBaseCritDamage();
-            MonsterAccuracy.text = "Monster Accuracy : " + MonsterBiengUsed.ReturnMonsterBaseAccuracy();
-            MonsterResistance.text = "Monster Resistance : " + MonsterBiengUsed.ReturnMonsterBaseResistance();
+            MonsterHealth.text = "Monster Health : " + MonsterBiengUsed.ReturnBaseHealth();
+            MonsterDefence.text = "Monster Defence : " + MonsterBiengUsed.ReturnBaseDefence();
+            MonsterAttack.text = "Monster Attack : " + MonsterBiengUsed.ReturnBaseDamage();
+            MonsterSpeed.text = "Monster Speed : " + MonsterBiengUsed.ReturnBaseSpeed();
+            MonsterCritRate.text = "Monster CritRate : " + MonsterBiengUsed.ReturnBaseCritRate();
+            MonsterCritDamage.text = "Monster CritDamage : " + MonsterBiengUsed.ReturnBaseCritDamage();
+            MonsterAccuracy.text = "Monster Accuracy : " + MonsterBiengUsed.ReturnBaseAccuracy();
+            MonsterResistance.text = "Monster Resistance : " + MonsterBiengUsed.ReturnBaseResistance();
             MonsterStars.text = "Stars : " + MonsterBiengUsed.ReturnMonsterStars();
             MonsterType.text = "Type : " + MonsterBiengUsed.ReturnMonsterType();
-            MonsterAwakened.text = "Awakened : " + MonsterBiengUsed.ReturnMonsterAwakened();
+            MonsterAwakened.text = "Awakened : " + MonsterBiengUsed.ReturnMonsterAwkaned();
             MonsterLevel.text = "Level : " + MonsterBiengUsed.ReturnMonsterLevel();
 
-            SkillOne.text = "Skill One : " + MonsterBiengUsed.ReturnSkillOneMainEffect();
+            SkillOne.text = "Skill One : " + MonsterBiengUsed.ReturnrSkillOneMainEffect();
             SkillTwo.text = "Skill Two : " + MonsterBiengUsed.ReturnSkillTwoMainEffect();
             SkillThree.text = "Skill Three : " + MonsterBiengUsed.ReturnSkillThreeMainEffect();
 
@@ -149,9 +150,39 @@ public class UIMonsterTest : MonoBehaviour
     }
 
 
-    public void SetMonsterBiengUsed(MonsterData TheMonster)
+    public void SetMonsterBiengUsed(MonsterScript TheMonster)
     {
         MonsterBiengUsed = TheMonster;
+    }
+
+    public void LevelUpMonster()
+    {
+        MonsterBiengUsed.LevelUpMonster();
+    }
+
+    public void AwakenMonster()
+    {
+        MonsterBiengUsed.Awaken();
+    }
+
+    public void IncreaseStars()
+    {
+        MonsterBiengUsed.IncreaseStars();
+    }
+
+    public void ChangeSkillOneImportance()
+    {
+        MonsterBiengUsed.SetSkillOneImportance(SkillImportanceSelectionOne.value);
+    }
+
+    public void ChangeSkillTwoImportance()
+    {
+        MonsterBiengUsed.SetSkillTwoImportance(SkillImportanceSelectionTwo.value);
+    }
+
+    public void ChangeSkillThreeImportance()
+    {
+        MonsterBiengUsed.SetSkillthreeImportance(SkillImportanceSelectionThree.value);
     }
 
 }

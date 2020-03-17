@@ -33,9 +33,10 @@ public class GenerateMonster : MonoBehaviour
         MonsterScriptGenerated = new MonsterScript();
 
         GenerateMonsterFunc();
-        MonsterDataGenerated.SetMonsterName("Monster" + MonsterNumberAt);
-        MonsterDataGenerated.SetMonsterOwner("Player");
-        
+        MonsterScriptGenerated.SetMonsterName("Monster" + MonsterNumberAt); // this was the monster name issue
+        MonsterScriptGenerated.SetMonsterOwner("Player");
+
+        TheManager.AddMonsterToData(MonsterScriptGenerated);
         MonsterNumberAt++;
     }
 
@@ -50,23 +51,23 @@ public class GenerateMonster : MonoBehaviour
 
         if(StarChance <= 30)
         {
-            MonsterDataGenerated.SetMonsterStars(1);
+            MonsterScriptGenerated.SetMonsterStars(1);
         }
         else if(StarChance > 30 && StarChance <= 65)
         {
-            MonsterDataGenerated.SetMonsterStars(2);
+            MonsterScriptGenerated.SetMonsterStars(2);
         }
         else if(StarChance > 65 && StarChance <= 80)
         {
-            MonsterDataGenerated.SetMonsterStars(3);
+            MonsterScriptGenerated.SetMonsterStars(3);
         }
         else if(StarChance > 80 && StarChance <= 95)
         {
-            MonsterDataGenerated.SetMonsterStars(4);
+            MonsterScriptGenerated.SetMonsterStars(4);
         }
         else if(StarChance > 95 && StarChance <= 100)
         {
-            MonsterDataGenerated.SetMonsterStars(5);
+            MonsterScriptGenerated.SetMonsterStars(5);
         }
 
         // this part will now generate the type of monster that this one will be
@@ -74,24 +75,24 @@ public class GenerateMonster : MonoBehaviour
 
         if(MonsterTypeChance <= 30)
         {
-            MonsterDataGenerated.SetMonsterstype("Attack");
+            MonsterScriptGenerated.SetMonsterstype("Attack");
         }
         else if(MonsterTypeChance >= 31 && MonsterTypeChance <= 61)
         {
-            MonsterDataGenerated.SetMonsterstype("Health");
+            MonsterScriptGenerated.SetMonsterstype("Health");
         }
         else if(MonsterTypeChance >= 62 && MonsterTypeChance <= 92)
         {
-            MonsterDataGenerated.SetMonsterstype("Defence");
+            MonsterScriptGenerated.SetMonsterstype("Defence");
         }
 
 
         //this part will now generate the stats for the monster (they will chnage depending on the stars and 
         //health generation for the monster
         int TempHealth = Random.Range(100, 200);
-        TempHealth = (TempHealth * (10 * MonsterDataGenerated.ReturnMonsterStars()));
+        TempHealth = (TempHealth * (10 * MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Attack"):
                 {
@@ -116,7 +117,7 @@ public class GenerateMonster : MonoBehaviour
         //defence generation for the monster
 
         int TempDefence = Random.Range(100, 200);
-        TempDefence = (TempDefence * (10 * MonsterDataGenerated.ReturnMonsterStars()));
+        TempDefence = (TempDefence * (10 * MonsterScriptGenerated.ReturnMonsterStars()));
 
         switch (MonsterDataGenerated.ReturnMonsterType())
         {
@@ -137,14 +138,14 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterDefence(TempDefence);
+        MonsterScriptGenerated.SetMonsterDefence(TempDefence);
 
         // Attack generation for the monster
 
         int TempAttack = Random.Range(100, 200);
-        TempAttack = (TempAttack * (10 * MonsterDataGenerated.ReturnMonsterStars()));
+        TempAttack = (TempAttack * (10 * MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Attack"):
                 {
@@ -163,13 +164,13 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterAttack(TempAttack);
+        MonsterScriptGenerated.SetMonsterAttack(TempAttack);
 
         // Speed Generation for the monster
         int TempSpeed = Random.Range(90, 120);
-        TempSpeed = (TempSpeed + (5 + MonsterDataGenerated.ReturnMonsterStars()));
+        TempSpeed = (TempSpeed + (5 + MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Attack"):
                 {
@@ -188,13 +189,13 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterSpeed(TempSpeed);
+        MonsterScriptGenerated.SetMonsterSpeed(TempSpeed);
 
         //Crit Rate Generation for the monster
         int TempCritRate = Random.Range(10, 30);
-        TempCritRate = (TempCritRate + (5 + MonsterDataGenerated.ReturnMonsterStars()));
+        TempCritRate = (TempCritRate + (5 + MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Attack"):
                 {
@@ -214,14 +215,14 @@ public class GenerateMonster : MonoBehaviour
         }
 
 
-        MonsterDataGenerated.SetMonsterCritRate(TempCritRate);
+        MonsterScriptGenerated.SetMonsterCritRate(TempCritRate);
 
 
         //Crit Damage Generation for the monster
         int TempCritDamage = Random.Range(80, 110);
-        TempCritDamage = (TempCritDamage + (Random.Range(10, 15) + MonsterDataGenerated.ReturnMonsterStars()));
+        TempCritDamage = (TempCritDamage + (Random.Range(10, 15) + MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Attack"):
                 {
@@ -240,13 +241,13 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterCritDamage(TempCritDamage);
+        MonsterScriptGenerated.SetMonsterCritDamage(TempCritDamage);
 
         //Accuracy Generation for the monster
         int TempAccuracy = Random.Range(10,20);
-        TempAccuracy = (TempAccuracy + MonsterDataGenerated.ReturnMonsterStars());
+        TempAccuracy = (TempAccuracy + MonsterScriptGenerated.ReturnMonsterStars());
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Defence"):
                 {
@@ -260,14 +261,14 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterAccuracy(TempAccuracy);
+        MonsterScriptGenerated.SetMonsterAccuracy(TempAccuracy);
 
 
         // the Resistance of the monster generation
         int TempResistance = Random.Range(10, 20);
-        TempResistance = (TempResistance + (3 * MonsterDataGenerated.ReturnMonsterStars()));
+        TempResistance = (TempResistance + (3 * MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Defence"):
                 {
@@ -286,7 +287,7 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterResistance(TempResistance);
+        MonsterScriptGenerated.SetMonsterResistance(TempResistance);
 
         // now the final step is generating the skills for the monster.
         
@@ -294,28 +295,28 @@ public class GenerateMonster : MonoBehaviour
         // first skill deciding if its an AOE
         if(Random.Range(1, 100) > 30)
         {
-            MonsterDataGenerated.SetSkillOneAOE(false);
+            MonsterScriptGenerated.SetSkillOneAOE(false);
         }
         else
         {
-            MonsterDataGenerated.SetSkillOneAOE(true);
+            MonsterScriptGenerated.SetSkillOneAOE(true);
         }
 
         // determines what type of skill the first skill will be
         int SKillTemp = Random.Range(1, 100);
         if (SKillTemp >= 1 && SKillTemp < 33)
         {
-            MonsterDataGenerated.SetSkillOneMainEffect("Healing");
+            MonsterScriptGenerated.SetSkillOneMainEffect("Healing");
         }
         else if (SKillTemp >= 33 && SKillTemp < 66)
         {
-            MonsterDataGenerated.SetSkillOneMainEffect("Damage");
+            MonsterScriptGenerated.SetSkillOneMainEffect("Damage");
         }
         else
         {
             if(Random.Range(1, 100) > 50)
             {
-                MonsterDataGenerated.SetSkillOneMainEffect("BeneficialEffect");
+                MonsterScriptGenerated.SetSkillOneMainEffect("BeneficialEffect");
                 //adding effects
                 int TempEffects = Random.Range(1, 3);
 
@@ -331,12 +332,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("Accuracy");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("Attack");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("Attack");
                                             break;
                                         }
                                 }
@@ -349,12 +350,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("CritRate");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("Defence");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("Defence");
                                             break;
                                         }
                                 }
@@ -367,12 +368,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("Immunity");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("Shield");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("Shield");
                                             break;
                                         }
                                 }
@@ -389,7 +390,7 @@ public class GenerateMonster : MonoBehaviour
             }
             else
             {
-                MonsterDataGenerated.SetSkillOneMainEffect("HarmfulEffect");
+                MonsterScriptGenerated.SetSkillOneMainEffect("HarmfulEffect");
 
                 int TempEffects = Random.Range(1, 3);
 
@@ -405,12 +406,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("AttackDeBuff");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("AttackDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("CritDeBuff");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("CritDeBuff");
                                             break;
                                         }
                                 }
@@ -423,12 +424,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("DefenceDeBuff");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("DefenceDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("ImmunityDeBuff");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("ImmunityDeBuff");
                                             break;
                                         }
                                 }
@@ -441,12 +442,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("MissDeBuff");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("MissDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectFirstSkill("ShieldDeBuff");
+                                            MonsterScriptGenerated.AddEffectFirstSkill("ShieldDeBuff");
                                             break;
                                         }
                                 }
@@ -468,7 +469,7 @@ public class GenerateMonster : MonoBehaviour
         if(SKillTemp == 1)
         {
 
-            switch (MonsterDataGenerated.ReturnSkillOneMainEffect())
+            switch (MonsterScriptGenerated.ReturnrSkillOneMainEffect())
             {
                 case ("Healing"):
                     {
@@ -476,11 +477,11 @@ public class GenerateMonster : MonoBehaviour
 
                         if(SKillTemp >= 1 && SKillTemp < 50)
                         {
-                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         }
                         else
                         {
-                            MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                            MonsterScriptGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
                             int TempEffects = Random.Range(1, 3);
 
                             for (int i = 0; i < TempEffects; i++)
@@ -495,12 +496,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectFirstSkill("Accuracy");
+                                                        MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectFirstSkill("Attack");
+                                                        MonsterScriptGenerated.AddEffectFirstSkill("Attack");
                                                         break;
                                                     }
                                             }
@@ -513,12 +514,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectFirstSkill("CritRate");
+                                                        MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectFirstSkill("Defence");
+                                                        MonsterScriptGenerated.AddEffectFirstSkill("Defence");
                                                         break;
                                                     }
                                             }
@@ -531,12 +532,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectFirstSkill("Immunity");
+                                                        MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectFirstSkill("Shield");
+                                                        MonsterScriptGenerated.AddEffectFirstSkill("Shield");
                                                         break;
                                                     }
                                             }
@@ -555,13 +556,13 @@ public class GenerateMonster : MonoBehaviour
                         SKillTemp = Random.Range(1, 100);
                         if(SKillTemp >= 1 && SKillTemp < 50)
                         {
-                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         }
                         else
                         {
                             if (Random.Range(1, 100) > 50)
                             {
-                                MonsterDataGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
+                                MonsterScriptGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
                                 //adding effects
                                 int TempEffects = Random.Range(1, 3);
 
@@ -577,12 +578,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("Accuracy");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("Attack");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("Attack");
                                                             break;
                                                         }
                                                 }
@@ -595,12 +596,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("CritRate");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("Defence");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("Defence");
                                                             break;
                                                         }
                                                 }
@@ -613,12 +614,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("Immunity");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("Shield");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("Shield");
                                                             break;
                                                         }
                                                 }
@@ -635,7 +636,7 @@ public class GenerateMonster : MonoBehaviour
                             }
                             else
                             {
-                                MonsterDataGenerated.SetSkillOneSecondaryEffect("HarmfulEffect");
+                                MonsterScriptGenerated.SetSkillOneSecondaryEffect("HarmfulEffect");
 
                                 int TempEffects = Random.Range(1, 3);
 
@@ -651,12 +652,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("AttackDeBuff");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("AttackDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("CritDeBuff");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("CritDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -669,12 +670,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("DefenceDeBuff");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("DefenceDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("ImmunityDeBuff");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("ImmunityDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -687,12 +688,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("MissDeBuff");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("MissDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectFirstSkill("ShieldDeBuff");
+                                                            MonsterScriptGenerated.AddEffectFirstSkill("ShieldDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -713,18 +714,18 @@ public class GenerateMonster : MonoBehaviour
                     }
                 case ("BeneficialEffect"):
                     {
-                        MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                        MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         break;
                     }
                 case ("HarmfulEffect"):
                     {
                         if (Random.Range(1, 2) == 1)
                         {
-                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         }
                         else
                         {
-                            MonsterDataGenerated.SetSkillOneSecondaryEffect("Damage");
+                            MonsterScriptGenerated.SetSkillOneSecondaryEffect("Damage");
                         }
 
                         break;
@@ -741,17 +742,17 @@ public class GenerateMonster : MonoBehaviour
         SKillTemp = Random.Range(1, 100);
         if (SKillTemp >= 1 && SKillTemp < 33)
         {
-            MonsterDataGenerated.SetSkillTwoMainEffect("Healing");
+            MonsterScriptGenerated.SetSkillTwoMainEffect("Healing");
         }
         else if (SKillTemp >= 33 && SKillTemp < 66)
         {
-            MonsterDataGenerated.SetSkillTwoMainEffect("Damage");
+            MonsterScriptGenerated.SetSkillTwoMainEffect("Damage");
         }
         else
         {
             if (Random.Range(1, 100) > 50)
             {
-                MonsterDataGenerated.SetSkillTwoMainEffect("BeneficialEffect");
+                MonsterScriptGenerated.SetSkillTwoMainEffect("BeneficialEffect");
                 //adding effects
                 int TempEffects = Random.Range(1, 3);
 
@@ -767,12 +768,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("Accuracy");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("Attack");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("Attack");
                                             break;
                                         }
                                 }
@@ -785,12 +786,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("CritRate");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("Defence");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("Defence");
                                             break;
                                         }
                                 }
@@ -803,12 +804,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("Immunity");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("Shield");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("Shield");
                                             break;
                                         }
                                 }
@@ -825,7 +826,7 @@ public class GenerateMonster : MonoBehaviour
             }
             else
             {
-                MonsterDataGenerated.SetSkillTwoMainEffect("HarmfulEffect");
+                MonsterScriptGenerated.SetSkillTwoMainEffect("HarmfulEffect");
 
                 int TempEffects = Random.Range(1, 3);
 
@@ -841,12 +842,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("AttackDeBuff");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("AttackDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("CritDeBuff");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("CritDeBuff");
                                             break;
                                         }
                                 }
@@ -859,12 +860,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("DefenceDeBuff");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("DefenceDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("ImmunityDeBuff");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("ImmunityDeBuff");
                                             break;
                                         }
                                 }
@@ -877,12 +878,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("MissDeBuff");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("MissDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectSecondSkill("ShieldDeBuff");
+                                            MonsterScriptGenerated.AddEffectSecondSkill("ShieldDeBuff");
                                             break;
                                         }
                                 }
@@ -904,7 +905,7 @@ public class GenerateMonster : MonoBehaviour
         if (SKillTemp == 1)
         {
 
-            switch (MonsterDataGenerated.ReturnSkillTwoMainEffect())
+            switch (MonsterScriptGenerated.ReturnSkillTwoMainEffect())
             {
                 case ("Healing"):
                     {
@@ -912,11 +913,11 @@ public class GenerateMonster : MonoBehaviour
 
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
-                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Healing");
                         }
                         else
                         {
-                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
+                            MonsterScriptGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
                             int TempEffects = Random.Range(1, 3);
 
                             for (int i = 0; i < TempEffects; i++)
@@ -931,12 +932,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectSecondSkill("Accuracy");
+                                                        MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectSecondSkill("Attack");
+                                                        MonsterScriptGenerated.AddEffectSecondSkill("Attack");
                                                         break;
                                                     }
                                             }
@@ -949,12 +950,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectSecondSkill("CritRate");
+                                                        MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectSecondSkill("Defence");
+                                                        MonsterScriptGenerated.AddEffectSecondSkill("Defence");
                                                         break;
                                                     }
                                             }
@@ -967,12 +968,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectSecondSkill("Immunity");
+                                                        MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectSecondSkill("Shield");
+                                                        MonsterScriptGenerated.AddEffectSecondSkill("Shield");
                                                         break;
                                                     }
                                             }
@@ -991,13 +992,13 @@ public class GenerateMonster : MonoBehaviour
                         SKillTemp = Random.Range(1, 100);
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
-                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Healing");
                         }
                         else
                         {
                             if (Random.Range(1, 100) > 50)
                             {
-                                MonsterDataGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
+                                MonsterScriptGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
                                 //adding effects
                                 int TempEffects = Random.Range(1, 3);
 
@@ -1013,12 +1014,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("Accuracy");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("Attack");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("Attack");
                                                             break;
                                                         }
                                                 }
@@ -1031,12 +1032,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("CritRate");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("Defence");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("Defence");
                                                             break;
                                                         }
                                                 }
@@ -1049,12 +1050,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("Immunity");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("Shield");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("Shield");
                                                             break;
                                                         }
                                                 }
@@ -1071,7 +1072,7 @@ public class GenerateMonster : MonoBehaviour
                             }
                             else
                             {
-                                MonsterDataGenerated.SetSkillTwoSecondaryEffect("HarmfulEffect");
+                                MonsterScriptGenerated.SetSkillTwoSecondaryEffect("HarmfulEffect");
 
                                 int TempEffects = Random.Range(1, 3);
 
@@ -1087,12 +1088,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("AttackDeBuff");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("AttackDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("CritDeBuff");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("CritDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -1105,12 +1106,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("DefenceDeBuff");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("DefenceDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("ImmunityDeBuff");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("ImmunityDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -1123,12 +1124,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("MissDeBuff");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("MissDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectSecondSkill("ShieldDeBuff");
+                                                            MonsterScriptGenerated.AddEffectSecondSkill("ShieldDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -1149,18 +1150,18 @@ public class GenerateMonster : MonoBehaviour
                     }
                 case ("BeneficialEffect"):
                     {
-                        MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                        MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Healing");
                         break;
                     }
                 case ("HarmfulEffect"):
                     {
                         if (Random.Range(1, 2) == 1)
                         {
-                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Healing");
                         }
                         else
                         {
-                            MonsterDataGenerated.SetSkillTwoSecondaryEffect("Damage");
+                            MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Damage");
                         }
 
                         break;
@@ -1175,17 +1176,17 @@ public class GenerateMonster : MonoBehaviour
         SKillTemp = Random.Range(1, 100);
         if (SKillTemp >= 1 && SKillTemp < 33)
         {
-            MonsterDataGenerated.SetSkillThreeMainEffect("Healing");
+            MonsterScriptGenerated.SetSkillThreeMainEffect("Healing");
         }
         else if (SKillTemp >= 33 && SKillTemp < 66)
         {
-            MonsterDataGenerated.SetSkillThreeMainEffect("Damage");
+            MonsterScriptGenerated.SetSkillThreeMainEffect("Damage");
         }
         else
         {
             if (Random.Range(1, 100) > 50)
             {
-                MonsterDataGenerated.SetSkillThreeMainEffect("BeneficialEffect");
+                MonsterScriptGenerated.SetSkillThreeMainEffect("BeneficialEffect");
                 //adding effects
                 int TempEffects = Random.Range(1, 3);
 
@@ -1201,12 +1202,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("Accuracy");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("Attack");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("Attack");
                                             break;
                                         }
                                 }
@@ -1219,12 +1220,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("CritRate");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("Defence");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("Defence");
                                             break;
                                         }
                                 }
@@ -1237,12 +1238,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("Immunity");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("Shield");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("Shield");
                                             break;
                                         }
                                 }
@@ -1259,7 +1260,7 @@ public class GenerateMonster : MonoBehaviour
             }
             else
             {
-                MonsterDataGenerated.SetSkillThreeMainEffect("HarmfulEffect");
+                MonsterScriptGenerated.SetSkillThreeMainEffect("HarmfulEffect");
 
                 int TempEffects = Random.Range(1, 3);
 
@@ -1275,12 +1276,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("AttackDeBuff");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("AttackDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("CritDeBuff");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("CritDeBuff");
                                             break;
                                         }
                                 }
@@ -1293,12 +1294,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("DefenceDeBuff");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("DefenceDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("ImmunityDeBuff");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("ImmunityDeBuff");
                                             break;
                                         }
                                 }
@@ -1311,12 +1312,12 @@ public class GenerateMonster : MonoBehaviour
                                 {
                                     case (1):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("MissDeBuff");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("MissDeBuff");
                                             break;
                                         }
                                     case (2):
                                         {
-                                            MonsterDataGenerated.AddEffectThirdSkill("ShieldDeBuff");
+                                            MonsterScriptGenerated.AddEffectThirdSkill("ShieldDeBuff");
                                             break;
                                         }
                                 }
@@ -1338,7 +1339,7 @@ public class GenerateMonster : MonoBehaviour
         if (SKillTemp == 1)
         {
 
-            switch (MonsterDataGenerated.ReturnSkillThreeMainEffect())
+            switch (MonsterScriptGenerated.ReturnSkillThreeMainEffect())
             {
                 case ("Healing"):
                     {
@@ -1346,11 +1347,11 @@ public class GenerateMonster : MonoBehaviour
 
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
-                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
                         }
                         else
                         {
-                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
+                            MonsterScriptGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
                             int TempEffects = Random.Range(1, 3);
 
                             for (int i = 0; i < TempEffects; i++)
@@ -1365,12 +1366,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectThirdSkill("Accuracy");
+                                                        MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectThirdSkill("Attack");
+                                                        MonsterScriptGenerated.AddEffectThirdSkill("Attack");
                                                         break;
                                                     }
                                             }
@@ -1383,12 +1384,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectThirdSkill("CritRate");
+                                                        MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectThirdSkill("Defence");
+                                                        MonsterScriptGenerated.AddEffectThirdSkill("Defence");
                                                         break;
                                                     }
                                             }
@@ -1401,12 +1402,12 @@ public class GenerateMonster : MonoBehaviour
                                             {
                                                 case (1):
                                                     {
-                                                        MonsterDataGenerated.AddEffectThirdSkill("Immunity");
+                                                        MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
                                                         break;
                                                     }
                                                 case (2):
                                                     {
-                                                        MonsterDataGenerated.AddEffectThirdSkill("Shield");
+                                                        MonsterScriptGenerated.AddEffectThirdSkill("Shield");
                                                         break;
                                                     }
                                             }
@@ -1425,13 +1426,13 @@ public class GenerateMonster : MonoBehaviour
                         SKillTemp = Random.Range(1, 100);
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
-                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
                         }
                         else
                         {
                             if (Random.Range(1, 100) > 50)
                             {
-                                MonsterDataGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
+                                MonsterScriptGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
                                 //adding effects
                                 int TempEffects = Random.Range(1, 3);
 
@@ -1447,12 +1448,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("Accuracy");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("Attack");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("Attack");
                                                             break;
                                                         }
                                                 }
@@ -1465,12 +1466,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("CritRate");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("Defence");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("Defence");
                                                             break;
                                                         }
                                                 }
@@ -1483,12 +1484,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("Immunity");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("Shield");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("Shield");
                                                             break;
                                                         }
                                                 }
@@ -1505,7 +1506,7 @@ public class GenerateMonster : MonoBehaviour
                             }
                             else
                             {
-                                MonsterDataGenerated.SetSkillThreeSecondaryEffect("HarmfulEffect");
+                                MonsterScriptGenerated.SetSkillThreeSecondaryEffect("HarmfulEffect");
 
                                 int TempEffects = Random.Range(1, 3);
 
@@ -1521,12 +1522,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("AttackDeBuff");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("AttackDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("CritDeBuff");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("CritDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -1539,12 +1540,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("DefenceDeBuff");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("DefenceDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("ImmunityDeBuff");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("ImmunityDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -1557,12 +1558,12 @@ public class GenerateMonster : MonoBehaviour
                                                 {
                                                     case (1):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("MissDeBuff");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("MissDeBuff");
                                                             break;
                                                         }
                                                     case (2):
                                                         {
-                                                            MonsterDataGenerated.AddEffectThirdSkill("ShieldDeBuff");
+                                                            MonsterScriptGenerated.AddEffectThirdSkill("ShieldDeBuff");
                                                             break;
                                                         }
                                                 }
@@ -1583,18 +1584,18 @@ public class GenerateMonster : MonoBehaviour
                     }
                 case ("BeneficialEffect"):
                     {
-                        MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                        MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
                         break;
                     }
                 case ("HarmfulEffect"):
                     {
                         if (Random.Range(1, 2) == 1)
                         {
-                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Healing");
+                            MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
                         }
                         else
                         {
-                            MonsterDataGenerated.SetSkillThreeSecondaryEffect("Damage");
+                            MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Damage");
                         }
 
                         break;
@@ -1605,11 +1606,11 @@ public class GenerateMonster : MonoBehaviour
         }
 
         //final step is to calculate the multiplier of each of the skills. this is a number that will be used in the skill script to determine the effectiveness of each skill
-        MonsterDataGenerated.SetFirstSkillMultiplier(Random.Range(0.1f, 0.4f));
+        MonsterScriptGenerated.SetFirstSkillMultiplier(Random.Range(0.1f, 0.4f));
 
-        MonsterDataGenerated.SetSecondSkillMultipler(Random.Range(0.3f, 0.7f));
+        MonsterScriptGenerated.SetSecondSkillMultipler(Random.Range(0.3f, 0.7f));
 
-        MonsterDataGenerated.SetThirdSkillMultiplier(Random.Range(0.8f, 1.2f));
+        MonsterScriptGenerated.SetThirdSkillMultiplier(Random.Range(0.8f, 1.2f));
 
     }
 }

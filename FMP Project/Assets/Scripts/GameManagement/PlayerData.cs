@@ -12,7 +12,7 @@ public class PlayerData
     private List<RuneScript> PlayerRunes = new List<RuneScript>();
 
     // this is a list of the players monsters
-    private List<MonsterData> PlayerMonsters = new List<MonsterData>();
+    private List<MonsterScript> PlayerMonsters = new List<MonsterScript>();
 
     // this is the amount of Mana that the player has
     private int PlayerMana;
@@ -49,7 +49,7 @@ public class PlayerData
     // this function will allow to add monsters to the list of monsters. this function will no go through a check as the player will be able to have as many monsters as they want
     //Params:
     // - TheMonster : this is the monster that is going to be added to the players monster list
-    public void AddSelectedMonster(MonsterData TheMonster)
+    public void AddSelectedMonster(MonsterScript TheMonster)
     {
         PlayerMonsters.Add(TheMonster);
     }
@@ -84,9 +84,9 @@ public class PlayerData
     // a function that allows you to return the monster depending on the name 
     // Params: 
     // - MonsterName : this is the monster that you want to try to find within the monsters that the player owns 
-    public MonsterData ReturnSelectedMonster(string MonsterName)
+    public MonsterScript ReturnSelectedMonster(string MonsterName)
     {
-        foreach(MonsterData M in PlayerMonsters)
+        foreach(MonsterScript M in PlayerMonsters)
         {
             if(M.ReturnMonsterName() == MonsterName)
             {
@@ -102,7 +102,7 @@ public class PlayerData
     // this function returns the monster at a certain point within the players list
     // Params:
     // - MonsterNumber : this is the number in which monster will be selected from the list
-    public MonsterData ReturnSelectedMonster(int MonsterNumber)
+    public MonsterScript ReturnSelectedMonster(int MonsterNumber)
     {
         return PlayerMonsters[MonsterNumber];
     }
@@ -161,7 +161,7 @@ public class PlayerData
 
 
     // this function returns all of the players monsters that have been saved
-    public List<MonsterData> ReturnAllPlayerMonsters()
+    public List<MonsterScript> ReturnAllPlayerMonsters()
     {
         return PlayerMonsters;
     }

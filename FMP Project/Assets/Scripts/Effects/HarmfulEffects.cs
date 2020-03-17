@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class HarmfulEffects 
 {
     [Tooltip("this is the amount of time left on the beneficial effect")]
