@@ -35,6 +35,9 @@ public class UIMonsterTest : MonoBehaviour
     public Text SkillOne;
     public Text SkillTwo;
     public Text SkillThree;
+    public Text SkillOneSecondaryEffect;
+    public Text SkillTwoSecondaryEffect;
+    public Text SkillThreeSecondaryEffect;
     public Text SkillOneImportance;
     public Text SkillTwoImportance;
     public Text SkillThreeImportance;
@@ -76,14 +79,16 @@ public class UIMonsterTest : MonoBehaviour
         SkillImportanceSelectionOne.ClearOptions();
         SkillImportanceSelectionOne.AddOptions(ImportanceSelectionOptions);
 
+        SkillImportanceSelectionTwo.ClearOptions();
+        SkillImportanceSelectionTwo.AddOptions(ImportanceSelectionOptions);
 
-
+        SkillImportanceSelectionThree.ClearOptions();
+        SkillImportanceSelectionThree.AddOptions(ImportanceSelectionOptions);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //this was fix for ui not updating
         ChangeUI();
     }
 
@@ -142,6 +147,10 @@ public class UIMonsterTest : MonoBehaviour
             SkillOne.text = "Skill One : " + MonsterBiengUsed.ReturnrSkillOneMainEffect();
             SkillTwo.text = "Skill Two : " + MonsterBiengUsed.ReturnSkillTwoMainEffect();
             SkillThree.text = "Skill Three : " + MonsterBiengUsed.ReturnSkillThreeMainEffect();
+
+            SkillOneSecondaryEffect.text = "Skill One Secondary Effect: " + MonsterBiengUsed.ReturnSkillOneSecondaryEffect();
+            SkillTwoSecondaryEffect.text = "Skill Two Secondary Effect: " + MonsterBiengUsed.ReturnSkillTwoSecondaryEffect();
+            SkillThreeSecondaryEffect.text = "Skill Three Secondary Effect: " + MonsterBiengUsed.ReturnSkillThreeSecondaryEffect();
 
             SkillOneImportance.text = "Skill One Importance : " + MonsterBiengUsed.ReturnSkillOneImportance();
             SkillTwoImportance.text = "Skill Two Importance : " + MonsterBiengUsed.ReturnSkillTwoImportance();

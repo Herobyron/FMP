@@ -72,17 +72,22 @@ public class MonsterScript
     [SerializeField]
     private int MonsterLevel = 0;
 
+    [Tooltip("The Current Max level of the monster")]
+    [SerializeField]
+    private int MonsterMaxLevel = 15;
+
+
     [Tooltip("this is a bool that determines wether the monster has been awakened yet")]
     [SerializeField]
     private bool Awakened = false;
 
     [Tooltip("this is the multiplier that is applied to the monsters stats. (this will be multiplied with the level and then with the stats to increase the base stats")]
     [SerializeField]
-    private float LevelMultiplier = 0.2f;
+    private float LevelMultiplier = 0.01f;
 
     [Tooltip("this is the multiplier applied to the monsters stats depending on wether the monster is awakened (this will be multiplied with the stats and then added on to the base to increase the base)")]
     [SerializeField]
-    private float AwakenMultiplier = 0.3f;
+    private float AwakenMultiplier = 0.5f;
 
     [Tooltip("this is the multipleir applied to the monsters stats depending on how many stars that the monster has (this will be multiplied with the stats and then added on to the base to increase the base)")]
     [SerializeField]
@@ -151,6 +156,9 @@ public class MonsterScript
     [Tooltip("this is the multiplier that affects the skills ")]
     private float SkillOneMultiplier = 0.0f;
 
+    [Tooltip("this is the multiplier for the first skills secondary effect")]
+    private float SkillOneSecondaryEffectMultiplier = 0.0f;
+
     //this will be wehere the skill script should go when the skill script has been adapted
 
     [Tooltip("this is the main effect that the monsters first skill will do (this will be used to create the monsters skill")]
@@ -174,6 +182,9 @@ public class MonsterScript
 
     [Tooltip("this is the multiplier that affects the skills ")]
     private float SkillTwoMultiplier = 0.0f;
+
+    [Tooltip("this is the multiplier for the Second skills secondary effect")]
+    private float SkillTwoSecondaryEffectMultiplier = 0.0f;
 
     [Tooltip("the skill cooldown for the second skill the monster has")]
     [SerializeField]
@@ -202,6 +213,9 @@ public class MonsterScript
 
     [Tooltip("this is the multiplier that affects the skills ")]
     private float SkillThreeMultiplier = 0.0f;
+
+    [Tooltip("this is the multiplier for the Third skills secondary effect")]
+    private float SkillThreeSecondaryEffectMultiplier = 0.0f;
 
     [Tooltip("the skill cooldown for the second skill the monster has")]
     [SerializeField]
@@ -280,6 +294,10 @@ public class MonsterScript
                         if (MonsterLevel < 15)
                         {
                             MonsterLevel++;
+                            LevelMultiplier += (MonsterLevel / 100);
+                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
                         }
                         break;
                     }
@@ -288,6 +306,10 @@ public class MonsterScript
                         if (MonsterLevel < 20)
                         {
                             MonsterLevel++;
+                            LevelMultiplier += (MonsterLevel / 100);
+                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
                         }
                         break;
                     }
@@ -296,6 +318,10 @@ public class MonsterScript
                         if (MonsterLevel < 25)
                         {
                             MonsterLevel++;
+                            LevelMultiplier += (MonsterLevel / 100);
+                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
                         }
                         break;
                     }
@@ -304,6 +330,10 @@ public class MonsterScript
                         if (MonsterLevel < 30)
                         {
                             MonsterLevel++;
+                            LevelMultiplier += (MonsterLevel / 100);
+                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
                         }
                         break;
                     }
@@ -312,6 +342,10 @@ public class MonsterScript
                         if (MonsterLevel < 35)
                         {
                             MonsterLevel++;
+                            LevelMultiplier += (MonsterLevel / 100);
+                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
                         }
                         break;
                     }
@@ -320,6 +354,10 @@ public class MonsterScript
                         if (MonsterLevel < 40)
                         {
                             MonsterLevel++;
+                            LevelMultiplier += (MonsterLevel / 100);
+                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
                         }
                         break;
                     }
@@ -333,7 +371,45 @@ public class MonsterScript
     {
         if(Stars <= 5)
         {
-            Stars++;
+            if (MonsterLevel == MonsterMaxLevel)
+            {
+                Stars++;
+
+                switch (Stars)
+                {
+
+                    case (2):
+                        {
+                            MonsterMaxLevel = 20;
+                            LevelMultiplier = 0.05f;
+                            break;
+                        }
+                    case (3):
+                        {
+                            MonsterMaxLevel = 25;
+                            LevelMultiplier = 0.1f;
+                            break;
+                        }
+                    case (4):
+                        {
+                            MonsterMaxLevel = 30;
+                            LevelMultiplier = 0.15f;
+                            break;
+                        }
+                    case (5):
+                        {
+                            MonsterMaxLevel = 35;
+                            LevelMultiplier = 0.20f;
+                            break;
+                        }
+                    case (6):
+                        {
+                            MonsterMaxLevel = 40;
+                            LevelMultiplier = 0.25f;
+                            break;
+                        }
+                }
+            }
         }
     }
 
@@ -343,6 +419,64 @@ public class MonsterScript
         if(!Awakened)
         {
             Awakened = true;
+            switch(TheMonsterType)
+            {
+                case ("Attack"):
+                    {
+                        BaseDamage += 500;
+                        BaseDefence += 250;
+                        BaseHealth += 250;
+                        BaseSpeed += 10;
+
+                        SkillOneMultiplier += 0.1f;
+                        SkillOneSecondaryEffectMultiplier += 0.1f;
+
+                        SkillTwoMultiplier += 0.2f;
+                        SkillTwoSecondaryEffectMultiplier += 0.2f;
+
+                        SkillThreeMultiplier += 0.3f;
+                        SkillThreeSecondaryEffectMultiplier += 0.3f;
+
+                        break;
+                    }
+                case ("Health"):
+                    {
+                        BaseDamage += 250;
+                        BaseDefence += 250;
+                        BaseHealth += 500;
+                        BaseSpeed += 15;
+
+                        SkillOneMultiplier += 0.1f;
+                        SkillOneSecondaryEffectMultiplier += 0.1f;
+
+                        SkillTwoMultiplier += 0.2f;
+                        SkillTwoSecondaryEffectMultiplier += 0.2f;
+
+                        SkillThreeMultiplier += 0.3f;
+                        SkillThreeSecondaryEffectMultiplier += 0.3f;
+
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        BaseDamage += 250;
+                        BaseDefence += 500;
+                        BaseHealth += 250;
+                        BaseSpeed += 5;
+
+                        SkillOneMultiplier += 0.1f;
+                        SkillOneSecondaryEffectMultiplier += 0.1f;
+
+                        SkillTwoMultiplier += 0.2f;
+                        SkillTwoSecondaryEffectMultiplier += 0.2f;
+
+                        SkillThreeMultiplier += 0.3f;
+                        SkillThreeSecondaryEffectMultiplier += 0.3f;
+
+                        break;
+                    }
+            }
+
         }
     }
 
@@ -1131,6 +1265,21 @@ public class MonsterScript
         return SkillThreeMultiplier;
     }
 
+    public float ReturnMonsterSkillOneSecondMultiplier()
+    {
+        return SkillOneSecondaryEffectMultiplier;
+    }
+
+    public float ReturnMonsterSkillTwoSecondMultiplier()
+    {
+        return SkillTwoSecondaryEffectMultiplier;
+    }
+
+    public float ReturnMonsterSkillThreeSecondMultiplier()
+    {
+        return SkillThreeSecondaryEffectMultiplier;
+    }
+
     //this function returns the monsters Owner
     public string ReturnMonsterOwner()
     {
@@ -1324,12 +1473,36 @@ public class MonsterScript
         SkillThreeMultiplier = Multiplier;
     }
 
+    public void SetFirstSkillSecondaryMultiplier(float Multiplier)
+    {
+        SkillOneSecondaryEffectMultiplier = Multiplier;
+    }
+
+    public void SetSecondSkillSecondaryMultiplier(float Multiplier)
+    {
+        SkillTwoSecondaryEffectMultiplier = Multiplier;
+    }
+
+    public void SetThirdSkillSecondaryMultiplier(float Multiplier)
+    {
+        SkillThreeSecondaryEffectMultiplier = Multiplier;
+    }
+
     //this function will set the monsters owner to the player
     public void SetMonsterOwner(string Owner)
     {
         OwnerName = Owner;
     }
 
+    public void SetMonsterMaxLevel(int MaxLevel)
+    {
+        MonsterMaxLevel = MaxLevel;
+    }
+
+    public void SetMonsterMultiplier(float multipleir)
+    {
+        LevelMultiplier = multipleir;
+    }
 
     // this function is used to set the skill cool down of the second skill
     //Variables :
@@ -1466,4 +1639,6 @@ public class MonsterScript
     {
         return ThisData;
     }
+
+   
 }

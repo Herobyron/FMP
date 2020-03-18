@@ -33,7 +33,7 @@ public class GenerateMonster : MonoBehaviour
         MonsterScriptGenerated = new MonsterScript();
 
         GenerateMonsterFunc();
-        MonsterScriptGenerated.SetMonsterName("Monster" + MonsterNumberAt); // this was the monster name issue
+        MonsterScriptGenerated.SetMonsterName("Monster " + MonsterNumberAt); 
         MonsterScriptGenerated.SetMonsterOwner("Player");
 
         TheManager.AddMonsterToData(MonsterScriptGenerated);
@@ -69,6 +69,42 @@ public class GenerateMonster : MonoBehaviour
         {
             MonsterScriptGenerated.SetMonsterStars(5);
         }
+
+        switch (MonsterScriptGenerated.ReturnMonsterStars())
+        {
+            case (1):
+                {
+                    MonsterScriptGenerated.SetMonsterMaxLevel(15);
+                    MonsterScriptGenerated.SetMonsterMultiplier(0.01f);
+                    break; 
+                }
+            case (2):
+                {
+                    MonsterScriptGenerated.SetMonsterMaxLevel(20);
+                    MonsterScriptGenerated.SetMonsterMultiplier(0.05f);
+                    break;
+                }
+            case (3):
+                {
+                    MonsterScriptGenerated.SetMonsterMaxLevel(25);
+                    MonsterScriptGenerated.SetMonsterMultiplier(0.1f);
+                    break;
+                }
+            case (4):
+                {
+                    MonsterScriptGenerated.SetMonsterMaxLevel(30);
+                    MonsterScriptGenerated.SetMonsterMultiplier(0.15f);
+                    break;
+                }
+            case (5):
+                {
+                    MonsterScriptGenerated.SetMonsterMaxLevel(35);
+                    MonsterScriptGenerated.SetMonsterMultiplier(0.20f);
+                    break;
+                }
+
+        }
+
 
         // this part will now generate the type of monster that this one will be
         int MonsterTypeChance = Random.Range(0, 92);
@@ -111,7 +147,7 @@ public class GenerateMonster : MonoBehaviour
                 }
         }
 
-        MonsterDataGenerated.SetMonsterHealth(TempHealth);
+        MonsterScriptGenerated.SetMonsterHealth(TempHealth);
 
 
         //defence generation for the monster
@@ -119,7 +155,7 @@ public class GenerateMonster : MonoBehaviour
         int TempDefence = Random.Range(100, 200);
         TempDefence = (TempDefence * (10 * MonsterScriptGenerated.ReturnMonsterStars()));
 
-        switch (MonsterDataGenerated.ReturnMonsterType())
+        switch (MonsterScriptGenerated.ReturnMonsterType())
         {
             case ("Attack"):
                 {
@@ -307,10 +343,12 @@ public class GenerateMonster : MonoBehaviour
         if (SKillTemp >= 1 && SKillTemp < 33)
         {
             MonsterScriptGenerated.SetSkillOneMainEffect("Healing");
+            MonsterScriptGenerated.SetFirstSkillMultiplier(Random.Range(0.1f, 0.3f));
         }
         else if (SKillTemp >= 33 && SKillTemp < 66)
         {
             MonsterScriptGenerated.SetSkillOneMainEffect("Damage");
+            MonsterScriptGenerated.SetFirstSkillMultiplier(Random.Range(0.1f, 0.3f));
         }
         else
         {
@@ -474,6 +512,7 @@ public class GenerateMonster : MonoBehaviour
                 case ("Healing"):
                     {
                         SKillTemp = Random.Range(1, 100);
+                        MonsterScriptGenerated.SetFirstSkillSecondaryMultiplier(Random.Range(0.1f, 0.3f));
 
                         if(SKillTemp >= 1 && SKillTemp < 50)
                         {
@@ -554,7 +593,8 @@ public class GenerateMonster : MonoBehaviour
                 case ("Damage"):
                     {
                         SKillTemp = Random.Range(1, 100);
-                        if(SKillTemp >= 1 && SKillTemp < 50)
+                        MonsterScriptGenerated.SetFirstSkillSecondaryMultiplier(Random.Range(0.1f, 0.3f));
+                        if (SKillTemp >= 1 && SKillTemp < 50)
                         {
                             MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         }
@@ -743,10 +783,12 @@ public class GenerateMonster : MonoBehaviour
         if (SKillTemp >= 1 && SKillTemp < 33)
         {
             MonsterScriptGenerated.SetSkillTwoMainEffect("Healing");
+            MonsterScriptGenerated.SetSecondSkillMultipler(Random.Range(0.3f, 0.5f));
         }
         else if (SKillTemp >= 33 && SKillTemp < 66)
         {
             MonsterScriptGenerated.SetSkillTwoMainEffect("Damage");
+            MonsterScriptGenerated.SetSecondSkillMultipler(Random.Range(0.3f, 0.5f));
         }
         else
         {
@@ -910,6 +952,8 @@ public class GenerateMonster : MonoBehaviour
                 case ("Healing"):
                     {
                         SKillTemp = Random.Range(1, 100);
+                        
+                        MonsterScriptGenerated.SetSecondSkillSecondaryMultiplier(Random.Range(0.3f, 0.5f));
 
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
@@ -990,6 +1034,7 @@ public class GenerateMonster : MonoBehaviour
                 case ("Damage"):
                     {
                         SKillTemp = Random.Range(1, 100);
+                        MonsterScriptGenerated.SetSecondSkillSecondaryMultiplier(Random.Range(0.3f, 0.5f));
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
                             MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Healing");
@@ -1177,10 +1222,12 @@ public class GenerateMonster : MonoBehaviour
         if (SKillTemp >= 1 && SKillTemp < 33)
         {
             MonsterScriptGenerated.SetSkillThreeMainEffect("Healing");
+            MonsterScriptGenerated.SetThirdSkillMultiplier(Random.Range(0.5f, 0.7f));
         }
         else if (SKillTemp >= 33 && SKillTemp < 66)
         {
             MonsterScriptGenerated.SetSkillThreeMainEffect("Damage");
+            MonsterScriptGenerated.SetThirdSkillMultiplier(Random.Range(0.5f, 0.7f));
         }
         else
         {
@@ -1344,7 +1391,7 @@ public class GenerateMonster : MonoBehaviour
                 case ("Healing"):
                     {
                         SKillTemp = Random.Range(1, 100);
-
+                        MonsterScriptGenerated.SetThirdSkillSecondaryMultiplier(Random.Range(0.5f, 0.7f));
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
                             MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
@@ -1424,6 +1471,7 @@ public class GenerateMonster : MonoBehaviour
                 case ("Damage"):
                     {
                         SKillTemp = Random.Range(1, 100);
+                        MonsterScriptGenerated.SetThirdSkillSecondaryMultiplier(Random.Range(0.5f, 0.7f));
                         if (SKillTemp >= 1 && SKillTemp < 50)
                         {
                             MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
