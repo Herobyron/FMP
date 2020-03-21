@@ -57,6 +57,38 @@ public class MonsterScript
     [SerializeField]
     private int Stars = 0;
 
+    [Tooltip("this is the increased Health of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedHealth = 0.0f;
+
+    [Tooltip("this is the increased Defence of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedDefence = 0.0f;
+
+    [Tooltip("this is the increased Damage of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedAttack = 0.0f;
+
+    [Tooltip("this is the increased Speed of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedSpeed = 0.0f;
+
+    [Tooltip("This is the increased Accuracy of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedAccuracy = 0.0f;
+
+    [Tooltip("this is the increased Resisatnce of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedResistance = 0.0f;
+
+    [Tooltip("this is the increased crit rate of the runes stats added to the monster")]
+    [SerializeField]
+    private float IncreasedCritRate = 0.0f;
+
+    [Tooltip("this is the increased crit damage of the runes stats added to the monster ")]
+    [SerializeField]
+    private float IncreasedCritDamage = 0.0f;
+
     // this is an enum that holds all of the types that a monster can be
     private enum MonsterType {Defence, Attack, Health };
 
@@ -272,6 +304,9 @@ public class MonsterScript
     [SerializeField]
     private bool RuneSixApplied = false;
 
+    [Tooltip("this is a bool to determine is no runes are currently equiped")]
+    [SerializeField]
+    private bool RunesEquiped = false;
  
     // this is the enum for what type of state the monster is in
     // idle means they are just standing there and will not be battling any time soon
@@ -287,81 +322,141 @@ public class MonsterScript
     {
         if (MonsterLevel != 40)
         {
-            switch (Stars)
+            if(MonsterLevel < MonsterMaxLevel)
             {
-                case (1):
+                if(RuneOneApplied || RuneTwoApplied || RuneThreeApplied || RuneFourApplied || RuneFiveApplied || RuneSixApplied )
+                {
+                    MonsterLevel++;
+                    LevelMultiplier += (MonsterLevel / 100);
+                    BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                    BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                    BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+                }
+                else
+                {
+                    MonsterLevel++;
+                    LevelMultiplier += (MonsterLevel / 100);
+                    BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+                    BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+                    BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+
+                    IncreasedAttack = 0;
+                    IncreasedDefence = 0;
+                    IncreasedHealth = 0;
+                    IncreasedSpeed = 0;
+                    IncreasedResistance = 0;
+                    IncreasedAccuracy = 0;
+                    IncreasedCritRate = 0;
+                    IncreasedCritDamage = 0;
+
+                    if(RuneOneApplied)
                     {
-                        if (MonsterLevel < 15)
-                        {
-                            MonsterLevel++;
-                            LevelMultiplier += (MonsterLevel / 100);
-                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-                        }
-                        break;
+                        ApplyRuneEffects(1);
                     }
-                case (2):
+                    
+                    if(RuneTwoApplied)
                     {
-                        if (MonsterLevel < 20)
-                        {
-                            MonsterLevel++;
-                            LevelMultiplier += (MonsterLevel / 100);
-                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-                        }
-                        break;
+                        ApplyRuneEffects(2);
                     }
-                case (3):
+
+                    if (RuneThreeApplied)
                     {
-                        if (MonsterLevel < 25)
-                        {
-                            MonsterLevel++;
-                            LevelMultiplier += (MonsterLevel / 100);
-                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-                        }
-                        break;
+                        ApplyRuneEffects(3);
                     }
-                case (4):
+
+                    if(RuneFourApplied)
                     {
-                        if (MonsterLevel < 30)
-                        {
-                            MonsterLevel++;
-                            LevelMultiplier += (MonsterLevel / 100);
-                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-                        }
-                        break;
+                        ApplyRuneEffects(4);
                     }
-                case (5):
+
+                    if(RuneFiveApplied)
                     {
-                        if (MonsterLevel < 35)
-                        {
-                            MonsterLevel++;
-                            LevelMultiplier += (MonsterLevel / 100);
-                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-                        }
-                        break;
+                        ApplyRuneEffects(5);
                     }
-                case (6):
+
+                    if(RuneSixApplied)
                     {
-                        if (MonsterLevel < 40)
-                        {
-                            MonsterLevel++;
-                            LevelMultiplier += (MonsterLevel / 100);
-                            BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-                            BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-                        }
-                        break;
+                        ApplyRuneEffects(6);
                     }
+                }
+                
             }
+
+            //switch (Stars)
+            //{
+            //    case (1):
+            //        {
+            //            if (MonsterLevel < 15)
+            //            {
+            //                MonsterLevel++;
+            //                LevelMultiplier += (MonsterLevel / 100);
+            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+            //            }
+            //            break;
+            //        }
+            //    case (2):
+            //        {
+            //            if (MonsterLevel < 20)
+            //            {
+            //                MonsterLevel++;
+            //                LevelMultiplier += (MonsterLevel / 100);
+            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+            //            }
+            //            break;
+            //        }
+            //    case (3):
+            //        {
+            //            if (MonsterLevel < 25)
+            //            {
+            //                MonsterLevel++;
+            //                LevelMultiplier += (MonsterLevel / 100);
+            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+            //            }
+            //            break;
+            //        }
+            //    case (4):
+            //        {
+            //            if (MonsterLevel < 30)
+            //            {
+            //                MonsterLevel++;
+            //                LevelMultiplier += (MonsterLevel / 100);
+            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+            //            }
+            //            break;
+            //        }
+            //    case (5):
+            //        {
+            //            if (MonsterLevel < 35)
+            //            {
+            //                MonsterLevel++;
+            //                LevelMultiplier += (MonsterLevel / 100);
+            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+            //            }
+            //            break;
+            //        }
+            //    case (6):
+            //        {
+            //            if (MonsterLevel < 40)
+            //            {
+            //                MonsterLevel++;
+            //                LevelMultiplier += (MonsterLevel / 100);
+            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
+            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
+            //            }
+            //            break;
+            //        }
+            //}
 
         }
     }
@@ -717,48 +812,124 @@ public class MonsterScript
         // then it will go through all of the stats and find which type of stats are on the rune
         // and then apply the stats to the correct base stat
 
+        switch (TheRune.ReturnMainRuneStatType())
+        {
+            case ("Attack"):
+                {
+                    IncreasedAttack += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Health"):
+                {
+                    IncreasedHealth += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case("Defence"):
+                {
+                    IncreasedDefence += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Speed"):
+                {
+                    IncreasedSpeed += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("CritRate"):
+                {
+                    IncreasedCritRate += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("CritDamage"):
+                {
+                    IncreasedCritDamage += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Accuracy"):
+                {
+                    IncreasedAccuracy += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Resistance"):
+                {
+                    IncreasedResistance += TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("HealthPercentage"):
+                {
+                    IncreasedHealth += (BaseHealth * TheRune.ReturnMainRuneStat());
+                    break;
+                }
+            case ("DefencePercentage"):
+                {
+                    IncreasedDefence += (BaseDefence * TheRune.ReturnMainRuneStat());
+                    break;
+                }
+            case ("AttackPercentage"):
+                {
+                    IncreasedAttack += (BaseDamage * TheRune.ReturnMainRuneStat());
+                    break;
+                }
+        }
+
+
+
         if (TheRune.ReturnRuneStatOne() > 0.0f)
         {
             switch (TheRune.ReturnRuneStatOneType()) // gets the runes first stat
             {
                 case ("Health"):
                     {
-                        BaseHealth += BaseHealth * TheRune.ReturnRuneStatOne();
+                        IncreasedHealth += TheRune.ReturnRuneStatOne();
                         break;
                     }
-                case ("Damage"):
+                case ("Attack"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatOne();
+                        IncreasedAttack += TheRune.ReturnRuneStatOne();
                         break;
                     }
                 case ("Defence"):
                     {
-                        BaseDefence += BaseDefence * TheRune.ReturnRuneStatOne();
+                        IncreasedDefence += TheRune.ReturnRuneStatOne();
                         break;
                     }
                 case ("Speed"):
                     {
-                        BaseSpeed += BaseSpeed * TheRune.ReturnRuneStatOne();
+                        IncreasedSpeed +=  TheRune.ReturnRuneStatOne();
                         break;
                     }
                 case ("CritRate"):
                     {
-                        BaseCritRate += BaseCritRate * TheRune.ReturnRuneStatOne();
+                        IncreasedCritRate += TheRune.ReturnRuneStatOne();
                         break;
                     }
                 case ("CritDamage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatOne();
+                        IncreasedCritDamage += TheRune.ReturnRuneStatOne();
                         break;
                     }
                 case ("Accuracy"):
                     {
-                        BaseAccuracy += BaseAccuracy * TheRune.ReturnRuneStatOne();
+                        IncreasedAccuracy += TheRune.ReturnRuneStatOne();
                         break;
                     }
                 case ("Resistance"):
                     {
-                        BaseResistance += BaseResistance * TheRune.ReturnRuneStatOne();
+                        IncreasedResistance += TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatOne());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence += (BaseDefence * TheRune.ReturnRuneStatOne());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatOne());
                         break;
                     }
             }
@@ -771,42 +942,57 @@ public class MonsterScript
             {
                 case ("Health"):
                     {
-                        BaseHealth += BaseHealth * TheRune.ReturnRuneStatTwo();
+                        IncreasedHealth += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("Damage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatTwo();
+                        IncreasedAttack += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("Defence"):
                     {
-                        BaseDefence += BaseDefence * TheRune.ReturnRuneStatTwo();
+                        IncreasedDefence += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("Speed"):
                     {
-                        BaseSpeed += BaseSpeed * TheRune.ReturnRuneStatTwo();
+                        IncreasedSpeed += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("CritRate"):
                     {
-                        BaseCritRate += BaseCritRate * TheRune.ReturnRuneStatTwo();
+                        IncreasedCritRate += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("CritDamage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatTwo();
+                        IncreasedCritDamage += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("Accuracy"):
                     {
-                        BaseAccuracy += BaseAccuracy * TheRune.ReturnRuneStatTwo();
+                        IncreasedAccuracy += TheRune.ReturnRuneStatTwo();
                         break;
                     }
                 case ("Resistance"):
                     {
-                        BaseResistance += BaseResistance * TheRune.ReturnRuneStatTwo();
+                        IncreasedResistance += TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatTwo());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence += (BaseDefence * TheRune.ReturnRuneStatTwo());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatTwo());
                         break;
                     }
             }
@@ -819,42 +1005,57 @@ public class MonsterScript
             {
                 case ("Health"):
                     {
-                        BaseHealth += BaseHealth * TheRune.ReturnRuneStatThree();
+                        IncreasedHealth += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("Damage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatThree();
+                        IncreasedAttack += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("Defence"):
                     {
-                        BaseDefence += BaseDefence * TheRune.ReturnRuneStatThree();
+                        IncreasedDefence += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("Speed"):
                     {
-                        BaseSpeed += BaseSpeed * TheRune.ReturnRuneStatThree();
+                        IncreasedSpeed += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("CritRate"):
                     {
-                        BaseCritRate += BaseCritRate * TheRune.ReturnRuneStatThree();
+                        IncreasedCritRate += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("CritDamage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatThree();
+                        IncreasedCritDamage += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("Accuracy"):
                     {
-                        BaseAccuracy += BaseAccuracy * TheRune.ReturnRuneStatThree();
+                        IncreasedAccuracy += TheRune.ReturnRuneStatThree();
                         break;
                     }
                 case ("Resistance"):
                     {
-                        BaseResistance += BaseResistance * TheRune.ReturnRuneStatThree();
+                        IncreasedResistance += TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatThree());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence += (BaseDefence * TheRune.ReturnRuneStatThree());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatThree());
                         break;
                     }
             }
@@ -867,42 +1068,57 @@ public class MonsterScript
             {
                 case ("Health"):
                     {
-                        BaseHealth += BaseHealth * TheRune.ReturnRuneStatFour();
+                        IncreasedHealth += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("Damage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatFour();
+                        IncreasedAttack += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("Defence"):
                     {
-                        BaseDefence += BaseDefence * TheRune.ReturnRuneStatFour();
+                        IncreasedDefence += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("Speed"):
                     {
-                        BaseSpeed += BaseSpeed * TheRune.ReturnRuneStatFour();
+                        IncreasedSpeed += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("CritRate"):
                     {
-                        BaseCritRate += BaseCritRate * TheRune.ReturnRuneStatFour();
+                        IncreasedCritRate += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("CritDamage"):
                     {
-                        BaseDamage += BaseDamage * TheRune.ReturnRuneStatFour();
+                        IncreasedCritDamage += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("Accuracy"):
                     {
-                        BaseAccuracy += BaseAccuracy * TheRune.ReturnRuneStatFour();
+                        IncreasedAccuracy += TheRune.ReturnRuneStatFour();
                         break;
                     }
                 case ("Resistance"):
                     {
-                        BaseResistance += BaseResistance * TheRune.ReturnRuneStatFour();
+                        IncreasedResistance += TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatFour());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence += (BaseHealth * TheRune.ReturnRuneStatFour());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatFour());
                         break;
                     }
             }
@@ -1094,6 +1310,54 @@ public class MonsterScript
     public float ReturnCurrentHealth()
     {
         return CurrentHealth;
+    }
+
+    //this function will return the monsters Increased Health
+    public float ReturnIncreasedHealth()
+    {
+        return IncreasedHealth;
+    }
+
+    //this function will return the monsters Increased Defence
+    public float ReturnIncreasedDefence()
+    {
+        return IncreasedDefence;
+    }
+
+    //this function will return the monsters Increased Attack
+    public float ReturnIncreasedAttack()
+    {
+        return IncreasedAttack;
+    }
+
+    //this function will return the monsters increased Speed
+    public float ReturnIncreasedSpeed()
+    {
+        return IncreasedSpeed;
+    }
+
+    //this function will return the monsters increased crit rate
+    public float ReturnIncreasedCritRate()
+    {
+        return IncreasedCritRate;
+    }
+
+    //this function will return the monsters increased crit damage
+    public float ReturnIncreasedCritDamage()
+    {
+        return IncreasedCritDamage;
+    }
+
+    //this function will return the monsters increased accuracy
+    public float ReturnIncreasedAccuracy()
+    {
+        return IncreasedAccuracy;
+    }
+
+    //this function will returns the monsters increased Resistance
+    public float ReturnIncreasedResistance()
+    {
+        return IncreasedResistance;
     }
 
     // this function will return the monsters saved stars
@@ -1317,6 +1581,30 @@ public class MonsterScript
     // this will set the monsters crit damage
     public void SetMonsterCritDamage(float CritDamage) { BaseCritDamage = CritDamage; }
 
+    //this will set the monsters Increased Health
+    public void SetMonsterIncreasedHealth(float increasedhealth) { IncreasedHealth = increasedhealth; }
+
+    //this will set the monsters Increased Defence
+    public void SetMonstersIncreasedDefence(float increaseddefence) { IncreasedDefence = increaseddefence; }
+
+    //this will set the monsters Increased Attack
+    public void SetMonstersIncreasedAttack(float increasedattack) { IncreasedAttack = increasedattack; }
+
+    //this function will set the monsters increased speed
+    public void SetMonstersIncreasedSpeed(float increasedspeed) { IncreasedSpeed = increasedspeed; }
+
+    //this function will set the monsters increased crit rate
+    public void SetMonstersIncreasedCritRate(float increasedcritrate) { IncreasedCritRate = increasedcritrate; }
+
+    //this function will set the monsters increased crit damage
+    public void SetMonstersIncreasedCritDamage(float increasedcritdamage) { IncreasedCritDamage = increasedcritdamage; }
+
+    //this function will set the monsters increased accuracy
+    public void SetMonstersIncreasedAccuracy(float increasedaccuracy) { IncreasedAccuracy = increasedaccuracy; }
+
+    //this functoin will set the monsters increased resistance
+    public void SetMonstersIncreasedResistance(float increasedresistance) { IncreasedResistance = increasedresistance; }
+    
     //this will set the monsters star
     public void SetMonsterStars(int StarsAmount) { Stars = StarsAmount; }
 

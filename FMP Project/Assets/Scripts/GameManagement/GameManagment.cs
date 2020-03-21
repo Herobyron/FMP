@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-
+using System;
 
 public class GameManagment : MonoBehaviour
 {
@@ -19,6 +19,15 @@ public class GameManagment : MonoBehaviour
     // a private list of the monsters that the player currently owns
     private List<string> MonsterNames = new List<string>();
 
+    // a private UI that is the monsters UI (this is used so they can be switched for the first build may be changed later)
+    [SerializeField]
+    private GameObject MonsterUI;
+
+    // a private UI that is the Rune UI (this is used so they can be switched for the first build may be changed later)
+    [SerializeField]
+    private GameObject RuneUI;
+
+    
 
     void Start()
     {
@@ -76,6 +85,21 @@ public class GameManagment : MonoBehaviour
         FindObjectOfType<UITest>().SetRuneBiengUsed(GameData.PlayerInformation.ReturnSelectedRune(0));
 
     }
+
+    public void SwitchUI()
+    {
+        if(RuneUI.activeSelf == false)
+        {
+            RuneUI.SetActive(true);
+            MonsterUI.SetActive(false);
+        }
+        else
+        {
+            MonsterUI.SetActive(true);
+            RuneUI.SetActive(false);
+        }
+    }
+
 
     public void LoadInMonsterName()
     {

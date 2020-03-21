@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &531537549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 73768766776231334, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
+    type: 3}
+  m_PrefabInstance: {fileID: 7246622808940900591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &902043514
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +217,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &933192237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3502001568777213094, guid: c33269bead718824385baf5ed8e4d370,
+    type: 3}
+  m_PrefabInstance: {fileID: 3502001567377347630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &962956724
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,9 +518,18 @@ MonoBehaviour:
     BaseResistance: 0
     CurrentHealth: 0
     Stars: 0
+    IncreasedHealth: 0
+    IncreasedDefence: 0
+    IncreasedAttack: 0
+    IncreasedSpeed: 0
+    IncreasedAccuracy: 0
+    IncreasedResistance: 0
+    IncreasedCritRate: 0
+    IncreasedCritDamage: 0
     Type: 1
     TheMonsterType: 
     MonsterLevel: 0
+    MonsterMaxLevel: 15
     Awakened: 0
     LevelMultiplier: 0.2
     AwakenMultiplier: 0.3
@@ -678,6 +699,8 @@ MonoBehaviour:
     SkillThreeImportance: 0
     SkillThreeEffects: []
     SkillThreeCoolDown: 0
+    EffectsHarmful: []
+    EffectsBeneficial: []
     RuneNames: []
     MaxEffects: 10
     OwnerName: 
@@ -688,14 +711,17 @@ MonoBehaviour:
     RuneFourApplied: 0
     RuneFiveApplied: 0
     RuneSixApplied: 0
+    RunesEquiped: 0
     state: 0
+  MonsterUI: {fileID: 933192237}
+  RuneUI: {fileID: 531537549}
 --- !u!114 &1611468062 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9159193095424568127, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
     type: 3}
   m_PrefabInstance: {fileID: 7246622808940900591}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 531537549}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e111ef46ead68304cbdff57ed124eae1, type: 3}
@@ -1044,6 +1070,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1506256429}
+    - target: {fileID: 8220531163116458509, guid: c33269bead718824385baf5ed8e4d370,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1506256429}
+    - target: {fileID: 8220531163116458509, guid: c33269bead718824385baf5ed8e4d370,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220531163116458509, guid: c33269bead718824385baf5ed8e4d370,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c33269bead718824385baf5ed8e4d370, type: 3}
 --- !u!1001 &7246622808940900591
@@ -1063,6 +1104,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9159193095424568127, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
+        type: 3}
+      propertyPath: TheManager
+      value: 
+      objectReference: {fileID: 1506256429}
     - target: {fileID: 3122646703244453950, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1318,10 +1364,20 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 9159193095424568127, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
+    - target: {fileID: 5072544687064562914, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
-      propertyPath: TheManager
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1506256429}
+    - target: {fileID: 5072544687064562914, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SwitchUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072544687064562914, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ae042fd39c4fcc45a3f4f8af4278538, type: 3}
