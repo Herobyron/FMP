@@ -129,11 +129,11 @@ public class UITest : MonoBehaviour
         }
         else if(RuneBiengUsed != null)
         {
-            RuneName.text = "Rune Name : " + RuneBiengUsed.ReturnRuneName();
-            RuneLevelText.text = "Rune Level : " + RuneBiengUsed.ReturnRuneLevel();
-            RuneStar.text = "Rune star : " + RuneBiengUsed.ReturnAmountOfStars();
-            RuneGrade.text = "Rune Grade : " + RuneBiengUsed.ReturnRuneRarity();
-            RuneSlot.text = "Rune Slot : " + RuneBiengUsed.ReturnRuneSlot();
+            RuneName.text = "Rune Name: " + RuneBiengUsed.ReturnRuneName();
+            RuneLevelText.text = "Rune Level: " + RuneBiengUsed.ReturnRuneLevel();
+            RuneStar.text = "Rune Star: " + RuneBiengUsed.ReturnAmountOfStars();
+            RuneGrade.text = "Rune Rarity: " + RuneBiengUsed.ReturnRuneRarity();
+            RuneSlot.text = "Rune Slot: " + RuneBiengUsed.ReturnRuneSlot();
 
             MainRuneStat.text = RuneBiengUsed.ReturnMainRuneStatType() + ": " + RuneBiengUsed.ReturnMainRuneStat();
             RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": " + RuneBiengUsed.ReturnRuneStatOne();

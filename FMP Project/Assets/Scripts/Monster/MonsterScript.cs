@@ -382,81 +382,7 @@ public class MonsterScript
                 
             }
 
-            //switch (Stars)
-            //{
-            //    case (1):
-            //        {
-            //            if (MonsterLevel < 15)
-            //            {
-            //                MonsterLevel++;
-            //                LevelMultiplier += (MonsterLevel / 100);
-            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-            //            }
-            //            break;
-            //        }
-            //    case (2):
-            //        {
-            //            if (MonsterLevel < 20)
-            //            {
-            //                MonsterLevel++;
-            //                LevelMultiplier += (MonsterLevel / 100);
-            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-            //            }
-            //            break;
-            //        }
-            //    case (3):
-            //        {
-            //            if (MonsterLevel < 25)
-            //            {
-            //                MonsterLevel++;
-            //                LevelMultiplier += (MonsterLevel / 100);
-            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-            //            }
-            //            break;
-            //        }
-            //    case (4):
-            //        {
-            //            if (MonsterLevel < 30)
-            //            {
-            //                MonsterLevel++;
-            //                LevelMultiplier += (MonsterLevel / 100);
-            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-            //            }
-            //            break;
-            //        }
-            //    case (5):
-            //        {
-            //            if (MonsterLevel < 35)
-            //            {
-            //                MonsterLevel++;
-            //                LevelMultiplier += (MonsterLevel / 100);
-            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-            //            }
-            //            break;
-            //        }
-            //    case (6):
-            //        {
-            //            if (MonsterLevel < 40)
-            //            {
-            //                MonsterLevel++;
-            //                LevelMultiplier += (MonsterLevel / 100);
-            //                BaseHealth += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDefence += ((15 * Stars) + (100 * LevelMultiplier));
-            //                BaseDamage += ((15 * Stars) + (100 * LevelMultiplier));
-            //            }
-            //            break;
-            //        }
-            //}
+            
 
         }
     }
@@ -1126,6 +1052,326 @@ public class MonsterScript
     }
 
 
+    private void RuneStatDecrease(RuneScript TheRune)
+    {
+        // the function first checks to make sure that the rune has a stat on it (so if the rune stat two is zero then it dosent have two stats and shouldnt try to apply it)
+        // then it will go through all of the stats and find which type of stats are on the rune
+        // and then apply the stats to the correct base stat
+
+        switch (TheRune.ReturnMainRuneStatType())
+        {
+            case ("Attack"):
+                {
+                    IncreasedAttack -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Health"):
+                {
+                    IncreasedHealth -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Defence"):
+                {
+                    IncreasedDefence -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Speed"):
+                {
+                    IncreasedSpeed -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("CritRate"):
+                {
+                    IncreasedCritRate -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("CritDamage"):
+                {
+                    IncreasedCritDamage -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Accuracy"):
+                {
+                    IncreasedAccuracy -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("Resistance"):
+                {
+                    IncreasedResistance -= TheRune.ReturnMainRuneStat();
+                    break;
+                }
+            case ("HealthPercentage"):
+                {
+                    IncreasedHealth -= (BaseHealth * TheRune.ReturnMainRuneStat());
+                    break;
+                }
+            case ("DefencePercentage"):
+                {
+                    IncreasedDefence -= (BaseDefence * TheRune.ReturnMainRuneStat());
+                    break;
+                }
+            case ("AttackPercentage"):
+                {
+                    IncreasedAttack -= (BaseDamage * TheRune.ReturnMainRuneStat());
+                    break;
+                }
+        }
+
+
+
+        if (TheRune.ReturnRuneStatOne() > 0.0f)
+        {
+            switch (TheRune.ReturnRuneStatOneType()) // gets the runes first stat
+            {
+                case ("Health"):
+                    {
+                        IncreasedHealth -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("Attack"):
+                    {
+                        IncreasedAttack -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        IncreasedDefence -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("Speed"):
+                    {
+                        IncreasedSpeed -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        IncreasedCritRate -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("CritDamage"):
+                    {
+                        IncreasedCritDamage -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        IncreasedAccuracy -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("Resistance"):
+                    {
+                        IncreasedResistance -= TheRune.ReturnRuneStatOne();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatOne());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence -= (BaseDefence * TheRune.ReturnRuneStatOne());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatOne());
+                        break;
+                    }
+            }
+        }
+
+
+        if (TheRune.ReturnRuneStatTwo() > 0.0f)
+        {
+            switch (TheRune.ReturnRuneStatTwoType())
+            {
+                case ("Health"):
+                    {
+                        IncreasedHealth -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("Damage"):
+                    {
+                        IncreasedAttack -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        IncreasedDefence -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("Speed"):
+                    {
+                        IncreasedSpeed -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        IncreasedCritRate -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("CritDamage"):
+                    {
+                        IncreasedCritDamage -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        IncreasedAccuracy -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("Resistance"):
+                    {
+                        IncreasedResistance -= TheRune.ReturnRuneStatTwo();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatTwo());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence -= (BaseDefence * TheRune.ReturnRuneStatTwo());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatTwo());
+                        break;
+                    }
+            }
+        }
+
+
+        if (TheRune.ReturnRuneStatThree() > 0.0f)
+        {
+            switch (TheRune.ReturnRuneStatThreeType())
+            {
+                case ("Health"):
+                    {
+                        IncreasedHealth -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("Damage"):
+                    {
+                        IncreasedAttack -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        IncreasedDefence -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("Speed"):
+                    {
+                        IncreasedSpeed -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        IncreasedCritRate -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("CritDamage"):
+                    {
+                        IncreasedCritDamage -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        IncreasedAccuracy -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("Resistance"):
+                    {
+                        IncreasedResistance -= TheRune.ReturnRuneStatThree();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatThree());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence -= (BaseDefence * TheRune.ReturnRuneStatThree());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatThree());
+                        break;
+                    }
+            }
+        }
+
+
+        if (TheRune.ReturnRuneStatFour() > 0.0f)
+        {
+            switch (TheRune.ReturnRuneStatFourType())
+            {
+                case ("Health"):
+                    {
+                        IncreasedHealth -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("Damage"):
+                    {
+                        IncreasedAttack -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        IncreasedDefence -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("Speed"):
+                    {
+                        IncreasedSpeed -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        IncreasedCritRate -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("CritDamage"):
+                    {
+                        IncreasedCritDamage -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        IncreasedAccuracy -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("Resistance"):
+                    {
+                        IncreasedResistance -= TheRune.ReturnRuneStatFour();
+                        break;
+                    }
+                case ("HealthPercentage"):
+                    {
+                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatFour());
+                        break;
+                    }
+                case ("DefencePercentage"):
+                    {
+                        IncreasedDefence -= (BaseHealth * TheRune.ReturnRuneStatFour());
+                        break;
+                    }
+                case ("AttackPercentage"):
+                    {
+                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatFour());
+                        break;
+                    }
+            }
+        }
+    }
+
+
 
     // this function is used to unequip runes. this will also decrease the stats accordingly when the rune is unequiped
     //Variables : 
@@ -1138,42 +1384,48 @@ public class MonsterScript
         {
             case (1):
                 {
-                    //function that removes the stats of the rune
+                    
+                    RuneStatDecrease(RuneOne);
                     RuneOneApplied = false;
                     RuneOne = null;
                     break;
                 }
             case (2):
                 {
-                    //function that removes the stats of the rune
+                    
+                    RuneStatDecrease(RuneTwo);
                     RuneTwoApplied = false;
                     RuneTwo = null;
                     break;
                 }
             case (3):
                 {
-                    //function that removes the stats of the rune
+                    
+                    RuneStatDecrease(RuneThree);
                     RuneThreeApplied = false;
                     RuneThree = null;
                     break;
                 }
             case (4):
                 {
-                    //function that removes the stats of the rune
+                    
+                    RuneStatDecrease(RuneFour);
                     RuneFourApplied = false;
                     RuneFour = null;
                     break;
                 }
             case (5):
                 {
-                    //function that removes the stats of the rune
+                    
+                    RuneStatDecrease(RuneFive);
                     RuneFiveApplied = false;
                     RuneFive = null;
                     break;
                 }
             case (6):
                 {
-                    //function that removes the stats of the rune
+                   
+                    RuneStatDecrease(RuneSix);
                     RuneSixApplied = false;
                     RuneSix = null;
                     break;
@@ -1181,6 +1433,7 @@ public class MonsterScript
         }
 
     }
+
 
     // this function will return the rune that has the same name as the rune name given in the variables
     //Variables : 
