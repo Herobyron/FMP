@@ -178,6 +178,12 @@ public class GameManagment : MonoBehaviour
         Application.Quit();
     }
 
+    public List<RuneScript> ReturnPlayerRunes()
+    {
+        return GameData.PlayerInformation.ReturnAllPlayerRunes();
+    }
+
+
 }
 
 
