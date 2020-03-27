@@ -25,6 +25,10 @@ public class RuneScript
     [SerializeField]
     private string RuneOwnerName;
 
+    [Tooltip("this is the monster the rune is equiped to")]
+    [SerializeField]
+    private string MonsterEquipedToo;
+
     // this is the rarity that the runes can be 
     public enum RuneRarity { common, Uncommon, Rare, Epic, Legendary };
 
@@ -138,7 +142,7 @@ public class RuneScript
 
 
     // this function will be run when the player wants to upgrade a rune and will increase the level of the rune depending on a random percentage
-    public void UpgradeRune()
+    public bool UpgradeRune()
     {
         if (RuneLevel < RuneMaxLevel) // check to make sure that the rune level is not higher then the max level
         {
@@ -401,8 +405,13 @@ public class RuneScript
                     GenerateRuneStat(4);
                 }
 
+                // have it return a bool to show the upgrade was a success. 
+                return true;
+
             }
         }
+
+        return false;
     }
 
     public void UpgradeMainRuneStat()
@@ -1160,6 +1169,11 @@ public class RuneScript
         }
     }
 
+    // function that sets what monster this rune is equipped too 
+    public void SetMonsterEquipedToo(string MonsterName)
+    {
+        MonsterEquipedToo = MonsterName;
+    }
 
     // this function returns what rune slot this rune should be equiped to 
     public int ReturnRuneNumber()
@@ -1273,6 +1287,11 @@ public class RuneScript
     public string ReturnRuneName()
     {
         return RuneName;
+    }
+
+    public string ReturnMonsterEquipedTo()
+    {
+        return MonsterEquipedToo;
     }
 
 }

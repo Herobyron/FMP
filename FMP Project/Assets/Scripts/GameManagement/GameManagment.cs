@@ -56,6 +56,13 @@ public class GameManagment : MonoBehaviour
         }
     }
 
+    // a function that finds a specific rune from the Game Data
+    public RuneScript ReturnSelectedRune(string RuneName)
+    {
+        return GameData.PlayerInformation.ReturnSelectedRune(RuneName);
+    }
+
+
     // a function specifically made to add Runes to the players information
     public void AddRuneToData(RuneScript RuneAdded)
     { 
@@ -100,11 +107,19 @@ public class GameManagment : MonoBehaviour
         }
     }
 
-
+    // a function made to load in the first monster to the monster specific UI
     public void LoadInMonsterName()
     {
         FindObjectOfType<UIMonsterTest>().SetMonsterBiengUsed(GameData.PlayerInformation.ReturnSelectedMonster(0));
     }
+
+    // a function used to load in the monsters names and to load in the first monster for rune and monster ui
+    public void LoadMonsterInformation()
+    {
+        GetAllMonsters();
+        FindObjectOfType<MonsterRuneUI>().SetMonsterInUse(GameData.PlayerInformation.ReturnSelectedMonster(0)); 
+    }
+
 
     // this function is made to get all of the names of runes the playuer currently owns
     public void GetAllRunes()
