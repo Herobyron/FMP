@@ -21,16 +21,6 @@ public class UIMonsterTest : MonoBehaviour
     public Text MonsterAwakened;
     public Text MonsterType;
 
-    // Monster Runes
-
-    public Text RuneOne;
-    public Text RuneTwo;
-    public Text RuneThree;
-    public Text RuneFour;
-    public Text RuneFive;
-    public Text RuneSix;
-
-
     // Monster Skills
     public Text SkillOne;
     public Text SkillTwo;

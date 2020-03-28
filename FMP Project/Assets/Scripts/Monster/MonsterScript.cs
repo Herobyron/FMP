@@ -324,7 +324,7 @@ public class MonsterScript
         {
             if(MonsterLevel < MonsterMaxLevel)
             {
-                if(RuneOneApplied || RuneTwoApplied || RuneThreeApplied || RuneFourApplied || RuneFiveApplied || RuneSixApplied )
+                if(!RuneOneApplied || !RuneTwoApplied || !RuneThreeApplied || !RuneFourApplied || !RuneFiveApplied || !RuneSixApplied )
                 {
                     MonsterLevel++;
                     LevelMultiplier += (MonsterLevel / 100);
@@ -2038,6 +2038,11 @@ public class MonsterScript
     public void SetMonsterMaxLevel(int MaxLevel)
     {
         MonsterMaxLevel = MaxLevel;
+    }
+
+    public int ReturnMonsterMaxLevel()
+    {
+        return MonsterMaxLevel;
     }
 
     public void SetMonsterMultiplier(float multipleir)
