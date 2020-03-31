@@ -1460,6 +1460,8 @@ public class MonsterScript
                     {
                         RuneOne = TheRune;
                         ApplyRuneEffects(TheRune.ReturnRuneNumber());
+                        RuneOne.SetRuneEquiped(true);
+                        RuneOne.SetMonsterEquipedToo(MonsterName);
                         RuneOneApplied = true;
                         break;
                     }
@@ -1467,6 +1469,8 @@ public class MonsterScript
                     {
                         RuneTwo = TheRune;
                         ApplyRuneEffects(TheRune.ReturnRuneNumber());
+                        RuneTwo.SetRuneEquiped(true);
+                        RuneTwo.SetMonsterEquipedToo(MonsterName);
                         RuneTwoApplied = true;
                         break;
                     }
@@ -1474,6 +1478,8 @@ public class MonsterScript
                     {
                         RuneThree = TheRune;
                         ApplyRuneEffects(TheRune.ReturnRuneNumber());
+                        RuneThree.SetRuneEquiped(true);
+                        RuneThree.SetMonsterEquipedToo(MonsterName);
                         RuneThreeApplied = true;
                         break;
                     }
@@ -1481,6 +1487,8 @@ public class MonsterScript
                     {
                         RuneFour = TheRune;
                         ApplyRuneEffects(TheRune.ReturnRuneNumber());
+                        RuneFour.SetRuneEquiped(true);
+                        RuneFour.SetMonsterEquipedToo(MonsterName);
                         RuneFourApplied = true;
                         break;
                     }
@@ -1488,6 +1496,8 @@ public class MonsterScript
                     {
                         RuneFive = TheRune;
                         ApplyRuneEffects(TheRune.ReturnRuneNumber());
+                        RuneFive.SetRuneEquiped(true);
+                        RuneFive.SetMonsterEquipedToo(MonsterName);
                         RuneFiveApplied = true;
                         break;
                     }
@@ -1495,6 +1505,8 @@ public class MonsterScript
                     {
                         RuneSix = TheRune;
                         ApplyRuneEffects(TheRune.ReturnRuneNumber());
+                        RuneSix.SetRuneEquiped(true);
+                        RuneSix.SetMonsterEquipedToo(MonsterName);
                         RuneSixApplied = true;
                         break;
                     }

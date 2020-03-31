@@ -1181,6 +1181,13 @@ public class RuneScript
         return RuneSlot;
     }
 
+    // this function sets the runes equiped bool
+    public void SetRuneEquiped(bool Equiped)
+    {
+        RuneEquiped = Equiped;
+    }
+
+
     // returns the bool that determines wether this rune is equiped to the monster or not
     public bool ReturnRuneEquiped()
     {

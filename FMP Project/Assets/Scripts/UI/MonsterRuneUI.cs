@@ -342,6 +342,64 @@ public class MonsterRuneUI : MonoBehaviour
         }
     }
 
+    // this function will increase the monstes stats by the increased stats
+    public void EquipSelectedRune()
+    {
+        MonsterBiengUsed.EquipRune(RuneBiengUsed);
+        RefreshRuneUI();
+        RefreshRuneEquipedMonsterUI();
+
+    }
+
+    //this function will change the monster stats ui to display the increased stats
+    public void RefreshRuneEquipedMonsterUI()
+    {
+        if (MonsterBiengUsed.ReturnIncreasedHealth() > 0)
+        {
+            MonsterHealth.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth() + " + " + MonsterBiengUsed.ReturnIncreasedHealth();
+        }
+
+        if(MonsterBiengUsed.ReturnIncreasedAttack() > 0)
+        {
+            MonsterDamage.text = "Attack: " + MonsterBiengUsed.ReturnBaseDamage() + " + " + MonsterBiengUsed.ReturnIncreasedAttack();
+        }
+
+        if(MonsterBiengUsed.ReturnIncreasedDefence() > 0)
+        {
+            MonsterDefence.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence() + " + " + MonsterBiengUsed.ReturnIncreasedDefence();
+        }
+       
+        if(MonsterBiengUsed.ReturnIncreasedSpeed() > 0)
+        {
+            MonsterSpeed.text = "Speed: " + MonsterBiengUsed.ReturnBaseSpeed() + " + " + MonsterBiengUsed.ReturnIncreasedSpeed();
+        }
+
+        if(MonsterBiengUsed.ReturnIncreasedCritRate() > 0)
+        {
+            MonsterCritRate.text = "Crit Rate: " + MonsterBiengUsed.ReturnBaseCritRate() + " + " + MonsterBiengUsed.ReturnIncreasedCritRate();
+        }
+
+        if(MonsterBiengUsed.ReturnIncreasedCritDamage() > 0)
+        {
+            MonsterCritDamage.text = "Crit Damage: " + MonsterBiengUsed.ReturnBaseCritDamage() + " + " + MonsterBiengUsed.ReturnIncreasedCritDamage();
+        }
+        
+        if(MonsterBiengUsed.ReturnIncreasedAccuracy() > 0)
+        {
+            MonsterAccuracy.text = "Accuracy: " + MonsterBiengUsed.ReturnBaseAccuracy() + " + " + MonsterBiengUsed.ReturnIncreasedAccuracy();
+        }
+
+        if(MonsterBiengUsed.ReturnIncreasedResistance() > 0)
+        {
+            MonsterResistance.text = "Resistance: " + MonsterBiengUsed.ReturnBaseResistance() + " + " + MonsterBiengUsed.ReturnIncreasedResistance();
+        }
+
+        
+        
+        
+    }
+
+
     // this function will close the rune upgraded panel
     public void CloseRuneUpgradedPanel()
     {
@@ -455,17 +513,20 @@ public class MonsterRuneUI : MonoBehaviour
     {
         if (!LevelCorutineRun)
         {
-            PreviousMonsterDamage = MonsterBiengUsed.ReturnBaseDamage();
-            PreviousMonsterDefence = MonsterBiengUsed.ReturnBaseDefence();
-            PreviousMonsterHealth = MonsterBiengUsed.ReturnBaseHealth();
-            PreviousMonsterLevel = MonsterBiengUsed.ReturnMonsterLevel();
-            PreviousMonsterMaxLevel = MonsterBiengUsed.ReturnMonsterMaxLevel();
+            if (MonsterBiengUsed.ReturnMonsterLevel() != MonsterBiengUsed.ReturnMonsterMaxLevel())
+            {
+                PreviousMonsterDamage = MonsterBiengUsed.ReturnBaseDamage();
+                PreviousMonsterDefence = MonsterBiengUsed.ReturnBaseDefence();
+                PreviousMonsterHealth = MonsterBiengUsed.ReturnBaseHealth();
+                PreviousMonsterLevel = MonsterBiengUsed.ReturnMonsterLevel();
+                PreviousMonsterMaxLevel = MonsterBiengUsed.ReturnMonsterMaxLevel();
 
 
-        
-            MonsterBiengUsed.LevelUpMonster();
 
-            StartCoroutine(LevelUpDisplayChange(2));
+                MonsterBiengUsed.LevelUpMonster();
+
+                StartCoroutine(LevelUpDisplayChange(2));
+            }
         }
 
     }
@@ -476,6 +537,57 @@ public class MonsterRuneUI : MonoBehaviour
         MonsterUpgradePanel.SetActive(false);
     }
     
+    // function used to awaken the selected monster
+    public void AwakenMonster()
+    {
+        if (MonsterBiengUsed.ReturnMonsterLevel() >= 25 && MonsterBiengUsed.ReturnMonsterStars() >= 4)
+        {
+            PreviousMonsterHealth = MonsterBiengUsed.ReturnBaseHealth();
+            PreviousMonsterDefence = MonsterBiengUsed.ReturnBaseDefence();
+            PreviousMonsterDamage = MonsterBiengUsed.ReturnBaseDamage();
+            MonsterBiengUsed.Awaken();
+            StartCoroutine(AwakendisplayChange(2.0f, true));
+        }
+        else
+        {
+            StartCoroutine(AwakendisplayChange(3.0f, false));
+        }
+    }
+
+    // enumerator to change the display to show monster awakening 
+    IEnumerator AwakendisplayChange(float PauseTime, bool Awakened)
+    {
+        if (Awakened)
+        {
+            for (float i = 0; i < PauseTime; i += Time.deltaTime)
+            {
+                
+                MonsterUpgradeText.text = "MONSTER SUCCESSULY AWAKENED!!!";
+
+                HealthText.text = PreviousMonsterHealth + "  --->  " + MonsterBiengUsed.ReturnBaseHealth();
+                DamageText.text = PreviousMonsterDamage + "  --->  " + MonsterBiengUsed.ReturnBaseDamage();
+                DefenceText.text = PreviousMonsterDefence + "  --->  " + MonsterBiengUsed.ReturnBaseDefence();
+                yield return null;
+            }
+            
+        }
+        else
+        {
+            for (float i = 0; i < PauseTime; i += Time.deltaTime)
+            {
+                MonsterUpgradeText.text = "Monster Needs to be level 25 and 4 stars or more to awaken!";
+                yield return null;
+            }
+            
+        }
+
+        MonsterUpgradeText.text = "Upgrade your monster";
+        HealthText.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth();
+        DamageText.text = "Damage: " + MonsterBiengUsed.ReturnBaseDamage();
+        DefenceText.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence();
+        MonsterLevelText.text = "Level: " + MonsterBiengUsed.ReturnMonsterLevel();
+
+    }
 
     //enumerator to fade the image selected
     IEnumerator FadeImage(Image TheImage)
@@ -515,5 +627,7 @@ public class MonsterRuneUI : MonoBehaviour
 
         LevelCorutineRun = false;
     }
+
+
 
 }
