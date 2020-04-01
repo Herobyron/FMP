@@ -82,6 +82,10 @@ public class MonsterRuneUI : MonoBehaviour
     [SerializeField]
     private Text MonsterRuneEquipedTo = null;
 
+    [Tooltip("this is the slot that this rune can be placed into")]
+    [SerializeField]
+    private Text RuneSlot = null;
+
 
     ////////////////////////////////////////////////
     // these are variables for the previous stats of the rune before upgrades 
@@ -132,55 +136,55 @@ public class MonsterRuneUI : MonoBehaviour
     //text components linking to the monster panel
     [Tooltip("this is the Monsters Level Text")]
     [SerializeField]
-    private Text MonsterLevel;
+    private Text MonsterLevel = null;
 
     [Tooltip("this is the Monsters Name")]
     [SerializeField]
-    private Text MonstersName;
+    private Text MonstersName = null;
 
     [Tooltip("this is the monsters health stat")]
     [SerializeField]
-    private Text MonsterHealth;
+    private Text MonsterHealth = null;
 
     [Tooltip("this is the monsters Damage Stat")]
     [SerializeField]
-    private Text MonsterDamage;
+    private Text MonsterDamage = null;
 
     [Tooltip("this is the monsters Defence Stat")]
     [SerializeField]
-    private Text MonsterDefence;
+    private Text MonsterDefence = null;
 
     [Tooltip("This is the monsters Speed stat")]
     [SerializeField]
-    private Text MonsterSpeed;
+    private Text MonsterSpeed = null;
 
     [Tooltip("this is the monsters Resistance Stat")]
     [SerializeField]
-    private Text MonsterResistance;
+    private Text MonsterResistance = null;
 
     [Tooltip("This is the monsters Accuracy Stat")]
     [SerializeField]
-    private Text MonsterAccuracy;
+    private Text MonsterAccuracy = null;
 
     [Tooltip("this is the monsters Crit Damage Stat")]
     [SerializeField]
-    private Text MonsterCritDamage;
+    private Text MonsterCritDamage = null;
 
     [Tooltip("this is the monsters Crit Rate Stat")]
     [SerializeField]
-    private Text MonsterCritRate;
+    private Text MonsterCritRate = null;
 
     [Tooltip("this is the monsters stars")]
     [SerializeField]
-    private Text MonsterStars;
+    private Text MonsterStars = null;
 
     [Tooltip("this is the monsters Type")]
     [SerializeField]
-    private Text MonsterType;
+    private Text MonsterType = null;
 
     [Tooltip("this is the monsters Awakening")]
     [SerializeField]
-    private Text MonsterAwakening;
+    private Text MonsterAwakening = null;
 
     // UI components that link to monster upgrade panel
     [Tooltip("this is the upgrade panels health text")]
@@ -225,12 +229,34 @@ public class MonsterRuneUI : MonoBehaviour
     // a bool to determine when the level up corutine is running
     private bool LevelCorutineRun = false;
 
+    //these are the images for the six runes bieng displayed
+    [SerializeField]
+    private Image RuneOneImage = null;
+    
+    [SerializeField]
+    private Image RuneTwoImage = null;
+
+    [SerializeField]
+    private Image RuneThreeImage = null;
+
+    [SerializeField]
+    private Image RuneFourImage = null;
+
+    [SerializeField]
+    private Image RuneFiveImage = null;
+
+    [SerializeField]
+    private Image RuneSixImage = null;
+
+
 
     void Start()
     {
         RunePanel.SetActive(false);
         RuneUpgradePanel.SetActive(false);
         MonsterUpgradePanel.SetActive(false);
+
+
 
     }
 
@@ -287,6 +313,75 @@ public class MonsterRuneUI : MonoBehaviour
         
     }
 
+    // a function used to select a certain rune that has been equiped on the monster
+    public void RuneMainButton(int RuneNumber)
+    {
+        switch (RuneNumber)
+        {
+            case (1):
+                {
+                    if(MonsterBiengUsed.ReturnRune(1) != null)
+                    {
+                        RuneBiengUsed = MonsterBiengUsed.ReturnRune(1);
+                        RunePanel.SetActive(true);
+                        RefreshRuneUI();
+                    }
+                    break;
+                }
+            case (2):
+                {
+                    if(MonsterBiengUsed.ReturnRune(2) != null)
+                    {
+                        RuneBiengUsed = MonsterBiengUsed.ReturnRune(2);
+                        RunePanel.SetActive(true);
+                        RefreshRuneUI();
+                    }
+                    break;
+                }
+            case (3):
+                {
+                    if (MonsterBiengUsed.ReturnRune(3) != null)
+                    {
+                        RuneBiengUsed = MonsterBiengUsed.ReturnRune(3);
+                        RunePanel.SetActive(true);
+                        RefreshRuneUI();
+                    }
+                    break;
+                }
+            case (4):
+                {
+                    if (MonsterBiengUsed.ReturnRune(4) != null)
+                    {
+                        RuneBiengUsed = MonsterBiengUsed.ReturnRune(4);
+                        RunePanel.SetActive(true);
+                        RefreshRuneUI();
+                    }
+                    break;
+                }
+            case (5):
+                {
+                    if (MonsterBiengUsed.ReturnRune(5) != null)
+                    {
+                        RuneBiengUsed = MonsterBiengUsed.ReturnRune(5);
+                        RunePanel.SetActive(true);
+                        RefreshRuneUI();
+                    }
+                    break;
+                }
+            case (6):
+                {
+                    if (MonsterBiengUsed.ReturnRune(6) != null)
+                    {
+                        RuneBiengUsed = MonsterBiengUsed.ReturnRune(6);
+                        RunePanel.SetActive(true);
+                        RefreshRuneUI();
+                    }
+                    break;
+                }
+        }
+
+    }
+
     // a function that updates the rune UI section of this 
     public void RefreshRuneUI()
     {
@@ -299,7 +394,7 @@ public class MonsterRuneUI : MonoBehaviour
         RuneSubStatFour.text = RuneBiengUsed.ReturnRuneStatFourType() + ": " + RuneBiengUsed.ReturnRuneStatFour();
         RuneEquiped.text = (RuneBiengUsed.ReturnRuneEquiped() ? "Rune Equiped" : "Rune Not Equiped");
         MonsterRuneEquipedTo.text = (RuneBiengUsed.ReturnRuneEquiped() ? "Monster Rune equiped to : " + RuneBiengUsed.ReturnMonsterEquipedTo() : "Not Equiped to any Monster");
-    
+        RuneSlot.text = "Rune Slot: " + RuneBiengUsed.ReturnRuneSlot();
     }
 
     // a function to close the rune panel to enable selection of other runes
@@ -322,6 +417,8 @@ public class MonsterRuneUI : MonoBehaviour
             PreviousRuneSubStatThree = RuneBiengUsed.ReturnRuneStatThree();
             PreviousRuneSubStatFour = RuneBiengUsed.ReturnRuneStatFour();
 
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(RuneBiengUsed, "Decreased");
+
             if (RuneBiengUsed.UpgradeRune())
             {
                 RuneUpgradedText.text = "Rune Upgraded Successfully!!!";
@@ -339,17 +436,66 @@ public class MonsterRuneUI : MonoBehaviour
             RuneStatFourUpgradeText.text = RuneBiengUsed.ReturnRuneStatFourType() + ": " + PreviousRuneSubStatFour + "  --->  " + RuneBiengUsed.ReturnRuneStatFour();
 
             RefreshRuneUI();
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(RuneBiengUsed, "Increased");
+
+            if(RuneBiengUsed.ReturnRuneEquiped())
+            {
+                RefreshRuneEquipedMonsterUI();
+            }
         }
     }
 
-    // this function will increase the monstes stats by the increased stats
+    // this function will increase the monstes stats by the increased stats by the rune bieng equiped
     public void EquipSelectedRune()
     {
         MonsterBiengUsed.EquipRune(RuneBiengUsed);
         RefreshRuneUI();
         RefreshRuneEquipedMonsterUI();
 
+        switch (RuneBiengUsed.ReturnRuneSlot())
+        {
+            case (1):
+                {
+                    StartCoroutine(FadeImageRune(RuneOneImage));
+                    break;
+                }
+            case (2):
+                {
+                    StartCoroutine(FadeImageRune(RuneTwoImage));
+                    break;
+                }
+            case (3):
+                {
+                    StartCoroutine(FadeImageRune(RuneThreeImage));
+                    break;
+                }
+            case (4):
+                {
+                    StartCoroutine(FadeImageRune(RuneFourImage));
+                    break;
+                }
+            case (5):
+                {
+                    StartCoroutine(FadeImageRune(RuneFiveImage));
+                    break;
+                }
+            case (6):
+                {
+                    StartCoroutine(FadeImageRune(RuneSixImage));
+                    break;
+                }
+        }
+
     }
+
+    //this function will decrease the monsters stats by the increased stats of the rune bieng unequiped
+    public void UnEquipSelectedRune()
+    {
+        MonsterBiengUsed.UnequipRune(RuneBiengUsed);
+        RefreshRuneUI();
+        RefreshRuneEquipedMonsterUI();
+    }
+
 
     //this function will change the monster stats ui to display the increased stats
     public void RefreshRuneEquipedMonsterUI()
@@ -358,40 +504,72 @@ public class MonsterRuneUI : MonoBehaviour
         {
             MonsterHealth.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth() + " + " + MonsterBiengUsed.ReturnIncreasedHealth();
         }
+        else
+        {
+            MonsterHealth.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth();
+        }
 
         if(MonsterBiengUsed.ReturnIncreasedAttack() > 0)
         {
             MonsterDamage.text = "Attack: " + MonsterBiengUsed.ReturnBaseDamage() + " + " + MonsterBiengUsed.ReturnIncreasedAttack();
+        }
+        else
+        {
+            MonsterDamage.text = "Attack: " + MonsterBiengUsed.ReturnBaseDamage();
         }
 
         if(MonsterBiengUsed.ReturnIncreasedDefence() > 0)
         {
             MonsterDefence.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence() + " + " + MonsterBiengUsed.ReturnIncreasedDefence();
         }
+        else
+        {
+            MonsterDefence.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence();
+        }
        
         if(MonsterBiengUsed.ReturnIncreasedSpeed() > 0)
         {
             MonsterSpeed.text = "Speed: " + MonsterBiengUsed.ReturnBaseSpeed() + " + " + MonsterBiengUsed.ReturnIncreasedSpeed();
+        }
+        else
+        {
+            MonsterSpeed.text = "Speed: " + MonsterBiengUsed.ReturnBaseSpeed();
         }
 
         if(MonsterBiengUsed.ReturnIncreasedCritRate() > 0)
         {
             MonsterCritRate.text = "Crit Rate: " + MonsterBiengUsed.ReturnBaseCritRate() + " + " + MonsterBiengUsed.ReturnIncreasedCritRate();
         }
+        else
+        {
+            MonsterCritRate.text = "Crit Rate: " + MonsterBiengUsed.ReturnBaseCritRate();
+        }
 
         if(MonsterBiengUsed.ReturnIncreasedCritDamage() > 0)
         {
             MonsterCritDamage.text = "Crit Damage: " + MonsterBiengUsed.ReturnBaseCritDamage() + " + " + MonsterBiengUsed.ReturnIncreasedCritDamage();
+        }
+        else
+        {
+            MonsterCritDamage.text = "Crit Damage: " + MonsterBiengUsed.ReturnBaseCritDamage();
         }
         
         if(MonsterBiengUsed.ReturnIncreasedAccuracy() > 0)
         {
             MonsterAccuracy.text = "Accuracy: " + MonsterBiengUsed.ReturnBaseAccuracy() + " + " + MonsterBiengUsed.ReturnIncreasedAccuracy();
         }
+        else
+        {
+            MonsterAccuracy.text = "Accuracy: " + MonsterBiengUsed.ReturnBaseAccuracy();
+        }
 
         if(MonsterBiengUsed.ReturnIncreasedResistance() > 0)
         {
             MonsterResistance.text = "Resistance: " + MonsterBiengUsed.ReturnBaseResistance() + " + " + MonsterBiengUsed.ReturnIncreasedResistance();
+        }
+        else
+        {
+            MonsterResistance.text = "Resistance: " + MonsterBiengUsed.ReturnBaseResistance();
         }
 
         
@@ -439,6 +617,7 @@ public class MonsterRuneUI : MonoBehaviour
 
         MonsterBiengUsed = TheManager.SelectedDropDownMonsterLoad(MonsterDropDown.value);
         RefreshMonsterStats();
+        RefreshRuneEquipedMonsterUI();
     }
 
     // a function to load the upgrade rune panel
@@ -554,6 +733,9 @@ public class MonsterRuneUI : MonoBehaviour
         }
     }
 
+
+
+
     // enumerator to change the display to show monster awakening 
     IEnumerator AwakendisplayChange(float PauseTime, bool Awakened)
     {
@@ -592,17 +774,29 @@ public class MonsterRuneUI : MonoBehaviour
     //enumerator to fade the image selected
     IEnumerator FadeImage(Image TheImage)
     {
-        for(float i = 0.0f; i <= 1.0f; i += Time.deltaTime)
+        for (float i = 0.0f; i <= 1.0f; i += Time.deltaTime)
         {
             MonsterUpgradeText.text = "Monster Stars Increased!!";
             MonsterMaxLevelText.text = PreviousMonsterMaxLevel + "  --->  " + MonsterBiengUsed.ReturnMonsterMaxLevel();
-            TheImage.color = new Color(1,1,1,i);
+            TheImage.color = new Color(1, 1, 1, i);
             yield return null;
         }
 
         MonsterMaxLevelText.text = "Max Level: " + MonsterBiengUsed.ReturnMonsterMaxLevel();
         MonsterUpgradeText.text = "Upgrade Your Monster";
     }
+
+    //enumerator to fade any of the rune images
+    IEnumerator FadeImageRune(Image TheImage)
+    {
+        for (float i = 0.0f; i <= 1.0f; i += Time.deltaTime)
+        {
+            TheImage.color = new Color(1, 1, 1, i);
+            yield return null;
+        }
+    }
+
+
 
     // an enumerator to pause the display just for a couple of seconds
     IEnumerator LevelUpDisplayChange(float PauseTime)

@@ -729,6 +729,31 @@ public class MonsterScript
         
     }
 
+    //this function is used to refresh the increased stats of the monster for when it is bieng upgraded
+    // the function can be called two differnt ways
+    // one to decreased monsters increased stats to be used before the rune is upgraded
+    // one to refresh the monsters increased stats after the rune was upgraded
+    // Parameters: 
+    // RuneScript = this is the rune that has been upgraded or is going to be upgraded to use to increase or decrease the increased monster stats
+    // State - this is the stats the rune is in. increased means to increase the increased stats (for after the rune upgrade) and Decreased means to decrease the increased monster stats (before rune upgrade)
+    public void MonsterIncreasedStatRefresh(RuneScript TheRune, string State)
+    {
+        switch (State)
+        {
+            case ("Increased"):
+                {
+                    RuneStatIncrease(TheRune);
+                    break;
+                }
+            case ("Decreased"):
+                {
+                    RuneStatDecrease(TheRune);
+                    break;
+                }
+        }
+
+    }
+    
     // this function is used to apply the stats that are held on the rune to the monsters base stats
     // Parameters:
     // - the rune that will be checked for what stats it has and also apply it to the monster
@@ -782,17 +807,17 @@ public class MonsterScript
                 }
             case ("HealthPercentage"):
                 {
-                    IncreasedHealth += (BaseHealth * TheRune.ReturnMainRuneStat());
+                    IncreasedHealth += Mathf.RoundToInt(((BaseHealth * TheRune.ReturnMainRuneStat()) / 100));
                     break;
                 }
             case ("DefencePercentage"):
                 {
-                    IncreasedDefence += (BaseDefence * TheRune.ReturnMainRuneStat());
+                    IncreasedDefence += Mathf.RoundToInt(((BaseDefence * TheRune.ReturnMainRuneStat()) / 100));
                     break;
                 }
             case ("AttackPercentage"):
                 {
-                    IncreasedAttack += (BaseDamage * TheRune.ReturnMainRuneStat());
+                    IncreasedAttack += Mathf.RoundToInt(((BaseDamage * TheRune.ReturnMainRuneStat()) / 100));
                     break;
                 }
         }
@@ -845,17 +870,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatOne());
+                        IncreasedHealth += Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatOne()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence += (BaseDefence * TheRune.ReturnRuneStatOne());
+                        IncreasedDefence += Mathf.RoundToInt(((BaseDefence * TheRune.ReturnRuneStatOne()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatOne());
+                        IncreasedAttack += Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatOne()) / 100));
                         break;
                     }
             }
@@ -908,17 +933,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatTwo());
+                        IncreasedHealth += Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatTwo()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence += (BaseDefence * TheRune.ReturnRuneStatTwo());
+                        IncreasedDefence += Mathf.RoundToInt(((BaseDefence * TheRune.ReturnRuneStatTwo()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatTwo());
+                        IncreasedAttack += Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatTwo()) / 100));
                         break;
                     }
             }
@@ -971,17 +996,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatThree());
+                        IncreasedHealth += Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatThree()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence += (BaseDefence * TheRune.ReturnRuneStatThree());
+                        IncreasedDefence += Mathf.RoundToInt(((BaseDefence * TheRune.ReturnRuneStatThree()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatThree());
+                        IncreasedAttack += Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatThree()) / 100));
                         break;
                     }
             }
@@ -1034,17 +1059,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth += (BaseHealth * TheRune.ReturnRuneStatFour());
+                        IncreasedHealth += Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatFour()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence += (BaseHealth * TheRune.ReturnRuneStatFour());
+                        IncreasedDefence += Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatFour()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack += (BaseDamage * TheRune.ReturnRuneStatFour());
+                        IncreasedAttack += Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatFour()) / 100));
                         break;
                     }
             }
@@ -1102,17 +1127,17 @@ public class MonsterScript
                 }
             case ("HealthPercentage"):
                 {
-                    IncreasedHealth -= (BaseHealth * TheRune.ReturnMainRuneStat());
+                    IncreasedHealth -= Mathf.RoundToInt(((BaseHealth * TheRune.ReturnMainRuneStat()) / 100));
                     break;
                 }
             case ("DefencePercentage"):
                 {
-                    IncreasedDefence -= (BaseDefence * TheRune.ReturnMainRuneStat());
+                    IncreasedDefence -= Mathf.RoundToInt(((BaseDefence * TheRune.ReturnMainRuneStat()) / 100));
                     break;
                 }
             case ("AttackPercentage"):
                 {
-                    IncreasedAttack -= (BaseDamage * TheRune.ReturnMainRuneStat());
+                    IncreasedAttack -= Mathf.RoundToInt(((BaseDamage * TheRune.ReturnMainRuneStat()) / 100));
                     break;
                 }
         }
@@ -1165,17 +1190,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatOne());
+                        IncreasedHealth -= Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatOne()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence -= (BaseDefence * TheRune.ReturnRuneStatOne());
+                        IncreasedDefence -= Mathf.RoundToInt(((BaseDefence * TheRune.ReturnRuneStatOne()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatOne());
+                        IncreasedAttack -= Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatOne()) / 100));
                         break;
                     }
             }
@@ -1228,17 +1253,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatTwo());
+                        IncreasedHealth -= Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatTwo()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence -= (BaseDefence * TheRune.ReturnRuneStatTwo());
+                        IncreasedDefence -= Mathf.RoundToInt(((BaseDefence * TheRune.ReturnRuneStatTwo()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatTwo());
+                        IncreasedAttack -= Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatTwo()) / 100));
                         break;
                     }
             }
@@ -1291,17 +1316,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatThree());
+                        IncreasedHealth -= Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatThree()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence -= (BaseDefence * TheRune.ReturnRuneStatThree());
+                        IncreasedDefence -= Mathf.RoundToInt(((BaseDefence * TheRune.ReturnRuneStatThree()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatThree());
+                        IncreasedAttack -= Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatThree())/ 100));
                         break;
                     }
             }
@@ -1354,17 +1379,17 @@ public class MonsterScript
                     }
                 case ("HealthPercentage"):
                     {
-                        IncreasedHealth -= (BaseHealth * TheRune.ReturnRuneStatFour());
+                        IncreasedHealth -= Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatFour()) / 100));
                         break;
                     }
                 case ("DefencePercentage"):
                     {
-                        IncreasedDefence -= (BaseHealth * TheRune.ReturnRuneStatFour());
+                        IncreasedDefence -= Mathf.RoundToInt(((BaseHealth * TheRune.ReturnRuneStatFour()) / 100));
                         break;
                     }
                 case ("AttackPercentage"):
                     {
-                        IncreasedAttack -= (BaseDamage * TheRune.ReturnRuneStatFour());
+                        IncreasedAttack -= Mathf.RoundToInt(((BaseDamage * TheRune.ReturnRuneStatFour()) / 100));
                         break;
                     }
             }
@@ -1375,17 +1400,20 @@ public class MonsterScript
 
     // this function is used to unequip runes. this will also decrease the stats accordingly when the rune is unequiped
     //Variables : 
-    // - the number is to determine which rune is going to be unequiped
-    public void UnequipRune(int RuneNumber)
+    // - TheRune - The rune that is going to be unequiped fromt he monster
+    public void UnequipRune(RuneScript TheRune)
     {
         //finds the rune number and then unequips the rune specified
+        RuneStatDecrease(TheRune);
 
-        switch (RuneNumber)
+
+        switch (TheRune.ReturnRuneSlot())
         {
             case (1):
                 {
-                    
-                    RuneStatDecrease(RuneOne);
+
+                    TheRune.SetMonsterEquipedToo("");
+                    TheRune.SetRuneEquiped(false);
                     RuneOneApplied = false;
                     RuneOne = null;
                     break;
@@ -1393,7 +1421,8 @@ public class MonsterScript
             case (2):
                 {
                     
-                    RuneStatDecrease(RuneTwo);
+                    TheRune.SetMonsterEquipedToo("");
+                    TheRune.SetRuneEquiped(false);
                     RuneTwoApplied = false;
                     RuneTwo = null;
                     break;
@@ -1401,7 +1430,8 @@ public class MonsterScript
             case (3):
                 {
                     
-                    RuneStatDecrease(RuneThree);
+                    TheRune.SetMonsterEquipedToo("");
+                    TheRune.SetRuneEquiped(false);
                     RuneThreeApplied = false;
                     RuneThree = null;
                     break;
@@ -1409,7 +1439,8 @@ public class MonsterScript
             case (4):
                 {
                     
-                    RuneStatDecrease(RuneFour);
+                    TheRune.SetMonsterEquipedToo("");
+                    TheRune.SetRuneEquiped(false);
                     RuneFourApplied = false;
                     RuneFour = null;
                     break;
@@ -1417,15 +1448,17 @@ public class MonsterScript
             case (5):
                 {
                     
-                    RuneStatDecrease(RuneFive);
+                    TheRune.SetMonsterEquipedToo("");
+                    TheRune.SetRuneEquiped(false);
                     RuneFiveApplied = false;
                     RuneFive = null;
                     break;
                 }
             case (6):
                 {
-                   
-                    RuneStatDecrease(RuneSix);
+                    
+                    TheRune.SetMonsterEquipedToo("");
+                    TheRune.SetRuneEquiped(false);
                     RuneSixApplied = false;
                     RuneSix = null;
                     break;
@@ -1440,7 +1473,43 @@ public class MonsterScript
     // - the name of the rune that will be returned
     public RuneScript ReturnRune(int RuneNumber)
     {
-        return Runes[RuneNumber];
+        RuneScript TempRune = new RuneScript();
+
+        switch (RuneNumber)
+        {
+            case (1):
+                {
+                    TempRune =  RuneOne;
+                    break;
+                }
+            case (2):
+                {
+                    TempRune = RuneTwo;
+                    break;
+                }
+            case (3):
+                {
+                    TempRune = RuneThree;
+                    break;
+                }
+            case (4):
+                {
+                    TempRune = RuneFour;
+                    break;
+                }
+            case (5):
+                {
+                    TempRune = RuneFive;
+                    break;
+                }
+            case (6):
+                {
+                    TempRune = RuneSix;
+                    break;
+                }
+        }
+
+        return TempRune;
     }
 
     // this function will use the rune and equip it to the monster and will also use the applyRuneEffect function to apply that runes stats to the monster
