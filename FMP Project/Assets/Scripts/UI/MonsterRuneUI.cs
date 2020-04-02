@@ -9,6 +9,8 @@ using System.Xml;
 public class MonsterRuneUI : MonoBehaviour
 {
 
+
+
     [Tooltip("The game manager that holds all of the player information")]
     [SerializeField]
     private GameManagment TheManager = null;
@@ -284,6 +286,7 @@ public class MonsterRuneUI : MonoBehaviour
     }
 
 
+
     // a function to set the monster bieng used
     public void SetMonsterInUse(MonsterScript Monster)
     {
@@ -456,32 +459,32 @@ public class MonsterRuneUI : MonoBehaviour
         {
             case (1):
                 {
-                    StartCoroutine(FadeImageRune(RuneOneImage));
+                    StartCoroutine(FadeImageRune(RuneOneImage, "In"));
                     break;
                 }
             case (2):
                 {
-                    StartCoroutine(FadeImageRune(RuneTwoImage));
+                    StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
                     break;
                 }
             case (3):
                 {
-                    StartCoroutine(FadeImageRune(RuneThreeImage));
+                    StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
                     break;
                 }
             case (4):
                 {
-                    StartCoroutine(FadeImageRune(RuneFourImage));
+                    StartCoroutine(FadeImageRune(RuneFourImage, "In"));
                     break;
                 }
             case (5):
                 {
-                    StartCoroutine(FadeImageRune(RuneFiveImage));
+                    StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
                     break;
                 }
             case (6):
                 {
-                    StartCoroutine(FadeImageRune(RuneSixImage));
+                    StartCoroutine(FadeImageRune(RuneSixImage, "In"));
                     break;
                 }
         }
@@ -494,6 +497,41 @@ public class MonsterRuneUI : MonoBehaviour
         MonsterBiengUsed.UnequipRune(RuneBiengUsed);
         RefreshRuneUI();
         RefreshRuneEquipedMonsterUI();
+
+        switch (RuneBiengUsed.ReturnRuneSlot())
+        {
+            case (1):
+                {
+                    StartCoroutine(FadeImageRune(RuneOneImage, "Out"));
+                    break;
+                }
+            case (2):
+                {
+                    StartCoroutine(FadeImageRune(RuneTwoImage, "Out"));
+                    break;
+                }
+            case (3):
+                {
+                    StartCoroutine(FadeImageRune(RuneThreeImage, "Out"));
+                    break;
+                }
+            case (4):
+                {
+                    StartCoroutine(FadeImageRune(RuneFourImage, "Out"));
+                    break;
+                }
+            case (5):
+                {
+                    StartCoroutine(FadeImageRune(RuneFiveImage, "Out"));
+                    break;
+                }
+            case (6):
+                {
+                    StartCoroutine(FadeImageRune(RuneSixImage, "Out"));
+                    break;
+                }
+        }
+
     }
 
 
@@ -787,15 +825,28 @@ public class MonsterRuneUI : MonoBehaviour
     }
 
     //enumerator to fade any of the rune images
-    IEnumerator FadeImageRune(Image TheImage)
+    IEnumerator FadeImageRune(Image TheImage, string InorOut)
     {
-        for (float i = 0.0f; i <= 1.0f; i += Time.deltaTime)
+        if(InorOut == "In")
         {
-            TheImage.color = new Color(1, 1, 1, i);
-            yield return null;
+            for (float i = 0.0f; i <= 1.0f; i += Time.deltaTime)
+            {
+                TheImage.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
         }
+        else if (InorOut == "Out")
+        {
+            for (float i = 1.0f; i >= 0.0f; i -= Time.deltaTime)
+            {
+                TheImage.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
+
     }
 
+   
 
 
     // an enumerator to pause the display just for a couple of seconds

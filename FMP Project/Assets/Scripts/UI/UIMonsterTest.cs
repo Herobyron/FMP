@@ -32,6 +32,10 @@ public class UIMonsterTest : MonoBehaviour
     public Text SkillTwoImportance;
     public Text SkillThreeImportance;
 
+    public Text SkillOneDescription;
+    public Text SkillTwoDescription;
+    public Text SkillThreeDescription;
+
     // DropDown Commponents
     public Dropdown MonsterDisplay;
     public Dropdown SkillImportanceSelectionOne;
@@ -171,17 +175,17 @@ public class UIMonsterTest : MonoBehaviour
 
     public void ChangeSkillOneImportance()
     {
-        MonsterBiengUsed.SetSkillOneImportance(SkillImportanceSelectionOne.value);
+        MonsterBiengUsed.SetSkillOneImportance(SkillImportanceSelectionOne.value + 1);
     }
 
     public void ChangeSkillTwoImportance()
     {
-        MonsterBiengUsed.SetSkillTwoImportance(SkillImportanceSelectionTwo.value);
+        MonsterBiengUsed.SetSkillTwoImportance(SkillImportanceSelectionTwo.value + 1);
     }
 
     public void ChangeSkillThreeImportance()
     {
-        MonsterBiengUsed.SetSkillthreeImportance(SkillImportanceSelectionThree.value);
+        MonsterBiengUsed.SetSkillthreeImportance(SkillImportanceSelectionThree.value + 1);
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
@@ -27,25 +28,33 @@ public class GameManagment : MonoBehaviour
     [SerializeField]
     private GameObject RuneUI;
 
-    
+    // a private UI that is the Monster and Rune Interaction UI (this is so that they can be switched betweem this may be changed later)
+    [SerializeField]
+    private GameObject MonsterAndRuneUI;
+
+    //// this is a gameobject that holds the links to all of the other panels
+    //[SerializeField]
+    //private GameObject SwitchUIPanel;
 
     void Start()
     {
         GameData = new Data();
+
+
     }
 
     public void Save()
     {
         BinaryFormatter BinFormatter = new BinaryFormatter();
         FileStream DataFile = File.Create(Application.persistentDataPath + "/PlayerData.dat");
-       
+
         BinFormatter.Serialize(DataFile, GameData);
         DataFile.Close();
     }
 
     public void Load()
     {
-        if(File.Exists(Application.persistentDataPath + "/PlayerData.dat"))
+        if (File.Exists(Application.persistentDataPath + "/PlayerData.dat"))
         {
             BinaryFormatter BinFormatter = new BinaryFormatter();
             FileStream DataFile = File.Open(Application.persistentDataPath + "/PlayerData.dat", FileMode.Open);
@@ -65,7 +74,7 @@ public class GameManagment : MonoBehaviour
 
     // a function specifically made to add Runes to the players information
     public void AddRuneToData(RuneScript RuneAdded)
-    { 
+    {
         GameData.PlayerInformation.AddSelectedRune(RuneAdded);
         Save();
     }
@@ -93,19 +102,15 @@ public class GameManagment : MonoBehaviour
 
     }
 
-    public void SwitchUI()
-    {
-        if(RuneUI.activeSelf == false)
-        {
-            RuneUI.SetActive(true);
-            MonsterUI.SetActive(false);
-        }
-        else
-        {
-            MonsterUI.SetActive(true);
-            RuneUI.SetActive(false);
-        }
-    }
+    //public void SwitchUI()
+    //{
+    //    SwitchUIPanel.SetActive(true);
+    //}
+    //
+    //public void OpenRuneUI()
+    //{
+    //    SwitchUIPanel.SetActive(false);
+    //}
 
     // a function made to load in the first monster to the monster specific UI
     public void LoadInMonsterName()
