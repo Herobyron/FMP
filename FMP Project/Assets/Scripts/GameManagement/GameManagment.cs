@@ -32,9 +32,9 @@ public class GameManagment : MonoBehaviour
     [SerializeField]
     private GameObject MonsterAndRuneUI;
 
-    //// this is a gameobject that holds the links to all of the other panels
-    //[SerializeField]
-    //private GameObject SwitchUIPanel;
+    // this is a gameobject that holds the links to all of the other panels
+    [SerializeField]
+    private GameObject SwitchUIPanel;
 
     void Start()
     {
@@ -102,15 +102,42 @@ public class GameManagment : MonoBehaviour
 
     }
 
-    //public void SwitchUI()
-    //{
-    //    SwitchUIPanel.SetActive(true);
-    //}
-    //
-    //public void OpenRuneUI()
-    //{
-    //    SwitchUIPanel.SetActive(false);
-    //}
+
+    // this opens the ui switching panel
+    public void SwitchUI()
+    {
+        SwitchUIPanel.SetActive(true);
+        RuneUI.SetActive(false);
+        MonsterUI.SetActive(false);
+        MonsterAndRuneUI.SetActive(false);
+    }
+    
+    //this opens the Rune Making UI
+    public void OpenRuneUI()
+    {
+        SwitchUIPanel.SetActive(false);
+        RuneUI.SetActive(true);
+        MonsterUI.SetActive(false);
+        MonsterAndRuneUI.SetActive(false);
+    }
+
+    // this opens the monster creating UI
+    public void OpenMonsterUI()
+    {
+        SwitchUIPanel.SetActive(false);
+        RuneUI.SetActive(false);
+        MonsterUI.SetActive(true);
+        MonsterAndRuneUI.SetActive(false);
+    }
+
+    // this opens the monster and rune upgrade UI
+    public void OpenUPgradePanel()
+    {
+        SwitchUIPanel.SetActive(false);
+        RuneUI.SetActive(false);
+        MonsterUI.SetActive(false);
+        MonsterAndRuneUI.SetActive(true);
+    }
 
     // a function made to load in the first monster to the monster specific UI
     public void LoadInMonsterName()

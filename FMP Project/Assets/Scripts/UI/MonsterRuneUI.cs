@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Runtime.CompilerServices;
 using System.Xml;
+using System;
 
 public class MonsterRuneUI : MonoBehaviour
 {
@@ -448,6 +449,47 @@ public class MonsterRuneUI : MonoBehaviour
         }
     }
 
+    // this is a function to refresh the rune image UI when switching monsters
+    public void RefreshRuneImageUI()
+    {
+        if (MonsterBiengUsed.ReturnRune(1) != null)
+            RuneOneImage.color = new Color(1, 1, 1, 1);
+        else
+            RuneOneImage.color = new Color(1, 1, 1, 0);
+
+
+        if (MonsterBiengUsed.ReturnRune(2) != null)
+            RuneTwoImage.color = new Color(1, 1, 1, 1);
+        else
+            RuneTwoImage.color = new Color(1, 1, 1, 0);
+
+
+        if (MonsterBiengUsed.ReturnRune(3) != null)
+            RuneThreeImage.color = new Color(1, 1, 1, 1);
+        else
+            RuneThreeImage.color = new Color(1, 1, 1, 0);
+
+
+        if (MonsterBiengUsed.ReturnRune(4) != null)
+            RuneFourImage.color = new Color(1, 1, 1, 1);
+        else
+            RuneFourImage.color = new Color(1, 1, 1, 0);
+
+
+        if (MonsterBiengUsed.ReturnRune(5) != null)
+            RuneFiveImage.color = new Color(1, 1, 1, 1);
+        else
+            RuneFiveImage.color = new Color(1, 1, 1, 0);
+
+
+        if (MonsterBiengUsed.ReturnRune(6) != null)
+            RuneSixImage.color = new Color(1, 1, 1, 1);
+        else
+            RuneSixImage.color = new Color(1, 1, 1, 0);
+
+    }
+
+
     // this function will increase the monstes stats by the increased stats by the rune bieng equiped
     public void EquipSelectedRune()
     {
@@ -656,6 +698,7 @@ public class MonsterRuneUI : MonoBehaviour
         MonsterBiengUsed = TheManager.SelectedDropDownMonsterLoad(MonsterDropDown.value);
         RefreshMonsterStats();
         RefreshRuneEquipedMonsterUI();
+        RefreshRuneImageUI();
     }
 
     // a function to load the upgrade rune panel
