@@ -358,7 +358,7 @@ public class GenerateMonster : MonoBehaviour
                 //adding effects
                 int TempEffects = Random.Range(1, 3);
 
-                for(int i = 0; i < TempEffects; i++)
+                for(int i = 0; i <= TempEffects; i++)
                 {
                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -432,7 +432,7 @@ public class GenerateMonster : MonoBehaviour
 
                 int TempEffects = Random.Range(1, 3);
 
-                for (int i = 0; i < TempEffects; i++)
+                for (int i = 0; i <= TempEffects; i++)
                 {
                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -523,7 +523,7 @@ public class GenerateMonster : MonoBehaviour
                             MonsterScriptGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
                             int TempEffects = Random.Range(1, 3);
 
-                            for (int i = 0; i < TempEffects; i++)
+                            for (int i = 0; i <= TempEffects; i++)
                             {
                                 int TempChosenEffects = Random.Range(1, 2);
 
@@ -606,7 +606,7 @@ public class GenerateMonster : MonoBehaviour
                                 //adding effects
                                 int TempEffects = Random.Range(1, 3);
 
-                                for (int i = 0; i < TempEffects; i++)
+                                for (int i = 0; i <= TempEffects; i++)
                                 {
                                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -680,7 +680,7 @@ public class GenerateMonster : MonoBehaviour
 
                                 int TempEffects = Random.Range(1, 3);
 
-                                for (int i = 0; i < TempEffects; i++)
+                                for (int i = 0; i <= TempEffects; i++)
                                 {
                                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -798,7 +798,7 @@ public class GenerateMonster : MonoBehaviour
                 //adding effects
                 int TempEffects = Random.Range(1, 3);
 
-                for (int i = 0; i < TempEffects; i++)
+                for (int i = 0; i <= TempEffects; i++)
                 {
                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -872,7 +872,7 @@ public class GenerateMonster : MonoBehaviour
 
                 int TempEffects = Random.Range(1, 3);
 
-                for (int i = 0; i < TempEffects; i++)
+                for (int i = 0; i <= TempEffects; i++)
                 {
                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -964,7 +964,7 @@ public class GenerateMonster : MonoBehaviour
                             MonsterScriptGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
                             int TempEffects = Random.Range(1, 3);
 
-                            for (int i = 0; i < TempEffects; i++)
+                            for (int i = 0; i <= TempEffects; i++)
                             {
                                 int TempChosenEffects = Random.Range(1, 2);
 
@@ -1047,7 +1047,7 @@ public class GenerateMonster : MonoBehaviour
                                 //adding effects
                                 int TempEffects = Random.Range(1, 3);
 
-                                for (int i = 0; i < TempEffects; i++)
+                                for (int i = 0; i <= TempEffects; i++)
                                 {
                                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -1121,7 +1121,7 @@ public class GenerateMonster : MonoBehaviour
 
                                 int TempEffects = Random.Range(1, 3);
 
-                                for (int i = 0; i < TempEffects; i++)
+                                for (int i = 0; i <= TempEffects; i++)
                                 {
                                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -1237,7 +1237,7 @@ public class GenerateMonster : MonoBehaviour
                 //adding effects
                 int TempEffects = Random.Range(1, 3);
 
-                for (int i = 0; i < TempEffects; i++)
+                for (int i = 0; i <= TempEffects; i++)
                 {
                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -1311,7 +1311,7 @@ public class GenerateMonster : MonoBehaviour
 
                 int TempEffects = Random.Range(1, 3);
 
-                for (int i = 0; i < TempEffects; i++)
+                for (int i = 0; i <= TempEffects; i++)
                 {
                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -1401,7 +1401,7 @@ public class GenerateMonster : MonoBehaviour
                             MonsterScriptGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
                             int TempEffects = Random.Range(1, 3);
 
-                            for (int i = 0; i < TempEffects; i++)
+                            for (int i = 0; i <= TempEffects; i++)
                             {
                                 int TempChosenEffects = Random.Range(1, 2);
 
@@ -1484,7 +1484,7 @@ public class GenerateMonster : MonoBehaviour
                                 //adding effects
                                 int TempEffects = Random.Range(1, 3);
 
-                                for (int i = 0; i < TempEffects; i++)
+                                for (int i = 0; i <= TempEffects; i++)
                                 {
                                     int TempChosenEffects = Random.Range(1, 2);
 
@@ -1558,7 +1558,7 @@ public class GenerateMonster : MonoBehaviour
 
                                 int TempEffects = Random.Range(1, 3);
 
-                                for (int i = 0; i < TempEffects; i++)
+                                for (int i = 0; i <= TempEffects; i++)
                                 {
                                     int TempChosenEffects = Random.Range(1, 2);
 
