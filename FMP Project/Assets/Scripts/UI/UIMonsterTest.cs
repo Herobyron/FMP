@@ -22,19 +22,14 @@ public class UIMonsterTest : MonoBehaviour
     public Text MonsterType;
 
     // Monster Skills
-    public Text SkillOne;
-    public Text SkillTwo;
-    public Text SkillThree;
-    public Text SkillOneSecondaryEffect;
-    public Text SkillTwoSecondaryEffect;
-    public Text SkillThreeSecondaryEffect;
+    public Text SkillOneDescription;
+    public Text SkillTwoDescription;
+    public Text SkillThreeDescription;
+
     public Text SkillOneImportance;
     public Text SkillTwoImportance;
     public Text SkillThreeImportance;
 
-    public Text SkillOneDescription;
-    public Text SkillTwoDescription;
-    public Text SkillThreeDescription;
 
     // DropDown Commponents
     public Dropdown MonsterDisplay;
@@ -138,18 +133,721 @@ public class UIMonsterTest : MonoBehaviour
             MonsterAwakened.text = "Awakened : " + MonsterBiengUsed.ReturnMonsterAwkaned();
             MonsterLevel.text = "Level : " + MonsterBiengUsed.ReturnMonsterLevel();
 
-            SkillOne.text = "Skill One : " + MonsterBiengUsed.ReturnrSkillOneMainEffect();
-            SkillTwo.text = "Skill Two : " + MonsterBiengUsed.ReturnSkillTwoMainEffect();
-            SkillThree.text = "Skill Three : " + MonsterBiengUsed.ReturnSkillThreeMainEffect();
-
-            SkillOneSecondaryEffect.text = "Skill One Secondary Effect: " + MonsterBiengUsed.ReturnSkillOneSecondaryEffect();
-            SkillTwoSecondaryEffect.text = "Skill Two Secondary Effect: " + MonsterBiengUsed.ReturnSkillTwoSecondaryEffect();
-            SkillThreeSecondaryEffect.text = "Skill Three Secondary Effect: " + MonsterBiengUsed.ReturnSkillThreeSecondaryEffect();
+            SkillDescriptionFunc();
 
             SkillOneImportance.text = "Skill One Importance : " + MonsterBiengUsed.ReturnSkillOneImportance();
             SkillTwoImportance.text = "Skill Two Importance : " + MonsterBiengUsed.ReturnSkillTwoImportance();
             SkillThreeImportance.text = "SKill Three Importance : " + MonsterBiengUsed.ReturnSkillThreeImportance();
         }
+    }
+
+
+    public void SkillDescriptionFunc()
+    {
+        switch (MonsterBiengUsed.ReturnrSkillOneMainEffect())
+        {
+            case ("Healing"):
+                {
+                    if(MonsterBiengUsed.ReturnSkillOneAOE())
+                    {
+                        SkillOneDescription.text = "This Skill Heals All Allies by a large amount";
+
+                        switch (MonsterBiengUsed.ReturnSkillOneSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillOneDescription.text += "this skill will also heal all allies by a small amount after";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillOneDescription.text += "this skill will also apply ";
+
+                                    for(int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                                    {
+                                        SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                                    }
+
+                                    SkillOneDescription.text += "To All Allies";
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillOneDescription.text = "This Skill Heals A single Allie by a large amount";
+
+                        switch (MonsterBiengUsed.ReturnSkillOneSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillOneDescription.text += "this skill will also heal one allies by a small amount after";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillOneDescription.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                                    {
+                                        SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                                    }
+
+                                    SkillOneDescription.text += "To one Allies";
+
+                                    break;
+                                }
+                        }
+
+                    }
+
+                    break;
+                }
+            case ("BeneficialEffect"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillOneAOE())
+                    {
+                        SkillOneDescription.text = "this skill will apply ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                        {
+                            SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                        }
+
+                        SkillOneDescription.text += "To all Allies";
+
+                        if(MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Healing")
+                        {
+                            SkillOneDescription.text += "this skill will also heal all allies for a small amount";
+                        }
+
+                    }
+                    else
+                    {
+                        SkillOneDescription.text = "this skill will apply";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                        {
+                            SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                        }
+
+                        SkillOneDescription.text += "To one Allie";
+
+                        if(MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Healing")
+                        {
+                            SkillOneDescription.text += "this skill will also heal one allie for a small amount";                        }
+
+
+                    }
+                        break;
+                }
+            case ("HarmfulEffect"):
+                {
+                    if(MonsterBiengUsed.ReturnSkillOneAOE())
+                    {
+                        SkillOneDescription.text = "this skill applies ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                        {
+                            SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                        }
+
+                        SkillOneDescription.text += "to all enemies";
+
+                        if(MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Damage")
+                        {
+                            SkillOneDescription.text += "this skill will also apply damage to all enemies proportiionate to your attack power";
+                        }
+                        else
+                        {
+                            SkillOneDescription.text += "this skill will also heal you for a small amount";
+                        }
+                    }
+                    else
+                    {
+                        SkillOneDescription.text = "this skill applies ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                        {
+                            SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                        }
+
+                        SkillOneDescription.text += "to One enemy";
+
+                        if (MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Damage")
+                        {
+                            SkillOneDescription.text += "this skill will also apply damage to one enemy proportiionate to your attack power";
+                        }
+                        else
+                        {
+                            SkillOneDescription.text += "this skill will also heal you for a small amount";
+                        }
+                    }
+
+                    break;
+                }
+            case ("Damage"):
+                {
+
+                    if(MonsterBiengUsed.ReturnSkillOneAOE())
+                    {
+                        SkillOneDescription.text = "this skill applies damage proportionate to your attack to all enemies monsters";
+
+                        switch (MonsterBiengUsed.ReturnSkillOneSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillOneDescription.text += "this skill also heals you for a small amount";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillOneDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                                    {
+                                        SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                                    }
+
+                                    SkillOneDescription.text += "to you";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillOneDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                                    {
+                                        SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                                    }
+
+                                    SkillOneDescription.text += "to all enemies";
+
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillOneDescription.text = "this skill applies damage proportionate to your attack to one enemy monsters";
+
+                        switch (MonsterBiengUsed.ReturnSkillOneSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillOneDescription.text += "this skill also heals you for a small amount";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillOneDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                                    {
+                                        SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                                    }
+
+                                    SkillOneDescription.text += "to you";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillOneDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillOneEffects().Count; i++)
+                                    {
+                                        SkillOneDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillOneEffects()[i];
+                                    }
+
+                                    SkillOneDescription.text += "to one enemies";
+
+
+                                    break;
+                                }
+                        }
+                    }
+
+                    break;
+                }
+        }
+
+
+
+        switch (MonsterBiengUsed.ReturnSkillTwoMainEffect())
+        {
+            case ("Healing"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillTwoAOE())
+                    {
+                        SkillTwoDescription.text = "This Skill Heals All Allies by a large amount";
+
+                        switch (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also heal all allies by a small amount after";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                                    {
+                                        SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                                    }
+
+                                    SkillTwoDescription.text += "To All Allies";
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillTwoDescription.text = "This Skill Heals A single Allie by a large amount";
+
+                        switch (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also heal one allies by a small amount after";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                                    {
+                                        SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                                    }
+
+                                    SkillTwoDescription.text += "To one Allies";
+
+                                    break;
+                                }
+                        }
+
+                    }
+
+                    break;
+                }
+            case ("BeneficialEffect"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillTwoAOE())
+                    {
+                        SkillTwoDescription.text = "this skill will apply ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                        {
+                            SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                        }
+
+                        SkillTwoDescription.text += "To all Allies";
+
+                        if (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect() == "Healing")
+                        {
+                            SkillTwoDescription.text += "this skill will also heal all allies for a small amount";
+                        }
+
+                    }
+                    else
+                    {
+                        SkillTwoDescription.text = "this skill will apply";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                        {
+                            SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                        }
+
+                        SkillTwoDescription.text += "To one Allie";
+
+                        if (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect() == "Healing")
+                        {
+                            SkillTwoDescription.text += "this skill will also heal one allie for a small amount";
+                        }
+
+
+                    }
+                    break;
+                }
+            case ("HarmfulEffect"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillTwoAOE())
+                    {
+                        SkillTwoDescription.text = "this skill applies ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                        {
+                            SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                        }
+
+                        SkillTwoDescription.text += "to all enemies";
+
+                        if (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect() == "Damage")
+                        {
+                            SkillTwoDescription.text += "this skill will also apply damage to all enemies proportiionate to your attack power";
+                        }
+                        else
+                        {
+                            SkillTwoDescription.text += "this skill will also heal you for a small amount";
+                        }
+                    }
+                    else
+                    {
+                        SkillTwoDescription.text = "this skill applies ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                        {
+                            SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                        }
+
+                        SkillTwoDescription.text += "to One enemy";
+
+                        if (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect() == "Damage")
+                        {
+                            SkillTwoDescription.text += "this skill will also apply damage to one enemy proportiionate to your attack power";
+                        }
+                        else
+                        {
+                            SkillTwoDescription.text += "this skill will also heal you for a small amount";
+                        }
+                    }
+
+                    break;
+                }
+            case ("Damage"):
+                {
+
+                    if (MonsterBiengUsed.ReturnSkillTwoAOE())
+                    {
+                        SkillTwoDescription.text = "this skill applies damage proportionate to your attack to all enemies monsters";
+
+                        switch (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillTwoDescription.text += "this skill also heals you for a small amount";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                                    {
+                                        SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                                    }
+
+                                    SkillTwoDescription.text += "to you";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                                    {
+                                        SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                                    }
+
+                                    SkillTwoDescription.text += "to all enemies";
+
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillTwoDescription.text = "this skill applies damage proportionate to your attack to one enemy monsters";
+
+                        switch (MonsterBiengUsed.ReturnSkillTwoSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillTwoDescription.text += "this skill also heals you for a small amount";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                                    {
+                                        SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                                    }
+
+                                    SkillTwoDescription.text += "to you";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillTwoDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillTwoEffects().Count; i++)
+                                    {
+                                        SkillTwoDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillTwoEffects()[i];
+                                    }
+
+                                    SkillTwoDescription.text += "to one enemies";
+
+
+                                    break;
+                                }
+                        }
+                    }
+
+                    break;
+                }
+        }
+
+        switch (MonsterBiengUsed.ReturnSkillThreeMainEffect())
+        {
+            case ("Healing"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillThreeAOE())
+                    {
+                        SkillThreeDescription.text = "This Skill Heals All Allies by a large amount";
+
+                        switch (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also heal all allies by a small amount after";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                                    {
+                                        SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                                    }
+
+                                    SkillThreeDescription.text += "To All Allies";
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillThreeDescription.text = "This Skill Heals A single Allie by a large amount";
+
+                        switch (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also heal one allies by a small amount after";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                                    {
+                                        SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                                    }
+
+                                    SkillThreeDescription.text += "To one Allies";
+
+                                    break;
+                                }
+                        }
+
+                    }
+
+                    break;
+                }
+            case ("BeneficialEffect"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillThreeAOE())
+                    {
+                        SkillThreeDescription.text = "this skill will apply ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                        {
+                            SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                        }
+
+                        SkillThreeDescription.text += "To all Allies";
+
+                        if (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect() == "Healing")
+                        {
+                            SkillThreeDescription.text += "this skill will also heal all allies for a small amount";
+                        }
+
+                    }
+                    else
+                    {
+                        SkillThreeDescription.text = "this skill will apply";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                        {
+                            SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                        }
+
+                        SkillThreeDescription.text += "To one Allie";
+
+                        if (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect() == "Healing")
+                        {
+                            SkillThreeDescription.text += "this skill will also heal one allie for a small amount";
+                        }
+
+
+                    }
+                    break;
+                }
+            case ("HarmfulEffect"):
+                {
+                    if (MonsterBiengUsed.ReturnSkillThreeAOE())
+                    {
+                        SkillThreeDescription.text = "this skill applies ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                        {
+                            SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                        }
+
+                        SkillThreeDescription.text += "to all enemies";
+
+                        if (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect() == "Damage")
+                        {
+                            SkillThreeDescription.text += "this skill will also apply damage to all enemies proportiionate to your attack power";
+                        }
+                        else
+                        {
+                            SkillThreeDescription.text += "this skill will also heal you for a small amount";
+                        }
+                    }
+                    else
+                    {
+                        SkillThreeDescription.text = "this skill applies ";
+
+                        for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                        {
+                            SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                        }
+
+                        SkillThreeDescription.text += "to One enemy";
+
+                        if (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect() == "Damage")
+                        {
+                            SkillThreeDescription.text += "this skill will also apply damage to one enemy proportiionate to your attack power";
+                        }
+                        else
+                        {
+                            SkillThreeDescription.text += "this skill will also heal you for a small amount";
+                        }
+                    }
+
+                    break;
+                }
+            case ("Damage"):
+                {
+
+                    if (MonsterBiengUsed.ReturnSkillThreeAOE())
+                    {
+                        SkillThreeDescription.text = "this skill applies damage proportionate to your attack to all enemies monsters";
+
+                        switch (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillThreeDescription.text += "this skill also heals you for a small amount";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                                    {
+                                        SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                                    }
+
+                                    SkillThreeDescription.text += "to you";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                                    {
+                                        SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                                    }
+
+                                    SkillThreeDescription.text += "to all enemies";
+
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillThreeDescription.text = "this skill applies damage proportionate to your attack to one enemy monsters";
+
+                        switch (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillThreeDescription.text += "this skill also heals you for a small amount";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                                    {
+                                        SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                                    }
+
+                                    SkillThreeDescription.text += "to you";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillThreeDescription.text += "this skill will also apply";
+
+                                    for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
+                                    {
+                                        SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                                    }
+
+                                    SkillThreeDescription.text += "to one enemies";
+
+
+                                    break;
+                                }
+                        }
+                    }
+
+                    break;
+                }
+        }
+
+
     }
 
 
