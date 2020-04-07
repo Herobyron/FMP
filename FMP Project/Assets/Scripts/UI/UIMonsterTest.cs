@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIMonsterTest : MonoBehaviour
@@ -32,7 +33,7 @@ public class UIMonsterTest : MonoBehaviour
 
 
     // DropDown Commponents
-    public Dropdown MonsterDisplay;
+    //public Dropdown MonsterDisplay;
     public Dropdown SkillImportanceSelectionOne;
     public Dropdown SkillImportanceSelectionTwo;
     public Dropdown SkillImportanceSelectionThree;
@@ -53,13 +54,33 @@ public class UIMonsterTest : MonoBehaviour
     //the list of options for the Importance selection (these are predefined)
     private List<string> ImportanceSelectionOptions = new List<string>();
 
+    [Tooltip("the list of buttons that will be used to display each monster")]
+    [SerializeField]
+    private List<GameObject> MonsterButtons = new List<GameObject>();
+
+    [Tooltip("this is the amount of monsters within the list")]
+    [SerializeField]
+    private int MonsterButtonCount = 0;
+
+    [Tooltip("thiis is the button template that will be used to create the button")]
+    [SerializeField]
+    private GameObject ButtonTemplate = null;
+
+    [Tooltip("this is the Panel to display the monsters for the monster UI")]
+    [SerializeField]
+    private GameObject MonsterSelectionPanel = null;
+
+    [Tooltip("this is a list of images to be used for the monsters")]
+    [SerializeField]
+    private List<Sprite> SpriteList = new List<Sprite>();
+
     // Start is called before the first frame update
     void Start()
     {
         TheManager = FindObjectOfType<GameManagment>();
         Monsters.Add("No Monster");
-        MonsterDisplay.ClearOptions();
-        MonsterDisplay.AddOptions(Monsters);
+        //MonsterDisplay.ClearOptions();
+        //MonsterDisplay.AddOptions(Monsters);
 
         ImportanceSelectionOptions.Add("Importance 1");
         ImportanceSelectionOptions.Add("Importance 2");
@@ -73,6 +94,7 @@ public class UIMonsterTest : MonoBehaviour
 
         SkillImportanceSelectionThree.ClearOptions();
         SkillImportanceSelectionThree.AddOptions(ImportanceSelectionOptions);
+
     }
 
     // Update is called once per frame
@@ -81,6 +103,29 @@ public class UIMonsterTest : MonoBehaviour
         ChangeUI();
     }
 
+    // a function to generate buttons for the monsters scrolling UI
+    public void GenerateMonsterButtons()
+    {
+        foreach(GameObject G in MonsterButtons)
+        {
+            Destroy(G);
+        }
+
+        MonsterButtons.Clear();
+        MonsterButtonCount = 0;
+
+        foreach(MonsterScript M in TheManager.ReturnPlayerMonsters())
+        {
+            GameObject NewMonster = Instantiate(ButtonTemplate) as GameObject;
+            NewMonster.SetActive(true);
+            NewMonster.name = "Monster " + MonsterButtonCount;
+            NewMonster.GetComponent<Image>().sprite = SpriteList[Random.Range(0, SpriteList.Count)];
+            MonsterButtonCount++;
+            NewMonster.transform.SetParent(ButtonTemplate.transform.parent, false);
+            MonsterButtons.Add(NewMonster);
+        }
+
+    }
 
     public void MonsterDisplayFunc()
     {
@@ -90,26 +135,26 @@ public class UIMonsterTest : MonoBehaviour
             Monsters.Add(TheManager.ReturnMonsterNames()[i]);
         }
 
-        MonsterDisplay.ClearOptions();
-        MonsterDisplay.AddOptions(Monsters);
-        MonsterDisplay.value = 0;
-        MonsterDisplay.Select();
-        MonsterDisplay.RefreshShownValue();
+        //MonsterDisplay.ClearOptions();
+        //MonsterDisplay.AddOptions(Monsters);
+        //MonsterDisplay.value = 0;
+        //MonsterDisplay.Select();
+        //MonsterDisplay.RefreshShownValue();
     }
 
 
-    public void ChangedValue()
-    {
-        if(TheManager.ReturnMonsterCount() == 0)
-        {
-            //do something with no monste used (for now does nothing)
-        }
-        else
-        {
-            MonsterBiengUsed = TheManager.SelectedDropDownMonsterLoad(MonsterDisplay.value);
-        }
-
-    }
+    //public void ChangedValue()
+    //{
+    //    if(TheManager.ReturnMonsterCount() == 0)
+    //    {
+    //        //do something with no monste used (for now does nothing)
+    //    }
+    //    else
+    //    {
+    //        MonsterBiengUsed = TheManager.SelectedDropDownMonsterLoad(MonsterDisplay.value);
+    //    }
+    //
+    //}
 
     public void ChangeUI()
     {
@@ -141,9 +186,11 @@ public class UIMonsterTest : MonoBehaviour
         }
     }
 
-
+    // add to this function to highlight specific words using the split function and untiy arrays.
     public void SkillDescriptionFunc()
     {
+        
+
         switch (MonsterBiengUsed.ReturnrSkillOneMainEffect())
         {
             case ("Healing"):
@@ -173,6 +220,8 @@ public class UIMonsterTest : MonoBehaviour
                                     break;
                                 }
                         }
+
+                        
 
                     }
                     else
@@ -886,4 +935,15 @@ public class UIMonsterTest : MonoBehaviour
         MonsterBiengUsed.SetSkillthreeImportance(SkillImportanceSelectionThree.value + 1);
     }
 
+    public void OpenCloseMonsterSelection()
+    {
+        MonsterSelectionPanel.SetActive(!MonsterSelectionPanel.activeSelf);
+    }
+
+    public void SetMonsterInUSe()
+    {
+        MonsterBiengUsed = TheManager.ReturnSelectedMonster(EventSystem.current.currentSelectedGameObject.name);
+        ChangeUI();
+    
+    }
 }

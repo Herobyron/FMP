@@ -360,61 +360,56 @@ public class GenerateMonster : MonoBehaviour
 
                 for(int i = 0; i <= TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 2);
+                    int TempChosenEffects = 0;
 
                     switch (i)
                     {
                         case (1):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("Attack");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectFirstSkill("Attack");
+                                }
+
 
                                 break;
                             }
                         case (2):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("Defence");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectFirstSkill("Defence");
+                                }
+
+                                
 
                                 break;
                             }
                         case (3):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("Shield");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectFirstSkill("Shield");
+                                }
+
 
                                 break;
                             }
@@ -434,60 +429,54 @@ public class GenerateMonster : MonoBehaviour
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 2);
+                    int TempChosenEffects = 0;
 
                     switch (i)
                     {
                         case (1):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("AttackDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("CritDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectFirstSkill("AttackDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectFirstSkill("CritDeBuff");
+                                }
+
 
                                 break;
                             }
                         case (2):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("DefenceDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("ImmunityDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectFirstSkill("DefenceDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectFirstSkill("ImmunityDeBuff");
+                                }
+
+                             
 
                                 break;
                             }
                         case (3):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("MissDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectFirstSkill("ShieldDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectFirstSkill("MissDeBuff");
+                                }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectFirstSkill("ShieldDeBuff");
                                 }
 
                                 break;
@@ -525,61 +514,57 @@ public class GenerateMonster : MonoBehaviour
 
                             for (int i = 0; i <= TempEffects; i++)
                             {
-                                int TempChosenEffects = Random.Range(1, 2);
+                                int TempChosenEffects = 0;
 
                                 switch (i)
                                 {
                                     case (1):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectFirstSkill("Attack");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
                                             }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectFirstSkill("Attack");
+                                            }
+
+                                            
 
                                             break;
                                         }
                                     case (2):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectFirstSkill("Defence");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
                                             }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectFirstSkill("Defence");
+                                            }
+
+                                          
 
                                             break;
                                         }
                                     case (3):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectFirstSkill("Shield");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
                                             }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectFirstSkill("Shield");
+                                            }
+
 
                                             break;
                                         }
@@ -608,61 +593,58 @@ public class GenerateMonster : MonoBehaviour
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
-                                    int TempChosenEffects = Random.Range(1, 2);
+                                    int TempChosenEffects = 0;
 
                                     switch (i)
                                     {
                                         case (1):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("Attack");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("Accuracy");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("Attack");
+                                                }
+
+
 
                                                 break;
                                             }
                                         case (2):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("Defence");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("CritRate");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("Defence");
+                                                }
+
+                                               
 
                                                 break;
                                             }
                                         case (3):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("Shield");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("Immunity");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("Shield");
+                                                }
+
+                                              
 
                                                 break;
                                             }
@@ -682,60 +664,52 @@ public class GenerateMonster : MonoBehaviour
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
-                                    int TempChosenEffects = Random.Range(1, 2);
+                                    int TempChosenEffects = 0;
 
                                     switch (i)
                                     {
                                         case (1):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("AttackDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("CritDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("AttackDeBuff");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("CritDeBuff");
+                                                }
+
 
                                                 break;
                                             }
                                         case (2):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("DefenceDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("ImmunityDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("DefenceDeBuff");
+                                                }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("ImmunityDeBuff");
                                                 }
 
                                                 break;
                                             }
                                         case (3):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("MissDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectFirstSkill("ShieldDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("MissDeBuff");
+                                                }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectFirstSkill("ShieldDeBuff");
                                                 }
 
                                                 break;
@@ -800,61 +774,55 @@ public class GenerateMonster : MonoBehaviour
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 2);
+                    int TempChosenEffects = 0;
 
                     switch (i)
                     {
                         case (1):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("Attack");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectSecondSkill("Attack");
+                                }
+
 
                                 break;
                             }
                         case (2):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("Defence");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectSecondSkill("Defence");
+                                }
+
 
                                 break;
                             }
                         case (3):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("Shield");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectSecondSkill("Shield");
+                                }
+
 
                                 break;
                             }
@@ -874,61 +842,55 @@ public class GenerateMonster : MonoBehaviour
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 2);
+                    int TempChosenEffects = 0;
 
                     switch (i)
                     {
                         case (1):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("AttackDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("CritDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectSecondSkill("AttackDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectSecondSkill("CritDeBuff");
+                                }
+
 
                                 break;
                             }
                         case (2):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("DefenceDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("ImmunityDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectSecondSkill("DefenceDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectSecondSkill("ImmunityDeBuff");
+                                }
+
 
                                 break;
                             }
                         case (3):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("MissDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectSecondSkill("ShieldDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectSecondSkill("MissDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectSecondSkill("ShieldDeBuff");
+                                }
+
 
                                 break;
                             }
@@ -966,61 +928,55 @@ public class GenerateMonster : MonoBehaviour
 
                             for (int i = 0; i <= TempEffects; i++)
                             {
-                                int TempChosenEffects = Random.Range(1, 2);
+                                int TempChosenEffects = 0;
 
                                 switch (i)
                                 {
                                     case (1):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectSecondSkill("Attack");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
                                             }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectSecondSkill("Attack");
+                                            }
+
 
                                             break;
                                         }
                                     case (2):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectSecondSkill("Defence");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
                                             }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectSecondSkill("Defence");
+                                            }
+
 
                                             break;
                                         }
                                     case (3):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectSecondSkill("Shield");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
                                             }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectSecondSkill("Shield");
+                                            }
+
 
                                             break;
                                         }
@@ -1049,61 +1005,55 @@ public class GenerateMonster : MonoBehaviour
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
-                                    int TempChosenEffects = Random.Range(1, 2);
+                                    int TempChosenEffects = 0;
 
                                     switch (i)
                                     {
                                         case (1):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("Attack");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("Accuracy");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("Attack");
+                                                }
+
 
                                                 break;
                                             }
                                         case (2):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("Defence");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("CritRate");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("Defence");
+                                                }
+
 
                                                 break;
                                             }
                                         case (3):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("Shield");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("Immunity");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("Shield");
+                                                }
+
 
                                                 break;
                                             }
@@ -1123,61 +1073,55 @@ public class GenerateMonster : MonoBehaviour
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
-                                    int TempChosenEffects = Random.Range(1, 2);
+                                    int TempChosenEffects = 0;
 
                                     switch (i)
                                     {
                                         case (1):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("AttackDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("CritDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("AttackDeBuff");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("CritDeBuff");
+                                                }
+
 
                                                 break;
                                             }
                                         case (2):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("DefenceDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("ImmunityDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("DefenceDeBuff");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("ImmunityDeBuff");
+                                                }
+
 
                                                 break;
                                             }
                                         case (3):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("MissDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectSecondSkill("ShieldDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("MissDeBuff");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectSecondSkill("ShieldDeBuff");
+                                                }
+
 
                                                 break;
                                             }
@@ -1239,60 +1183,51 @@ public class GenerateMonster : MonoBehaviour
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 2);
+                    int TempChosenEffects = 0;
 
                     switch (i)
                     {
                         case (1):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("Attack");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
+                                }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectThirdSkill("Attack");
                                 }
 
                                 break;
                             }
                         case (2):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("Defence");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
+                                }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectThirdSkill("Defence");
                                 }
 
                                 break;
                             }
                         case (3):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("Shield");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
+                                }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectThirdSkill("Shield");
                                 }
 
                                 break;
@@ -1313,61 +1248,54 @@ public class GenerateMonster : MonoBehaviour
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
-                    int TempChosenEffects = Random.Range(1, 2);
+                    int TempChosenEffects = 0;
 
                     switch (i)
                     {
                         case (1):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("AttackDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("CritDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectThirdSkill("AttackDeBuff");
+                                }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectThirdSkill("CritDeBuff");
                                 }
 
                                 break;
                             }
                         case (2):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("DefenceDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("ImmunityDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectThirdSkill("DefenceDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectThirdSkill("ImmunityDeBuff");
+                                }
+
 
                                 break;
                             }
                         case (3):
                             {
-                                switch (TempChosenEffects)
+                                TempChosenEffects = Random.Range(1, 100);
+
+                                if (TempChosenEffects < 50)
                                 {
-                                    case (1):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("MissDeBuff");
-                                            break;
-                                        }
-                                    case (2):
-                                        {
-                                            MonsterScriptGenerated.AddEffectThirdSkill("ShieldDeBuff");
-                                            break;
-                                        }
+                                    MonsterScriptGenerated.AddEffectThirdSkill("MissDeBuff");
                                 }
+                                else
+                                {
+                                    MonsterScriptGenerated.AddEffectThirdSkill("ShieldDeBuff");
+                                }
+
 
                                 break;
                             }
@@ -1403,60 +1331,51 @@ public class GenerateMonster : MonoBehaviour
 
                             for (int i = 0; i <= TempEffects; i++)
                             {
-                                int TempChosenEffects = Random.Range(1, 2);
+                                int TempChosenEffects = 0;
 
                                 switch (i)
                                 {
                                     case (1):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectThirdSkill("Attack");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
+                                            }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectThirdSkill("Attack");
                                             }
 
                                             break;
                                         }
                                     case (2):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectThirdSkill("Defence");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
+                                            }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectThirdSkill("Defence");
                                             }
 
                                             break;
                                         }
                                     case (3):
                                         {
-                                            switch (TempChosenEffects)
+                                            TempChosenEffects = Random.Range(1, 100);
+
+                                            if (TempChosenEffects < 50)
                                             {
-                                                case (1):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
-                                                        break;
-                                                    }
-                                                case (2):
-                                                    {
-                                                        MonsterScriptGenerated.AddEffectThirdSkill("Shield");
-                                                        break;
-                                                    }
+                                                MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
+                                            }
+                                            else
+                                            {
+                                                MonsterScriptGenerated.AddEffectThirdSkill("Shield");
                                             }
 
                                             break;
@@ -1486,60 +1405,51 @@ public class GenerateMonster : MonoBehaviour
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
-                                    int TempChosenEffects = Random.Range(1, 2);
+                                    int TempChosenEffects = 0;
 
                                     switch (i)
                                     {
                                         case (1):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("Attack");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("Accuracy");
+                                                }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("Attack");
                                                 }
 
                                                 break;
                                             }
                                         case (2):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("Defence");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("CritRate");
+                                                }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("Defence");
                                                 }
 
                                                 break;
                                             }
                                         case (3):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("Shield");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("Immunity");
+                                                }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("Shield");
                                                 }
 
                                                 break;
@@ -1560,61 +1470,54 @@ public class GenerateMonster : MonoBehaviour
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
-                                    int TempChosenEffects = Random.Range(1, 2);
+                                    int TempChosenEffects = 0;
 
                                     switch (i)
                                     {
                                         case (1):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("AttackDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("CritDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("AttackDeBuff");
+                                                }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("CritDeBuff");
                                                 }
 
                                                 break;
                                             }
                                         case (2):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("DefenceDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("ImmunityDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("DefenceDeBuff");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("ImmunityDeBuff");
+                                                }
+
 
                                                 break;
                                             }
                                         case (3):
                                             {
-                                                switch (TempChosenEffects)
+                                                TempChosenEffects = Random.Range(1, 100);
+
+                                                if (TempChosenEffects < 50)
                                                 {
-                                                    case (1):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("MissDeBuff");
-                                                            break;
-                                                        }
-                                                    case (2):
-                                                        {
-                                                            MonsterScriptGenerated.AddEffectThirdSkill("ShieldDeBuff");
-                                                            break;
-                                                        }
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("MissDeBuff");
                                                 }
+                                                else
+                                                {
+                                                    MonsterScriptGenerated.AddEffectThirdSkill("ShieldDeBuff");
+                                                }
+
 
                                                 break;
                                             }

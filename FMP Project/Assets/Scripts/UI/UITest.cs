@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UITest : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class UITest : MonoBehaviour
     public Text RuneName;
 
     // this is the drop down that is used to display the rune information
-    public Dropdown RuneDisplay = null;
+    //public Dropdown RuneDisplay = null;
 
     public Image NoRuneUsed = null;
 
@@ -46,13 +47,29 @@ public class UITest : MonoBehaviour
     // list of the runes names to be used for sorting through differnt runes
     private List<string> Runes = new List<string>();
 
+    [Tooltip("the list of buttons that will be used to display each rune")]
+    [SerializeField]
+    private List<GameObject> RuneButtons = new List<GameObject>();
+
+    [Tooltip("this is the amount of monsters within the list")]
+    [SerializeField]
+    private int RuneButtonCount;
+
+    [Tooltip("this is the button template that will be use dto create the button")]
+    [SerializeField]
+    private GameObject ButtonTemplate = null;
+
+    [Tooltip("this is the panel object to display the rune UI")]
+    [SerializeField]
+    private GameObject RuneSelectionPanel = null;
+
     // Start is called before the first frame update
     void Start()
     {
         TheManager = FindObjectOfType<GameManagment>();
         Runes.Add("NoRune");
-        RuneDisplay.ClearOptions();
-        RuneDisplay.AddOptions(Runes);
+        //RuneDisplay.ClearOptions();
+        //RuneDisplay.AddOptions(Runes);
         NoRuneUsed.gameObject.SetActive(true);
         RuneBiengUsed = null;
     }
@@ -85,6 +102,29 @@ public class UITest : MonoBehaviour
     //     
     //}
 
+    public void GenerateRuneButtons()
+    {
+        foreach(GameObject G in RuneButtons)
+        {
+            Destroy(G);
+        }
+
+        RuneButtons.Clear();
+        RuneButtonCount = 0;
+
+        foreach(RuneScript R in TheManager.ReturnPlayerRunes())
+        {
+            GameObject NewRune = Instantiate(ButtonTemplate) as GameObject;
+            NewRune.SetActive(true);
+            NewRune.name = "Rune " + RuneButtonCount;
+            RuneButtonCount++;
+            NewRune.transform.SetParent(ButtonTemplate.transform.parent, false);
+            RuneButtons.Add(NewRune);
+        }
+
+    }
+
+
 
     public void RuneDisplayFunc()
     {
@@ -95,11 +135,11 @@ public class UITest : MonoBehaviour
             Runes.Add(TheManager.ReturnRuneNames()[i]);
         }
 
-        RuneDisplay.ClearOptions();
-        RuneDisplay.AddOptions(Runes);
-        RuneDisplay.value = 0;
-        RuneDisplay.Select();
-        RuneDisplay.RefreshShownValue();
+       // RuneDisplay.ClearOptions();
+       // RuneDisplay.AddOptions(Runes);
+       // RuneDisplay.value = 0;
+       // RuneDisplay.Select();
+       // RuneDisplay.RefreshShownValue();
 
 
     }
@@ -113,7 +153,7 @@ public class UITest : MonoBehaviour
         else
         {
             NoRuneUsed.gameObject.SetActive(false);
-            RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value);
+           // RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value);
         }
 
         
@@ -151,5 +191,14 @@ public class UITest : MonoBehaviour
         RuneBiengUsed = TheRune;
     }
 
+    public void OpenCloseRuneSelection()
+    {
+        RuneSelectionPanel.SetActive(!RuneSelectionPanel.activeSelf);
+    }
 
+    public void SetRuneInUse()
+    {
+        RuneBiengUsed = TheManager.ReturnSelectedRune(EventSystem.current.currentSelectedGameObject.name);
+        ChangeUI();
+    }
 }

@@ -71,6 +71,11 @@ public class GameManagment : MonoBehaviour
         return GameData.PlayerInformation.ReturnSelectedRune(RuneName);
     }
 
+    // a function that finds a specific monster from the game data
+    public MonsterScript ReturnSelectedMonster(string MonsterName)
+    {
+        return GameData.PlayerInformation.ReturnSelectedMonster(MonsterName);
+    }
 
     // a function specifically made to add Runes to the players information
     public void AddRuneToData(RuneScript RuneAdded)
@@ -230,7 +235,10 @@ public class GameManagment : MonoBehaviour
         return GameData.PlayerInformation.ReturnAllPlayerRunes();
     }
 
-
+    public List<MonsterScript> ReturnPlayerMonsters()
+    {
+        return GameData.PlayerInformation.ReturnAllPlayerMonsters();
+    }
 }
 
 

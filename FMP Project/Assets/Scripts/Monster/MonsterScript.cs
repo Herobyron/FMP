@@ -163,6 +163,9 @@ public class MonsterScript
     //this list is for storing the runes so that it can be used in a function later on
     private List<RuneScript> Runes = new List<RuneScript>();
 
+    // this is a list of the skill script that will be used to use the monsters skills within battle
+    private List<MonsterSkillScript> MonsterSkill = new List<MonsterSkillScript>();
+
     // these are the Skills that the monster can have and the skills information
     // this will need testing to see wether it needs to be a gameobject or not
 
@@ -2267,5 +2270,14 @@ public class MonsterScript
         return ThisData;
     }
 
+    public void SetMonsterSkills(MonsterSkillScript TheSkill)
+    {
+        MonsterSkill.Add(TheSkill);
+    }
+
+    public List<MonsterSkillScript> GetMonsterSKills()
+    {
+        return MonsterSkill;
+    }
    
 }
