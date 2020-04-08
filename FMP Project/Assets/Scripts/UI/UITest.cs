@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class UITest : MonoBehaviour
 {
-    // this is all temporary as this ui will not be used in final vertical slice
 
     // this is the monster that is holding the rune that i want to test the upgrading on
     public GameObject Monster;
@@ -26,26 +25,15 @@ public class UITest : MonoBehaviour
     public Text RuneSlot;
     public Text RuneName;
 
-    // this is the drop down that is used to display the rune information
-    //public Dropdown RuneDisplay = null;
-
+    // an image to display when no information is present
     public Image NoRuneUsed = null;
 
-    // other infromation bits
-    public GameObject loadedrune;
-    public bool LoadTheRuneOnce = false;
-
-    
+    // the current rune that is bieng used
     private RuneScript RuneBiengUsed = null;
 
-    public MonsterData MonsterBiengUsed = null;
-
-    
     // this is the manager that holds all of the information 
     private GameManagment TheManager;
 
-    // list of the runes names to be used for sorting through differnt runes
-    private List<string> Runes = new List<string>();
 
     [Tooltip("the list of buttons that will be used to display each rune")]
     [SerializeField]
@@ -67,9 +55,6 @@ public class UITest : MonoBehaviour
     void Start()
     {
         TheManager = FindObjectOfType<GameManagment>();
-        Runes.Add("NoRune");
-        //RuneDisplay.ClearOptions();
-        //RuneDisplay.AddOptions(Runes);
         NoRuneUsed.gameObject.SetActive(true);
         RuneBiengUsed = null;
     }
@@ -77,31 +62,10 @@ public class UITest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //FindObjectOfType<Image>().gameObject.SetActive(true);
-        
         ChangeUI();
     }
 
-
-    // for this functoin it needs to get the monster script. when this is done later on make sure to get all objects at the start
-    // so that this getcomponent is not constantly called
-    public void UpgradeRune()
-    {
-        if(RuneBiengUsed != null)
-        {
-            RuneBiengUsed.UpgradeRune();
-        }
-    }
-
-
-    //public void LoadRuneTest()
-    //{
-    //     
-    //     loadedrune = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Assets/Prefabs/RunesPrefabs/Rune.prefab") ;
-    //     RuneBiengUsed = loadedrune.GetComponent<RuneScript>();
-    //     
-    //}
-
+    //this functoin generates the buttons to display all of the runes that the player owns in thier inventory
     public void GenerateRuneButtons()
     {
         foreach(GameObject G in RuneButtons)
@@ -124,43 +88,7 @@ public class UITest : MonoBehaviour
 
     }
 
-
-
-    public void RuneDisplayFunc()
-    {
-        Debug.Log(TheManager.ReturnRuneNames()[0]);
-        Runes.Clear();
-        for (int i = 0; i < TheManager.ReturnRuneNames().Count; i++)
-        {
-            Runes.Add(TheManager.ReturnRuneNames()[i]);
-        }
-
-       // RuneDisplay.ClearOptions();
-       // RuneDisplay.AddOptions(Runes);
-       // RuneDisplay.value = 0;
-       // RuneDisplay.Select();
-       // RuneDisplay.RefreshShownValue();
-
-
-    }
-
-    public void ChangedValue()
-    {
-        if(TheManager.ReturnRuneCount() == 0)
-        {
-            NoRuneUsed.gameObject.SetActive(true);
-        }
-        else
-        {
-            NoRuneUsed.gameObject.SetActive(false);
-           // RuneBiengUsed = TheManager.SelectedDropDownRuneLoad(RuneDisplay.value);
-        }
-
-        
-
-    }
-
-
+    // refreshes the UI of the rune to display everything.
     public void ChangeUI()
     {
         if(RuneBiengUsed == null)
@@ -185,17 +113,19 @@ public class UITest : MonoBehaviour
         }
     }
 
-
+    // this sets the rune that is currently bieng used
     public void SetRuneBiengUsed(RuneScript TheRune)
     {
         RuneBiengUsed = TheRune;
     }
 
+    // opens the rune penel to allow for the player to select the rune they want
     public void OpenCloseRuneSelection()
     {
         RuneSelectionPanel.SetActive(!RuneSelectionPanel.activeSelf);
     }
 
+    //this sets the rune that is bieng used from the selection and then refreshes the UI. 
     public void SetRuneInUse()
     {
         RuneBiengUsed = TheManager.ReturnSelectedRune(EventSystem.current.currentSelectedGameObject.name);

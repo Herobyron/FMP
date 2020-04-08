@@ -1556,12 +1556,18 @@ public class GenerateMonster : MonoBehaviour
 
         }
 
-        //final step is to calculate the multiplier of each of the skills. this is a number that will be used in the skill script to determine the effectiveness of each skill
+        //Semi final step is to calculate the multiplier of each of the skills. this is a number that will be used in the skill script to determine the effectiveness of each skill
         MonsterScriptGenerated.SetFirstSkillMultiplier(Random.Range(0.1f, 0.4f));
 
         MonsterScriptGenerated.SetSecondSkillMultipler(Random.Range(0.3f, 0.7f));
 
         MonsterScriptGenerated.SetThirdSkillMultiplier(Random.Range(0.8f, 1.2f));
+
+        // final step is setting the max turns for the seconda and third skills on the monster
+
+        MonsterScriptGenerated.SetSkillTwoMaxTurns(Random.Range(2,5));
+
+        MonsterScriptGenerated.SetSkillThreeMaxTurns(Random.Range(2,5));
 
     }
 }

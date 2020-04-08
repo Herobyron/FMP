@@ -251,7 +251,7 @@ public class MonsterRuneUI : MonoBehaviour
     [SerializeField]
     private Image RuneSixImage = null;
 
-
+    private bool Once = false;
 
     void Start()
     {
@@ -259,8 +259,25 @@ public class MonsterRuneUI : MonoBehaviour
         RuneUpgradePanel.SetActive(false);
         MonsterUpgradePanel.SetActive(false);
 
+        //TheManager.Load();
+    }
 
+    private void OnEnable()
+    {
+        if (Once)
+        {
+            TheManager.Load();
+            GenerateRuneButtons();
+            TheManager.LoadMonsterInformation();
+            StoreMonsters();
+            RefreshMonsterStats();
+        }
+    }
 
+    private void Update()
+    {
+        if (!Once)
+            Once = true;
     }
 
     // generates the runes buttons to be used on the scrolling ui
@@ -493,87 +510,91 @@ public class MonsterRuneUI : MonoBehaviour
     // this function will increase the monstes stats by the increased stats by the rune bieng equiped
     public void EquipSelectedRune()
     {
-        MonsterBiengUsed.EquipRune(RuneBiengUsed);
-        RefreshRuneUI();
-        RefreshRuneEquipedMonsterUI();
-
-        switch (RuneBiengUsed.ReturnRuneSlot())
+        if (!RuneBiengUsed.ReturnRuneEquiped())
         {
-            case (1):
-                {
-                    StartCoroutine(FadeImageRune(RuneOneImage, "In"));
-                    break;
-                }
-            case (2):
-                {
-                    StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
-                    break;
-                }
-            case (3):
-                {
-                    StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
-                    break;
-                }
-            case (4):
-                {
-                    StartCoroutine(FadeImageRune(RuneFourImage, "In"));
-                    break;
-                }
-            case (5):
-                {
-                    StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
-                    break;
-                }
-            case (6):
-                {
-                    StartCoroutine(FadeImageRune(RuneSixImage, "In"));
-                    break;
-                }
-        }
+            MonsterBiengUsed.EquipRune(RuneBiengUsed);
+            RefreshRuneUI();
+            RefreshRuneEquipedMonsterUI();
 
+            switch (RuneBiengUsed.ReturnRuneSlot())
+            {
+                case (1):
+                    {
+                        StartCoroutine(FadeImageRune(RuneOneImage, "In"));
+                        break;
+                    }
+                case (2):
+                    {
+                        StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
+                        break;
+                    }
+                case (3):
+                    {
+                        StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
+                        break;
+                    }
+                case (4):
+                    {
+                        StartCoroutine(FadeImageRune(RuneFourImage, "In"));
+                        break;
+                    }
+                case (5):
+                    {
+                        StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
+                        break;
+                    }
+                case (6):
+                    {
+                        StartCoroutine(FadeImageRune(RuneSixImage, "In"));
+                        break;
+                    }
+            }
+        }
     }
 
     //this function will decrease the monsters stats by the increased stats of the rune bieng unequiped
     public void UnEquipSelectedRune()
     {
-        MonsterBiengUsed.UnequipRune(RuneBiengUsed);
-        RefreshRuneUI();
-        RefreshRuneEquipedMonsterUI();
-
-        switch (RuneBiengUsed.ReturnRuneSlot())
+        if (RuneBiengUsed.ReturnRuneEquiped())
         {
-            case (1):
-                {
-                    StartCoroutine(FadeImageRune(RuneOneImage, "Out"));
-                    break;
-                }
-            case (2):
-                {
-                    StartCoroutine(FadeImageRune(RuneTwoImage, "Out"));
-                    break;
-                }
-            case (3):
-                {
-                    StartCoroutine(FadeImageRune(RuneThreeImage, "Out"));
-                    break;
-                }
-            case (4):
-                {
-                    StartCoroutine(FadeImageRune(RuneFourImage, "Out"));
-                    break;
-                }
-            case (5):
-                {
-                    StartCoroutine(FadeImageRune(RuneFiveImage, "Out"));
-                    break;
-                }
-            case (6):
-                {
-                    StartCoroutine(FadeImageRune(RuneSixImage, "Out"));
-                    break;
-                }
-        }
+            MonsterBiengUsed.UnequipRune(RuneBiengUsed);
+            RefreshRuneUI();
+            RefreshRuneEquipedMonsterUI();
 
+            switch (RuneBiengUsed.ReturnRuneSlot())
+            {
+                case (1):
+                    {
+                        StartCoroutine(FadeImageRune(RuneOneImage, "Out"));
+                        break;
+                    }
+                case (2):
+                    {
+                        StartCoroutine(FadeImageRune(RuneTwoImage, "Out"));
+                        break;
+                    }
+                case (3):
+                    {
+                        StartCoroutine(FadeImageRune(RuneThreeImage, "Out"));
+                        break;
+                    }
+                case (4):
+                    {
+                        StartCoroutine(FadeImageRune(RuneFourImage, "Out"));
+                        break;
+                    }
+                case (5):
+                    {
+                        StartCoroutine(FadeImageRune(RuneFiveImage, "Out"));
+                        break;
+                    }
+                case (6):
+                    {
+                        StartCoroutine(FadeImageRune(RuneSixImage, "Out"));
+                        break;
+                    }
+            }
+        }
     }
 
 
@@ -733,8 +754,17 @@ public class MonsterRuneUI : MonoBehaviour
 
             PreviousMonsterMaxLevel = MonsterBiengUsed.ReturnMonsterMaxLevel();
 
+            //decrease all increased stats for all runes equiped
+            RefreshIncreasedStatDecrease();
+
             MonsterBiengUsed.IncreaseStars();
 
+            //increase all increased stats for all runes equiped
+            RefreshIncreasedStatIncrease();
+
+
+            //refresh ui
+            RefreshRuneEquipedMonsterUI();
 
 
             switch (MonsterBiengUsed.ReturnMonsterStars())
@@ -781,9 +811,15 @@ public class MonsterRuneUI : MonoBehaviour
                 PreviousMonsterLevel = MonsterBiengUsed.ReturnMonsterLevel();
                 PreviousMonsterMaxLevel = MonsterBiengUsed.ReturnMonsterMaxLevel();
 
-
+                RefreshIncreasedStatDecrease();
 
                 MonsterBiengUsed.LevelUpMonster();
+
+                RefreshIncreasedStatIncrease();
+
+
+                //refresh ui
+                RefreshRuneEquipedMonsterUI();
 
                 StartCoroutine(LevelUpDisplayChange(2));
             }
@@ -805,7 +841,18 @@ public class MonsterRuneUI : MonoBehaviour
             PreviousMonsterHealth = MonsterBiengUsed.ReturnBaseHealth();
             PreviousMonsterDefence = MonsterBiengUsed.ReturnBaseDefence();
             PreviousMonsterDamage = MonsterBiengUsed.ReturnBaseDamage();
+
+            RefreshIncreasedStatDecrease();
+
             MonsterBiengUsed.Awaken();
+
+            RefreshIncreasedStatIncrease();
+
+
+            //refresh ui
+            RefreshRuneEquipedMonsterUI();
+
+
             StartCoroutine(AwakendisplayChange(2.0f, true));
         }
         else
@@ -814,7 +861,66 @@ public class MonsterRuneUI : MonoBehaviour
         }
     }
 
+    // a function that refreshes the monsters increased stats by increasing them by the runes stats
+    // this function is used to refresh the monsters increased stats when leveling up, awakening or increasing the stars on a monster 
+    public void RefreshIncreasedStatIncrease()
+    {
+        if (MonsterBiengUsed.ReturnRune(1) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(1), "Increased");
+        }
+        if (MonsterBiengUsed.ReturnRune(2) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(2), "Increased");
+        }
+        if (MonsterBiengUsed.ReturnRune(3) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(3), "Increased");
+        }
+        if (MonsterBiengUsed.ReturnRune(4) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(4), "Increased");
+        }
+        if (MonsterBiengUsed.ReturnRune(5) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(5), "Increased");
+        }
+        if (MonsterBiengUsed.ReturnRune(6) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(6), "Increased");
+        }
+    }
 
+    // a function that refreshes the monsters increased stats by decreaseing them by the runes stats
+    // this function is used to refresh the monsters increased stats when leveliing up, awakening or increasing the stars on a monster
+    public void RefreshIncreasedStatDecrease()
+    {
+        if (MonsterBiengUsed.ReturnRune(1) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(1), "Decreased");
+        }
+        if (MonsterBiengUsed.ReturnRune(2) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(2), "Decreased");
+        }
+        if (MonsterBiengUsed.ReturnRune(3) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(3), "Decreased");
+        }
+        if (MonsterBiengUsed.ReturnRune(4) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(4), "Decreased");
+        }
+        if (MonsterBiengUsed.ReturnRune(5) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(5), "Decreased");
+        }
+        if (MonsterBiengUsed.ReturnRune(6) != null)
+        {
+            MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(6), "Decreased");
+        }
+
+    }
 
 
     // enumerator to change the display to show monster awakening 
@@ -912,6 +1018,10 @@ public class MonsterRuneUI : MonoBehaviour
         DamageText.text = "Damage: " + MonsterBiengUsed.ReturnBaseDamage();
         DefenceText.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence();
         MonsterLevelText.text = "Level: " + MonsterBiengUsed.ReturnMonsterLevel();
+
+        RefreshMonsterStats();
+        RefreshRuneEquipedMonsterUI();
+        
 
         LevelCorutineRun = false;
     }

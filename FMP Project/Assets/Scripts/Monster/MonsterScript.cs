@@ -225,6 +225,10 @@ public class MonsterScript
     [SerializeField]
     private int SkillTwoCoolDown = 0;
 
+    [Tooltip("this is the max turns of the second skill")]
+    [SerializeField]
+    private int SKillTwoMaxTurns = 0;
+
     //this will be where the skill script should go when the skill script is adapted 
 
     [Tooltip("this is the main effect that the monsters first skill will do (this will be used to create the monsters skill")]
@@ -255,6 +259,10 @@ public class MonsterScript
     [Tooltip("the skill cooldown for the second skill the monster has")]
     [SerializeField]
     private int SkillThreeCoolDown = 0;
+
+    [Tooltip("this is the third skills max turns")]
+    [SerializeField]
+    private int SkillThreeMaxTurns = 0;
 
 
     [Tooltip("this is the list of harmful effects that can be applied on the monster")]
@@ -1476,38 +1484,118 @@ public class MonsterScript
     // - the name of the rune that will be returned
     public RuneScript ReturnRune(int RuneNumber)
     {
-        RuneScript TempRune = new RuneScript();
+        RuneScript TempRune = null;
 
         switch (RuneNumber)
         {
             case (1):
                 {
-                    TempRune =  RuneOne;
+                   
+                    if(RuneOne == null)
+                    {
+                        TempRune = null;
+                    }
+                    else if(RuneOne.ReturnMainRuneStat() == 0)
+                    {
+                        TempRune = null;
+                    }
+                    else
+                    {
+                        TempRune = RuneOne;
+                    }
+
+
                     break;
                 }
             case (2):
                 {
-                    TempRune = RuneTwo;
+                    
+                    
+                    if(RuneTwo == null)
+                    {
+                        TempRune = null;
+                    }
+                    else if(RuneTwo.ReturnMainRuneStat() == 0)
+                    {
+                        TempRune = null;
+                    }
+                    else
+                    {
+                        TempRune = RuneTwo;
+                    }
+
                     break;
                 }
             case (3):
                 {
-                    TempRune = RuneThree;
+                    
+                    if(RuneThree == null)
+                    {
+                        TempRune = null;
+                    }
+                    else if (RuneThree.ReturnMainRuneStat() == 0)
+                    {
+                        TempRune = null;
+                    }
+                    else
+                    {
+                        TempRune = RuneThree;
+                    }
+
                     break;
                 }
             case (4):
                 {
-                    TempRune = RuneFour;
+                    
+                    if(RuneFour == null)
+                    {
+                        TempRune = null;
+                    }
+                    else if (RuneFour.ReturnMainRuneStat() == 0)
+                    {
+                        TempRune = null;
+                    }
+                    else
+                    {
+                        TempRune = RuneFour;
+                    }
+
                     break;
                 }
             case (5):
                 {
-                    TempRune = RuneFive;
+                    
+                    if(RuneFive == null)
+                    {
+                        TempRune = null;
+                    }
+                    else if (RuneFive.ReturnMainRuneStat() == 0)
+                    {
+                        TempRune = null;
+                    }
+                    else
+                    {
+                        TempRune = RuneFive;
+                    }
+
                     break;
                 }
             case (6):
                 {
-                    TempRune = RuneSix;
+
+                    if(RuneSix == null)
+                    {
+                        TempRune = null;
+                    }
+                    else if (RuneSix.ReturnMainRuneStat() == 0)
+                    {
+                        TempRune = null;
+                    }
+                    else
+                    {
+                        TempRune = RuneSix;
+                    }
+
                     break;
                 }
         }
@@ -2280,4 +2368,24 @@ public class MonsterScript
         return MonsterSkill;
     }
    
+
+    public int ReturnMonsterSkillTwoMaxTurns()
+    {
+        return SKillTwoMaxTurns;
+    }
+
+    public void SetSkillTwoMaxTurns(int Turns)
+    {
+        SKillTwoMaxTurns = Turns;
+    }
+
+    public int ReturnMonsterSkillThreeMaxTurns()
+    {
+        return SkillThreeMaxTurns;
+    }
+
+    public void SetSkillThreeMaxTurns(int Turns)
+    {
+        SkillThreeMaxTurns = Turns;
+    }
 }
