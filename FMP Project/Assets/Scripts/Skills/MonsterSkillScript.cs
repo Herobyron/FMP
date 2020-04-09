@@ -1,9 +1,6 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.XR;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [System.Serializable]
 public class MonsterSkillScript

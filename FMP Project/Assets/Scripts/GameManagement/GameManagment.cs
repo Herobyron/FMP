@@ -39,8 +39,6 @@ public class GameManagment : MonoBehaviour
     void Start()
     {
         GameData = new Data();
-
-
     }
 
     public void Save()
@@ -97,14 +95,11 @@ public class GameManagment : MonoBehaviour
     {
         GameData.PlayerInformation.ClearRunes();
         GameData.PlayerInformation.ClearMonsters();
-
     }
 
     public void LoadRuneIn()
     {
-
         FindObjectOfType<UITest>().SetRuneBiengUsed(GameData.PlayerInformation.ReturnSelectedRune(0));
-
     }
 
 
@@ -239,6 +234,9 @@ public class GameManagment : MonoBehaviour
     {
         return GameData.PlayerInformation.ReturnAllPlayerMonsters();
     }
+
+
+
 }
 
 

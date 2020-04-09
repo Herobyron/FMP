@@ -1,0 +1,264 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2419853704525750064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2419853704525750071}
+  - component: {fileID: 2419853704525750070}
+  m_Layer: 0
+  m_Name: TheGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2419853704525750071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2419853704525750064}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 383.32736, y: 272.48764, z: -74.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2419853704525750070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2419853704525750064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfd359e17676904c9c528edd8a0e955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TestSaveMonster:
+    MonsterName: Blank
+    BaseHealth: 0
+    BaseDamage: 0
+    BaseDefence: 0
+    BaseSpeed: 0
+    BaseCritRate: 0
+    BaseCritDamage: 0
+    BaseAccuracy: 0
+    BaseResistance: 0
+    CurrentHealth: 0
+    Stars: 0
+    IncreasedHealth: 0
+    IncreasedDefence: 0
+    IncreasedAttack: 0
+    IncreasedSpeed: 0
+    IncreasedAccuracy: 0
+    IncreasedResistance: 0
+    IncreasedCritRate: 0
+    IncreasedCritDamage: 0
+    Type: 1
+    TheMonsterType: 
+    MonsterLevel: 0
+    MonsterMaxLevel: 15
+    Awakened: 0
+    LevelMultiplier: 0.2
+    AwakenMultiplier: 0.3
+    StarsMultiplier: 0.3
+    BaseStars: 1
+    RuneOne:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneTwo:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneThree:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneFour:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneFive:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneSix:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    SkillOneMainEffect: 
+    SkillOneSecondaryEffect: 
+    SkillOneImportance: 0
+    SkillOneEffects: []
+    SkillTwoMainEffect: 
+    SkillTwoSecondaryEffect: 
+    SkillTwoImportance: 0
+    SkillTwoEffects: []
+    SkillTwoCoolDown: 0
+    SKillTwoMaxTurns: 0
+    SkillThreeMainEffect: 
+    SkillThreeSecondaryEffect: 
+    SkillThreeImportance: 0
+    SkillThreeEffects: []
+    SkillThreeCoolDown: 0
+    SkillThreeMaxTurns: 0
+    EffectsHarmful: []
+    EffectsBeneficial: []
+    RuneNames: []
+    MaxEffects: 10
+    OwnerName: 
+    CurrentTurn: 0
+    RuneOneApplied: 0
+    RuneTwoApplied: 0
+    RuneThreeApplied: 0
+    RuneFourApplied: 0
+    RuneFiveApplied: 0
+    RuneSixApplied: 0
+    RunesEquiped: 0
+    state: 0
+  MonsterUI: {fileID: 0}
+  RuneUI: {fileID: 0}
+  MonsterAndRuneUI: {fileID: 0}
+  SwitchUIPanel: {fileID: 0}
