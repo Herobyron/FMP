@@ -129,7 +129,8 @@ public class MonsterScript
     [SerializeField]
     private int BaseStars = 1;
 
-    // Type enum seen in design (monster type is already included not sure wether is still needed)
+    // this is a number designated to be used to determine the monsters image. this is created on generation 
+    private int MonsterImageNumber = 1;
 
 
     // these are the runes that the monster can have equiped
@@ -2387,5 +2388,15 @@ public class MonsterScript
     public void SetSkillThreeMaxTurns(int Turns)
     {
         SkillThreeMaxTurns = Turns;
+    }
+
+    public int GetMonsterImageNumber()
+    {
+        return MonsterImageNumber;
+    }
+
+    public void SetMonsterImageNumber(int Num)
+    {
+        MonsterImageNumber = Num;
     }
 }

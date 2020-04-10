@@ -34,6 +34,10 @@ public class TrainingSelectionUI : MonoBehaviour
     [SerializeField]
     private List<MonsterScript> SelectedMonsters = new List<MonsterScript>();
 
+    [Tooltip("this is a list of the images for the monster")]
+    [SerializeField]
+    private List<Sprite> MonsterImages = new List<Sprite>();
+
     [Tooltip("this is the text for the name of curent monster the player is looking at")]
     [SerializeField]
     private Text MonsterLookingAtName = null;
@@ -64,29 +68,27 @@ public class TrainingSelectionUI : MonoBehaviour
 
     [Tooltip("this is the image for the first selected monster")]
     [SerializeField]
-    private Image SelectedMonsterOne = null;
+    private Image SelectedMonsterOneImage = null;
 
     [Tooltip("this is the image for the second selected monster")]
     [SerializeField]
-    private Image SelectedMonsterTwo = null;
+    private Image SelectedMonsterTwoImage = null;
 
     [Tooltip("this is the image for the third selected monster")]
     [SerializeField]
-    private Image SelectedMonsterThree = null;
+    private Image SelectedMonsterThreeImage = null;
 
+    [Tooltip("this is the replacement panel")]
+    [SerializeField]
+    private GameObject ReplaceMonsterPanel = null;
 
+    [Tooltip("this is a panel to display what monster has been selected to give the player a notification")]
+    [SerializeField]
+    private GameObject MonsterSelectedPanel = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Tooltip("this is the text that is displayed when a monster is selected on the team")]
+    [SerializeField]
+    private Text SelectedMonsterdisplayText = null;
 
     // this function uses the game manager to load in the information from the manager to here
     public void LoadInformation()
@@ -111,10 +113,9 @@ public class TrainingSelectionUI : MonoBehaviour
         {
             GameObject NewButton = Instantiate(ButtonTemplate) as GameObject;
             NewButton.SetActive(true);
-            NewButton.name = "Monster" + MonsterButtonCount;
-
+            NewButton.name = "Monster " + MonsterButtonCount;
+            NewButton.GetComponent<Image>().sprite = MonsterImages[(TheManager.ReturnPlayerMonsters()[MonsterButtonCount].GetMonsterImageNumber() - 1)];
             MonsterButtonCount++;
-
             NewButton.transform.SetParent(ButtonTemplate.transform.parent, false);
             MonsterButtons.Add(NewButton);
 
@@ -135,10 +136,186 @@ public class TrainingSelectionUI : MonoBehaviour
         RefreshViewedMonsterUI();
     }
 
+    // this function allows you to view the picked selected monster
+    public void AddSelectedMonsterToView(int SelectedMonsterNum)
+    {
+        MonsterBiengDisplayed = SelectedMonsters[SelectedMonsterNum];
+        RefreshViewedMonsterUI();
+    }
+
     // this function refreshes the UI of the viewed Monster
     public void RefreshViewedMonsterUI()
     {
 
+        MonsterLookingAtName.text = "Monster Name:" + MonsterBiengDisplayed.ReturnMonsterName();
+
+        if (MonsterBiengDisplayed.ReturnRune(1) != null)
+        {
+            if (MonsterBiengDisplayed.ReturnRune(1).ReturnMainRuneStat() != 0)
+            {
+                RuneOneImage.gameObject.SetActive(true);
+            }
+        }
+
+        if (MonsterBiengDisplayed.ReturnRune(2) != null)
+        {
+            if (MonsterBiengDisplayed.ReturnRune(2).ReturnMainRuneStat() != 0)
+            {
+                RuneTwoImage.gameObject.SetActive(true);
+            }
+        }
+
+        if (MonsterBiengDisplayed.ReturnRune(3) != null)
+        {
+            if (MonsterBiengDisplayed.ReturnRune(3).ReturnMainRuneStat() != 0)
+            {
+                RuneThreeImage.gameObject.SetActive(true);
+            }
+        }
+
+        if (MonsterBiengDisplayed.ReturnRune(4) != null)
+        {
+            if (MonsterBiengDisplayed.ReturnRune(4).ReturnMainRuneStat() != 0)
+            {
+                RuneFourImage.gameObject.SetActive(true);
+            }
+        }
+
+        if (MonsterBiengDisplayed.ReturnRune(5) != null)
+        {
+            if (MonsterBiengDisplayed.ReturnRune(5).ReturnMainRuneStat() != 0)
+            {
+                RuneFiveImage.gameObject.SetActive(true);
+            }
+        }
+
+        if (MonsterBiengDisplayed.ReturnRune(6) != null)
+        {
+            if (MonsterBiengDisplayed.ReturnRune(6).ReturnMainRuneStat() != 0)
+            {
+                RuneSixImage.gameObject.SetActive(true);
+            }
+        }
+
     }
 
+    // this function adds the viewed monster to the list 
+    // if the list has more then three monsters (count equal too 2) then the panel opens to pick one to replace
+    public void AddViewedMonsterToSelected()
+    {
+        
+
+        for(int i = 0; i < SelectedMonsters.Count; i++)
+        {
+            if(MonsterBiengDisplayed != SelectedMonsters[i])
+            {
+                if(SelectedMonsters.Count  < 3)
+                {
+                    SelectedMonsters.Add(MonsterBiengDisplayed);
+                    switch (SelectedMonsters.Count)
+                    {
+                        case (1):
+                            {
+                                SelectedMonsterOneImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() -1];
+                                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 1);
+                                break;
+                            }
+                        case (2):
+                            {
+                                SelectedMonsterTwoImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() -1];
+                                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 2);
+                                break;
+                            }
+                        case (3):
+                            {
+                                SelectedMonsterThreeImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() -1];
+                                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 3);
+                                break;
+                            }
+                    }
+
+                    break;
+                }
+                else
+                {
+                    ReplaceMonsterPanel.SetActive(true);
+                }
+            }
+        }
+
+        if (SelectedMonsters.Count == 0)
+        {
+            if (MonsterBiengDisplayed.ReturnMonsterName() != "Blank")
+            {
+                SelectedMonsters.Add(MonsterBiengDisplayed);
+                SelectedMonsterOneImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 1);
+            }
+
+        }
+    }
+
+    // this function is used on the replacement panel to swap the monster bieng viewed with the one selected
+    public void ReplaceSelectedMonster(int SelectedMonsterNum)
+    {
+        bool MonsterAlreadySelected = false;
+
+        for(int i = 0; i < SelectedMonsters.Count; i++)
+        {
+            if(MonsterBiengDisplayed == SelectedMonsters[i])
+            {
+                MonsterAlreadySelected = true;
+            }
+        }
+
+
+        if (!MonsterAlreadySelected)
+        {
+            SelectedMonsters[SelectedMonsterNum] = MonsterBiengDisplayed;
+
+            switch ((SelectedMonsterNum + 1))
+            {
+                case (1):
+                    {
+                        SelectedMonsterOneImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                        SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 1);
+                        break;
+                    }
+                case (2):
+                    {
+                        SelectedMonsterTwoImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                        SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 2);
+                        break;
+                    }
+                case (3):
+                    {
+                        SelectedMonsterThreeImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                        SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 3);
+                        break;
+                    }
+            }
+
+
+        }
+
+    }
+
+
+    // a function to display what monster has been selected and added to the team
+    public void SelectionNotification(string MonsterName, int Slot)
+    {
+        MonsterSelectedPanel.SetActive(true);
+        SelectedMonsterdisplayText.text = MonsterName + " Has been selected and added to the team. they are in Slot: " + Slot;
+
+    }
+
+    // a function that starts the training battle for the player
+    public void StartBattle()
+    {
+        FindObjectOfType<BattleManager>().SetPlayerBattleMonsters(SelectedMonsters);
+        
+        // here i want a bettle effect to be a transition.
+
+        gameObject.SetActive(false);
+    }
 }

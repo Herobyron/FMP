@@ -112,7 +112,7 @@ public class UIMonsterTest : MonoBehaviour
             GameObject NewMonster = Instantiate(ButtonTemplate) as GameObject;
             NewMonster.SetActive(true);
             NewMonster.name = "Monster " + MonsterButtonCount;
-            NewMonster.GetComponent<Image>().sprite = SpriteList[Random.Range(0, SpriteList.Count)];
+            NewMonster.GetComponent<Image>().sprite = SpriteList[(TheManager.ReturnPlayerMonsters()[MonsterButtonCount].GetMonsterImageNumber() - 1)];
             MonsterButtonCount++;
             NewMonster.transform.SetParent(ButtonTemplate.transform.parent, false);
             MonsterButtons.Add(NewMonster);

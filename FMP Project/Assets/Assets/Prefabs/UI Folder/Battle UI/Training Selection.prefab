@@ -119,8 +119,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SetMonsterInUSe
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: AddMonsterToView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -328,7 +328,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2720416084419266202}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: AddSelectedMonsterToView
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &768332278336186500
@@ -409,7 +420,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chose Slot To Put Monster In
+  m_Text: Chose A Monster Too Replace
 --- !u!1 &1041313535188460387
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,13 +697,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: ReplaceSelectedMonster
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -727,7 +738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2958376103813376866
 RectTransform:
   m_ObjectHideFlags: 0
@@ -866,6 +877,85 @@ MonoBehaviour:
   m_Text: 'Slot Six
 
 '
+--- !u!1 &1455994226027758186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5054240461349231746}
+  - component: {fileID: 9078574005022632946}
+  - component: {fileID: 7538803168609788055}
+  m_Layer: 5
+  m_Name: Selected Monster Display Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5054240461349231746
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455994226027758186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 993057488285704193}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -44.5}
+  m_SizeDelta: {x: 1153.6, y: 152.8}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9078574005022632946
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455994226027758186}
+  m_CullTransparentMesh: 0
+--- !u!114 &7538803168609788055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455994226027758186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
+    m_FontSize: 70
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 180
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: MOnster Robo Has Been Selected
 --- !u!1 &1647553867421944412
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1157531714851091907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -958,7 +1048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5555334688639808562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1501,19 +1591,95 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6041926836220827760}
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: AddViewedMonsterToSelected
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &3094476207820576100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993057488285704193}
+  - component: {fileID: 745178743283317765}
+  - component: {fileID: 2518463604021203642}
+  m_Layer: 5
+  m_Name: Monster Selected Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &993057488285704193
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094476207820576100}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5054240461349231746}
+  - {fileID: 6157893678778610455}
+  m_Father: {fileID: 2581523175559138950}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 41.19995}
+  m_SizeDelta: {x: -800, y: -864.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &745178743283317765
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094476207820576100}
+  m_CullTransparentMesh: 0
+--- !u!114 &2518463604021203642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3094476207820576100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.20893213, g: 0.16073336, b: 0.7924528, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
 --- !u!1 &3151028647121034301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,13 +1798,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: ReplaceSelectedMonster
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1690,8 +1856,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1847, y: -26}
-  m_SizeDelta: {x: 220, y: 41.4}
+  m_AnchoredPosition: {x: 1832.4, y: -26}
+  m_SizeDelta: {x: 249.1, y: 41.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8328567430733006524
 CanvasRenderer:
@@ -1734,7 +1900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Monster One
+  m_Text: Monster Three
 --- !u!1 &3484211552529790198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2001,7 +2167,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7698325213106123011}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: StartBattle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3542621300217858962
@@ -2409,12 +2586,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: LoadInformation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2592,6 +2769,7 @@ GameObject:
   - component: {fileID: 2305657051539676468}
   - component: {fileID: 7080592751630332775}
   - component: {fileID: 3822797501203179962}
+  - component: {fileID: 830664199765966979}
   m_Layer: 5
   m_Name: Training Selection
   m_TagString: Untagged
@@ -2615,6 +2793,7 @@ RectTransform:
   - {fileID: 4505992471777299539}
   - {fileID: 266004398794636360}
   - {fileID: 2004574154121308285}
+  - {fileID: 993057488285704193}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2683,6 +2862,256 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &830664199765966979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176688509348192019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814447b3e1dd75e4fb42c5777a66e9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TheManager: {fileID: 0}
+  GridGroup: {fileID: 8039318583760129802}
+  ButtonTemplate: {fileID: 195606977242062697}
+  MonsterBiengDisplayed:
+    MonsterName: Blank
+    BaseHealth: 0
+    BaseDamage: 0
+    BaseDefence: 0
+    BaseSpeed: 0
+    BaseCritRate: 0
+    BaseCritDamage: 0
+    BaseAccuracy: 0
+    BaseResistance: 0
+    CurrentHealth: 0
+    Stars: 0
+    IncreasedHealth: 0
+    IncreasedDefence: 0
+    IncreasedAttack: 0
+    IncreasedSpeed: 0
+    IncreasedAccuracy: 0
+    IncreasedResistance: 0
+    IncreasedCritRate: 0
+    IncreasedCritDamage: 0
+    Type: 1
+    TheMonsterType: 
+    MonsterLevel: 0
+    MonsterMaxLevel: 15
+    Awakened: 0
+    LevelMultiplier: 0.01
+    AwakenMultiplier: 0.5
+    StarsMultiplier: 0.3
+    BaseStars: 1
+    RuneOne:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneTwo:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneThree:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneFour:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneFive:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    RuneSix:
+      RuneName: 
+      RuneEquiped: 0
+      RuneLevel: 0
+      RuneStars: 0
+      RuneOwnerName: 
+      MonsterEquipedToo: 
+      Rarity: 0
+      RuneSlot: 0
+      MaxRuneStats: 0
+      CurrentRuneStats: 0
+      RuneMaxLevel: 15
+      MainRuneStat: 0
+      MainStat: 2
+      RuneStatOne: 0
+      StatsOne: 0
+      StatOneType: 
+      RuneStatTwo: 0
+      StatsTwo: 0
+      StatTwoType: 
+      RuneStatThree: 0
+      StatsThree: 0
+      StatThreeType: 
+      RuneStatFour: 0
+      StatsFour: 0
+      StatFourType: 
+    SkillOneMainEffect: 
+    SkillOneSecondaryEffect: 
+    SkillOneImportance: 0
+    SkillOneEffects: []
+    SkillTwoMainEffect: 
+    SkillTwoSecondaryEffect: 
+    SkillTwoImportance: 0
+    SkillTwoEffects: []
+    SkillTwoCoolDown: 0
+    SKillTwoMaxTurns: 0
+    SkillThreeMainEffect: 
+    SkillThreeSecondaryEffect: 
+    SkillThreeImportance: 0
+    SkillThreeEffects: []
+    SkillThreeCoolDown: 0
+    SkillThreeMaxTurns: 0
+    EffectsHarmful: []
+    EffectsBeneficial: []
+    RuneNames: []
+    MaxEffects: 10
+    OwnerName: 
+    CurrentTurn: 0
+    RuneOneApplied: 0
+    RuneTwoApplied: 0
+    RuneThreeApplied: 0
+    RuneFourApplied: 0
+    RuneFiveApplied: 0
+    RuneSixApplied: 0
+    RunesEquiped: 0
+    state: 0
+  MonsterButtonCount: 0
+  MonsterButtons: []
+  SelectedMonsters: []
+  MonsterImages:
+  - {fileID: -7282886668606283007, guid: 763f3cbf5c237a449b0da7f733290d6e, type: 3}
+  - {fileID: 21300000, guid: 9e055f9b9e35a2240b3b187c1a9dd7ab, type: 3}
+  - {fileID: 21300000, guid: c9409716484f94c44b2eb00c33de3bb1, type: 3}
+  MonsterLookingAtName: {fileID: 4304614880774307563}
+  RuneOneImage: {fileID: 1188567644649610332}
+  RuneTwoImage: {fileID: 1617696975876440197}
+  RuneThreeImage: {fileID: 5386470476614580332}
+  RuneFourImage: {fileID: 5946464623986041048}
+  RuneFiveImage: {fileID: 4372011695469651842}
+  RuneSixImage: {fileID: 8933478473287539326}
+  SelectedMonsterOneImage: {fileID: 2720416084419266202}
+  SelectedMonsterTwoImage: {fileID: 6656665716617490935}
+  SelectedMonsterThreeImage: {fileID: 2751716474544723092}
+  ReplaceMonsterPanel: {fileID: 6041926836220827760}
+  MonsterSelectedPanel: {fileID: 3094476207820576100}
+  SelectedMonsterdisplayText: {fileID: 7538803168609788055}
 --- !u!1 &4177038662750251286
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,7 +3404,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2751716474544723092}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: AddSelectedMonsterToView
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &4683652939583361121
@@ -2995,7 +3435,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3133860878774665071
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3219,7 +3659,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Monster One
+  m_Text: Monster Two
 --- !u!1 &5332891542278149738
 GameObject:
   m_ObjectHideFlags: 0
@@ -3492,7 +3932,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6656665716617490935}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: AddSelectedMonsterToView
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &5769742252937321224
@@ -3727,6 +4178,7 @@ RectTransform:
   - {fileID: 1670181283610141574}
   - {fileID: 3280157612714466788}
   - {fileID: 6432502952822646780}
+  - {fileID: 8817469669993643736}
   m_Father: {fileID: 2581523175559138950}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3772,6 +4224,137 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!1 &6064494469455430362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8817469669993643736}
+  - component: {fileID: 3907672774497952544}
+  - component: {fileID: 5993684716819139197}
+  - component: {fileID: 3529861735765069975}
+  m_Layer: 5
+  m_Name: Close Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8817469669993643736
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064494469455430362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2004574154121308285}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 540, y: 207.01}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3907672774497952544
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064494469455430362}
+  m_CullTransparentMesh: 0
+--- !u!114 &5993684716819139197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064494469455430362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!114 &3529861735765069975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6064494469455430362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5993684716819139197}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6041926836220827760}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &6096632672065599977
 GameObject:
   m_ObjectHideFlags: 0
@@ -3969,18 +4552,149 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 830664199765966979}
+        m_MethodName: ReplaceSelectedMonster
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6041926836220827760}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!1 &6219248530867215605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6157893678778610455}
+  - component: {fileID: 7490766025641965180}
+  - component: {fileID: 5269426197607948621}
+  - component: {fileID: 2804527401395393025}
+  m_Layer: 5
+  m_Name: Close Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6157893678778610455
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219248530867215605}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 993057488285704193}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 540, y: 74.956}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7490766025641965180
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219248530867215605}
+  m_CullTransparentMesh: 0
+--- !u!114 &5269426197607948621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219248530867215605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!114 &2804527401395393025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6219248530867215605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 5269426197607948621}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3094476207820576100}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -4322,7 +5036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4199216066559643103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4591,7 +5305,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3218280449942306537
 RectTransform:
   m_ObjectHideFlags: 0

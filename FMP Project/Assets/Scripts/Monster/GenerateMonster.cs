@@ -44,10 +44,12 @@ public class GenerateMonster : MonoBehaviour
     //this function goes about actually generating the information for the monster
     public void GenerateMonsterFunc()
     {
+        //setting the monster image number
+        MonsterScriptGenerated.SetMonsterImageNumber(Random.Range(1, 4));
 
         //this first part makes it so stars are generated
 
-        int StarChance = Random.Range(0, 100);
+        int StarChance = Random.Range(0, 101);
 
         if(StarChance <= 30)
         {
@@ -107,7 +109,7 @@ public class GenerateMonster : MonoBehaviour
 
 
         // this part will now generate the type of monster that this one will be
-        int MonsterTypeChance = Random.Range(0, 92);
+        int MonsterTypeChance = Random.Range(0, 93);
 
         if(MonsterTypeChance <= 30)
         {
@@ -329,7 +331,7 @@ public class GenerateMonster : MonoBehaviour
         
         //first skill 
         // first skill deciding if its an AOE
-        if(Random.Range(1, 100) > 30)
+        if(Random.Range(1, 100) > 40)
         {
             MonsterScriptGenerated.SetSkillOneAOE(false);
         }
@@ -356,7 +358,7 @@ public class GenerateMonster : MonoBehaviour
             {
                 MonsterScriptGenerated.SetSkillOneMainEffect("BeneficialEffect");
                 //adding effects
-                int TempEffects = Random.Range(1, 3);
+                int TempEffects = Random.Range(1, 4);
 
                 for(int i = 0; i <= TempEffects; i++)
                 {
@@ -425,7 +427,7 @@ public class GenerateMonster : MonoBehaviour
             {
                 MonsterScriptGenerated.SetSkillOneMainEffect("HarmfulEffect");
 
-                int TempEffects = Random.Range(1, 3);
+                int TempEffects = Random.Range(1, 4);
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
@@ -492,7 +494,7 @@ public class GenerateMonster : MonoBehaviour
         }
 
         //now determins if the first skill will have a secondary effect
-        SKillTemp = Random.Range(1, 2);
+        SKillTemp = Random.Range(1, 3);
         if(SKillTemp == 1)
         {
 
@@ -510,7 +512,7 @@ public class GenerateMonster : MonoBehaviour
                         else
                         {
                             MonsterScriptGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
-                            int TempEffects = Random.Range(1, 3);
+                            int TempEffects = Random.Range(1, 4);
 
                             for (int i = 0; i <= TempEffects; i++)
                             {
@@ -589,7 +591,7 @@ public class GenerateMonster : MonoBehaviour
                             {
                                 MonsterScriptGenerated.SetSkillOneSecondaryEffect("BeneficialEffect");
                                 //adding effects
-                                int TempEffects = Random.Range(1, 3);
+                                int TempEffects = Random.Range(1, 4);
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
@@ -660,7 +662,7 @@ public class GenerateMonster : MonoBehaviour
                             {
                                 MonsterScriptGenerated.SetSkillOneSecondaryEffect("HarmfulEffect");
 
-                                int TempEffects = Random.Range(1, 3);
+                                int TempEffects = Random.Range(1, 4);
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
@@ -733,7 +735,7 @@ public class GenerateMonster : MonoBehaviour
                     }
                 case ("HarmfulEffect"):
                     {
-                        if (Random.Range(1, 2) == 1)
+                        if (Random.Range(1, 3) == 1)
                         {
                             MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         }
@@ -770,7 +772,7 @@ public class GenerateMonster : MonoBehaviour
             {
                 MonsterScriptGenerated.SetSkillTwoMainEffect("BeneficialEffect");
                 //adding effects
-                int TempEffects = Random.Range(1, 3);
+                int TempEffects = Random.Range(1, 4);
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
@@ -838,7 +840,7 @@ public class GenerateMonster : MonoBehaviour
             {
                 MonsterScriptGenerated.SetSkillTwoMainEffect("HarmfulEffect");
 
-                int TempEffects = Random.Range(1, 3);
+                int TempEffects = Random.Range(1, 4);
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
@@ -905,7 +907,7 @@ public class GenerateMonster : MonoBehaviour
         }
 
         //now determins if the first skill will have a secondary effect
-        SKillTemp = Random.Range(1, 2);
+        SKillTemp = Random.Range(1, 3);
         if (SKillTemp == 1)
         {
 
@@ -924,7 +926,7 @@ public class GenerateMonster : MonoBehaviour
                         else
                         {
                             MonsterScriptGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
-                            int TempEffects = Random.Range(1, 3);
+                            int TempEffects = Random.Range(1, 4);
 
                             for (int i = 0; i <= TempEffects; i++)
                             {
@@ -1001,7 +1003,7 @@ public class GenerateMonster : MonoBehaviour
                             {
                                 MonsterScriptGenerated.SetSkillTwoSecondaryEffect("BeneficialEffect");
                                 //adding effects
-                                int TempEffects = Random.Range(1, 3);
+                                int TempEffects = Random.Range(1, 4);
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
@@ -1069,7 +1071,7 @@ public class GenerateMonster : MonoBehaviour
                             {
                                 MonsterScriptGenerated.SetSkillTwoSecondaryEffect("HarmfulEffect");
 
-                                int TempEffects = Random.Range(1, 3);
+                                int TempEffects = Random.Range(1, 4);
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
@@ -1144,7 +1146,7 @@ public class GenerateMonster : MonoBehaviour
                     }
                 case ("HarmfulEffect"):
                     {
-                        if (Random.Range(1, 2) == 1)
+                        if (Random.Range(1, 3) == 1)
                         {
                             MonsterScriptGenerated.SetSkillTwoSecondaryEffect("Healing");
                         }
@@ -1179,7 +1181,7 @@ public class GenerateMonster : MonoBehaviour
             {
                 MonsterScriptGenerated.SetSkillThreeMainEffect("BeneficialEffect");
                 //adding effects
-                int TempEffects = Random.Range(1, 3);
+                int TempEffects = Random.Range(1, 4);
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
@@ -1244,7 +1246,7 @@ public class GenerateMonster : MonoBehaviour
             {
                 MonsterScriptGenerated.SetSkillThreeMainEffect("HarmfulEffect");
 
-                int TempEffects = Random.Range(1, 3);
+                int TempEffects = Random.Range(1, 4);
 
                 for (int i = 0; i <= TempEffects; i++)
                 {
@@ -1310,7 +1312,7 @@ public class GenerateMonster : MonoBehaviour
         }
 
         //now determins if the first skill will have a secondary effect
-        SKillTemp = Random.Range(1, 2);
+        SKillTemp = Random.Range(1, 3);
         if (SKillTemp == 1)
         {
 
@@ -1327,7 +1329,7 @@ public class GenerateMonster : MonoBehaviour
                         else
                         {
                             MonsterScriptGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
-                            int TempEffects = Random.Range(1, 3);
+                            int TempEffects = Random.Range(1, 4);
 
                             for (int i = 0; i <= TempEffects; i++)
                             {
@@ -1401,7 +1403,7 @@ public class GenerateMonster : MonoBehaviour
                             {
                                 MonsterScriptGenerated.SetSkillThreeSecondaryEffect("BeneficialEffect");
                                 //adding effects
-                                int TempEffects = Random.Range(1, 3);
+                                int TempEffects = Random.Range(1, 4);
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
@@ -1466,7 +1468,7 @@ public class GenerateMonster : MonoBehaviour
                             {
                                 MonsterScriptGenerated.SetSkillThreeSecondaryEffect("HarmfulEffect");
 
-                                int TempEffects = Random.Range(1, 3);
+                                int TempEffects = Random.Range(1, 4);
 
                                 for (int i = 0; i <= TempEffects; i++)
                                 {
@@ -1540,7 +1542,7 @@ public class GenerateMonster : MonoBehaviour
                     }
                 case ("HarmfulEffect"):
                     {
-                        if (Random.Range(1, 2) == 1)
+                        if (Random.Range(1, 3) == 1)
                         {
                             MonsterScriptGenerated.SetSkillThreeSecondaryEffect("Healing");
                         }
@@ -1565,9 +1567,9 @@ public class GenerateMonster : MonoBehaviour
 
         // final step is setting the max turns for the seconda and third skills on the monster
 
-        MonsterScriptGenerated.SetSkillTwoMaxTurns(Random.Range(2,5));
+        MonsterScriptGenerated.SetSkillTwoMaxTurns(Random.Range(2,6));
 
-        MonsterScriptGenerated.SetSkillThreeMaxTurns(Random.Range(2,5));
+        MonsterScriptGenerated.SetSkillThreeMaxTurns(Random.Range(2,6));
 
     }
 }
