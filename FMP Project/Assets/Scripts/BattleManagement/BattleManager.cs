@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class BattleManager : MonoBehaviour
@@ -28,15 +29,15 @@ public class BattleManager : MonoBehaviour
     private CurrentTurnMonster MonstersTurn = CurrentTurnMonster.PlayerMon1;
 
     // these are bools to detemrine who has had a turn
-    [Tooltip("A bool to detemrin if PlayerMon1 has had a turn")]
+    [Tooltip("A bool to detemrin if the first monster has had a turn")]
     [SerializeField]
     private bool PlayerMonOneHadTurn = false;
 
-    [Tooltip("A bool to detemrin if PlayerMon2 has had a turn")]
+    [Tooltip("A bool to detemrin if the second monster has had a turn")]
     [SerializeField]
     private bool PlayerMonTwoHadTurn = false;
 
-    [Tooltip("A bool to detemrin if PlayerMon3 has had a turn")]
+    [Tooltip("A bool to detemrin if the third monster has had a turn")]
     [SerializeField]
     private bool PlayerMonThreeHadTurn = false;
 
@@ -60,24 +61,51 @@ public class BattleManager : MonoBehaviour
     // a int to keep a track of how many rounds have passed
     [Tooltip("this is the number of rounds that have passed ")]
     [SerializeField]
-    private int NumberOfRounds;
+    private int NumberOfRounds = 0;
+
+
+    // these are the string for the player monsters on who will move, first second and third
+    [SerializeField]
+    private string PlayerMonFirst = "";
+
+    private string PlayerMonSecond = "";
+
+    private string PlayerMonThird = "";
+
+
+    //this is the monster whos turn it is
+    private MonsterScript CurrentMonster = null;
+
+
+    [Tooltip("this is a refernce to the current Battle UI script")]
+    [SerializeField]
+    private BattleUIScript BattleUI;
+
+
+    // this is the training dummy Monster Script
+    private MonsterScript TrainingDummy;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if(CurrentState == BattleState.Training)
-        {
-            EnemyMonOneHadTurn = true;
-            EnemyMonTwoHadTurn = true;
-            EnemyMonThreeHadTurn = true;
-        }
+        //if(CurrentState == BattleState.Training)
+        //{
+        //    
+        //    EnemyMonOneHadTurn = true;
+        //    EnemyMonTwoHadTurn = true;
+        //    EnemyMonThreeHadTurn = true;
+        //
+        //    TurnOrderCalculateTraining();
+        //}
     }
 
     // Update is called once per frame and will check wether to change a monsters turn or not
     void Update()
     {
-        
+        //CurrentTurnCalc();
     }
 
 
@@ -87,26 +115,130 @@ public class BattleManager : MonoBehaviour
         PlayersMonsters = TheMonsters;
     }
 
-    // this is used to caculate who's turn it is when its a training battle
-    public void TurnCalculateTraining()
+    // this is a function that returns all of the players monsters on the battle field
+    public List<MonsterScript> ReturnPlayerMonsters()
     {
-        if (PlayerMonOneHadTurn && PlayerMonTwoHadTurn && PlayerMonThreeHadTurn)
-        {
-            NumberOfRounds++;
+        return PlayersMonsters;
+    }
 
-            // speed calcualtion
-            // set the current turn to that monster
-            // send that information to the UI
+    // this is used to caculate who's turn it is when its a training battle
+    public void TurnOrderCalculateTraining()
+    {
+        //NumberOfRounds++;
+
+        
+
+        SpeedCalculationPlayer(PlayersMonsters);
+
+        foreach(MonsterScript M in PlayersMonsters)
+        {
+            if(M.ReturnMonsterName() == PlayerMonFirst)
+            {
+                CurrentMonster = M;
+            }
+        }
+
+        BattleUI.SetCurrentMonster(CurrentMonster);
+       
+
+    }
+
+    // a function that updates who's turn it currently is
+    public void CurrentTurnCalc()
+    {
+        if(PlayerMonOneHadTurn && PlayerMonTwoHadTurn && PlayerMonThreeHadTurn)
+        {
+            PlayerMonOneHadTurn = false;
+            PlayerMonTwoHadTurn = false;
+            PlayerMonThreeHadTurn = false;
+
+            foreach (MonsterScript M in PlayersMonsters)
+            {
+                if (M.ReturnMonsterName() == PlayerMonFirst)
+                {
+                    CurrentMonster = M;
+                }
+            }
 
         }
-        else
+        else if(PlayerMonOneHadTurn && !PlayerMonTwoHadTurn && !PlayerMonThreeHadTurn)
         {
-            // speed calculation
-            // check if they have had a turn
-            // if they have then find the person in second and third and check them
-            // set the current turn
-            // send that information to the UI
+            foreach (MonsterScript M in PlayersMonsters)
+            {
+                if (M.ReturnMonsterName() == PlayerMonSecond)
+                {
+                    CurrentMonster = M;
+                }
+            }
         }
+        else if (PlayerMonOneHadTurn && PlayerMonTwoHadTurn && !PlayerMonThreeHadTurn)
+        {
+            foreach (MonsterScript M in PlayersMonsters)
+            {
+                if (M.ReturnMonsterName() == PlayerMonThird)
+                {
+                    CurrentMonster = M;
+                }
+            }
+        }
+
+        BattleUI.SetCurrentMonster(CurrentMonster);
+
+    }
+       
+
+
+    // this function is used to find the speed in between all of the monsters given to the function (this is for the player)
+    public void SpeedCalculationPlayer(List<MonsterScript> AllMons)
+    {
+
+        List<MonsterScript> TempMonList = new List<MonsterScript>();
+        TempMonList = AllMons;
+
+        int TempSpeed = 0;
+        MonsterScript TempMon = new MonsterScript();
+
+        foreach (MonsterScript M in TempMonList)
+        {
+            if((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed())  > TempSpeed)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                PlayerMonFirst = M.ReturnMonsterName();
+                TempMon = M;
+            }
+
+        }
+
+        //TempMonList.Remove(TempMon);
+
+        foreach (MonsterScript M in TempMonList)
+        {
+            if ((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != PlayerMonFirst)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                PlayerMonSecond = M.ReturnMonsterName();
+                TempMon = M;
+            }
+
+        }
+
+        //TempMonList.Remove(TempMon);
+
+
+        foreach (MonsterScript M in TempMonList)
+        {
+            if ((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != PlayerMonFirst && M.ReturnMonsterName() != PlayerMonSecond)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                PlayerMonThird = M.ReturnMonsterName();
+                TempMon = M;
+            }
+
+        }
+
+        //TempMonList.Remove(TempMon);
+
+
     }
 
     // a function to set a specific monsters turn to be completed
@@ -130,6 +262,48 @@ public class BattleManager : MonoBehaviour
                     break;
                 }
         }
+
+    }
+
+    // a function to set the end of the monsters turn and change the current monster
+    public void EndCurrentTurn()
+    {
+        if(CurrentMonster.ReturnMonsterName() == PlayerMonFirst)
+        {
+            PlayerMonOneHadTurn = true;
+        }
+        else if(CurrentMonster.ReturnMonsterName() == PlayerMonSecond)
+        {
+            PlayerMonTwoHadTurn = true;
+        }
+        else if(CurrentMonster.ReturnMonsterName() == PlayerMonThird)
+        {
+            PlayerMonThreeHadTurn = true;
+        }
+
+        CurrentTurnCalc();
+    }
+
+
+    // this is a function used to give the battle UI the taget monster
+    // if the battle mode is training then it will just set the target to the training dummy
+    // if the battle mode is an actual battle then it will use the int given to pick the target
+    public void SetMonsterTarget(int TargetNumber)
+    {
+        if(CurrentState == BattleState.Training)
+        {
+            BattleUI.SetEnemySingleTarget(TrainingDummy);
+        }
+        else
+        {
+            BattleUI.SetEnemySingleTarget(EnemyMonsters[TargetNumber]);
+        }
+    }
+
+    // this function is used to give the battle UI the target monster when the skill is a healing skill
+    // no matter the type of the battle the player will be able to select 
+    public void SetTargetMonsterHeal()
+    {
 
     }
 

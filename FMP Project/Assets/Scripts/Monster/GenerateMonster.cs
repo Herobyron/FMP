@@ -1571,5 +1571,44 @@ public class GenerateMonster : MonoBehaviour
 
         MonsterScriptGenerated.SetSkillThreeMaxTurns(Random.Range(2,6));
 
+        // generating the skill scripts and storing them in the monster
+        // skill one generated
+        MonsterSkillScript SkillOne = new MonsterSkillScript();
+        SkillOne.SetSkillAOE(MonsterScriptGenerated.ReturnSkillOneAOE());
+        SkillOne.SetSkillMainEffect(MonsterScriptGenerated.ReturnrSkillOneMainEffect());
+        SkillOne.SetSkillSecondaryeffect(MonsterScriptGenerated.ReturnSkillOneSecondaryEffect());
+        SkillOne.SetSkillMainEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillOneMultipler());
+        SkillOne.SetSkillSecondaryEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillOneSecondMultiplier());
+        SkillOne.SetSkillEffects(MonsterScriptGenerated.ReturnAllSkillOneEffects());
+
+        MonsterScriptGenerated.SetMonsterSkills(SkillOne);
+
+
+        // Skill Two geerated
+
+        MonsterSkillScript SkillTwo = new MonsterSkillScript();
+        SkillTwo.SetSkillAOE(MonsterScriptGenerated.ReturnSkillTwoAOE());
+        SkillTwo.SetSkillMainEffect(MonsterScriptGenerated.ReturnSkillTwoMainEffect());
+        SkillTwo.SetSkillSecondaryeffect(MonsterScriptGenerated.ReturnSkillTwoSecondaryEffect());
+        SkillTwo.SetSkillMainEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillTwoMultipler());
+        SkillTwo.SetSkillSecondaryEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillTwoSecondMultiplier());
+        SkillTwo.SetSkillEffects(MonsterScriptGenerated.ReturnAllSkillTwoEffects());
+
+        MonsterScriptGenerated.SetMonsterSkills(SkillTwo);
+
+
+
+        // skill three generated
+
+        MonsterSkillScript SkillThree = new MonsterSkillScript();
+        SkillThree.SetSkillAOE(MonsterScriptGenerated.ReturnSkillThreeAOE());
+        SkillThree.SetSkillMainEffect(MonsterScriptGenerated.ReturnSkillThreeMainEffect());
+        SkillThree.SetSkillSecondaryeffect(MonsterScriptGenerated.ReturnSkillThreeSecondaryEffect());
+        SkillThree.SetSkillMainEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillThreeMultipler());
+        SkillThree.SetSkillSecondaryEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillThreeSecondMultiplier());
+        SkillThree.SetSkillEffects(MonsterScriptGenerated.ReturnAllSkillThreeEffects());
+
+        MonsterScriptGenerated.SetMonsterSkills(SkillThree);
+
     }
 }

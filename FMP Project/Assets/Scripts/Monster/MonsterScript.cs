@@ -165,6 +165,8 @@ public class MonsterScript
     private List<RuneScript> Runes = new List<RuneScript>();
 
     // this is a list of the skill script that will be used to use the monsters skills within battle
+    // they are added in order but also will all have a number to tell
+    // they are added in monster generation.
     private List<MonsterSkillScript> MonsterSkill = new List<MonsterSkillScript>();
 
     // these are the Skills that the monster can have and the skills information
@@ -2399,4 +2401,6 @@ public class MonsterScript
     {
         MonsterImageNumber = Num;
     }
+
+
 }

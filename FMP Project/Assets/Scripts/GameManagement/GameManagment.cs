@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
@@ -235,7 +236,15 @@ public class GameManagment : MonoBehaviour
         return GameData.PlayerInformation.ReturnAllPlayerMonsters();
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Monster");
+    }
 
+    public void LoadTrainingScene()
+    {
+        SceneManager.LoadScene("Training");
+    }
 
 }
 

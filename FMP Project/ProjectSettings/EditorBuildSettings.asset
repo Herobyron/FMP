@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Monster.unity
     guid: 85de5f8a5f8be56408747175ab095758
+  - enabled: 1
+    path: Assets/Scenes/Training.unity
+    guid: bbebde0d9f0f5554c9470b8efe4e2030
   m_configObjects: {}

@@ -90,6 +90,15 @@ public class TrainingSelectionUI : MonoBehaviour
     [SerializeField]
     private Text SelectedMonsterdisplayText = null;
 
+    [Tooltip("this is a penel to display a message to the player when they try to enter battle with less then three monsters")]
+    [SerializeField]
+    private GameObject StartBattleFailPanel = null;
+
+    [Tooltip("this is a panel that will display the final message before the battle begins")]
+    [SerializeField]
+    private GameObject StartBattleQuestionPanel = null;
+
+
     // this function uses the game manager to load in the information from the manager to here
     public void LoadInformation()
     {
@@ -310,12 +319,28 @@ public class TrainingSelectionUI : MonoBehaviour
     }
 
     // a function that starts the training battle for the player
-    public void StartBattle()
+    public void StartBattlePanel()
+    {
+
+        if(SelectedMonsters.Count < 3)
+        {
+            StartBattleFailPanel.SetActive(true);
+        }
+        else
+        {
+            StartBattleQuestionPanel.SetActive(true);
+        }
+
+        
+    }
+
+   public void StartBattle()
     {
         FindObjectOfType<BattleManager>().SetPlayerBattleMonsters(SelectedMonsters);
-        
+
         // here i want a bettle effect to be a transition.
 
         gameObject.SetActive(false);
     }
+
 }
