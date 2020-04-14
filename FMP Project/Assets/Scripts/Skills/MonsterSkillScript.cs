@@ -39,8 +39,11 @@ public class MonsterSkillScript
    // Params:
    // Targets - is a list of monsters that this skill can target. if this skill is not an AOE the list will only have one monster included within it
    // UsingMonster - this is the monster that is using the skill. this will allow for information like damage and defence to be used
-   public void UseSkill(List<MonsterScript> Targets, MonsterScript UsingMonster)
+   public int UseSkill(List<MonsterScript> Targets, MonsterScript UsingMonster)
    {
+        //this is a return number for the amount of damage/healing done
+        int TempDamageReturn = 0;
+
         if(CurrentCoolDown == 0)
         {
             switch (MainEffect)
@@ -72,9 +75,11 @@ public class MonsterSkillScript
                     {
                         foreach(MonsterScript M in Targets)
                         {
-                            for(int i = 0; i <= SkillEffects.Count; i++)
-                            {
-                                switch (SkillEffects[i])
+
+                            foreach(string S in SkillEffects)
+                            { 
+
+                                switch (S)
                                 {
                                     case ("Accuracy"):
                                         {
@@ -142,6 +147,7 @@ public class MonsterSkillScript
 
                             
                         }
+
                         break;
                     }
                 case ("HarmfulEffect"):
@@ -489,7 +495,7 @@ public class MonsterSkillScript
         }
 
         CurrentCoolDown = MaxCoolDown;
-
+        return TempDamageReturn;
    }
 
 

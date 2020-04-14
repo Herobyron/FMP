@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor.Build;
@@ -57,6 +58,46 @@ public class BattleUIScript : MonoBehaviour
     [SerializeField]
     private Text CurrentMonsterDefence = null;
 
+    // these are the text compoents for the skill decription and name
+    [Tooltip("this is the text information on the skill number")]
+    [SerializeField]
+    private Text SkillNumberText = null;
+
+    [Tooltip("this is the text information on the skill description")]
+    [SerializeField]
+    private Text SkillDescriptionText = null;
+
+    // these are the gameobject used to display the current monster
+    [Tooltip("this is the game object to show the first monster is the current monster")]
+    [SerializeField]
+    private GameObject CurrentMonOne;
+
+    [Tooltip("this is the game object to show the Second monster is the current monster")]
+    [SerializeField]
+    private GameObject CurrentMonTwo;
+
+    [Tooltip("this is the game object to show the Third monster is the current monster")]
+    [SerializeField]
+    private GameObject CurrentMonThree;
+
+
+    // these are the text elements for the damage numbers
+    [Tooltip("this is the text component for the damage numbers for the monster one")]
+    [SerializeField]
+    private Text MonsterOneDamageText = null;
+
+    [Tooltip("this is the text component for the damage numbers for the monster Two")]
+    [SerializeField]
+    private Text MonsterTwoDamageText = null;
+
+    [Tooltip("this is the text component for the damage numbers for the monster Three")]
+    [SerializeField]
+    private Text MonsterThreeDamageText = null;
+
+    [Tooltip("this is the text component for the damage numbers for the monster Dummy")]
+    [SerializeField]
+    private Text MonsterDummyDamageText = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -79,8 +120,241 @@ public class BattleUIScript : MonoBehaviour
 
 
     // a function to update the skills display of the current monster
-    public void UpdateSkillsDisplay()
+    public void UpdateSkillsDisplay(int SelectedSkill, MonsterSkillScript TheSkill)
     {
+        SkillNumberText.text = "Skill Number: " + SelectedSkill;
+
+        switch (TheSkill.GetSkillMainEffect())
+        {
+            case ("Healing"):
+                {
+                    if (TheSkill.ReturnSkillAOE())
+                    {
+                        SkillDescriptionText.text = "This Skill <color=darkblue>Heals</color> All Allies by a large amount. ";
+
+                        switch (TheSkill.GetSkillSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> all allies by a small amount. ";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                                    {
+                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                    }
+
+                                    SkillDescriptionText.text += " To All Allies. ";
+
+                                    break;
+                                }
+                        }
+                    }
+                    else
+                    {
+                        SkillDescriptionText.text = "This Skill <color=darkblue>Heals</color> A single Ally by a large amount. ";
+
+                        switch (TheSkill.GetSkillSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> one ally by a small amount. ";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also apply ";
+
+                                    for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                                    {
+                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                    }
+
+                                    SkillDescriptionText.text += " To one Allies. ";
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    break;
+                }
+            case ("BeneficialEffect"):
+                {
+                    if (TheSkill.ReturnSkillAOE())
+                    {
+                        SkillDescriptionText.text = "this skill will apply ";
+
+                        for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                        {
+                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                        }
+
+                        SkillDescriptionText.text += " To all Allies. ";
+
+                        if (TheSkill.GetSkillSecondaryEffect() == "Healing")
+                        {
+                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> all allies for a small amount. ";
+                        }
+
+                    }
+                    else
+                    {
+                        SkillDescriptionText.text = "this skill will apply";
+
+                        for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                        {
+                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                        }
+
+                        SkillDescriptionText.text += " To one Ally. ";
+
+                        if (TheSkill.GetSkillSecondaryEffect() == "Healing")
+                        {
+                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> one ally for a small amount. ";
+                        }
+
+
+                    }
+                    break;
+                }
+            case ("HarmfulEffect"):
+                {
+                    if (TheSkill.ReturnSkillAOE())
+                    {
+                        SkillDescriptionText.text = "this skill applies ";
+
+                        for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                        {
+                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                        }
+
+                        SkillDescriptionText.text += " to all enemies. ";
+
+                        if (TheSkill.GetSkillSecondaryEffect() == "Damage")
+                        {
+                            SkillDescriptionText.text += "this skill will also apply <color=darkblue>damage</color> to all enemies proportiionate to your attack power. ";
+                        }
+                        else if(TheSkill.GetSkillSecondaryEffect() == "Healing")
+                        {
+                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
+                        }
+                    }
+                    else
+                    {
+                        SkillDescriptionText.text = "this skill applies ";
+
+                        for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                        {
+                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                        }
+
+                        SkillDescriptionText.text += " to one enemy. ";
+
+                        if (TheSkill.GetSkillSecondaryEffect() == "Damage")
+                        {
+                            SkillDescriptionText.text += "this skill will also apply <color=darkblue>damage</color> to one enemy proportiionate to your attack power. ";
+                        }
+                        else if (TheSkill.GetSkillSecondaryEffect() == "Healing")
+                        {
+                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
+                        }
+                    }
+
+                    break;
+                }
+            case ("Damage"):
+                {
+
+                    if (TheSkill.ReturnSkillAOE())
+                    {
+                        SkillDescriptionText.text = "this skill applies <color=darkblue>damage</color> proportionate to your attack to all enemies monsters. ";
+
+                        switch (TheSkill.GetSkillSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillDescriptionText.text += "this skill also <color=darkblue>heals</color> you for a small amount. ";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also apply";
+
+                                    for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                                    {
+                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                    }
+
+                                    SkillDescriptionText.text += " to you. ";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also apply";
+
+                                    for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                                    {
+                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                    }
+
+                                    SkillDescriptionText.text += " to all enemies. ";
+
+
+                                    break;
+                                }
+                        }
+
+                    }
+                    else
+                    {
+                        SkillDescriptionText.text = "this skill applies <color=darkblue>damage</color> proportionate to your attack to one enemy monsters. ";
+
+                        switch (TheSkill.GetSkillSecondaryEffect())
+                        {
+                            case ("Healing"):
+                                {
+                                    SkillDescriptionText.text += "this skill also <color=darkblue>heals</color> you for a small amount. ";
+                                    break;
+                                }
+                            case ("BeneficialEffect"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also apply";
+
+                                    for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                                    {
+                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                    }
+
+                                    SkillDescriptionText.text += " to you. ";
+
+                                    break;
+                                }
+                            case ("HarmfulEffect"):
+                                {
+                                    SkillDescriptionText.text += "this skill will also apply";
+
+                                    for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
+                                    {
+                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                    }
+
+                                    SkillDescriptionText.text += " to one enemy. ";
+
+
+                                    break;
+                                }
+                        }
+                    }
+
+                    break;
+                }
+        }
 
     }    
 
@@ -107,7 +381,7 @@ public class BattleUIScript : MonoBehaviour
                         if(CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
                         {
                             CurrentMonster.GetMonsterSKills()[0].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster);
-
+                            
                         }
                         else
                         {
@@ -115,7 +389,7 @@ public class BattleUIScript : MonoBehaviour
                         }
 
                         BattleManagerRef.EndCurrentTurn();
-
+                        UpdateCurrentMonsterImage();
                         break;
                     }
                 case (2):
@@ -131,7 +405,7 @@ public class BattleUIScript : MonoBehaviour
                         }
 
                         BattleManagerRef.EndCurrentTurn();
-
+                        UpdateCurrentMonsterImage();
                         break;
                     }
                 case (3):
@@ -147,7 +421,7 @@ public class BattleUIScript : MonoBehaviour
                         }
 
                         BattleManagerRef.EndCurrentTurn();
-
+                        UpdateCurrentMonsterImage();
                         break;
                     }
             }
@@ -173,6 +447,7 @@ public class BattleUIScript : MonoBehaviour
         CurrentMonster.GetMonsterSKills()[0].UseSkill(EnemyTarget, CurrentMonster);
 
         BattleManagerRef.EndCurrentTurn();
+        UpdateCurrentMonsterImage();
     }
 
     // a function that uses the monsters second skill
@@ -185,6 +460,7 @@ public class BattleUIScript : MonoBehaviour
         CurrentMonster.GetMonsterSKills()[1].UseSkill(EnemyTarget, CurrentMonster);
 
         BattleManagerRef.EndCurrentTurn();
+        UpdateCurrentMonsterImage();
     }
 
     // a function that uses the monsters third skill
@@ -197,6 +473,7 @@ public class BattleUIScript : MonoBehaviour
         CurrentMonster.GetMonsterSKills()[2].UseSkill(EnemyTarget, CurrentMonster);
 
         BattleManagerRef.EndCurrentTurn();
+        UpdateCurrentMonsterImage();
     }
 
 
@@ -210,7 +487,7 @@ public class BattleUIScript : MonoBehaviour
 
                     if (CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
                     {
-                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[0];
+                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber() -1];
                         UseSkillOne();
                     }
                     else
@@ -221,9 +498,9 @@ public class BattleUIScript : MonoBehaviour
                 }
             case (2):
                 {
-                    if(CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoSecondaryEffect() == "BeneficialEffect")
+                    if(CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoMainEffect() == "BeneficialEffect")
                     {
-                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[1];
+                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber() -1];
                         UseSkillTwo();
                     }
                     else
@@ -236,9 +513,9 @@ public class BattleUIScript : MonoBehaviour
             case (3):
                 {
 
-                    if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeSecondaryEffect() == "BeneficialEffect")
+                    if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeMainEffect() == "BeneficialEffect")
                     {
-                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[2];
+                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber() -1];
                         UseSKillThree();
                     }
                     else
@@ -269,6 +546,53 @@ public class BattleUIScript : MonoBehaviour
     public void SetSkillNumber(int num)
     {
         SkillSelectedNumber = num;
+        UpdateSkillsDisplay(num, CurrentMonster.GetMonsterSKills()[num - 1]);
+    }
+
+    // a functoin that updates the display to show who the current monster is
+    public void UpdateCurrentMonsterImage()
+    {
+        switch (CurrentMonsterNum)
+        {
+            case (1):
+                {
+                    CurrentMonOne.SetActive(true);
+                    CurrentMonTwo.SetActive(false);
+                    CurrentMonThree.SetActive(false);
+                    break;
+                }
+            case (2):
+                {
+                    CurrentMonOne.SetActive(false);
+                    CurrentMonTwo.SetActive(true);
+                    CurrentMonThree.SetActive(false);
+                    break;
+                }
+            case (3):
+                {
+                    CurrentMonOne.SetActive(false);
+                    CurrentMonTwo.SetActive(false);
+                    CurrentMonThree.SetActive(true);
+                    break;
+                }
+        }
+
+    }
+
+    // a function used to updated the current monster number 
+    public void SetCurrentMonsterNum(int MonsterNum)
+    {
+        CurrentMonsterNum = MonsterNum;
+    }
+
+    // this function is used to update the damage numbers so when a monster is healed or damage the number can be seen
+    public void UpdateDamageNumberS(MonsterSkillScript TheSkill)
+    {
+        switch (TheSkill.GetSkillMainEffect())
+        {
+
+        }
+
     }
 
 }

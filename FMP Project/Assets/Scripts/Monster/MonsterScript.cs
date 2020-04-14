@@ -1988,6 +1988,9 @@ public class MonsterScript
     // this function will set the monsters health
     public void SetMonsterHealth(float Health) { BaseHealth = Health; }
 
+    // this function will set the monsters current health (to be used at start of battle)
+    public void SetMonsterCurrentHealth(float Health) { CurrentHealth = Health; }
+
     // this function will set the monsters attack
     public void SetMonsterAttack(float Attack) { BaseDamage = Attack; }
 

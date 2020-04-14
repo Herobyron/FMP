@@ -68,8 +68,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private string PlayerMonFirst = "";
 
+    [SerializeField]
     private string PlayerMonSecond = "";
 
+    [SerializeField]
     private string PlayerMonThird = "";
 
 
@@ -79,14 +81,15 @@ public class BattleManager : MonoBehaviour
 
     [Tooltip("this is a refernce to the current Battle UI script")]
     [SerializeField]
-    private BattleUIScript BattleUI;
+    private BattleUIScript BattleUI = null;
 
 
     // this is the training dummy Monster Script
     private MonsterScript TrainingDummy;
 
-
-
+    [Tooltip("this is the target monster number. this will be used for player monsters as well as enemy monsters")]
+    [SerializeField]
+    private int TargetMonsterNumber = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -100,6 +103,8 @@ public class BattleManager : MonoBehaviour
         //
         //    TurnOrderCalculateTraining();
         //}
+
+        InitialiseTrainingDummy();
     }
 
     // Update is called once per frame and will check wether to change a monsters turn or not
@@ -108,6 +113,36 @@ public class BattleManager : MonoBehaviour
         //CurrentTurnCalc();
     }
 
+    public void InitialiseTrainingDummy()
+    {
+        MonsterScript NewMonster = new MonsterScript();
+        NewMonster.SetMonsterHealth(100000);
+        NewMonster.SetMonsterDefence(1000);
+        NewMonster.SetMonsterAttack(1);
+        NewMonster.SetMonsterName("Dummy");
+        NewMonster.SetMonsterResistance(1);
+        NewMonster.SetMonsterAccuracy(1);
+        NewMonster.SetMonsterCritDamage(1);
+        NewMonster.SetMonsterCritRate(1);
+        NewMonster.SetMonsterSpeed(1);
+        NewMonster.SetMonsterCurrentHealth(100000000);
+
+        TrainingDummy = NewMonster;
+
+    }
+
+    public void InitialiseMonstersCurrentHealth()
+    {
+        foreach(MonsterScript M in PlayersMonsters)
+        {
+            M.SetMonsterCurrentHealth(M.ReturnBaseHealth() + M.ReturnIncreasedHealth()) ;
+        }
+
+        foreach(MonsterScript M in EnemyMonsters)
+        {
+            M.SetMonsterCurrentHealth(M.ReturnBaseHealth() + M.ReturnIncreasedHealth());
+        }
+    }
 
     // this function sets the monster for the player in battle
     public void SetPlayerBattleMonsters(List<MonsterScript> TheMonsters)
@@ -139,7 +174,8 @@ public class BattleManager : MonoBehaviour
         }
 
         BattleUI.SetCurrentMonster(CurrentMonster);
-       
+        BattleUI.SetCurrentMonsterNum(1);
+        BattleUI.UpdateCurrentMonsterImage();
 
     }
 
@@ -157,6 +193,7 @@ public class BattleManager : MonoBehaviour
                 if (M.ReturnMonsterName() == PlayerMonFirst)
                 {
                     CurrentMonster = M;
+                    BattleUI.SetCurrentMonsterNum(1);
                 }
             }
 
@@ -168,6 +205,7 @@ public class BattleManager : MonoBehaviour
                 if (M.ReturnMonsterName() == PlayerMonSecond)
                 {
                     CurrentMonster = M;
+                    BattleUI.SetCurrentMonsterNum(2);
                 }
             }
         }
@@ -178,12 +216,13 @@ public class BattleManager : MonoBehaviour
                 if (M.ReturnMonsterName() == PlayerMonThird)
                 {
                     CurrentMonster = M;
+                    BattleUI.SetCurrentMonsterNum(3);
                 }
             }
         }
 
         BattleUI.SetCurrentMonster(CurrentMonster);
-
+        
     }
        
 
@@ -210,6 +249,7 @@ public class BattleManager : MonoBehaviour
         }
 
         //TempMonList.Remove(TempMon);
+        TempSpeed = 0;
 
         foreach (MonsterScript M in TempMonList)
         {
@@ -223,7 +263,7 @@ public class BattleManager : MonoBehaviour
         }
 
         //TempMonList.Remove(TempMon);
-
+        TempSpeed = 0;
 
         foreach (MonsterScript M in TempMonList)
         {
@@ -249,16 +289,19 @@ public class BattleManager : MonoBehaviour
             case (1):
                 {
                     PlayerMonOneHadTurn = true;
+                    BattleUI.SetCurrentMonsterNum(2);
                     break;
                 }
             case (2):
                 {
                     PlayerMonTwoHadTurn = true;
+                    BattleUI.SetCurrentMonsterNum(3);
                     break;
                 }
             case (3):
                 {
                     PlayerMonThreeHadTurn = true;
+                    BattleUI.SetCurrentMonsterNum(1);
                     break;
                 }
         }
@@ -290,6 +333,8 @@ public class BattleManager : MonoBehaviour
     // if the battle mode is an actual battle then it will use the int given to pick the target
     public void SetMonsterTarget(int TargetNumber)
     {
+        TargetMonsterNumber = TargetNumber;
+        
         if(CurrentState == BattleState.Training)
         {
             BattleUI.SetEnemySingleTarget(TrainingDummy);
@@ -298,6 +343,11 @@ public class BattleManager : MonoBehaviour
         {
             BattleUI.SetEnemySingleTarget(EnemyMonsters[TargetNumber]);
         }
+    }
+
+    public int ReturnTargetMonsterNumber()
+    {
+        return TargetMonsterNumber;
     }
 
     // this function is used to give the battle UI the target monster when the skill is a healing skill

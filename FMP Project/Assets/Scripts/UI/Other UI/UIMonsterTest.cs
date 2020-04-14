@@ -349,7 +349,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             case ("Healing"):
                                 {
-                                    SkillOneDescription.text += "this skill also <color=darkblue>heals<color> you for a small amount. ";
+                                    SkillOneDescription.text += "this skill also <color=darkblue>heals</color> you for a small amount. ";
                                     break;
                                 }
                             case ("BeneficialEffect"):
@@ -845,7 +845,7 @@ public class UIMonsterTest : MonoBehaviour
                                     }
 
                                     SkillThreeDescription.text += " to one enemy. ";
-
+                                    
 
                                     break;
                                 }
