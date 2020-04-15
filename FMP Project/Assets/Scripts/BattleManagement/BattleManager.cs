@@ -87,6 +87,13 @@ public class BattleManager : MonoBehaviour
     // this is the training dummy Monster Script
     private MonsterScript TrainingDummy;
 
+    //these are private scripts that are a complete copy of the monster scripts.
+    private MonsterScript FirstMonster = null;
+
+    private MonsterScript SecondMonster = null;
+
+    private MonsterScript ThirdMonster = null;
+
     [Tooltip("this is the target monster number. this will be used for player monsters as well as enemy monsters")]
     [SerializeField]
     private int TargetMonsterNumber = 0;
@@ -243,6 +250,7 @@ public class BattleManager : MonoBehaviour
             {
                 TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
                 PlayerMonFirst = M.ReturnMonsterName();
+                FirstMonster = M;
                 TempMon = M;
             }
 
@@ -257,6 +265,7 @@ public class BattleManager : MonoBehaviour
             {
                 TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
                 PlayerMonSecond = M.ReturnMonsterName();
+                SecondMonster = M;
                 TempMon = M;
             }
 
@@ -271,6 +280,7 @@ public class BattleManager : MonoBehaviour
             {
                 TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
                 PlayerMonThird = M.ReturnMonsterName();
+                ThirdMonster = M;
                 TempMon = M;
             }
 
@@ -349,6 +359,27 @@ public class BattleManager : MonoBehaviour
     {
         return TargetMonsterNumber;
     }
+
+    public MonsterScript ReturnTrainingDummy()
+    {
+        return TrainingDummy;
+    }
+
+    public MonsterScript ReturnMonsterOne()
+    {
+        return FirstMonster;
+    }
+
+    public MonsterScript ReturnMonsterTwo()
+    {
+        return SecondMonster;
+    }
+
+    public MonsterScript ReturnMonsterThree()
+    {
+        return ThirdMonster;
+    }
+
 
     // this function is used to give the battle UI the target monster when the skill is a healing skill
     // no matter the type of the battle the player will be able to select 

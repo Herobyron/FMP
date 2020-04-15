@@ -74,4 +74,48 @@ public class HarmfulEffects
         return TurnsLeftOnHarmfulEffect;
     }
 
+
+    // this function returns the effect but in the form of a string instead of an enum
+    public string ReturnDeBuffTypeString()
+    {
+        string ReturnString = "";
+
+        switch (HarmfulEffect)
+        {
+            case (Bufftype.AttackDeBuff):
+                {
+                    ReturnString = "AttackDown";
+                    break;
+                }
+            case (Bufftype.CritRateDeBuff):
+                {
+                    ReturnString = "CritRateDeBuff";
+                    break;
+                }
+            case (Bufftype.DefenceDeBuff):
+                {
+                    ReturnString = "DefenceDown";
+                    break;
+                }
+            case (Bufftype.ImmunityDeBuff):
+                {
+                    ReturnString = "ImmunityDown";
+                    break;
+                }
+            case (Bufftype.MissDeBuff):
+                {
+                    ReturnString = "MissDeBuff";
+                    break;
+                }
+            case (Bufftype.ShieldDeBuff):
+                {
+                    ReturnString = "ShieldDown";
+                    break;
+                }
+        }
+
+
+        return ReturnString;
+    }
+
 }

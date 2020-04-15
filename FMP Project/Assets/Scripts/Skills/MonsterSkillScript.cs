@@ -54,7 +54,7 @@ public class MonsterSkillScript
 
                         foreach(MonsterScript M in Targets)
                         {
-                            M.ApplyHeal(TempHealAmount);
+                            TempDamageReturn = (int)M.ApplyHeal(TempHealAmount);
 
                         }
 
@@ -66,7 +66,7 @@ public class MonsterSkillScript
 
                         foreach(MonsterScript M in Targets)
                         {
-                            M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
+                           TempDamageReturn =  (int)M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
                         }
 
                         break;
@@ -154,9 +154,10 @@ public class MonsterSkillScript
                     {
                         foreach (MonsterScript M in Targets)
                         {
-                            for (int i = 0; i <= SkillEffects.Count; i++)
-                            {
-                                switch (SkillEffects[i])
+                            
+                            foreach(string S in SkillEffects)
+                            { 
+                                switch (S)
                                 {
                                     case ("AttackDeBuff"):
                                         {
@@ -236,7 +237,7 @@ public class MonsterSkillScript
 
                         foreach (MonsterScript M in Targets)
                         {
-                            M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
+                           TempDamageReturn += (int)M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
                         }
 
                         break;
@@ -255,7 +256,7 @@ public class MonsterSkillScript
 
                             foreach (MonsterScript M in Targets)
                             {
-                                M.ApplyHeal(TempHealAmount);
+                               TempDamageReturn += (int)M.ApplyHeal(TempHealAmount);
 
                             }
                         }

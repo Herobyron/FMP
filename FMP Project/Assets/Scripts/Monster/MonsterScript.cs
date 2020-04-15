@@ -517,16 +517,18 @@ public class MonsterScript
 
     // this function is to apply damage to this monster. 
     // apply damage will particularly be used when a monster attacks this one and that skill function will call apply damage when necisary
+    // this function also returns the amount of damage done to be displayed
     //Variables :
     // - the float is the other monsters attack as this will be the main component for the math calculation
     // - the first list is the beneficail effects that are applied on the monster that is attacking this one
     // - the second list is the harmful effects that are apllied on the monster that is attacking this one
-    public void ApplyDamage(float OtherMonsterAttack, List<BeneficialEffects> OtherMonsterBeneficialEffects, List<HarmfulEffects> OtherMonsterHarmfulEffects)
+    public float ApplyDamage(float OtherMonsterAttack, List<BeneficialEffects> OtherMonsterBeneficialEffects, List<HarmfulEffects> OtherMonsterHarmfulEffects)
     {
 
         // this step of set all of the numbers and bools ready for the damage calculation step
         // all the attacking type buffs and defubs are calculated by enemy monster
         // all of the defence type buffs and debuffs are calculated by this monster
+        
 
         bool MissAttack = false;
         bool CritBuff = false;
@@ -604,6 +606,7 @@ public class MonsterScript
                float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown ;
                TempDamage *= 0.7f;
                CurrentHealth -= TempDamage;
+                return TempDamage;
            }
            else // else the attack has hit with the debuff and now check crit
            {
@@ -611,13 +614,16 @@ public class MonsterScript
                 {
                     if(Random.Range(0,100) >= (BaseCritRate + 30)) // if the random range is greater then the base crit rate + the extra chance then its regular damage
                     {
-                        CurrentHealth -= OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                        float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                        CurrentHealth -= TempDamage;
+                        return TempDamage;
                     }
                     else // else if the number isnt bigger then the attack landed as a crit
                     {
                         float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
                         TempDamage += TempDamage + (TempDamage * BaseCritDamage);
                         CurrentHealth -= TempDamage;
+                        return TempDamage;
                     }
                 }
            }
@@ -628,37 +634,47 @@ public class MonsterScript
             {
                 if (Random.Range(0, 100) >= (BaseCritRate + 30)) // if the random range is greater then the base crit rate + the extra chance then its regular damage
                 {
-                    CurrentHealth -= OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    CurrentHealth -= TempDamage;
+                    return TempDamage;
+                
                 }
                 else // else if the number isnt bigger then the attack landed as a crit
                 {
                     float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
                     TempDamage += TempDamage + (TempDamage * BaseCritDamage);
                     CurrentHealth -= TempDamage;
+                    return TempDamage;
                 }
             }
             else
             {
                 if (Random.Range(0, 100) >= BaseCritRate) // if the random range is greater then the base crit rate + the extra chance then its regular damage
                 {
-                    CurrentHealth -= OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    CurrentHealth -= TempDamage;
+                    return TempDamage;
                 }
                 else // else if the number isnt bigger then the attack landed as a crit
                 {
                     float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
                     TempDamage += TempDamage + (TempDamage * BaseCritDamage);
                     CurrentHealth -= TempDamage;
+                    return TempDamage;
                 }
             }
         }
 
+
+        return 0.0f;
     }
 
     //this is the function that will apply a heal to this monster
-    // the skill that is using the heal will calculate how much health to heal and will 
+    // the skill that is using the heal will calculate how much health to heal and will
+    // this function returns a float value that is the amount of health healed
     // Variables :
     // - the float is how much health will be given to this monster when they are healed
-    public void ApplyHeal(float HealAmount)
+    public float ApplyHeal(float HealAmount)
     {
         // adds the heal amount to the health (heal amount is calculated in the monsters skill function not in apply heal
         // then if the current health is more then the max health then it sets the current health to the base health
@@ -669,6 +685,7 @@ public class MonsterScript
             CurrentHealth = BaseHealth;
         }
 
+        return HealAmount;
     }
 
     // this function i want to change as i feel there is a better way of doing this so for now the function has been put on hold until a better way of doing it is found

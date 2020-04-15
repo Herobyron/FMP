@@ -76,4 +76,46 @@ public class BeneficialEffects
         return TurnsLeftOnBeneficialEffect;
     }
 
+    // this function returns the effect but in the form of a string
+    public string ReturnBuffTypeString()
+    {
+        string ReturnString = "";
+
+        switch (BeneficialEffect)
+        {
+            case (Bufftype.AttackBuff):
+            {
+                ReturnString = "Attack";
+                break;
+            }
+            case (Bufftype.AccuracyBuff):
+            {
+                ReturnString = "Accuracy";
+                break;
+            }
+            case (Bufftype.CritRateBuff):
+            {
+                ReturnString = "CritRate";
+                break;
+            }
+            case (Bufftype.DefenceBuff):
+            {
+                ReturnString = "Defence";
+                break;
+            }
+            case (Bufftype.ImmunityBuff):
+            {
+                ReturnString = "Immunity";
+                break;
+            }
+            case (Bufftype.ShieldBuff):
+            {
+                ReturnString = "Shield";
+                break;
+            }
+        }
+
+        return ReturnString;
+    }
+
 }
