@@ -1593,7 +1593,7 @@ public class GenerateMonster : MonoBehaviour
         SkillTwo.SetSkillMainEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillTwoMultipler());
         SkillTwo.SetSkillSecondaryEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillTwoSecondMultiplier());
         SkillTwo.SetSkillEffects(MonsterScriptGenerated.ReturnAllSkillTwoEffects());
-
+        SkillTwo.SetSkillMaxCoolDown(MonsterScriptGenerated.ReturnMonsterSkillTwoMaxTurns());
         MonsterScriptGenerated.SetMonsterSkills(SkillTwo);
 
 
@@ -1607,7 +1607,7 @@ public class GenerateMonster : MonoBehaviour
         SkillThree.SetSkillMainEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillThreeMultipler());
         SkillThree.SetSkillSecondaryEffectMultiplier(MonsterScriptGenerated.ReturnMonsterSkillThreeSecondMultiplier());
         SkillThree.SetSkillEffects(MonsterScriptGenerated.ReturnAllSkillThreeEffects());
-
+        SkillThree.SetSkillMaxCoolDown(MonsterScriptGenerated.ReturnMonsterSkillThreeMaxTurns());
         MonsterScriptGenerated.SetMonsterSkills(SkillThree);
 
     }

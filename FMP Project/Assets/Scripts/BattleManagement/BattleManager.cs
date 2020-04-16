@@ -88,10 +88,13 @@ public class BattleManager : MonoBehaviour
     private MonsterScript TrainingDummy;
 
     //these are private scripts that are a complete copy of the monster scripts.
+    [SerializeField]
     private MonsterScript FirstMonster = null;
 
+    [SerializeField]
     private MonsterScript SecondMonster = null;
 
+    [SerializeField]
     private MonsterScript ThirdMonster = null;
 
     [Tooltip("this is the target monster number. this will be used for player monsters as well as enemy monsters")]
@@ -229,7 +232,7 @@ public class BattleManager : MonoBehaviour
         }
 
         BattleUI.SetCurrentMonster(CurrentMonster);
-        
+        BattleUI.UpdateSkillCooldownDisplay();
     }
        
 

@@ -80,6 +80,22 @@ public class BattleUIScript : MonoBehaviour
     [SerializeField]
     private GameObject CurrentMonThree;
 
+    // these are the UI objects that display the monsters effects
+    [Tooltip("this is the game object that displays the first monsters current effects")]
+    [SerializeField]
+    private GameObject MonsterOneEffectDisplay = null;
+
+    [Tooltip("this is the game object that displays the second monsters current effects")]
+    [SerializeField]
+    private GameObject MonsterTwoEffectDisplay = null;
+
+    [Tooltip("this is the game object that displays the third monsters current effects")]
+    [SerializeField]
+    private GameObject MonsterThreeEffectDisplay = null;
+
+    [Tooltip("this is the game object that displays the training dummy current effects")]
+    [SerializeField]
+    private GameObject TrainingDummyEffectDisplay = null;
 
     // these are the text elements for the damage numbers
     [Tooltip("this is the text component for the damage numbers for the monster one")]
@@ -172,6 +188,15 @@ public class BattleUIScript : MonoBehaviour
 
     // this is the count for how many buttons has been created
     private int EffectButtonCount = 0;
+
+    // these are all of the skills buttons when the player wants to use the skills
+    [Tooltip("the button for skill two")]
+    [SerializeField]
+    private GameObject SkillTwoButton = null;
+
+    [Tooltip("the button for skill three")]
+    [SerializeField]
+    private GameObject SkillThreeButton = null;
 
     // Start is called before the first frame update
     void Start()
@@ -562,7 +587,27 @@ public class BattleUIScript : MonoBehaviour
 
                     if (CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
                     {
-                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber() -1];
+                        switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                        {
+                            case (0):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterOne();
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterTwo();
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterThree();
+                                    break;
+                                }
+                        }
+
+
+                        //CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber()];
                         UseSkillOne();
                     }
                     else
@@ -575,7 +620,27 @@ public class BattleUIScript : MonoBehaviour
                 {
                     if(CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoMainEffect() == "BeneficialEffect")
                     {
-                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber() -1];
+
+                        switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                        {
+                            case (0):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterOne();
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterTwo();
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterThree();
+                                    break;
+                                }
+                        }
+
+                        //CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber()];
                         UseSkillTwo();
                     }
                     else
@@ -590,7 +655,28 @@ public class BattleUIScript : MonoBehaviour
 
                     if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeMainEffect() == "BeneficialEffect")
                     {
-                        CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber() -1];
+
+                        switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                        {
+                            case (0):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterOne();
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterTwo();
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    CurrentMonsterTarget = BattleManagerRef.ReturnMonsterThree();
+                                    break;
+                                }
+                        }
+
+
+                        //CurrentMonsterTarget = BattleManagerRef.ReturnPlayerMonsters()[BattleManagerRef.ReturnTargetMonsterNumber()];
                         UseSKillThree();
                     }
                     else
@@ -827,7 +913,10 @@ public class BattleUIScript : MonoBehaviour
         }
 
         EffectButtonCount = 0;
-
+        if(TrainingDummyEffectButtons.Count >= 1)
+        {
+            TrainingDummyEffectDisplay.SetActive(true);
+        }
 
         foreach (BeneficialEffects B in BattleManagerRef.ReturnMonsterOne().ReturnBeneficialEffects())
         {
@@ -922,6 +1011,12 @@ public class BattleUIScript : MonoBehaviour
 
         EffectButtonCount = 0;
 
+        if (MonsterOneEffectButtons.Count >= 1)
+        {
+            MonsterOneEffectDisplay.SetActive(true);
+        }
+
+
         foreach (BeneficialEffects B in BattleManagerRef.ReturnMonsterTwo().ReturnBeneficialEffects())
         {
             GameObject NewButton = Instantiate(MonsterTwoEffectTemplate) as GameObject;
@@ -1015,6 +1110,12 @@ public class BattleUIScript : MonoBehaviour
 
         EffectButtonCount = 0;
 
+        if (MonsterTwoEffectButtons.Count >= 1)
+        {
+            MonsterTwoEffectDisplay.SetActive(true);
+        }
+
+
         foreach (BeneficialEffects B in BattleManagerRef.ReturnMonsterThree().ReturnBeneficialEffects())
         {
             GameObject NewButton = Instantiate(MonsterThreeEffectTemplate) as GameObject;
@@ -1104,11 +1205,43 @@ public class BattleUIScript : MonoBehaviour
             }
 
             MonsterThreeEffectButtons.Add(NewButton);
+
+
+
         }
+
+        if (MonsterThreeEffectButtons.Count >= 1)
+        {
+            MonsterThreeEffectDisplay.SetActive(true);
+        }
+
 
     }
 
-    
+    // this function updates the skills cooldowns images depending on thier cooldown
+    // this functoin checks the curent monster and then looks at its current available skills
+    public void UpdateSkillCooldownDisplay()
+    {
+       
+        if(CurrentMonster.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
+        {
+            SkillTwoButton.SetActive(true);
+        }
+        else
+        {
+            SkillTwoButton.SetActive(false);
+        }
+
+        if(CurrentMonster.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
+        {
+            SkillThreeButton.SetActive(true);
+        }
+        else
+        {
+            SkillThreeButton.SetActive(false);
+        }
+
+    }
 
 
     // this is the enumerator to display the damage text for a small amount of time 

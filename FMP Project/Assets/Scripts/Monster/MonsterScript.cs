@@ -2422,5 +2422,5 @@ public class MonsterScript
         MonsterImageNumber = Num;
     }
 
-
+    
 }
