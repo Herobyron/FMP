@@ -268,9 +268,9 @@ public class MonsterSkillScript
 
                         foreach (MonsterScript M in Targets)
                         {
-                            for (int i = 0; i <= SkillEffects.Count; i++)
+                            foreach (string S in SkillEffects)
                             {
-                                switch (SkillEffects[i])
+                                switch (S)
                                 {
                                     case ("AttackDeBuff"):
                                         {
@@ -344,9 +344,9 @@ public class MonsterSkillScript
                     {
                         if(MainEffect == "Damage")
                         {
-                            for (int i = 0; i <= SkillEffects.Count; i++)
+                            foreach (string S in SkillEffects)
                             {
-                                switch (SkillEffects[i])
+                                switch (S)
                                 {
                                     case ("Accuracy"):
                                         {
@@ -416,9 +416,9 @@ public class MonsterSkillScript
                         {
                             foreach (MonsterScript M in Targets)
                             {
-                                for (int i = 0; i <= SkillEffects.Count; i++)
+                                foreach (string S in SkillEffects)
                                 {
-                                    switch (SkillEffects[i])
+                                    switch (S)
                                     {
                                         case ("Accuracy"):
                                             {

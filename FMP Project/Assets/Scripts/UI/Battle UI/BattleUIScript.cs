@@ -198,6 +198,46 @@ public class BattleUIScript : MonoBehaviour
     [SerializeField]
     private GameObject SkillThreeButton = null;
 
+    // this is the text component to display for who the player to attack
+    [Tooltip("this is the text component to tell the player what type of monster to target")]
+    [SerializeField]
+    private Text TargetSelectionText = null;
+
+    // these are the three buttons the player can use to select the target
+    [Tooltip("this is the button representing the first monster selection")]
+    [SerializeField]
+    private GameObject SelectionButtonOne = null;
+
+    [Tooltip("this is the button representing the second monster selection")]
+    [SerializeField]
+    private GameObject SelectionButtpnTwo = null;
+
+    [Tooltip("this is the button representing the third monster selection")]
+    [SerializeField]
+    private GameObject SelectionButtonThree = null;
+
+    // these are the three text compoents for the three buttons the player can use to select the target
+    [Tooltip("this is the text component for the first monster selection button")]
+    [SerializeField]
+    private Text MonsterSelectionOne = null;
+
+    [Tooltip("this is the text component for the second monster selection button")]
+    [SerializeField]
+    private Text MonsterSelectionTwo = null;
+
+    [Tooltip("this is the text component for the third monster selection button")]
+    [SerializeField]
+    private Text MonsterSelectionThree = null;
+
+    // these are the text elements for the second and third skill cooldowns
+    [Tooltip("this is the text component for the second skill of the monster")]
+    [SerializeField]
+    private Text SkillTwoCooldownText = null;
+
+    [Tooltip("this is the text component for the third skill of the monster")]
+    [SerializeField]
+    private Text SkillThreeCooldownText = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -229,13 +269,13 @@ public class BattleUIScript : MonoBehaviour
                 {
                     if (TheSkill.ReturnSkillAOE())
                     {
-                        SkillDescriptionText.text = "This Skill <color=darkblue>Heals</color> All Allies by a large amount. ";
+                        SkillDescriptionText.text = "This Skill <color=orange>Heals</color> All Allies by a large amount. ";
 
                         switch (TheSkill.GetSkillSecondaryEffect())
                         {
                             case ("Healing"):
                                 {
-                                    SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> all allies by a small amount. ";
+                                    SkillDescriptionText.text += "this skill will also <color=orange>heal</color> all allies by a small amount. ";
                                     break;
                                 }
                             case ("BeneficialEffect"):
@@ -244,7 +284,7 @@ public class BattleUIScript : MonoBehaviour
 
                                     for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                                     {
-                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                        SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                                     }
 
                                     SkillDescriptionText.text += " To All Allies. ";
@@ -255,13 +295,13 @@ public class BattleUIScript : MonoBehaviour
                     }
                     else
                     {
-                        SkillDescriptionText.text = "This Skill <color=darkblue>Heals</color> A single Ally by a large amount. ";
+                        SkillDescriptionText.text = "This Skill <color=orange>Heals</color> A single Ally by a large amount. ";
 
                         switch (TheSkill.GetSkillSecondaryEffect())
                         {
                             case ("Healing"):
                                 {
-                                    SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> one ally by a small amount. ";
+                                    SkillDescriptionText.text += "this skill will also <color=orange>heal</color> one ally by a small amount. ";
                                     break;
                                 }
                             case ("BeneficialEffect"):
@@ -270,7 +310,7 @@ public class BattleUIScript : MonoBehaviour
 
                                     for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                                     {
-                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                        SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                                     }
 
                                     SkillDescriptionText.text += " To one Allies. ";
@@ -290,14 +330,14 @@ public class BattleUIScript : MonoBehaviour
 
                         for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                         {
-                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                            SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                         }
 
                         SkillDescriptionText.text += " To all Allies. ";
 
                         if (TheSkill.GetSkillSecondaryEffect() == "Healing")
                         {
-                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> all allies for a small amount. ";
+                            SkillDescriptionText.text += "this skill will also <color=orange>heal</color> all allies for a small amount. ";
                         }
 
                     }
@@ -307,14 +347,14 @@ public class BattleUIScript : MonoBehaviour
 
                         for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                         {
-                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                            SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                         }
 
                         SkillDescriptionText.text += " To one Ally. ";
 
                         if (TheSkill.GetSkillSecondaryEffect() == "Healing")
                         {
-                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> one ally for a small amount. ";
+                            SkillDescriptionText.text += "this skill will also <color=orange>heal</color> one ally for a small amount. ";
                         }
 
 
@@ -329,18 +369,18 @@ public class BattleUIScript : MonoBehaviour
 
                         for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                         {
-                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                            SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                         }
 
                         SkillDescriptionText.text += " to all enemies. ";
 
                         if (TheSkill.GetSkillSecondaryEffect() == "Damage")
                         {
-                            SkillDescriptionText.text += "this skill will also apply <color=darkblue>damage</color> to all enemies proportiionate to your attack power. ";
+                            SkillDescriptionText.text += "this skill will also apply <color=orange>damage</color> to all enemies proportiionate to your attack power. ";
                         }
                         else if(TheSkill.GetSkillSecondaryEffect() == "Healing")
                         {
-                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
+                            SkillDescriptionText.text += "this skill will also <color=orange>heal</color> you for a small amount. ";
                         }
                     }
                     else
@@ -349,18 +389,18 @@ public class BattleUIScript : MonoBehaviour
 
                         for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                         {
-                            SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                            SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                         }
 
                         SkillDescriptionText.text += " to one enemy. ";
 
                         if (TheSkill.GetSkillSecondaryEffect() == "Damage")
                         {
-                            SkillDescriptionText.text += "this skill will also apply <color=darkblue>damage</color> to one enemy proportiionate to your attack power. ";
+                            SkillDescriptionText.text += "this skill will also apply <color=orange>damage</color> to one enemy proportiionate to your attack power. ";
                         }
                         else if (TheSkill.GetSkillSecondaryEffect() == "Healing")
                         {
-                            SkillDescriptionText.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
+                            SkillDescriptionText.text += "this skill will also <color=orange>heal</color> you for a small amount. ";
                         }
                     }
 
@@ -371,13 +411,13 @@ public class BattleUIScript : MonoBehaviour
 
                     if (TheSkill.ReturnSkillAOE())
                     {
-                        SkillDescriptionText.text = "this skill applies <color=darkblue>damage</color> proportionate to your attack to all enemies monsters. ";
+                        SkillDescriptionText.text = "this skill applies <color=orange>damage</color> proportionate to your attack to all enemies monsters. ";
 
                         switch (TheSkill.GetSkillSecondaryEffect())
                         {
                             case ("Healing"):
                                 {
-                                    SkillDescriptionText.text += "this skill also <color=darkblue>heals</color> you for a small amount. ";
+                                    SkillDescriptionText.text += "this skill also <color=orange>heals</color> you for a small amount. ";
                                     break;
                                 }
                             case ("BeneficialEffect"):
@@ -386,7 +426,7 @@ public class BattleUIScript : MonoBehaviour
 
                                     for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                                     {
-                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                        SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                                     }
 
                                     SkillDescriptionText.text += " to you. ";
@@ -399,7 +439,7 @@ public class BattleUIScript : MonoBehaviour
 
                                     for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                                     {
-                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                        SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                                     }
 
                                     SkillDescriptionText.text += " to all enemies. ";
@@ -412,13 +452,13 @@ public class BattleUIScript : MonoBehaviour
                     }
                     else
                     {
-                        SkillDescriptionText.text = "this skill applies <color=darkblue>damage</color> proportionate to your attack to one enemy monsters. ";
+                        SkillDescriptionText.text = "this skill applies <color=orange>damage</color> proportionate to your attack to one enemy monsters. ";
 
                         switch (TheSkill.GetSkillSecondaryEffect())
                         {
                             case ("Healing"):
                                 {
-                                    SkillDescriptionText.text += "this skill also <color=darkblue>heals</color> you for a small amount. ";
+                                    SkillDescriptionText.text += "this skill also <color=orange>heals</color> you for a small amount. ";
                                     break;
                                 }
                             case ("BeneficialEffect"):
@@ -427,7 +467,7 @@ public class BattleUIScript : MonoBehaviour
 
                                     for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                                     {
-                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                        SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                                     }
 
                                     SkillDescriptionText.text += " to you. ";
@@ -440,7 +480,7 @@ public class BattleUIScript : MonoBehaviour
 
                                     for (int i = 0; i < TheSkill.GetSkillEffects().Count; i++)
                                     {
-                                        SkillDescriptionText.text += ", <color=darkblue>" + TheSkill.GetSkillEffects()[i] + "</color>";
+                                        SkillDescriptionText.text += ", <color=orange>" + TheSkill.GetSkillEffects()[i] + "</color>";
                                     }
 
                                     SkillDescriptionText.text += " to one enemy. ";
@@ -529,6 +569,50 @@ public class BattleUIScript : MonoBehaviour
         }
         else
         {
+
+            switch (SkillSelectedNumber)
+            {
+                case (1):
+                    {
+                        if (CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
+                        {
+                            UpdateTargetdisplay("Health");
+                        }
+                        else
+                        {
+                            UpdateTargetdisplay("Damage");
+                        }
+                        break;
+                    }
+                case (2):
+                    {
+                        if (CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoMainEffect() == "BeneficialEffect")
+                        {
+                            UpdateTargetdisplay("Health");
+                        }
+                        else
+                        {
+                            UpdateTargetdisplay("Damage");
+                        }
+                        break;
+                    }
+                case (3):
+                    {
+                        if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeMainEffect() == "BeneficialEffect")
+                        {
+                            UpdateTargetdisplay("Health");
+                        }
+                        else
+                        {
+                            UpdateTargetdisplay("Damage");
+                        }
+                        break;
+                    }
+            }
+
+
+
+
             EnemySelectionPanel.SetActive(true);
             MonsterSKilldescription.SetActive(false);
         }
@@ -764,19 +848,19 @@ public class BattleUIScript : MonoBehaviour
                 {
                     switch (BattleManagerRef.ReturnTargetMonsterNumber())
                     {
-                        case (1):
+                        case (0):
                             {
                                 MonsterOneDamageText.gameObject.SetActive(true);
                                 MonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
                                 break;
                             }
-                        case (2):
+                        case (1):
                             {
                                 MonsterTwoDamageText.gameObject.SetActive(true);
                                 MonsterTwoDamageText.text = "<color=green>" + DamageNumber + "</color>";
                                 break;
                             }
-                        case (3):
+                        case (2):
                             {
                                 MonsterThreeDamageText.gameObject.SetActive(true);
                                 MonsterThreeDamageText.text = "<color=green>" + DamageNumber + "</color>";
@@ -1226,6 +1310,7 @@ public class BattleUIScript : MonoBehaviour
         if(CurrentMonster.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
         {
             SkillTwoButton.SetActive(true);
+            SkillTwoCooldownText.text = "Cooldown: " + CurrentMonster.GetMonsterSKills()[1].GetSkillCurrentCooldown();
         }
         else
         {
@@ -1235,12 +1320,39 @@ public class BattleUIScript : MonoBehaviour
         if(CurrentMonster.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
         {
             SkillThreeButton.SetActive(true);
+            SkillThreeCooldownText.text = "Cooldown: " + CurrentMonster.GetMonsterSKills()[2].GetSkillCurrentCooldown();
         }
         else
         {
             SkillThreeButton.SetActive(false);
         }
 
+    }
+
+    // this function updates the target display depending on the skill bieng used
+    public void UpdateTargetdisplay(string SkillType)
+    {
+        if(SkillType == "Health")
+        {
+            TargetSelectionText.text = "Selecta teammate to heal";
+            SelectionButtonOne.SetActive(true);
+            SelectionButtpnTwo.SetActive(true);
+            SelectionButtonThree.SetActive(true);
+
+            MonsterSelectionOne.text = "Ally One";
+            MonsterSelectionTwo.text = "Ally Two";
+            MonsterSelectionThree.text = "Ally Three";
+        }
+        else
+        {
+            TargetSelectionText.text = "Select the Target dummy";
+
+            SelectionButtonOne.SetActive(false);
+            SelectionButtpnTwo.SetActive(true);
+            SelectionButtonThree.SetActive(false);
+
+            MonsterSelectionTwo.text = "Training Dummy";
+        }
     }
 
 

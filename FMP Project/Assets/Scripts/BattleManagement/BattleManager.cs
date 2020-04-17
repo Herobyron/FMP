@@ -207,6 +207,19 @@ public class BattleManager : MonoBehaviour
                 }
             }
 
+            foreach(MonsterScript M in PlayersMonsters)
+            {
+                if(M.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
+                {
+                    M.GetMonsterSKills()[1].SetSkillCurrentCooldown(M.GetMonsterSKills()[1].GetSkillCurrentCooldown() - 1);
+                }
+
+                if (M.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
+                {
+                    M.GetMonsterSKills()[2].SetSkillCurrentCooldown(M.GetMonsterSKills()[2].GetSkillCurrentCooldown() - 1);
+                }
+            }
+
         }
         else if(PlayerMonOneHadTurn && !PlayerMonTwoHadTurn && !PlayerMonThreeHadTurn)
         {
