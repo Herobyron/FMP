@@ -33,7 +33,8 @@ public class MonsterSkillScript
     // this is the current cooldown of the skill in battle
     private int CurrentCoolDown = 0;
 
-    
+    // this is a private int that stores the damage number for the secondary effect of the skill 
+    private int SecondaryEffectDamageNumber = 0;
 
    // this function allows for the execution of the skill. using all of the information of the skill it will determine what to execute and how long to put the skill on cooldown
    // Params:
@@ -237,7 +238,7 @@ public class MonsterSkillScript
 
                         foreach (MonsterScript M in Targets)
                         {
-                           TempDamageReturn += (int)M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
+                           SecondaryEffectDamageNumber = (int)M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
                         }
 
                         break;
@@ -248,7 +249,7 @@ public class MonsterSkillScript
                         {
                             float TempHealAmount = Mathf.Round((UsingMonster.ReturnBaseHealth() * SecondaryEffectMultipleir) + UsingMonster.ReturnBaseHealth());
 
-                            UsingMonster.ApplyHeal(TempHealAmount);
+                            SecondaryEffectDamageNumber =  (int)UsingMonster.ApplyHeal(TempHealAmount);
                         }
                         else
                         {
@@ -256,7 +257,7 @@ public class MonsterSkillScript
 
                             foreach (MonsterScript M in Targets)
                             {
-                               TempDamageReturn += (int)M.ApplyHeal(TempHealAmount);
+                               SecondaryEffectDamageNumber = (int)M.ApplyHeal(TempHealAmount);
 
                             }
                         }
@@ -561,5 +562,6 @@ public class MonsterSkillScript
     // this function will get the skills current cooldown
     public int GetSkillCurrentCooldown() { return CurrentCoolDown; }
 
-
+    //this function returns the secondary effect damage number
+    public int ReturnSecondaryEffectDamageNumber() { return SecondaryEffectDamageNumber; }
 }

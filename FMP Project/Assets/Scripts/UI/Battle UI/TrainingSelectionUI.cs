@@ -212,45 +212,52 @@ public class TrainingSelectionUI : MonoBehaviour
     // if the list has more then three monsters (count equal too 2) then the panel opens to pick one to replace
     public void AddViewedMonsterToSelected()
     {
-        
+        bool CanAddMonster = true;
 
         for(int i = 0; i < SelectedMonsters.Count; i++)
         {
-            if(MonsterBiengDisplayed != SelectedMonsters[i])
+            if(MonsterBiengDisplayed == SelectedMonsters[i])
             {
-                if(SelectedMonsters.Count  < 3)
-                {
-                    SelectedMonsters.Add(MonsterBiengDisplayed);
-                    switch (SelectedMonsters.Count)
-                    {
-                        case (1):
-                            {
-                                SelectedMonsterOneImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() -1];
-                                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 1);
-                                break;
-                            }
-                        case (2):
-                            {
-                                SelectedMonsterTwoImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() -1];
-                                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 2);
-                                break;
-                            }
-                        case (3):
-                            {
-                                SelectedMonsterThreeImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() -1];
-                                SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 3);
-                                break;
-                            }
-                    }
-
-                    break;
-                }
-                else
-                {
-                    ReplaceMonsterPanel.SetActive(true);
-                }
+                CanAddMonster = false;
             }
         }
+
+
+        if (SelectedMonsters.Count < 3)
+        {
+            if (CanAddMonster)
+            {
+                SelectedMonsters.Add(MonsterBiengDisplayed);
+                switch (SelectedMonsters.Count)
+                {
+                    case (1):
+                        {
+                            SelectedMonsterOneImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                            SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 1);
+                            break;
+                        }
+                    case (2):
+                        {
+                            SelectedMonsterTwoImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                            SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 2);
+                            break;
+                        }
+                    case (3):
+                        {
+                            SelectedMonsterThreeImage.sprite = MonsterImages[MonsterBiengDisplayed.GetMonsterImageNumber() - 1];
+                            SelectionNotification(MonsterBiengDisplayed.ReturnMonsterName(), 3);
+                            break;
+                        }
+                }
+            }
+            
+        }
+        else
+        {
+            ReplaceMonsterPanel.SetActive(true);
+        }
+
+
 
         if (SelectedMonsters.Count == 0)
         {

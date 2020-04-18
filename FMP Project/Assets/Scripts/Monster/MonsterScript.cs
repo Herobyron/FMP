@@ -2286,7 +2286,7 @@ public class MonsterScript
 
         foreach(BeneficialEffects B in EffectsBeneficial)
         {
-            if(B == BeneficialEffect)
+            if(B.ReturnBuffType() == BeneficialEffect.ReturnBuffType())
             {
                 TempAffectApplied = true;
                 B.SetTurns(3);

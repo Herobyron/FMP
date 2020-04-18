@@ -135,9 +135,13 @@ public class BattleManager : MonoBehaviour
         NewMonster.SetMonsterCritDamage(1);
         NewMonster.SetMonsterCritRate(1);
         NewMonster.SetMonsterSpeed(1);
-        NewMonster.SetMonsterCurrentHealth(100000000);
+        NewMonster.SetMonsterCurrentHealth(1000000);
 
         TrainingDummy = NewMonster;
+
+
+        BattleUI.ReturnTrainingDummySlider().maxValue = TrainingDummy.ReturnCurrentHealth();
+        BattleUI.ReturnTrainingDummySlider().value = TrainingDummy.ReturnCurrentHealth();
 
     }
 
@@ -152,6 +156,17 @@ public class BattleManager : MonoBehaviour
         {
             M.SetMonsterCurrentHealth(M.ReturnBaseHealth() + M.ReturnIncreasedHealth());
         }
+
+
+        
+        BattleUI.ReturnMonsterOneSlider().maxValue = FirstMonster.ReturnCurrentHealth();
+        BattleUI.ReturnMonsterOneSlider().value = FirstMonster.ReturnCurrentHealth();
+        BattleUI.ReturnMonsterTwoSlider().maxValue = SecondMonster.ReturnCurrentHealth();
+        BattleUI.ReturnMonsterTwoSlider().value = SecondMonster.ReturnCurrentHealth();
+        BattleUI.ReturnMonsterThreeSlider().maxValue = ThirdMonster.ReturnCurrentHealth();
+        BattleUI.ReturnMonsterThreeSlider().value = ThirdMonster.ReturnCurrentHealth();
+
+
     }
 
     // this function sets the monster for the player in battle
@@ -186,6 +201,7 @@ public class BattleManager : MonoBehaviour
         BattleUI.SetCurrentMonster(CurrentMonster);
         BattleUI.SetCurrentMonsterNum(1);
         BattleUI.UpdateCurrentMonsterImage();
+        
 
     }
 
