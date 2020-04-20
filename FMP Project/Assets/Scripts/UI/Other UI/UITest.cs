@@ -34,6 +34,9 @@ public class UITest : MonoBehaviour
     // this is the manager that holds all of the information 
     private GameManagment TheManager;
 
+    [Tooltip("this is the text component for the rune selection button")]
+    [SerializeField]
+    private Text RuneSelectionText = null;
 
     [Tooltip("the list of buttons that will be used to display each rune")]
     [SerializeField]
@@ -131,4 +134,18 @@ public class UITest : MonoBehaviour
         RuneBiengUsed = TheManager.ReturnSelectedRune(EventSystem.current.currentSelectedGameObject.name);
         ChangeUI();
     }
+
+
+    public void RuneSelectionTextChange()
+    {
+        if(RuneSelectionPanel.activeInHierarchy)
+        {
+            RuneSelectionText.text = "Close Rune Selection";
+        }
+        else
+        {
+            RuneSelectionText.text = "Open Rune Selection";
+        }
+    }
+
 }

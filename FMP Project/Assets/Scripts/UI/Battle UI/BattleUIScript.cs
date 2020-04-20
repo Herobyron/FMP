@@ -267,10 +267,28 @@ public class BattleUIScript : MonoBehaviour
     private Text MonsterThreeSeoncdaryDamageNumber = null;
 
 
+    // these are the text components to display the monsters and training dummy level
+    [SerializeField]
+    private Text TrainingDummyLevelText = null;
+
+    [SerializeField]
+    private Text MonsterOneLevel = null;
+
+    [SerializeField]
+    private Text MonsterTwoLevel = null;
+
+    [SerializeField]
+    private Text MonsterThreeLevel = null;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+       
+    }
+
+    private void OnEnable()
+    {
+        LevelDisplaySet();
     }
 
     // Update is called once per frame
@@ -1513,6 +1531,16 @@ public class BattleUIScript : MonoBehaviour
     {
         return TrainingDummySlider;
     }
+
+    // this function sets the levels of all of the monsters at the beggining of the battle
+    public void LevelDisplaySet()
+    {
+        TrainingDummyLevelText.text = "" + BattleManagerRef.ReturnTrainingDummy().ReturnMonsterLevel();
+        MonsterOneLevel.text = "" + BattleManagerRef.ReturnMonsterOne().ReturnMonsterLevel();
+        MonsterTwoLevel.text = "" + BattleManagerRef.ReturnMonsterTwo().ReturnMonsterLevel();
+        MonsterThreeLevel.text = "" + BattleManagerRef.ReturnMonsterThree().ReturnMonsterLevel();
+    }
+
 
     // this is the enumerator to display the damage text for a small amount of time 
     IEnumerator DamageTextDisplayTime(float DisplayTime, MonsterSkillScript TheSkill, int DamageNumber)

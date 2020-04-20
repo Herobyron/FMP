@@ -247,8 +247,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10.503, y: 11}
-  m_SizeDelta: {x: 997.19, y: 529.6}
+  m_AnchoredPosition: {x: 10.5, y: 11}
+  m_SizeDelta: {x: 823.21, y: 529.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5575440506052820186
 CanvasRenderer:
@@ -541,8 +541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -498.5951, y: 0}
-  m_SizeDelta: {x: 1045, y: 0}
+  m_AnchoredPosition: {x: -411.60513, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &789930283348234253
 CanvasRenderer:
@@ -2947,6 +2947,7 @@ MonoBehaviour:
   RuneSlot: {fileID: 3502001569004531504}
   RuneName: {fileID: 3502001568354576471}
   NoRuneUsed: {fileID: 3502001568051227111}
+  RuneSelectionText: {fileID: 4672881746604478072}
   RuneButtons: []
   RuneButtonCount: 0
   ButtonTemplate: {fileID: 2772319218447013473}
@@ -3585,6 +3586,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3502001568777213088}
+        m_MethodName: GenerateRuneButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3502001569182750852
@@ -4126,7 +4138,7 @@ GameObject:
   - component: {fileID: 1357872204042764032}
   - component: {fileID: 4672881746604478072}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Rune Selection Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4181,7 +4193,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 585188cdc4600544eb408bee749e4b3a, type: 3}
-    m_FontSize: 50
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -4192,7 +4204,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Rune Selection
+  m_Text: Open Rune Selection
 --- !u!1 &5808047445846037433
 GameObject:
   m_ObjectHideFlags: 0
@@ -4229,8 +4241,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.49651, y: 12}
-  m_SizeDelta: {x: 1017.2, y: 20}
+  m_AnchoredPosition: {x: 0.50048, y: 12}
+  m_SizeDelta: {x: 843.21, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &491703015437202289
 CanvasRenderer:
@@ -4311,8 +4323,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5156507118554844894}
   m_HandleRect: {fileID: 298313264552033990}
   m_Direction: 0
-  m_Value: 0.00000063830953
-  m_Size: 0.9542488
+  m_Value: 0.00000027519349
+  m_Size: 0.7877608
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4469,7 +4481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1694317341392473165
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4489,8 +4501,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -1427, y: 263}
-  m_SizeDelta: {x: 1018.2, y: 551.6}
+  m_AnchoredPosition: {x: -1511.3, y: 263}
+  m_SizeDelta: {x: 844.21, y: 551.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &322431580424035657
 CanvasRenderer:
@@ -4668,7 +4680,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4741,8 +4753,8 @@ RectTransform:
   m_Father: {fileID: 6405487535439824848}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000029203436, y: 0}
-  m_AnchorMax: {x: 0.9542488, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4994,6 +5006,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3502001568777213088}
         m_MethodName: GenerateRuneButtons
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3502001568777213088}
+        m_MethodName: RuneSelectionTextChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

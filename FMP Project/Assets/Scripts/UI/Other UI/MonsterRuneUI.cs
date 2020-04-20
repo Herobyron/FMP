@@ -253,6 +253,15 @@ public class MonsterRuneUI : MonoBehaviour
 
     private bool Once = false;
 
+
+    [Tooltip("this is the panel that allows the player to swap runes")]
+    [SerializeField]
+    private GameObject SwapRunePanel = null;
+
+    [Tooltip("this is the panel that allows the player to swap runes when equiping and already equiped rune")]
+    [SerializeField]
+    private GameObject SwapRunePanelTwo = null;
+
     void Start()
     {
         RunePanel.SetActive(false);
@@ -512,44 +521,151 @@ public class MonsterRuneUI : MonoBehaviour
     {
         if (!RuneBiengUsed.ReturnRuneEquiped())
         {
-            MonsterBiengUsed.EquipRune(RuneBiengUsed);
-            RefreshRuneUI();
-            RefreshRuneEquipedMonsterUI();
-
-            switch (RuneBiengUsed.ReturnRuneSlot())
+            if (MonsterBiengUsed.ReturnRune(RuneBiengUsed.ReturnRuneSlot()) == null)
             {
-                case (1):
-                    {
-                        StartCoroutine(FadeImageRune(RuneOneImage, "In"));
-                        break;
-                    }
-                case (2):
-                    {
-                        StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
-                        break;
-                    }
-                case (3):
-                    {
-                        StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
-                        break;
-                    }
-                case (4):
-                    {
-                        StartCoroutine(FadeImageRune(RuneFourImage, "In"));
-                        break;
-                    }
-                case (5):
-                    {
-                        StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
-                        break;
-                    }
-                case (6):
-                    {
-                        StartCoroutine(FadeImageRune(RuneSixImage, "In"));
-                        break;
-                    }
+
+                MonsterBiengUsed.EquipRune(RuneBiengUsed);
+                RefreshRuneUI();
+                RefreshRuneEquipedMonsterUI();
+
+                switch (RuneBiengUsed.ReturnRuneSlot())
+                {
+                    case (1):
+                        {
+                            StartCoroutine(FadeImageRune(RuneOneImage, "In"));
+                            break;
+                        }
+                    case (2):
+                        {
+                            StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
+                            break;
+                        }
+                    case (3):
+                        {
+                            StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
+                            break;
+                        }
+                    case (4):
+                        {
+                            StartCoroutine(FadeImageRune(RuneFourImage, "In"));
+                            break;
+                        }
+                    case (5):
+                        {
+                            StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
+                            break;
+                        }
+                    case (6):
+                        {
+                            StartCoroutine(FadeImageRune(RuneSixImage, "In"));
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                // have a pop up display to allow the player to swap runes
+                SwapRunePanel.SetActive(true);
             }
         }
+        else
+        {
+            // have a pop up display to allow for the player to swap runes and tell them its already equiped
+            SwapRunePanelTwo.SetActive(true);
+        }
+    }
+
+    public void RemoveAndSwapRuneMonster()
+    {
+        foreach(MonsterScript M in TheManager.ReturnPlayerMonsters())
+        {
+            if(M.ReturnMonsterName() == RuneBiengUsed.ReturnMonsterEquipedTo())
+            {
+                M.UnequipRune(RuneBiengUsed);
+                MonsterBiengUsed.EquipRune(RuneBiengUsed);
+                RefreshRuneUI();
+                RefreshRuneEquipedMonsterUI();
+
+                switch (RuneBiengUsed.ReturnRuneSlot())
+                {
+                    case (1):
+                        {
+                            StartCoroutine(FadeImageRune(RuneOneImage, "In"));
+                            break;
+                        }
+                    case (2):
+                        {
+                            StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
+                            break;
+                        }
+                    case (3):
+                        {
+                            StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
+                            break;
+                        }
+                    case (4):
+                        {
+                            StartCoroutine(FadeImageRune(RuneFourImage, "In"));
+                            break;
+                        }
+                    case (5):
+                        {
+                            StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
+                            break;
+                        }
+                    case (6):
+                        {
+                            StartCoroutine(FadeImageRune(RuneSixImage, "In"));
+                            break;
+                        }
+                }
+
+            }
+        }
+    }
+
+
+    public void SwapRuneFunction()
+    {
+        MonsterBiengUsed.UnequipRune(MonsterBiengUsed.ReturnRune(RuneBiengUsed.ReturnRuneSlot()));
+        MonsterBiengUsed.EquipRune(RuneBiengUsed);
+        RefreshRuneUI();
+        RefreshRuneEquipedMonsterUI();
+
+        switch (RuneBiengUsed.ReturnRuneSlot())
+        {
+            case (1):
+                {
+                    StartCoroutine(FadeImageRune(RuneOneImage, "In"));
+                    break;
+                }
+            case (2):
+                {
+                    StartCoroutine(FadeImageRune(RuneTwoImage, "In"));
+                    break;
+                }
+            case (3):
+                {
+                    StartCoroutine(FadeImageRune(RuneThreeImage, "In"));
+                    break;
+                }
+            case (4):
+                {
+                    StartCoroutine(FadeImageRune(RuneFourImage, "In"));
+                    break;
+                }
+            case (5):
+                {
+                    StartCoroutine(FadeImageRune(RuneFiveImage, "In"));
+                    break;
+                }
+            case (6):
+                {
+                    StartCoroutine(FadeImageRune(RuneSixImage, "In"));
+                    break;
+                }
+        }
+
     }
 
     //this function will decrease the monsters stats by the increased stats of the rune bieng unequiped
@@ -557,6 +673,7 @@ public class MonsterRuneUI : MonoBehaviour
     {
         if (RuneBiengUsed.ReturnRuneEquiped())
         {
+
             MonsterBiengUsed.UnequipRune(RuneBiengUsed);
             RefreshRuneUI();
             RefreshRuneEquipedMonsterUI();
