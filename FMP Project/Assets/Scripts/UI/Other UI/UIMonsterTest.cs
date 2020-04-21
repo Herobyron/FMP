@@ -71,6 +71,27 @@ public class UIMonsterTest : MonoBehaviour
     [SerializeField]
     private List<Sprite> SpriteList = new List<Sprite>();
 
+    private bool Once = false;
+
+    [Tooltip("this is the text compoent for the monster panel")]
+    [SerializeField]
+    private Text MonsterSelectionPanelText;
+
+  
+
+
+    private void OnEnable()
+    {
+        if(Once)
+        {
+            TheManager.Load();
+            TheManager.LoadInMonsterName();
+            TheManager.GetAllMonsters();
+            GenerateMonsterButtons();
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -93,6 +114,9 @@ public class UIMonsterTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Once)
+            Once = true;
+
         ChangeUI();
     }
 
@@ -897,5 +921,19 @@ public class UIMonsterTest : MonoBehaviour
         MonsterBiengUsed = TheManager.ReturnSelectedMonster(EventSystem.current.currentSelectedGameObject.name);
         ChangeUI();
     
+    }
+
+
+    // this function will change the output of the monster selection text depending on if the panel is opened or closed
+    public void MonsterSelectionTextChange()
+    {
+        if(MonsterSelectionPanel.activeInHierarchy)
+        {
+            MonsterSelectionPanelText.text = "Close Monster Selection";
+        }
+        else
+        {
+            MonsterSelectionPanelText.text = "Open Monster Selection";
+        }
     }
 }

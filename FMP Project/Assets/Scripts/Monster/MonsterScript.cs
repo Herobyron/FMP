@@ -2332,7 +2332,7 @@ public class MonsterScript
 
         foreach(HarmfulEffects H in EffectsHarmful)
         {
-            if(H == HarmfulEffect)
+            if (H.ReturnDebuffType() == HarmfulEffect.ReturnDebuffType())
             {
                 TempAffectApplied = true;
                 H.SetTurns(3);

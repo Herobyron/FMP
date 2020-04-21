@@ -54,6 +54,8 @@ public class UITest : MonoBehaviour
     [SerializeField]
     private GameObject RuneSelectionPanel = null;
 
+    private bool Once = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,9 +64,24 @@ public class UITest : MonoBehaviour
         RuneBiengUsed = null;
     }
 
+    private void OnEnable()
+    {
+        if(Once)
+        {
+            TheManager.Load();
+            TheManager.LoadRuneIn();
+            TheManager.GetAllRunes();
+            GenerateRuneButtons();
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
+        if (!Once)
+            Once = true;
+
         ChangeUI();
     }
 
@@ -100,17 +117,17 @@ public class UITest : MonoBehaviour
         }
         else if(RuneBiengUsed != null)
         {
-            RuneName.text = "Rune Name: " + RuneBiengUsed.ReturnRuneName();
-            RuneLevelText.text = "Rune Level: " + RuneBiengUsed.ReturnRuneLevel();
-            RuneStar.text = "Rune Star: " + RuneBiengUsed.ReturnAmountOfStars();
-            RuneGrade.text = "Rune Rarity: " + RuneBiengUsed.ReturnRuneRarity();
-            RuneSlot.text = "Rune Slot: " + RuneBiengUsed.ReturnRuneSlot();
+            RuneName.text = "Rune Name: <color=darkblue>" + RuneBiengUsed.ReturnRuneName() + "</color>";
+            RuneLevelText.text = "Rune Level: <color=darkblue>" + RuneBiengUsed.ReturnRuneLevel() + "</color>";
+            RuneStar.text = "Rune Star: <color=darkblue>" + RuneBiengUsed.ReturnAmountOfStars() + "</color>";
+            RuneGrade.text = "Rune Rarity: <color=darkblue>" + RuneBiengUsed.ReturnRuneRarity() + "</color>";
+            RuneSlot.text = "Rune Slot: <color=darkblue>" + RuneBiengUsed.ReturnRuneSlot() + "</color>";
 
-            MainRuneStat.text = RuneBiengUsed.ReturnMainRuneStatType() + ": " + RuneBiengUsed.ReturnMainRuneStat();
-            RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": " + RuneBiengUsed.ReturnRuneStatOne();
-            RuneTwoStat.text = RuneBiengUsed.ReturnRuneStatTwoType() + ": " + RuneBiengUsed.ReturnRuneStatTwo();
-            RuneThreeStat.text = RuneBiengUsed.ReturnRuneStatThreeType() + ": " + RuneBiengUsed.ReturnRuneStatThree();
-            RuneFourStat.text = RuneBiengUsed.ReturnRuneStatFourType() + ": " + RuneBiengUsed.ReturnRuneStatFour();
+            MainRuneStat.text = RuneBiengUsed.ReturnMainRuneStatType() + ": <color=darkblue>" + RuneBiengUsed.ReturnMainRuneStat() + "</color>";
+            RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatOne() + "</color>";
+            RuneTwoStat.text = RuneBiengUsed.ReturnRuneStatTwoType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatTwo() + "</color>";
+            RuneThreeStat.text = RuneBiengUsed.ReturnRuneStatThreeType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatThree() + "</color>";
+            RuneFourStat.text = RuneBiengUsed.ReturnRuneStatFourType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatFour() + "</color>";
 
             NoRuneUsed.gameObject.SetActive(false);
         }
@@ -140,11 +157,11 @@ public class UITest : MonoBehaviour
     {
         if(RuneSelectionPanel.activeInHierarchy)
         {
-            RuneSelectionText.text = "Close Rune Selection";
+            RuneSelectionText.text = "Close Rune\nSelection";
         }
         else
         {
-            RuneSelectionText.text = "Open Rune Selection";
+            RuneSelectionText.text = "Open Rune\nSelection";
         }
     }
 

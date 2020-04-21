@@ -98,6 +98,10 @@ public class TrainingSelectionUI : MonoBehaviour
     [SerializeField]
     private GameObject StartBattleQuestionPanel = null;
 
+    [Tooltip("this is the panel that displays that this monster has already been selected")]
+    [SerializeField]
+    private GameObject MonsterAlreadySelectedPanel = null;
+
 
     // this function uses the game manager to load in the information from the manager to here
     public void LoadInformation()
@@ -249,6 +253,10 @@ public class TrainingSelectionUI : MonoBehaviour
                             break;
                         }
                 }
+            }
+            else
+            {
+                MonsterAlreadySelectedPanel.SetActive(true);
             }
             
         }
