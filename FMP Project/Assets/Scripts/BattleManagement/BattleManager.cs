@@ -101,18 +101,94 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private int TargetMonsterNumber = 0;
 
+
+    //this is the siz strings use to detrmine which monsters are going in what positions for when battling agianst the AI
+    [Tooltip("this is the first monster in battle the one with fastest speed")]
+    [SerializeField]
+    private string TheFirstMonster = null;
+
+    [Tooltip("this is the first monster in battle script. this script is stored seperate from the lists")]
+    [SerializeField]
+    private MonsterScript TheFirstMonsterScript = null;
+
+    [Tooltip("this is a bool to determine is the first monster has had a turn")]
+    [SerializeField]
+    private bool FirstMonsterHadTurn = false;
+
+    [Tooltip("this is the second monster in battle with the second fastest speed")]
+    [SerializeField]
+    private string TheSecondMonster = null;
+
+    [Tooltip("this is the second monster in battle script. this script is stored seperate from the lists")]
+    [SerializeField]
+    private MonsterScript TheSecondMonsterScript = null;
+
+    [Tooltip("this is a bool to determine is the Second monster has had a turn")]
+    [SerializeField]
+    private bool SecondMonsterHadTurn = false;
+
+    [Tooltip("this is the third monster in battle. the one with the third fastest speed")]
+    [SerializeField]
+    private string TheThirdMonster = null;
+
+    [Tooltip("this is the third monster in battle script. this script is stored seperte from the lists")]
+    [SerializeField]
+    private MonsterScript TheThirdMonsterScript = null;
+
+    [Tooltip("this is a bool to determine is the Third monster has had a turn")]
+    [SerializeField]
+    private bool ThirdMonsterHadTurn = false;
+
+
+    [Tooltip("this is the fourth monster in battle. the one with the forth fastest speed")]
+    [SerializeField]
+    private string TheFourthMonster = null;
+
+    [Tooltip("this is the fourth monster in battle script. this script is stored seperate from the lists")]
+    [SerializeField]
+    private MonsterScript TheForthMonsterScript = null;
+
+    [Tooltip("this is a bool to determine is the Fourth monster has had a turn")]
+    [SerializeField]
+    private bool FourthMonsterHadTurn = false;
+
+
+    [Tooltip("this is the fifth monster in battle. the one with the fifth fastest speed")]
+    [SerializeField]
+    private string TheFifthMonster = null;
+
+    [Tooltip("this is the fifth monster in battle script. this script is stored seperate form the lists")]
+    [SerializeField]
+    private MonsterScript TheFifthMonsterScript = null;
+
+    [Tooltip("this is a bool to determine is the Fifth monster has had a turn")]
+    [SerializeField]
+    private bool FifthMonsterHadTurn = false;
+
+
+    [Tooltip("this is the sixth monster in battle. the one with the slowest speed")]
+    [SerializeField]
+    private string TheSixthMonster = null;
+
+    [Tooltip("this is the sixth monster in battle script. this script is stored seperate from the lists")]
+    [SerializeField]
+    private MonsterScript TheSixthMonsterScript = null;
+
+
+    [Tooltip("this is a bool to determine is the Sixth monster has had a turn")]
+    [SerializeField]
+    private bool SixthMonsterHadTurn = false;
+
+
+    // this is the battle UI for when fighting against AI
+    [Tooltip("UI that is used to battle against AI")]
+    [SerializeField]
+    private RealBattleUIScript AIBattleUI = null;
+
     // Start is called before the first frame update
     void Start()
     {
-        //if(CurrentState == BattleState.Training)
-        //{
-        //    
-        //    EnemyMonOneHadTurn = true;
-        //    EnemyMonTwoHadTurn = true;
-        //    EnemyMonThreeHadTurn = true;
-        //
-        //    TurnOrderCalculateTraining();
-        //}
+        
 
         InitialiseTrainingDummy();
     }
@@ -120,7 +196,7 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame and will check wether to change a monsters turn or not
     void Update()
     {
-        //CurrentTurnCalc();
+       
     }
 
     public void InitialiseTrainingDummy()
@@ -142,6 +218,17 @@ public class BattleManager : MonoBehaviour
 
         BattleUI.ReturnTrainingDummySlider().maxValue = TrainingDummy.ReturnCurrentHealth();
         BattleUI.ReturnTrainingDummySlider().value = TrainingDummy.ReturnCurrentHealth();
+
+    }
+
+    //this function will randomly generate the three monsters and store them in the enemy monster list
+    public void InitialseEnemyMonstersRandom()
+    {
+
+        for( int i = 0; i <= 2; i++)
+        {
+            EnemyMonsters.Add(FindObjectOfType<GenerateMonster>().CreateEnemyMonster(EnemyMonsters.Count));
+        }
 
     }
 
@@ -204,6 +291,180 @@ public class BattleManager : MonoBehaviour
         
 
     }
+
+
+    // this function will calculate the turn order for all of the monsters within the players and enemies monsters
+    // this function also sends information to the battle UI this will be looked at later
+    public void TurnOrderCalculateActualBattle()
+    {
+        List<MonsterScript> TempMons = new List<MonsterScript>();
+        TempMons = EnemyMonsters;
+        TempMons.AddRange(PlayersMonsters);
+
+
+        foreach (MonsterScript M in TempMons)
+        {
+            if(M.ReturnMonsterName() == TheFirstMonster)
+            {
+                CurrentMonster = M;
+            }
+        }
+
+        //  send information to battle UI
+        // I havent added that in yet becaus emay be using new battle UI script
+
+    }
+
+    // this function will calcualte the speed of all of the monsters bieng used from both sides and find out who is the faststes
+    // this function will only run once at the begninig of battle and will need to be done after the enemy monsters have been generated
+    public void SpeedCalcualteAllMonster()
+    {
+        List<MonsterScript> TempMons = new List<MonsterScript>();
+        TempMons = EnemyMonsters;
+        TempMons.AddRange(PlayersMonsters);
+
+        int TempSpeed = 0;
+        MonsterScript TempMonster = new MonsterScript();
+
+
+        foreach(MonsterScript M in TempMons)
+        {
+            if((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                TheFirstMonster = M.ReturnMonsterName();
+                TheFirstMonsterScript = M;
+                TempMonster = M;
+            }
+        }
+
+        TempSpeed = 0;
+
+        foreach(MonsterScript M in TempMons)
+        {
+            if((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != TheFirstMonster)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                TheSecondMonster = M.ReturnMonsterName();
+                TheSecondMonsterScript = M;
+                TempMonster = M;
+            }
+        }
+
+        TempSpeed = 0;
+
+        foreach(MonsterScript M in TempMons)
+        {
+            if((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != TheFirstMonster && M.ReturnMonsterName() != TheSecondMonster)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                TheThirdMonster = M.ReturnMonsterName();
+                TheThirdMonsterScript = M;
+                TempMonster = M;
+            }
+        }
+
+        TempSpeed = 0;
+
+        foreach(MonsterScript M in TempMons)
+        {
+            if((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != TheFirstMonster && M.ReturnMonsterName() != TheSecondMonster && M.ReturnMonsterName() != TheThirdMonster)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                TheFourthMonster = M.ReturnMonsterName();
+                TheForthMonsterScript = M;
+                TempMonster = M;
+            }
+        }
+
+        TempSpeed = 0;
+
+        foreach(MonsterScript M in TempMons)
+        {
+            if((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != TheFirstMonster && M.ReturnMonsterName() != TheSecondMonster && M.ReturnMonsterName() != TheThirdMonster && M.ReturnMonsterName() != TheFourthMonster)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                TheFifthMonster = M.ReturnMonsterName();
+                TheFifthMonsterScript = M;
+                TempMonster = M;
+            }
+        }
+
+
+        TempSpeed = 0;
+
+        foreach (MonsterScript M in TempMons)
+        {
+            if ((M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed()) > TempSpeed && M.ReturnMonsterName() != TheFirstMonster && M.ReturnMonsterName() != TheSecondMonster && M.ReturnMonsterName() != TheThirdMonster && M.ReturnMonsterName() != TheFourthMonster && M.ReturnMonsterName() != TheFifthMonster)
+            {
+                TempSpeed = (int)(M.ReturnBaseSpeed() + M.ReturnIncreasedSpeed());
+                TheSixthMonster = M.ReturnMonsterName();
+                TheSixthMonsterScript = M;
+                TempMonster = M;
+            }
+        }
+
+
+
+    }
+    
+    // this is a function to determine who's turn it is when battleing against AI
+    // not finished
+    public void CurrentTurnCalculationAIBattle()
+    {
+        if(FirstMonsterHadTurn && SecondMonsterHadTurn && ThirdMonsterHadTurn && FourthMonsterHadTurn && FifthMonsterHadTurn && SixthMonsterHadTurn)
+        {
+            FirstMonsterHadTurn = false;
+            SecondMonsterHadTurn = false;
+            ThirdMonsterHadTurn = false;
+            FourthMonsterHadTurn = false;
+            FifthMonsterHadTurn = false;
+            SixthMonsterHadTurn = false;
+
+            CurrentMonster = TheFirstMonsterScript;
+            
+            // update all monster turns
+
+            if(CurrentMonster.ReturnMonsterOwner() == "Player")
+            {
+                foreach(MonsterScript M in PlayersMonsters)
+                {
+                    int Temp = 0;
+
+                    if(M.ReturnMonsterName() == TheFirstMonster)
+                    {
+                        // if temp is 0 then its the first monster and so on
+                        AIBattleUI.SetCurrentMonster(TheFirstMonsterScript);
+                        AIBattleUI.SetCurrentMonsterNum(Temp);
+                        AIBattleUI.SetCurrentMonsterSide("Player");
+
+                    }
+
+                    Temp++;
+                }
+            }
+            else
+            {
+                foreach(MonsterScript M in EnemyMonsters)
+                {
+                    int Temp = 0;
+
+                    if (M.ReturnMonsterName() == TheFirstMonster)
+                    {
+                        // if temp is 0 then its the first monster and so on
+                        AIBattleUI.SetCurrentMonster(TheFirstMonsterScript);
+                        AIBattleUI.SetCurrentMonsterNum(Temp);
+                        AIBattleUI.SetCurrentMonsterSide("AI");
+                    }
+
+                    Temp++;
+                }
+            }
+
+        }
+    }
+
+
 
     // a function that updates who's turn it currently is
     public void CurrentTurnCalc()

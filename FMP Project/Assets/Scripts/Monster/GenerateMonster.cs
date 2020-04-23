@@ -40,6 +40,21 @@ public class GenerateMonster : MonoBehaviour
         MonsterNumberAt++;
     }
 
+    // this function create a monster that is specifically designed to be used for the battle Mechanic against the AI
+    // the monster generated will be the same as it would be generated for the player exceopt the name will be changed and the function will return the script instead of adding it to the game manager
+    // this script will be attached to battle manager so it can be used
+    public MonsterScript CreateEnemyMonster(int MonsterNumberAt)
+    {
+        // a way to track a number (for multiple enemies)
+
+        MonsterScriptGenerated = new MonsterScript();
+        GenerateMonsterFunc();
+        MonsterScriptGenerated.SetMonsterName("Enemy Monster " + MonsterNumberAt);
+        MonsterScriptGenerated.SetMonsterOwner("AI");
+
+       
+        return MonsterScriptGenerated;
+    }
 
     //this function goes about actually generating the information for the monster
     public void GenerateMonsterFunc()
