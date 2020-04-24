@@ -80,6 +80,18 @@ public class RealBattleUIScript : MonoBehaviour
     [SerializeField]
     private GameObject CurrentMonThree;
 
+    [Tooltip("this is the game object to show the first enemy monster is the current monster")]
+    [SerializeField]
+    private GameObject EnemyMonOne;
+
+    [Tooltip("this is the game object to show the second enemy monster is the current monster")]
+    [SerializeField]
+    private GameObject EnemyMonTwo;
+
+    [Tooltip("this is the game object to show the third enemy monster is the current monster")]
+    [SerializeField]
+    private GameObject EnemyMonThree;
+
     // these are the UI objects that display the monsters effects
     [Tooltip("this is the game object that displays the first monsters current effects")]
     [SerializeField]
@@ -93,9 +105,19 @@ public class RealBattleUIScript : MonoBehaviour
     [SerializeField]
     private GameObject MonsterThreeEffectDisplay = null;
 
-    [Tooltip("this is the game object that displays the training dummy current effects")]
+    [Tooltip("this is the game object that displays the first enemy monsters current effects")]
     [SerializeField]
-    private GameObject TrainingDummyEffectDisplay = null;
+    private GameObject EnemyOneEffectDisplay = null;
+
+    [Tooltip("this is the game object that displays the second enemy monster current effects")]
+    [SerializeField]
+    private GameObject EnemyTwoEffectDisplay = null;
+
+    [Tooltip("this is the game object that displays the third enemy monster current effects")]
+    [SerializeField]
+    private GameObject EnemyThreeEffectDisplay = null;
+
+
 
     // these are the text elements for the damage numbers
     [Tooltip("this is the text component for the damage numbers for the monster one")]
@@ -110,15 +132,31 @@ public class RealBattleUIScript : MonoBehaviour
     [SerializeField]
     private Text MonsterThreeDamageText = null;
 
-    [Tooltip("this is the text component for the damage numbers for the monster Dummy")]
+    [Tooltip("this is the text component for the damage numbers for the first enemy monster")]
     [SerializeField]
-    private Text MonsterDummyDamageText = null;
+    private Text EnemyMonsterOneDamageText = null;
+
+    [Tooltip("this is the text component for the damage numbers for the second enemy monster")]
+    [SerializeField]
+    private Text EnemyMonsterTwoDamageText = null;
+
+    [Tooltip("this is the text component for the damage numbers for the third enemy monster")]
+    [SerializeField]
+    private Text EnemyMonsterThreeDamageText = null;
 
 
     // this the Effect Template for the Effects of the training dummy
-    [Tooltip("Template for the effects for the training dummy")]
+    [Tooltip("Template for the effects for the first enemy monster")]
     [SerializeField]
-    private GameObject DummyEffectTemplate = null;
+    private GameObject EnemyOneEffectTemplate = null;
+
+    [Tooltip("Template for the effects for the second enemy monster")]
+    [SerializeField]
+    private GameObject EnemyTwoEffectTemplate = null;
+
+    [Tooltip("Template for the effects for the third enemy monster")]
+    [SerializeField]
+    private GameObject EnemyThreeEffectTemplate = null;
 
     [Tooltip("Template for the effects for the First Monster")]
     [SerializeField]
@@ -133,9 +171,17 @@ public class RealBattleUIScript : MonoBehaviour
     private GameObject MonsterThreeEffectTemplate = null;
 
     // these are the list of effects currently bieng displayed for each of the monsters in the training scene
-    [Tooltip("this is the list of buttons for the training dummy effects")]
+    [Tooltip("this is the list of buttons for the first enemy monster")]
     [SerializeField]
-    private List<GameObject> TrainingDummyEffectButtons = new List<GameObject>();
+    private List<GameObject> EnemyOneEffectButtons = new List<GameObject>();
+
+    [Tooltip("this is the list of buttons for the second enemy monster")]
+    [SerializeField]
+    private List<GameObject> EnemyTwoEffectButtons = new List<GameObject>();
+
+    [Tooltip("this is the list of buttons for the third enemy monster")]
+    [SerializeField]
+    private List<GameObject> EnemyThreeEffectButtons = new List<GameObject>();
 
     [Tooltip("this is the list of buttons for the Monster One effects")]
     [SerializeField]
@@ -250,12 +296,24 @@ public class RealBattleUIScript : MonoBehaviour
     private Slider MonsterThreeSlider = null;
 
     [SerializeField]
-    private Slider TrainingDummySlider = null;
+    private Slider EnemyOneSlider = null;
+
+    [SerializeField]
+    private Slider EnemyTwoSlider = null;
+
+    [SerializeField]
+    private Slider EnemyThreeSlider = null;
 
 
     // these are the text compoents for the secondary effect damage or healing numbers
     [SerializeField]
-    private Text TrainingDummySeoncdaryDamageNumber = null;
+    private Text EnemyOneSecondaryDamageNumber = null;
+
+    [SerializeField]
+    private Text EnemyTwoSecondaryDamageNumber = null;
+
+    [SerializeField]
+    private Text EnemythreeSecondaryDamageNumber = null;
 
     [SerializeField]
     private Text MonsterOneSecondaryDamageNumber = null;
@@ -269,7 +327,13 @@ public class RealBattleUIScript : MonoBehaviour
 
     // these are the text components to display the monsters and training dummy level
     [SerializeField]
-    private Text TrainingDummyLevelText = null;
+    private Text EnemyOneLevelText = null;
+
+    [SerializeField]
+    private Text EnemyTwoLevelText = null;
+
+    [SerializeField]
+    private Text EnemyThreeLevelText = null;
 
     [SerializeField]
     private Text MonsterOneLevel = null;
@@ -282,17 +346,141 @@ public class RealBattleUIScript : MonoBehaviour
 
 
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        
+        SetLevelDisplays();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateMonsterStatsDisplay();
+    }
+
+    // a function to update the monsters stat display
+    public void UpdateMonsterStatsDisplay()
+    {
+        CurrentMonsterCurrentHealth.text = "Health: " + CurrentMonster.ReturnCurrentHealth();
+        CurrentMonsterAttack.text = "Attack: " + (CurrentMonster.ReturnBaseDamage() + CurrentMonster.ReturnIncreasedAttack());
+        CurrentMonsterDefence.text = "Defence: " + (CurrentMonster.ReturnBaseDefence() + CurrentMonster.ReturnIncreasedDefence());
+        CurrentMonsterSpeed.text = "Speed: " + (CurrentMonster.ReturnBaseSpeed() + CurrentMonster.ReturnIncreasedSpeed());
+    }
+
+    // a function to set the levels of the monsters at the start of battle
+    public void SetLevelDisplays()
+    {
+        MonsterOneLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterLevel();
+        MonsterTwoLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterLevel();
+        MonsterThreeLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterLevel();
+
+        EnemyOneLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterLevel();
+        EnemyTwoLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterLevel();
+        EnemyThreeLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterLevel();
+
+    }
+
+    // a function to update who the current monster is
+    public void UpdateCurrentMonsterIcon()
+    {
+        if(CurrentMonsterSide == "Player")
+        {
+            switch (CurrentMonsterNum)
+            {
+                case (0):
+                    {
+                        CurrentMonOne.SetActive(true);
+                        break;
+                    }
+                case (1):
+                    {
+                        CurrentMonTwo.SetActive(true);
+                        break;
+                    }
+                case (2):
+                    {
+                        CurrentMonThree.SetActive(true);
+                        break;
+                    }
+
+            }
+
+        }
+        else if(CurrentMonsterSide == "AI")
+        {
+            switch (CurrentMonsterNum)
+            {
+                case (0):
+                    {
+                        EnemyMonOne.SetActive(true);
+                        break;
+                    }
+                case (1):
+                    {
+                        EnemyMonTwo.SetActive(true);
+                        break;
+                    }
+                case (2):
+                    {
+                        EnemyMonThree.SetActive(true);
+                        break;
+                    }
+            }
+
+        }
+    }
+
+    // this is a function used to update the health bar of the monster when a skill is used
+    public void SetMonsterCurrentHealthBar(bool AOE)
+    {
+        if(AOE)
+        {
+                MonsterOneSlider.value = BattleManagerRef.ReturnPlayerMonsters()[0].ReturnCurrentHealth();
+                MonsterTwoSlider.value = BattleManagerRef.ReturnPlayerMonsters()[1].ReturnCurrentHealth();
+                MonsterThreeSlider.value = BattleManagerRef.ReturnPlayerMonsters()[2].ReturnCurrentHealth();
+
+                EnemyOneSlider.value = BattleManagerRef.ReturnEnemyMonsters()[0].ReturnCurrentHealth();
+                EnemyTwoSlider.value = BattleManagerRef.ReturnEnemyMonsters()[1].ReturnCurrentHealth();
+                EnemyThreeSlider.value = BattleManagerRef.ReturnEnemyMonsters()[2].ReturnCurrentHealth();
+
+        }
+        else
+        {
+         
+            if(CurrentMonsterTarget == BattleManagerRef.ReturnPlayerMonsters()[0])
+            {
+                MonsterOneSlider.value = BattleManagerRef.ReturnPlayerMonsters()[0].ReturnCurrentHealth();
+            }
+            else if(CurrentMonsterTarget == BattleManagerRef.ReturnPlayerMonsters()[1])
+            {
+                MonsterTwoSlider.value = BattleManagerRef.ReturnPlayerMonsters()[1].ReturnCurrentHealth();
+            }
+            else if (CurrentMonsterTarget == BattleManagerRef.ReturnPlayerMonsters()[2])
+            {
+                MonsterThreeSlider.value = BattleManagerRef.ReturnPlayerMonsters()[2].ReturnCurrentHealth();
+            }
+            else if(CurrentMonsterTarget == BattleManagerRef.ReturnEnemyMonsters()[0])
+            {
+                EnemyOneSlider.value = BattleManagerRef.ReturnEnemyMonsters()[0].ReturnCurrentHealth();
+            }
+            else if (CurrentMonsterTarget == BattleManagerRef.ReturnEnemyMonsters()[1])
+            {
+                EnemyTwoSlider.value = BattleManagerRef.ReturnEnemyMonsters()[1].ReturnCurrentHealth();
+            }
+            else if (CurrentMonsterTarget == BattleManagerRef.ReturnEnemyMonsters()[2])
+            {
+                EnemyThreeSlider.value = BattleManagerRef.ReturnEnemyMonsters()[2].ReturnCurrentHealth();
+            }
+
+
+        }
+    }
+
+    // this is a function that will update the skill display when a certain skill is pressed when its the players turn
+    public void UpdateMonsterSkillDisplay(int SelectedSkill, MonsterSkillScript TheSkill)
+    {
+        SkillNumberText.text = "Skill Number: " + SelectedSkill;
+
+
     }
 
     // this function sets what monster is the current monster
@@ -313,5 +501,41 @@ public class RealBattleUIScript : MonoBehaviour
         CurrentMonsterSide = Side;
     }
 
+    // functoin to return the slider for the first player monster health bar
+    public Slider ReturnMonsterOneSlider()
+    {
+        return MonsterOneSlider;
+    }
+
+    // function to return the slider for the second player monster health bar
+    public Slider ReturnMonsterTwoSlider()
+    {
+        return MonsterTwoSlider;
+    }
+
+    // function to return the slider for the third player monster health bar
+    public Slider ReturnMonsterThreeslider()
+    {
+        return MonsterThreeSlider;
+    }
+
+    // function to return the slider for the first enemy monster health bar
+    public Slider ReturnEnemyOneSlider()
+    {
+        return EnemyOneSlider;
+    }
+
+
+    // function to return the slider for the first enemy monster health bar
+    public Slider ReturnEnemyTwoSlider()
+    {
+        return EnemyTwoSlider;
+    }
+
+    // function to return the slider for the first enemy monster health bar
+    public Slider ReturnEnemyThreeSlider()
+    {
+        return EnemyThreeSlider;
+    }
 
 }
