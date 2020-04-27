@@ -56,6 +56,11 @@ public class UITest : MonoBehaviour
 
     private bool Once = false;
 
+    [Tooltip("this is a panel used to tell the player what to do on the rune UI")]
+    [SerializeField]
+    private GameObject FirstTimeRunePanel;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +77,10 @@ public class UITest : MonoBehaviour
             TheManager.LoadRuneIn();
             TheManager.GetAllRunes();
             GenerateRuneButtons();
+        }
+        else
+        {
+            FirstTimeRunePanel.SetActive(true);
         }
     }
 

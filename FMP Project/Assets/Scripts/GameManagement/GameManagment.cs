@@ -60,6 +60,7 @@ public class GameManagment : MonoBehaviour
             Data data = (Data)BinFormatter.Deserialize(DataFile);
             DataFile.Close();
 
+            
             GameData.PlayerInformation = data.PlayerInformation;
         }
     }

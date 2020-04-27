@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using System.Runtime.CompilerServices;
 using System.Xml;
 using System;
+using UnityEditor;
 
 public class MonsterRuneUI : MonoBehaviour
 {
@@ -262,6 +263,10 @@ public class MonsterRuneUI : MonoBehaviour
     [SerializeField]
     private GameObject SwapRunePanelTwo = null;
 
+    [Tooltip("this is the panel that apears when the player enters the UI for the first time")]
+    [SerializeField]
+    private GameObject FirstTimePanelCombined = null;
+
     void Start()
     {
         RunePanel.SetActive(false);
@@ -280,6 +285,10 @@ public class MonsterRuneUI : MonoBehaviour
             TheManager.LoadMonsterInformation();
             StoreMonsters();
             RefreshMonsterStats();
+        }
+        else
+        {
+            FirstTimePanelCombined.SetActive(true);
         }
     }
 
@@ -720,74 +729,74 @@ public class MonsterRuneUI : MonoBehaviour
     {
         if (MonsterBiengUsed.ReturnIncreasedHealth() > 0)
         {
-            MonsterHealth.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth() + " + " + MonsterBiengUsed.ReturnIncreasedHealth();
+            MonsterHealth.text = "Health: <color=darkblue>" + MonsterBiengUsed.ReturnBaseHealth() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedHealth() + "</color>";
         }
         else
         {
-            MonsterHealth.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth();
+            MonsterHealth.text = "Health: <color=darkblue>" + MonsterBiengUsed.ReturnBaseHealth() + "</color>";
         }
 
         if(MonsterBiengUsed.ReturnIncreasedAttack() > 0)
         {
-            MonsterDamage.text = "Attack: " + MonsterBiengUsed.ReturnBaseDamage() + " + " + MonsterBiengUsed.ReturnIncreasedAttack();
+            MonsterDamage.text = "Attack: <color=darkblue>" + MonsterBiengUsed.ReturnBaseDamage() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedAttack() + "</color>";
         }
         else
         {
-            MonsterDamage.text = "Attack: " + MonsterBiengUsed.ReturnBaseDamage();
+            MonsterDamage.text = "Attack: <color=darkblue>" + MonsterBiengUsed.ReturnBaseDamage() + "</color>";
         }
 
         if(MonsterBiengUsed.ReturnIncreasedDefence() > 0)
         {
-            MonsterDefence.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence() + " + " + MonsterBiengUsed.ReturnIncreasedDefence();
+            MonsterDefence.text = "Defence: <color=darkblue>" + MonsterBiengUsed.ReturnBaseDefence() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedDefence() + "</color>";
         }
         else
         {
-            MonsterDefence.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence();
+            MonsterDefence.text = "Defence: <color=darkblue>" + MonsterBiengUsed.ReturnBaseDefence() + "</color>";
         }
        
         if(MonsterBiengUsed.ReturnIncreasedSpeed() > 0)
         {
-            MonsterSpeed.text = "Speed: " + MonsterBiengUsed.ReturnBaseSpeed() + " + " + MonsterBiengUsed.ReturnIncreasedSpeed();
+            MonsterSpeed.text = "Speed: <color=darkblue>" + MonsterBiengUsed.ReturnBaseSpeed() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedSpeed() + "</color>";
         }
         else
         {
-            MonsterSpeed.text = "Speed: " + MonsterBiengUsed.ReturnBaseSpeed();
+            MonsterSpeed.text = "Speed: <color=darkblue>" + MonsterBiengUsed.ReturnBaseSpeed() + "</color>";
         }
 
         if(MonsterBiengUsed.ReturnIncreasedCritRate() > 0)
         {
-            MonsterCritRate.text = "Crit Rate: " + MonsterBiengUsed.ReturnBaseCritRate() + " + " + MonsterBiengUsed.ReturnIncreasedCritRate();
+            MonsterCritRate.text = "Crit Rate: <color=darkblue>" + MonsterBiengUsed.ReturnBaseCritRate() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedCritRate() + "</color>";
         }
         else
         {
-            MonsterCritRate.text = "Crit Rate: " + MonsterBiengUsed.ReturnBaseCritRate();
+            MonsterCritRate.text = "Crit Rate: <color=darkblue>" + MonsterBiengUsed.ReturnBaseCritRate() + "</color>";
         }
 
         if(MonsterBiengUsed.ReturnIncreasedCritDamage() > 0)
         {
-            MonsterCritDamage.text = "Crit Damage: " + MonsterBiengUsed.ReturnBaseCritDamage() + " + " + MonsterBiengUsed.ReturnIncreasedCritDamage();
+            MonsterCritDamage.text = "Crit Damage: <color=darkblue>" + MonsterBiengUsed.ReturnBaseCritDamage() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedCritDamage() + "</color>";
         }
         else
         {
-            MonsterCritDamage.text = "Crit Damage: " + MonsterBiengUsed.ReturnBaseCritDamage();
+            MonsterCritDamage.text = "Crit Damage: <color=darkblue>" + MonsterBiengUsed.ReturnBaseCritDamage() + "</color>";
         }
         
         if(MonsterBiengUsed.ReturnIncreasedAccuracy() > 0)
         {
-            MonsterAccuracy.text = "Accuracy: " + MonsterBiengUsed.ReturnBaseAccuracy() + " + " + MonsterBiengUsed.ReturnIncreasedAccuracy();
+            MonsterAccuracy.text = "Accuracy: <color=darkblue>" + MonsterBiengUsed.ReturnBaseAccuracy() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedAccuracy() + "</color>";
         }
         else
         {
-            MonsterAccuracy.text = "Accuracy: " + MonsterBiengUsed.ReturnBaseAccuracy();
+            MonsterAccuracy.text = "Accuracy: <color=darkblue>" + MonsterBiengUsed.ReturnBaseAccuracy() + "</color>";
         }
 
         if(MonsterBiengUsed.ReturnIncreasedResistance() > 0)
         {
-            MonsterResistance.text = "Resistance: " + MonsterBiengUsed.ReturnBaseResistance() + " + " + MonsterBiengUsed.ReturnIncreasedResistance();
+            MonsterResistance.text = "Resistance: <color=darkblue>" + MonsterBiengUsed.ReturnBaseResistance() + "</color> + <color=darkblue>" + MonsterBiengUsed.ReturnIncreasedResistance() + "</color>";
         }
         else
         {
-            MonsterResistance.text = "Resistance: " + MonsterBiengUsed.ReturnBaseResistance();
+            MonsterResistance.text = "Resistance: <color=darkblue>" + MonsterBiengUsed.ReturnBaseResistance() + "</color>";
         }
 
         
@@ -805,20 +814,20 @@ public class MonsterRuneUI : MonoBehaviour
     //function to update and display the selected monsters stats
     public void RefreshMonsterStats()
     {
-        MonsterLevel.text = "Level: " + MonsterBiengUsed.ReturnMonsterLevel();
-        MonstersName.text = "Name: " + MonsterBiengUsed.ReturnMonsterName();
-        MonsterHealth.text = "Health: " + MonsterBiengUsed.ReturnBaseHealth();
-        MonsterDamage.text = "Attack: " + MonsterBiengUsed.ReturnBaseDamage();
-        MonsterDefence.text = "Defence: " + MonsterBiengUsed.ReturnBaseDefence();
-        MonsterSpeed.text = "Speed: " + MonsterBiengUsed.ReturnBaseSpeed();
-        MonsterAccuracy.text = "Accuracy: " + MonsterBiengUsed.ReturnBaseAccuracy();
-        MonsterResistance.text = "Resistance: " + MonsterBiengUsed.ReturnBaseResistance();
-        MonsterCritRate.text = "Crit Rate: " + MonsterBiengUsed.ReturnBaseCritRate();
-        MonsterCritDamage.text = "Crit Damage: " + MonsterBiengUsed.ReturnBaseCritDamage();
+        MonsterLevel.text = "Level: " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterLevel() + "</color>";
+        MonstersName.text = "Name: " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterName() + "</color>";
+        MonsterHealth.text = "Health: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseHealth() + "</color>";
+        MonsterDamage.text = "Attack: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseDamage() + "</color>";
+        MonsterDefence.text = "Defence: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseDefence() + "</color>";
+        MonsterSpeed.text = "Speed: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseSpeed() + "</color>";
+        MonsterAccuracy.text = "Accuracy: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseAccuracy() + "</color>";
+        MonsterResistance.text = "Resistance: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseResistance() + "</color>";
+        MonsterCritRate.text = "Crit Rate: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseCritRate() + "</color>";
+        MonsterCritDamage.text = "Crit Damage: " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseCritDamage() + "</color>";
 
-        MonsterType.text = "Type: " + MonsterBiengUsed.ReturnMonsterType();
-        MonsterAwakening.text = (MonsterBiengUsed.ReturnMonsterAwkaned() ? "Awakened : Yes" : "Awakened : No");
-        MonsterStars.text = "Stars: " + MonsterBiengUsed.ReturnMonsterStars();
+        MonsterType.text = "Type: " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterType() + "</color>";
+        MonsterAwakening.text = (MonsterBiengUsed.ReturnMonsterAwkaned() ? "Awakened : <color=darkblue>Yes</color>" : "Awakened : <color=darkblue>No</color>");
+        MonsterStars.text = "Stars: " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterStars() + "</color>";
 
 
     }
@@ -912,6 +921,12 @@ public class MonsterRuneUI : MonoBehaviour
                         break;
                     }
             }
+
+            StartCoroutine( IncreaseStarDisplayChange(true, 2.0f));
+        }
+        else
+        {
+            StartCoroutine(IncreaseStarDisplayChange(false, 2.0f));
         }
     }
 
@@ -1037,6 +1052,34 @@ public class MonsterRuneUI : MonoBehaviour
             MonsterBiengUsed.MonsterIncreasedStatRefresh(MonsterBiengUsed.ReturnRune(6), "Decreased");
         }
 
+    }
+
+    //enumerator to change the display text when a monster is not high enough level
+    IEnumerator IncreaseStarDisplayChange(bool Increased, float PauseTime)
+    {
+        if (Increased)
+        {
+            for (float i = 0; i < PauseTime; i += Time.deltaTime)
+            {
+
+                MonsterUpgradeText.text = "Star Increased";
+
+                yield return null;
+            }
+
+        }
+        else
+        {
+            for (float i = 0; i < PauseTime; i += Time.deltaTime)
+            {
+                MonsterUpgradeText.text = "Monster needs to be max level in order to increase the star";
+                yield return null;
+            }
+
+        }
+
+
+        MonsterUpgradeText.text = "Upgrade your monster";
     }
 
 

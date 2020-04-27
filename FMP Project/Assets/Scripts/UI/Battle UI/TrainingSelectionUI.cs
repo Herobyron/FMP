@@ -168,6 +168,14 @@ public class TrainingSelectionUI : MonoBehaviour
             {
                 RuneOneImage.gameObject.SetActive(true);
             }
+            else
+            {
+                RuneOneImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RuneOneImage.gameObject.SetActive(false);
         }
 
         if (MonsterBiengDisplayed.ReturnRune(2) != null)
@@ -176,6 +184,14 @@ public class TrainingSelectionUI : MonoBehaviour
             {
                 RuneTwoImage.gameObject.SetActive(true);
             }
+            else
+            {
+                RuneTwoImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RuneTwoImage.gameObject.SetActive(false);
         }
 
         if (MonsterBiengDisplayed.ReturnRune(3) != null)
@@ -184,6 +200,14 @@ public class TrainingSelectionUI : MonoBehaviour
             {
                 RuneThreeImage.gameObject.SetActive(true);
             }
+            else
+            {
+                RuneThreeImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RuneThreeImage.gameObject.SetActive(false);
         }
 
         if (MonsterBiengDisplayed.ReturnRune(4) != null)
@@ -192,6 +216,14 @@ public class TrainingSelectionUI : MonoBehaviour
             {
                 RuneFourImage.gameObject.SetActive(true);
             }
+            else
+            {
+                RuneFourImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RuneFourImage.gameObject.SetActive(false);
         }
 
         if (MonsterBiengDisplayed.ReturnRune(5) != null)
@@ -200,6 +232,14 @@ public class TrainingSelectionUI : MonoBehaviour
             {
                 RuneFiveImage.gameObject.SetActive(true);
             }
+            else
+            {
+                RuneFiveImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RuneFiveImage.gameObject.SetActive(false);
         }
 
         if (MonsterBiengDisplayed.ReturnRune(6) != null)
@@ -208,6 +248,14 @@ public class TrainingSelectionUI : MonoBehaviour
             {
                 RuneSixImage.gameObject.SetActive(true);
             }
+            else
+            {
+                RuneSixImage.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            RuneSixImage.gameObject.SetActive(false);
         }
 
     }

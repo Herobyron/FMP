@@ -376,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 2653912769280633913, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.012494862
+      value: 0.0124948025
       objectReference: {fileID: 0}
     - target: {fileID: 2653912769280633913, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
@@ -391,7 +391,7 @@ PrefabInstance:
     - target: {fileID: 5598447548569637256, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.041549027
+      value: 0.041548967
       objectReference: {fileID: 0}
     - target: {fileID: 5598447548569637256, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
@@ -406,7 +406,7 @@ PrefabInstance:
     - target: {fileID: 3877369996353778226, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.024289846
+      value: 0.024289787
       objectReference: {fileID: 0}
     - target: {fileID: 3877369996353778226, guid: 5ae042fd39c4fcc45a3f4f8af4278538,
         type: 3}
@@ -1555,26 +1555,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TheGameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: MonsterUI
-      value: 
-      objectReference: {fileID: 2005534675}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: RuneUI
-      value: 
-      objectReference: {fileID: 933192237}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: MonsterAndRuneUI
-      value: 
-      objectReference: {fileID: 1387210979}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: SwitchUIPanel
-      value: 
-      objectReference: {fileID: 1273027}
     - target: {fileID: 2419853704525750071, guid: baf075445253fdf4b80e3eeb1159b690,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1630,6 +1610,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: MonsterUI
+      value: 
+      objectReference: {fileID: 2005534675}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: RuneUI
+      value: 
+      objectReference: {fileID: 933192237}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: MonsterAndRuneUI
+      value: 
+      objectReference: {fileID: 1387210979}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: SwitchUIPanel
+      value: 
+      objectReference: {fileID: 1273027}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf075445253fdf4b80e3eeb1159b690, type: 3}
 --- !u!1001 &3502001567377347630
@@ -2091,7 +2091,7 @@ PrefabInstance:
     - target: {fileID: 6656055403345623964, guid: 79f5cf8910951c240bf65e5bad0f7680,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1045
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 6656055403345623964, guid: 79f5cf8910951c240bf65e5bad0f7680,
         type: 3}
@@ -2116,7 +2116,7 @@ PrefabInstance:
     - target: {fileID: 6160375332403016697, guid: 79f5cf8910951c240bf65e5bad0f7680,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.9542489
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6160375332403016697, guid: 79f5cf8910951c240bf65e5bad0f7680,
         type: 3}
@@ -2126,7 +2126,7 @@ PrefabInstance:
     - target: {fileID: 6160375332403016697, guid: 79f5cf8910951c240bf65e5bad0f7680,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.000000116813744
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7756617823085670199, guid: 79f5cf8910951c240bf65e5bad0f7680,
         type: 3}

@@ -75,9 +75,11 @@ public class UIMonsterTest : MonoBehaviour
 
     [Tooltip("this is the text compoent for the monster panel")]
     [SerializeField]
-    private Text MonsterSelectionPanelText;
+    private Text MonsterSelectionPanelText = null;
 
-  
+    [Tooltip("this is the panel for when the player enters the monster scene for the first time")]
+    [SerializeField]
+    private GameObject FirstTimePanelMonster = null;
 
 
     private void OnEnable()
@@ -88,6 +90,10 @@ public class UIMonsterTest : MonoBehaviour
             TheManager.LoadInMonsterName();
             TheManager.GetAllMonsters();
             GenerateMonsterButtons();
+        }
+        else
+        {
+            FirstTimePanelMonster.SetActive(true);
         }
     }
 
@@ -153,25 +159,25 @@ public class UIMonsterTest : MonoBehaviour
         }
         else if(MonsterBiengUsed != null)
         {
-            MonsterName.text = "Monster Name : " + MonsterBiengUsed.ReturnMonsterName();
-            MonsterHealth.text = "Monster Health : " + MonsterBiengUsed.ReturnBaseHealth();
-            MonsterDefence.text = "Monster Defence : " + MonsterBiengUsed.ReturnBaseDefence();
-            MonsterAttack.text = "Monster Attack : " + MonsterBiengUsed.ReturnBaseDamage();
-            MonsterSpeed.text = "Monster Speed : " + MonsterBiengUsed.ReturnBaseSpeed();
-            MonsterCritRate.text = "Monster CritRate : " + MonsterBiengUsed.ReturnBaseCritRate();
-            MonsterCritDamage.text = "Monster CritDamage : " + MonsterBiengUsed.ReturnBaseCritDamage();
-            MonsterAccuracy.text = "Monster Accuracy : " + MonsterBiengUsed.ReturnBaseAccuracy();
-            MonsterResistance.text = "Monster Resistance : " + MonsterBiengUsed.ReturnBaseResistance();
-            MonsterStars.text = "Stars : " + MonsterBiengUsed.ReturnMonsterStars();
-            MonsterType.text = "Type : " + MonsterBiengUsed.ReturnMonsterType();
-            MonsterAwakened.text = "Awakened : " + MonsterBiengUsed.ReturnMonsterAwkaned();
-            MonsterLevel.text = "Level : " + MonsterBiengUsed.ReturnMonsterLevel();
+            MonsterName.text = "Monster Name : " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterName() + "</color>";
+            MonsterHealth.text = "Monster Health : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseHealth() + "</color>";
+            MonsterDefence.text = "Monster Defence : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseDefence() + "</color>";
+            MonsterAttack.text = "Monster Attack : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseDamage() + "</color>";
+            MonsterSpeed.text = "Monster Speed : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseSpeed() + "</color>";
+            MonsterCritRate.text = "Monster CritRate : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseCritRate() + "</color>";
+            MonsterCritDamage.text = "Monster CritDamage : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseCritDamage() + "</color>";
+            MonsterAccuracy.text = "Monster Accuracy : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseAccuracy() + "</color>";
+            MonsterResistance.text = "Monster Resistance : " + "<color=darkblue>" + MonsterBiengUsed.ReturnBaseResistance() + "</color>";
+            MonsterStars.text = "Stars : " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterStars() + "</color>";
+            MonsterType.text = "Type : " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterType() + "</color>";
+            MonsterAwakened.text = "Awakened : " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterAwkaned() + "</color>";
+            MonsterLevel.text = "Level : " + "<color=darkblue>" + MonsterBiengUsed.ReturnMonsterLevel() + "</color>";
 
             SkillDescriptionFunc();
 
-            SkillOneImportance.text = "Skill One Importance : " + MonsterBiengUsed.ReturnSkillOneImportance();
-            SkillTwoImportance.text = "Skill Two Importance : " + MonsterBiengUsed.ReturnSkillTwoImportance();
-            SkillThreeImportance.text = "SKill Three Importance : " + MonsterBiengUsed.ReturnSkillThreeImportance();
+            SkillOneImportance.text = "Skill One Importance : " + "<color=darkblue>" + MonsterBiengUsed.ReturnSkillOneImportance() + "</color>";
+            SkillTwoImportance.text = "Skill Two Importance : " + "<color=darkblue>" + MonsterBiengUsed.ReturnSkillTwoImportance() + "</color>";
+            SkillThreeImportance.text = "SKill Three Importance : " + "<color=darkblue>" + MonsterBiengUsed.ReturnSkillThreeImportance() + "</color>";
         }
     }
 

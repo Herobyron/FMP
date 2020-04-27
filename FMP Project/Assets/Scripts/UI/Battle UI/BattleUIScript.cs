@@ -278,6 +278,35 @@ public class BattleUIScript : MonoBehaviour
     [SerializeField]
     private Text MonsterThreeLevel = null;
 
+    //these are all of the tutorial panels that will be used in the tutorial 
+    [Tooltip("this is the tutorial one panel")]
+    [SerializeField]
+    private GameObject TutorialPanelOne = null;
+
+    [Tooltip("this is the tutorial Two panel")]
+    [SerializeField]
+    private GameObject TutorialPanelTwo = null;
+
+    [Tooltip("this is the tutorial three panel")]
+    [SerializeField]
+    private GameObject TutorialPanelThree = null;
+
+    [Tooltip("this is the tutorial four panel")]
+    [SerializeField]
+    private GameObject TutorialPanelFour = null;
+
+    [Tooltip("this is the tutorial five panel")]
+    [SerializeField]
+    private GameObject TutorialPanelFive = null;
+
+    [Tooltip("this is the tutorial six panel")]
+    [SerializeField]
+    private GameObject TutorialPanelSix = null;
+
+    [Tooltip("this is the tutorial Background")]
+    [SerializeField]
+    private GameObject TutorialBackground = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -287,6 +316,8 @@ public class BattleUIScript : MonoBehaviour
     private void OnEnable()
     {
         LevelDisplaySet();
+
+        StartCoroutine(BattleTutorialPlay());
     }
 
     // Update is called once per frame
@@ -1539,6 +1570,71 @@ public class BattleUIScript : MonoBehaviour
         MonsterThreeLevel.text = "" + BattleManagerRef.ReturnMonsterThree().ReturnMonsterLevel();
     }
 
+    // this is the function that is used to display the tutorial
+    // each panel will be available for five second before moving onto the next one
+    IEnumerator BattleTutorialPlay()
+    {
+        TutorialBackground.SetActive(true);
+        TutorialPanelOne.SetActive(false);
+        TutorialPanelTwo.SetActive(false);
+        TutorialPanelThree.SetActive(false);
+        TutorialPanelFour.SetActive(false);
+        TutorialPanelFive.SetActive(false);
+        TutorialPanelSix.SetActive(false);
+
+        for (float i = 0; i < 5.0f; i += Time.deltaTime)
+        {
+            TutorialPanelOne.SetActive(true);
+            yield return null;
+        }
+
+        TutorialPanelOne.SetActive(false);
+
+        for (float i = 0; i < 5.0f; i += Time.deltaTime)
+        {
+            TutorialPanelTwo.SetActive(true);
+            yield return null;
+        }
+
+        TutorialPanelTwo.SetActive(false);
+
+        for (float i = 0; i < 5.0f; i += Time.deltaTime)
+        {
+            TutorialPanelThree.SetActive(true);
+            yield return null;
+        }
+
+        TutorialPanelThree.SetActive(false);
+
+        for (float i = 0; i < 5.0f; i += Time.deltaTime)
+        {
+            TutorialPanelFour.SetActive(true);
+            yield return null;
+        }
+
+        TutorialPanelFour.SetActive(false);
+
+        for (float i = 0; i < 5.0f; i += Time.deltaTime)
+        {
+            TutorialPanelFive.SetActive(true);
+            yield return null;
+        }
+
+        TutorialPanelFive.SetActive(false);
+
+        for (float i = 0; i < 5.0f; i += Time.deltaTime)
+        {
+            TutorialPanelSix.SetActive(true);
+            yield return null;
+        }
+
+        TutorialPanelSix.SetActive(false);
+
+        TutorialBackground.SetActive(false);
+
+        
+    }
+
 
     // this is the enumerator to display the damage text for a small amount of time 
     IEnumerator DamageTextDisplayTime(float DisplayTime, MonsterSkillScript TheSkill, int DamageNumber)
@@ -1631,5 +1727,9 @@ public class BattleUIScript : MonoBehaviour
         MonsterThreeSeoncdaryDamageNumber.gameObject.SetActive(false);
 
     }
+
+
+
+
 
 }
