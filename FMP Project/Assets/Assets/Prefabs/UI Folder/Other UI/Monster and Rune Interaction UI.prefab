@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6701479297280849288}
   m_HandleRect: {fileID: 6160375332403016697}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4932,7 +4932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -38.99994, y: -0.64746094}
+  m_AnchoredPosition: {x: -39.00006, y: -0.64746094}
   m_SizeDelta: {x: -1511.6001, y: -851.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6726089035208040342
@@ -13084,7 +13084,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: There is Already a Rune In this slot to you want to replace the rune. (the
+  m_Text: There is Already a Rune In this slot. Do you want to replace the rune? (the
     rune that is already equipped will be un equiped from this slot and put in the
     inventory)
 --- !u!1 &8390782427604957967

@@ -331,6 +331,10 @@ public class MonsterScript
     [SerializeField]
     private Monsterstate state = Monsterstate.Idle;
 
+
+    // this is a bool that determines if the last attack was a critical hit
+    private bool LastSkillCrit = false;
+
     //this function will upgrade the monsters level and will stop it from going further depending on what the stars of the monster is
     public void LevelUpMonster()
     {
@@ -528,8 +532,8 @@ public class MonsterScript
         // this step of set all of the numbers and bools ready for the damage calculation step
         // all the attacking type buffs and defubs are calculated by enemy monster
         // all of the defence type buffs and debuffs are calculated by this monster
-        
 
+        LastSkillCrit = false;
         bool MissAttack = false;
         bool CritBuff = false;
         float AttackDown = 0.0f;
@@ -620,8 +624,9 @@ public class MonsterScript
                     }
                     else // else if the number isnt bigger then the attack landed as a crit
                     {
+                        LastSkillCrit = true;
                         float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
-                        TempDamage += TempDamage + (TempDamage * BaseCritDamage);
+                        TempDamage +=  (TempDamage * BaseCritDamage);
                         CurrentHealth -= TempDamage;
                         return TempDamage;
                     }
@@ -641,8 +646,9 @@ public class MonsterScript
                 }
                 else // else if the number isnt bigger then the attack landed as a crit
                 {
+                    LastSkillCrit = true;
                     float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
-                    TempDamage += TempDamage + (TempDamage * BaseCritDamage);
+                    TempDamage += (TempDamage * BaseCritDamage);
                     CurrentHealth -= TempDamage;
                     return TempDamage;
                 }
@@ -657,8 +663,9 @@ public class MonsterScript
                 }
                 else // else if the number isnt bigger then the attack landed as a crit
                 {
+                    LastSkillCrit = true;
                     float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
-                    TempDamage += TempDamage + (TempDamage * BaseCritDamage);
+                    TempDamage +=  (TempDamage * BaseCritDamage);
                     CurrentHealth -= TempDamage;
                     return TempDamage;
                 }
@@ -2422,5 +2429,9 @@ public class MonsterScript
         MonsterImageNumber = Num;
     }
 
+    public bool ReturnLastSkillCrit()
+    {
+        return LastSkillCrit;
+    }
     
 }

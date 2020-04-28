@@ -336,7 +336,7 @@ public class BattleManager : MonoBehaviour
 
         foreach (MonsterScript M in PlayersMonsters)
         {
-
+            
             if (M.ReturnMonsterName() == TheFirstMonster)
             {
                 // if temp is 0 then its the first monster and so on
@@ -350,10 +350,11 @@ public class BattleManager : MonoBehaviour
             Temp++;
         }
 
+        Temp = 0;
 
         foreach (MonsterScript M in EnemyMonsters)
         {
-
+            
             if (M.ReturnMonsterName() == TheFirstMonster)
             {
                 // if temp is 0 then its the first monster and so on
@@ -486,6 +487,7 @@ public class BattleManager : MonoBehaviour
 
             if(CurrentMonster.ReturnMonsterOwner() == "Player")
             {
+                Temp = 0;
                 foreach(MonsterScript M in PlayersMonsters)
                 {
                     
@@ -503,6 +505,8 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
+                Temp = 0;
+
                 foreach(MonsterScript M in EnemyMonsters)
                 {
 
@@ -730,6 +734,7 @@ public class BattleManager : MonoBehaviour
 
         AIBattleUI.UpdateCurrentMonsterIcon();
         AIBattleUI.SetCurrentMonster(CurrentMonster);
+        AIBattleUI.UpdateSkillCoolDownDisplay();
     }
 
 

@@ -276,7 +276,8 @@ public class UIMonsterTest : MonoBehaviour
 
                         if(MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Healing")
                         {
-                            SkillOneDescription.text += "this skill will also <color=darkblue>heal</color> one ally for a small amount. ";                        }
+                            SkillOneDescription.text += "this skill will also <color=darkblue>heal</color> one ally for a small amount. ";                        
+                        }
 
 
                     }
@@ -299,7 +300,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             SkillOneDescription.text += "this skill will also apply <color=darkblue>damage</color> to all enemies proportiionate to your attack power. ";
                         }
-                        else
+                        else if(MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Healing")
                         {
                             SkillOneDescription.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
                         }
@@ -319,7 +320,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             SkillOneDescription.text += "this skill will also apply <color=darkblue>damage</color> to one enemy proportiionate to your attack power. ";
                         }
-                        else
+                        else if(MonsterBiengUsed.ReturnSkillOneSecondaryEffect() == "Healing")
                         {
                             SkillOneDescription.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
                         }
@@ -535,7 +536,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             SkillTwoDescription.text += "this skill will also apply <color=darkblue>damage</color> to all enemies proportiionate to your attack power. ";
                         }
-                        else
+                        else if(MonsterBiengUsed.ReturnSkillTwoSecondaryEffect() == "Healing")
                         {
                             SkillTwoDescription.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
                         }
@@ -555,7 +556,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             SkillTwoDescription.text += "this skill will also apply <color=darkblue>damage</color> to one enemy proportiionate to your attack power. ";
                         }
-                        else
+                        else if(MonsterBiengUsed.ReturnSkillTwoSecondaryEffect() == "Healing")
                         {
                             SkillTwoDescription.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
                         }
@@ -769,7 +770,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             SkillThreeDescription.text += "this skill will also apply <color=darkblue>damage</color> to all enemies proportiionate to your attack power. ";
                         }
-                        else
+                        else if (MonsterBiengUsed.ReturnSkillThreeSecondaryEffect() == "Healing")
                         {
                             SkillThreeDescription.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
                         }
@@ -780,7 +781,7 @@ public class UIMonsterTest : MonoBehaviour
 
                         for (int i = 0; i < MonsterBiengUsed.ReturnAllSkillThreeEffects().Count; i++)
                         {
-                            SkillThreeDescription.text += ", " + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i];
+                            SkillThreeDescription.text += ", <color=darkblue>" + MonsterBiengUsed.ReturnAllSkillThreeEffects()[i] + "</color>";
                         }
 
                         SkillThreeDescription.text += " to one enemy";
@@ -789,7 +790,7 @@ public class UIMonsterTest : MonoBehaviour
                         {
                             SkillThreeDescription.text += "this skill will also apply <color=darkblue>damage</color> to one enemy proportiionate to your attack power. ";
                         }
-                        else
+                        else if(MonsterBiengUsed.ReturnSkillThreeSecondaryEffect() == "Healing")
                         {
                             SkillThreeDescription.text += "this skill will also <color=darkblue>heal</color> you for a small amount. ";
                         }

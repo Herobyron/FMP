@@ -36,6 +36,9 @@ public class MonsterSkillScript
     // this is a private int that stores the damage number for the secondary effect of the skill 
     private int SecondaryEffectDamageNumber = 0;
 
+    // this is a bool to determine if this skill landed as a crit
+    private bool LandedAsCrit = false;
+
    // this function allows for the execution of the skill. using all of the information of the skill it will determine what to execute and how long to put the skill on cooldown
    // Params:
    // Targets - is a list of monsters that this skill can target. if this skill is not an AOE the list will only have one monster included within it
@@ -68,8 +71,10 @@ public class MonsterSkillScript
                         foreach(MonsterScript M in Targets)
                         {
                            TempDamageReturn =  (int)M.ApplyDamage(TempDamageAmount, UsingMonster.ReturnBeneficialEffects(), UsingMonster.ReturnHarmfulEffects());
+                            LandedAsCrit = M.ReturnLastSkillCrit();
                         }
 
+                        
                         break;
                     }
                 case ("BeneficialEffect"):
@@ -564,4 +569,10 @@ public class MonsterSkillScript
 
     //this function returns the secondary effect damage number
     public int ReturnSecondaryEffectDamageNumber() { return SecondaryEffectDamageNumber; }
+
+    //this function returns if the skill landed as a critical hit
+    public bool ReturnCriticalLanded()
+    {
+        return LandedAsCrit;
+    }
 }

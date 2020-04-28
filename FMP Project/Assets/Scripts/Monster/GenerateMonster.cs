@@ -754,7 +754,7 @@ public class GenerateMonster : MonoBehaviour
                         {
                             MonsterScriptGenerated.SetSkillOneSecondaryEffect("Healing");
                         }
-                        else
+                        else 
                         {
                             MonsterScriptGenerated.SetSkillOneSecondaryEffect("Damage");
                         }

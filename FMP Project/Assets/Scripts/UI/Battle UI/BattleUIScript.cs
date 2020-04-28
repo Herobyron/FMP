@@ -307,6 +307,11 @@ public class BattleUIScript : MonoBehaviour
     [SerializeField]
     private GameObject TutorialBackground = null;
 
+    // this is the text for the critical hit
+    [SerializeField]
+    private Text CritText = null;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -1007,6 +1012,12 @@ public class BattleUIScript : MonoBehaviour
                 {
                     MonsterDummyDamageText.gameObject.SetActive(true);
                     MonsterDummyDamageText.text = "<color=red>" + DamageNumber + "</color>";
+
+                    if (TheSkill.ReturnCriticalLanded())
+                    {
+                        CritText.gameObject.SetActive(true);
+                    }
+
                     break;
                 }
             case ("Healing"):
@@ -1483,7 +1494,7 @@ public class BattleUIScript : MonoBehaviour
 
 
     }
-
+    
     // this function updates the skills cooldowns images depending on thier cooldown
     // this functoin checks the curent monster and then looks at its current available skills
     public void UpdateSkillCooldownDisplay()
@@ -1647,6 +1658,8 @@ public class BattleUIScript : MonoBehaviour
         MonsterTwoSecondaryDamageNumber.text = "";
         MonsterThreeSeoncdaryDamageNumber.text = "";
 
+        int Temp = CurrentMonsterNum;
+
         for (float i = 0; i < DisplayTime; i+= Time.deltaTime)
         {
             UpdateDamageNumberS(TheSkill, DamageNumber);
@@ -1657,7 +1670,7 @@ public class BattleUIScript : MonoBehaviour
                 {
                     if(TheSkill.GetSkillMainEffect() == "Damage" || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
                     {
-                        switch (CurrentMonsterNum)
+                        switch (Temp)
                         {
                             case (1):
                                 {
@@ -1687,23 +1700,49 @@ public class BattleUIScript : MonoBehaviour
                 }
                 else
                 {
-                    switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                    if (TheSkill.GetSkillMainEffect() == "Healing" || TheSkill.GetSkillMainEffect() == "BeneficialEffect")
                     {
-                        case (1):
-                            {
-                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
-                                break;
-                            }
-                        case (2):
-                            {
-                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
-                                break;
-                            }
-                        case (3):
-                            {
-                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
-                                break;
-                            }
+                        switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                        {
+                            case (0):
+                                {
+                                    MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                    break;
+                                }
+                            case (1):
+                                {
+                                    MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                    break;
+                                }
+                        }
+                    }
+                    else if (TheSkill.GetSkillMainEffect() == "Damage" || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
+                    {
+                        
+                        switch (Temp)
+                        {
+                            case (1):
+                                {
+                                    MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                    break;
+                                }
+                            case (2):
+                                {
+                                    MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                    break;
+                                }
+                            case (3):
+                                {
+                                    MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                    break;
+                                }
+                        }
+
                     }
                 }
             }
@@ -1711,7 +1750,15 @@ public class BattleUIScript : MonoBehaviour
             {
                 TrainingDummySeoncdaryDamageNumber.gameObject.SetActive(true);
                 TrainingDummySeoncdaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+
+                if (TheSkill.ReturnCriticalLanded())
+                {
+                    CritText.gameObject.SetActive(true);
+                }
             }
+
+
+            
 
             yield return null;
         }
@@ -1725,7 +1772,7 @@ public class BattleUIScript : MonoBehaviour
         MonsterOneSecondaryDamageNumber.gameObject.SetActive(false);
         MonsterTwoSecondaryDamageNumber.gameObject.SetActive(false);
         MonsterThreeSeoncdaryDamageNumber.gameObject.SetActive(false);
-
+        CritText.gameObject.SetActive(false);
     }
 
 

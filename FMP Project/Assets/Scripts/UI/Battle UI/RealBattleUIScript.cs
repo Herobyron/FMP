@@ -369,13 +369,14 @@ public class RealBattleUIScript : MonoBehaviour
     // a function to set the levels of the monsters at the start of battle
     public void SetLevelDisplays()
     {
-        MonsterOneLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterLevel();
-        MonsterTwoLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterLevel();
-        MonsterThreeLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterLevel();
-
-        EnemyOneLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterLevel();
-        EnemyTwoLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterLevel();
-        EnemyThreeLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterLevel();
+      
+       //MonsterOneLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterLevel();
+       //MonsterTwoLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterLevel();
+       //MonsterThreeLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterLevel();
+       //
+       //EnemyOneLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterLevel();
+       //EnemyTwoLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterLevel();
+       //EnemyThreeLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterLevel();
 
     }
 
@@ -728,9 +729,18 @@ public class RealBattleUIScript : MonoBehaviour
                 case (1):
                     {
                         // do the corutine for damage number whilst using monster skill one
+                        if (CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
+                        {
+                            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster)));
+                        }
+                        else
+                        {
+                            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(Targets, CurrentMonster)));
+                        }
 
+                           
                         SetMonsterCurrentHealthBar(true);
-                        //update effects display
+                        UpdateEffectDisplay();
                         BattleManagerRef.EndCurrentTurnAIBattle();
                         UpdateCurrentMonsterIcon();
                         break;
@@ -738,9 +748,18 @@ public class RealBattleUIScript : MonoBehaviour
                 case (2):
                     {
                         // do the corutine for damage number whilst using monster skill two
+                        if (CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoMainEffect() == "BeneficialEffect")
+                        {
+                            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster)));
+                        }
+                        else
+                        {
+                            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(Targets, CurrentMonster)));
+                        }
+
 
                         SetMonsterCurrentHealthBar(true);
-                        //update effects display
+                        UpdateEffectDisplay();
                         BattleManagerRef.EndCurrentTurnAIBattle();
                         UpdateCurrentMonsterIcon();
                         break;
@@ -748,9 +767,18 @@ public class RealBattleUIScript : MonoBehaviour
                 case (3):
                     {
                         // do the corutine for damage number whilst using skill three
+                        if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeMainEffect() == "BeneficialEffect")
+                        {
+                            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster)));
+                        }
+                        else
+                        {
+                            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(Targets, CurrentMonster)));
+                        }
+
 
                         SetMonsterCurrentHealthBar(true);
-                        //update effects display
+                        UpdateEffectDisplay();
                         BattleManagerRef.EndCurrentTurnAIBattle();
                         UpdateCurrentMonsterIcon();
                         break;
@@ -767,11 +795,11 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if (CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
                         {
-                            // function to update target display (healing)
+                            UpdateTargetdisplay("Health");
                         }
                         else
                         {
-                            // function to update target display (damage)
+                            UpdateTargetdisplay("Damage");
                         }
                         break;
                     }
@@ -779,11 +807,11 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if (CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoMainEffect() == "BeneficialEffect")
                         {
-                            // function to update target display (healing)
+                            UpdateTargetdisplay("Health");
                         }
                         else
                         {
-                            // function to update target display (damage)
+                            UpdateTargetdisplay("Damage");
                         }
                         break;
                     }
@@ -791,11 +819,11 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeMainEffect() == "BeneficialEffect")
                         {
-                            // function to update target display (healing)
+                            UpdateTargetdisplay("Health");
                         }
                         else
                         {
-                            // function to update target display (damage)
+                            UpdateTargetdisplay("Damage");
                         }
                         break;
                     }
@@ -1277,6 +1305,921 @@ public class RealBattleUIScript : MonoBehaviour
 
     }
 
+    // this function will be used to update the effects for all of the monsters that are on the field
+    // it is done for all monsters no matter who the skill is used by
+    public void UpdateEffectDisplay()
+    {
+        foreach(GameObject G in MonsterOneEffectButtons)
+        {
+            Destroy(G);
+        }
+        
+        foreach(GameObject G in MonsterTwoEffectButtons)
+        {
+            Destroy(G);
+        }
+
+        foreach(GameObject G in MonsterThreeEffectButtons)
+        {
+            Destroy(G);
+        }
+
+        foreach(GameObject G in EnemyOneEffectButtons)
+        {
+            Destroy(G);
+        }
+
+        foreach(GameObject G in EnemyTwoEffectButtons)
+        {
+            Destroy(G);
+        }
+
+        foreach(GameObject G in EnemyThreeEffectButtons)
+        {
+            Destroy(G);
+        }
+
+        MonsterOneEffectButtons.Clear();
+        MonsterTwoEffectButtons.Clear();
+        MonsterThreeEffectButtons.Clear();
+        EnemyOneEffectButtons.Clear();
+        EnemyTwoEffectButtons.Clear();
+        EnemyThreeEffectButtons.Clear();
+        EffectButtonCount = 0;
+
+
+        // player monster one
+        foreach (BeneficialEffects B in BattleManagerRef.ReturnPlayerMonsters()[0].ReturnBeneficialEffects())
+        {
+            GameObject NewButton = Instantiate(MonsterOneEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = B.ReturnBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(MonsterOneEffectTemplate.transform.parent, false);
+
+            switch (B.ReturnBuffTypeString())
+            {
+                case ("Attack"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackUp;
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Accuracy;
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateBuff;
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceUp;
+                        break;
+                    }
+                case ("Immunity"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Immunity;
+                        break;
+                    }
+                case ("Shield"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Shield;
+                        break;
+                    }
+            }
+
+            MonsterOneEffectButtons.Add(NewButton);
+        }
+
+
+        foreach (HarmfulEffects H in BattleManagerRef.ReturnPlayerMonsters()[0].ReturnHarmfulEffects())
+        {
+            GameObject NewButton = Instantiate(MonsterOneEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = H.ReturnDeBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(MonsterOneEffectTemplate.transform.parent, false);
+
+            switch (H.ReturnDeBuffTypeString())
+            {
+                case ("AttackDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackDown;
+                        break;
+                    }
+                case ("CritRateDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateDeBuff;
+                        break;
+                    }
+                case ("DefenceDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceDown;
+                        break;
+                    }
+                case ("ImmunityDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ImmunityDown;
+                        break;
+                    }
+                case ("MissDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = MissDeBuff;
+                        break;
+                    }
+                case ("ShieldDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ShieldDeBuff;
+                        break;
+                    }
+            }
+
+            MonsterOneEffectButtons.Add(NewButton);
+        }
+
+        EffectButtonCount = 0;
+
+        if (MonsterOneEffectButtons.Count >= 1)
+        {
+            MonsterOneEffectDisplay.SetActive(true);
+        }
+
+        // player monster two
+
+        foreach (BeneficialEffects B in BattleManagerRef.ReturnPlayerMonsters()[1].ReturnBeneficialEffects())
+        {
+            GameObject NewButton = Instantiate(MonsterTwoEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = B.ReturnBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(MonsterTwoEffectTemplate.transform.parent, false);
+
+            switch (B.ReturnBuffTypeString())
+            {
+                case ("Attack"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackUp;
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Accuracy;
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateBuff;
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceUp;
+                        break;
+                    }
+                case ("Immunity"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Immunity;
+                        break;
+                    }
+                case ("Shield"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Shield;
+                        break;
+                    }
+            }
+
+            MonsterTwoEffectButtons.Add(NewButton);
+        }
+
+
+        foreach (HarmfulEffects H in BattleManagerRef.ReturnPlayerMonsters()[1].ReturnHarmfulEffects())
+        {
+            GameObject NewButton = Instantiate(MonsterTwoEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = H.ReturnDeBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(MonsterTwoEffectTemplate.transform.parent, false);
+
+            switch (H.ReturnDeBuffTypeString())
+            {
+                case ("AttackDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackDown;
+                        break;
+                    }
+                case ("CritRateDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateDeBuff;
+                        break;
+                    }
+                case ("DefenceDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceDown;
+                        break;
+                    }
+                case ("ImmunityDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ImmunityDown;
+                        break;
+                    }
+                case ("MissDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = MissDeBuff;
+                        break;
+                    }
+                case ("ShieldDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ShieldDeBuff;
+                        break;
+                    }
+            }
+
+            MonsterTwoEffectButtons.Add(NewButton);
+        }
+
+        EffectButtonCount = 0;
+
+        if (MonsterTwoEffectButtons.Count >= 1)
+        {
+            MonsterTwoEffectDisplay.SetActive(true);
+        }
+
+
+
+        // player monster three
+
+        foreach (BeneficialEffects B in BattleManagerRef.ReturnPlayerMonsters()[2].ReturnBeneficialEffects())
+        {
+            GameObject NewButton = Instantiate(MonsterThreeEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = B.ReturnBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(MonsterThreeEffectTemplate.transform.parent, false);
+
+            switch (B.ReturnBuffTypeString())
+            {
+                case ("Attack"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackUp;
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Accuracy;
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateBuff;
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceUp;
+                        break;
+                    }
+                case ("Immunity"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Immunity;
+                        break;
+                    }
+                case ("Shield"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Shield;
+                        break;
+                    }
+            }
+
+            MonsterThreeEffectButtons.Add(NewButton);
+        }
+
+
+        foreach (HarmfulEffects H in BattleManagerRef.ReturnPlayerMonsters()[2].ReturnHarmfulEffects())
+        {
+            GameObject NewButton = Instantiate(MonsterThreeEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = H.ReturnDeBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(MonsterThreeEffectTemplate.transform.parent, false);
+
+            switch (H.ReturnDeBuffTypeString())
+            {
+                case ("AttackDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackDown;
+                        break;
+                    }
+                case ("CritRateDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateDeBuff;
+                        break;
+                    }
+                case ("DefenceDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceDown;
+                        break;
+                    }
+                case ("ImmunityDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ImmunityDown;
+                        break;
+                    }
+                case ("MissDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = MissDeBuff;
+                        break;
+                    }
+                case ("ShieldDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ShieldDeBuff;
+                        break;
+                    }
+            }
+
+            MonsterThreeEffectButtons.Add(NewButton);
+        }
+
+        EffectButtonCount = 0;
+
+        if (MonsterThreeEffectButtons.Count >= 1)
+        {
+            MonsterThreeEffectDisplay.SetActive(true);
+        }
+
+
+        // the enemys first monster effects
+
+        foreach (BeneficialEffects B in BattleManagerRef.ReturnEnemyMonsters()[0].ReturnBeneficialEffects())
+        {
+            GameObject NewButton = Instantiate(EnemyOneEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = B.ReturnBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(EnemyOneEffectTemplate.transform.parent, false);
+
+            switch (B.ReturnBuffTypeString())
+            {
+                case ("Attack"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackUp;
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Accuracy;
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateBuff;
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceUp;
+                        break;
+                    }
+                case ("Immunity"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Immunity;
+                        break;
+                    }
+                case ("Shield"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Shield;
+                        break;
+                    }
+            }
+
+            EnemyOneEffectButtons.Add(NewButton);
+        }
+
+
+        foreach (HarmfulEffects H in BattleManagerRef.ReturnEnemyMonsters()[0].ReturnHarmfulEffects())
+        {
+            GameObject NewButton = Instantiate(EnemyOneEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = H.ReturnDeBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(EnemyOneEffectTemplate.transform.parent, false);
+
+            switch (H.ReturnDeBuffTypeString())
+            {
+                case ("AttackDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackDown;
+                        break;
+                    }
+                case ("CritRateDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateDeBuff;
+                        break;
+                    }
+                case ("DefenceDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceDown;
+                        break;
+                    }
+                case ("ImmunityDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ImmunityDown;
+                        break;
+                    }
+                case ("MissDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = MissDeBuff;
+                        break;
+                    }
+                case ("ShieldDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ShieldDeBuff;
+                        break;
+                    }
+            }
+
+            EnemyOneEffectButtons.Add(NewButton);
+        }
+
+        EffectButtonCount = 0;
+
+        if (EnemyOneEffectButtons.Count >= 1)
+        {
+            EnemyOneEffectDisplay.SetActive(true);
+        }
+
+        // the effects for the second enemy monster
+
+        foreach (BeneficialEffects B in BattleManagerRef.ReturnEnemyMonsters()[1].ReturnBeneficialEffects())
+        {
+            GameObject NewButton = Instantiate(EnemyTwoEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = B.ReturnBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(EnemyTwoEffectTemplate.transform.parent, false);
+
+            switch (B.ReturnBuffTypeString())
+            {
+                case ("Attack"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackUp;
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Accuracy;
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateBuff;
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceUp;
+                        break;
+                    }
+                case ("Immunity"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Immunity;
+                        break;
+                    }
+                case ("Shield"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Shield;
+                        break;
+                    }
+            }
+
+            EnemyTwoEffectButtons.Add(NewButton);
+        }
+
+
+        foreach (HarmfulEffects H in BattleManagerRef.ReturnEnemyMonsters()[1].ReturnHarmfulEffects())
+        {
+            GameObject NewButton = Instantiate(EnemyTwoEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = H.ReturnDeBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(EnemyTwoEffectTemplate.transform.parent, false);
+
+            switch (H.ReturnDeBuffTypeString())
+            {
+                case ("AttackDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackDown;
+                        break;
+                    }
+                case ("CritRateDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateDeBuff;
+                        break;
+                    }
+                case ("DefenceDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceDown;
+                        break;
+                    }
+                case ("ImmunityDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ImmunityDown;
+                        break;
+                    }
+                case ("MissDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = MissDeBuff;
+                        break;
+                    }
+                case ("ShieldDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ShieldDeBuff;
+                        break;
+                    }
+            }
+
+            EnemyTwoEffectButtons.Add(NewButton);
+        }
+
+        EffectButtonCount = 0;
+
+        if (EnemyTwoEffectButtons.Count >= 1)
+        {
+            EnemyTwoEffectDisplay.SetActive(true);
+        }
+
+
+        // enemy three effects display
+
+        foreach (BeneficialEffects B in BattleManagerRef.ReturnEnemyMonsters()[2].ReturnBeneficialEffects())
+        {
+            GameObject NewButton = Instantiate(EnemyThreeEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = B.ReturnBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(EnemyThreeEffectTemplate.transform.parent, false);
+
+            switch (B.ReturnBuffTypeString())
+            {
+                case ("Attack"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackUp;
+                        break;
+                    }
+                case ("Accuracy"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Accuracy;
+                        break;
+                    }
+                case ("CritRate"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateBuff;
+                        break;
+                    }
+                case ("Defence"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceUp;
+                        break;
+                    }
+                case ("Immunity"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Immunity;
+                        break;
+                    }
+                case ("Shield"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = Shield;
+                        break;
+                    }
+            }
+
+            EnemyThreeEffectButtons.Add(NewButton);
+        }
+
+
+        foreach (HarmfulEffects H in BattleManagerRef.ReturnEnemyMonsters()[2].ReturnHarmfulEffects())
+        {
+            GameObject NewButton = Instantiate(EnemyThreeEffectTemplate) as GameObject;
+            NewButton.SetActive(true);
+            NewButton.name = H.ReturnDeBuffTypeString();
+            EffectButtonCount++;
+            NewButton.transform.SetParent(EnemyThreeEffectTemplate.transform.parent, false);
+
+            switch (H.ReturnDeBuffTypeString())
+            {
+                case ("AttackDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = AttackDown;
+                        break;
+                    }
+                case ("CritRateDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = CritRateDeBuff;
+                        break;
+                    }
+                case ("DefenceDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = DefenceDown;
+                        break;
+                    }
+                case ("ImmunityDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ImmunityDown;
+                        break;
+                    }
+                case ("MissDeBuff"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = MissDeBuff;
+                        break;
+                    }
+                case ("ShieldDown"):
+                    {
+                        NewButton.GetComponent<Image>().sprite = ShieldDeBuff;
+                        break;
+                    }
+            }
+
+            EnemyThreeEffectButtons.Add(NewButton);
+        }
+
+        EffectButtonCount = 0;
+
+        if (EnemyThreeEffectButtons.Count >= 1)
+        {
+            EnemyThreeEffectDisplay.SetActive(true);
+        }
+
+    }
+
+    // this function will update the skill cooldown display for the player when needed
+    public void UpdateSkillCoolDownDisplay()
+    {
+        if(CurrentMonster.ReturnMonsterOwner() == "Player")
+        {
+            if (CurrentMonster.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
+            {
+                SkillTwoButton.SetActive(true);
+                SkillTwoCooldownText.text = "Cooldown: " + CurrentMonster.GetMonsterSKills()[1].GetSkillCurrentCooldown();
+            }
+            else
+            {
+                SkillTwoButton.SetActive(false);
+            }
+
+            if (CurrentMonster.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
+            {
+                SkillThreeButton.SetActive(true);
+                SkillThreeCooldownText.text = "Cooldown: " + CurrentMonster.GetMonsterSKills()[2].GetSkillCurrentCooldown();
+            }
+            else
+            {
+                SkillThreeButton.SetActive(false);
+            }
+        }
+
+    }
+
+    // this function will update the target display depending on the skill bieng used
+    public void UpdateTargetdisplay(string SkillType)
+    {
+        if (SkillType == "Health")
+        {
+            TargetSelectionText.text = "Select a teammate to heal";
+            SelectionButtonOne.SetActive(true);
+            SelectionButtpnTwo.SetActive(true);
+            SelectionButtonThree.SetActive(true);
+
+            MonsterSelectionOne.text = "Ally One";
+            MonsterSelectionTwo.text = "Ally Two";
+            MonsterSelectionThree.text = "Ally Three";
+        }
+        else
+        {
+            TargetSelectionText.text = "Select the Enemy too attack dummy";
+
+            SelectionButtonOne.SetActive(true);
+            SelectionButtpnTwo.SetActive(true);
+            SelectionButtonThree.SetActive(true);
+
+            MonsterSelectionOne.text = "Enemy One";
+            MonsterSelectionTwo.text = "Enemy Two";
+            MonsterSelectionThree.text = "Enemy Three";
+        }
+    }
+
+
+
+    // this function is used to set the monsters level at the begnining of the battle
+    public void LevelDisplaySet()
+    {
+        MonsterOneLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterLevel();
+        MonsterTwoLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterLevel();
+        MonsterThreeLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterLevel();
+
+        EnemyOneLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterLevel();
+        EnemyTwoLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterLevel();
+        EnemyThreeLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterLevel();
+    }
+
+    // this is an enumerator that displays the damage text for a small period of time before disapearing
+    IEnumerator DamageDisplayTextTIme(float DisplayTime, MonsterSkillScript TheSkill, int DamageNumber)
+    {
+        MonsterOneSecondaryDamageNumber.gameObject.SetActive(true);
+        MonsterTwoSecondaryDamageNumber.gameObject.SetActive(true);
+        MonsterThreeSeoncdaryDamageNumber.gameObject.SetActive(true);
+
+        MonsterOneSecondaryDamageNumber.text = "";
+        MonsterTwoSecondaryDamageNumber.text = "";
+        MonsterThreeSeoncdaryDamageNumber.text = "";
+
+        EnemyOneSecondaryDamageNumber.gameObject.SetActive(true);
+        EnemyTwoSecondaryDamageNumber.gameObject.SetActive(true);
+        EnemythreeSecondaryDamageNumber.gameObject.SetActive(true);
+
+        EnemyOneSecondaryDamageNumber.text = "";
+        EnemyTwoSecondaryDamageNumber.text = "";
+        EnemythreeSecondaryDamageNumber.text = "";
+
+        int Temp = CurrentMonsterNum;
+
+        for(float i = 0; i < DisplayTime; i+= Time.deltaTime)
+        {
+            UpdateMonsterDamageNumber(TheSkill, DamageNumber);
+
+            if (TheSkill.GetSkillSecondaryEffect() == "Healing")
+            {
+                if (TheSkill.ReturnSkillAOE())
+                {
+                    if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                    {
+                        if (TheSkill.GetSkillMainEffect() == "Damage " || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
+                        {
+                            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                            {
+                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                            {
+                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                            {
+                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                        }
+                        else
+                        {
+                            MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                    }
+                    else
+                    {
+                        if (TheSkill.GetSkillMainEffect() == "Damage " || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
+                        {
+                            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                            {
+                                EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                            {
+                                EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                            {
+                                EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                        }
+                        else
+                        {
+                            EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                    }
+                }
+                else
+                {
+                    if (TheSkill.GetSkillMainEffect() == "Healing" || TheSkill.GetSkillMainEffect() == "BeneficialEffect")
+                    {
+                        if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                        {
+                            if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                            {
+                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                            {
+                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                            {
+                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                        }
+                        else
+                        {
+                            if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                            {
+                                EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                            {
+                                EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                            {
+                                EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            }
+                        }
+                    }
+                    else if(TheSkill.GetSkillMainEffect() == "Damage" || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
+                    {
+                        if(CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                        {
+                            MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                        {
+                            MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                        {
+                            MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                        {
+                            EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                        {
+                            EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                        {
+                            EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                        }
+                    }
+                }
+            }
+            else if(TheSkill.GetSkillSecondaryEffect() == "Damage")
+            {
+                // I will add critical stuff in after working on the actual UI
+
+                if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                {
+                    MonsterOneSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                }
+                else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                {
+                    MonsterTwoSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                }
+                else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                {
+                    MonsterThreeSeoncdaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                }
+            
+      
+                if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                {
+                    EnemyOneSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                }
+                else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                {
+                    EnemyTwoSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                }
+                else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                {
+                    EnemythreeSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                }
+
+
+            }
+
+            yield return null;
+
+        }
+
+
+        MonsterOneDamageText.gameObject.SetActive(false);
+        MonsterTwoDamageText.gameObject.SetActive(false);
+        MonsterThreeDamageText.gameObject.SetActive(false);
+        
+        MonsterOneSecondaryDamageNumber.gameObject.SetActive(false);
+        MonsterTwoSecondaryDamageNumber.gameObject.SetActive(false);
+        MonsterThreeSeoncdaryDamageNumber.gameObject.SetActive(false);
+
+        EnemyMonsterOneDamageText.gameObject.SetActive(false);
+        EnemyMonsterTwoDamageText.gameObject.SetActive(false);
+        EnemyMonsterThreeDamageText.gameObject.SetActive(false);
+
+        EnemyOneSecondaryDamageNumber.gameObject.SetActive(false);
+        EnemyTwoSecondaryDamageNumber.gameObject.SetActive(false);
+        EnemythreeSecondaryDamageNumber.gameObject.SetActive(false);
+    }
 
     // this function sets what monster is the current monster
     public void SetCurrentMonster(MonsterScript Mon)
