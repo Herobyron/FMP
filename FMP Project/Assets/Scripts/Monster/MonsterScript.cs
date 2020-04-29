@@ -689,7 +689,7 @@ public class MonsterScript
 
         if(CurrentHealth > BaseHealth)
         {
-            CurrentHealth = BaseHealth;
+            CurrentHealth = BaseHealth + IncreasedHealth;
         }
 
         return HealAmount;

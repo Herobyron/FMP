@@ -232,6 +232,22 @@ public class BattleManager : MonoBehaviour
         EnemyMonsters.Add(FindObjectOfType<GenerateMonster>().CreateEnemyMonster(EnemyMonsters.Count));
         EnemyMonsters.Add(FindObjectOfType<GenerateMonster>().CreateEnemyMonster(EnemyMonsters.Count));
         EnemyMonsters.Add(FindObjectOfType<GenerateMonster>().CreateEnemyMonster(EnemyMonsters.Count));
+
+        for(int i = 0; i < EnemyMonsters[0].ReturnMonsterMaxLevel(); i++)
+        {
+            EnemyMonsters[0].LevelUpMonster();
+        }
+        
+        for(int i = 0; i < EnemyMonsters[1].ReturnMonsterMaxLevel(); i++)
+        {
+            EnemyMonsters[1].LevelUpMonster();
+        }
+
+        for(int i = 0; i < EnemyMonsters[2].ReturnMonsterMaxLevel(); i++)
+        {
+            EnemyMonsters[2].LevelUpMonster();
+        }
+
     }
 
     public void InitialiseMonstersCurrentHealth()
@@ -958,7 +974,7 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            BattleUI.SetEnemySingleTarget(EnemyMonsters[TargetNumber]);
+            AIBattleUI.SetEnemySingleTarget(EnemyMonsters[TargetNumber]);
         }
     }
 

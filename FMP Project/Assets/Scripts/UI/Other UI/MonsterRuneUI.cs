@@ -296,6 +296,9 @@ public class MonsterRuneUI : MonoBehaviour
     {
         if (!Once)
             Once = true;
+
+
+       
     }
 
     // generates the runes buttons to be used on the scrolling ui

@@ -345,6 +345,14 @@ public class RealBattleUIScript : MonoBehaviour
     private Text MonsterThreeLevel = null;
 
 
+    // this is a panel that stops the player from selecting skills when its the AI's turn
+    [Tooltip("Panel to stop player pressing skills with AI")]
+    [SerializeField]
+    private GameObject SkillBlockPanel = null;
+
+    // this is a text component for the current monster. this is only used for text display because the monsters are switching positions too quickly for it to handle
+    private string TheCurrentMonsterOwner = "";
+
 
     private void OnEnable()
     {
@@ -364,6 +372,16 @@ public class RealBattleUIScript : MonoBehaviour
         CurrentMonsterAttack.text = "Attack: " + (CurrentMonster.ReturnBaseDamage() + CurrentMonster.ReturnIncreasedAttack());
         CurrentMonsterDefence.text = "Defence: " + (CurrentMonster.ReturnBaseDefence() + CurrentMonster.ReturnIncreasedDefence());
         CurrentMonsterSpeed.text = "Speed: " + (CurrentMonster.ReturnBaseSpeed() + CurrentMonster.ReturnIncreasedSpeed());
+
+
+        if(CurrentMonster.ReturnMonsterOwner() == "AI")
+        {
+            SkillBlockPanel.SetActive(true);
+        }
+        else
+        {
+            SkillBlockPanel.SetActive(false);
+        }
     }
 
     // a function to set the levels of the monsters at the start of battle
@@ -383,51 +401,7 @@ public class RealBattleUIScript : MonoBehaviour
     // a function to update who the current monster is
     public void UpdateCurrentMonsterIcon()
     {
-        if(CurrentMonsterSide == "Player")
-        {
-            switch (CurrentMonsterNum)
-            {
-                case (0):
-                    {
-                        CurrentMonOne.SetActive(true);
-                        break;
-                    }
-                case (1):
-                    {
-                        CurrentMonTwo.SetActive(true);
-                        break;
-                    }
-                case (2):
-                    {
-                        CurrentMonThree.SetActive(true);
-                        break;
-                    }
-
-            }
-
-        }
-        else if(CurrentMonsterSide == "AI")
-        {
-            switch (CurrentMonsterNum)
-            {
-                case (0):
-                    {
-                        EnemyMonOne.SetActive(true);
-                        break;
-                    }
-                case (1):
-                    {
-                        EnemyMonTwo.SetActive(true);
-                        break;
-                    }
-                case (2):
-                    {
-                        EnemyMonThree.SetActive(true);
-                        break;
-                    }
-            }
-
-        }
+        UpdateCurrentMonsterDisplayImage();
     }
 
     // this is a function used to update the health bar of the monster when a skill is used
@@ -731,10 +705,12 @@ public class RealBattleUIScript : MonoBehaviour
                         // do the corutine for damage number whilst using monster skill one
                         if (CurrentMonster.ReturnrSkillOneMainEffect() == "Healing" || CurrentMonster.ReturnrSkillOneMainEffect() == "BeneficialEffect")
                         {
+                            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
                             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster)));
                         }
                         else
                         {
+                            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
                             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(Targets, CurrentMonster)));
                         }
 
@@ -750,10 +726,12 @@ public class RealBattleUIScript : MonoBehaviour
                         // do the corutine for damage number whilst using monster skill two
                         if (CurrentMonster.ReturnSkillTwoMainEffect() == "Healing" || CurrentMonster.ReturnSkillTwoMainEffect() == "BeneficialEffect")
                         {
+                            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
                             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster)));
                         }
                         else
                         {
+                            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
                             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(Targets, CurrentMonster)));
                         }
 
@@ -769,10 +747,12 @@ public class RealBattleUIScript : MonoBehaviour
                         // do the corutine for damage number whilst using skill three
                         if (CurrentMonster.ReturnSkillThreeMainEffect() == "Healing" || CurrentMonster.ReturnSkillThreeMainEffect() == "BeneficialEffect")
                         {
+                            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
                             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(BattleManagerRef.ReturnPlayerMonsters(), CurrentMonster)));
                         }
                         else
                         {
+                            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
                             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(Targets, CurrentMonster)));
                         }
 
@@ -843,15 +823,15 @@ public class RealBattleUIScript : MonoBehaviour
     // this function is specifically for when the skill is not an AOE and target is picked manually
     public void UseSkillOneSingle()
     {
-        int DamageNumber = 0;
+        
         List<MonsterScript> TheTarget = new List<MonsterScript>();
         TheTarget.Add(CurrentMonsterTarget);
 
-        DamageNumber = CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster);
-        //display damage number corutine
+        TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+        StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster)));
         SetMonsterCurrentHealthBar(false);
         BattleManagerRef.EndCurrentTurnAIBattle();
-        // effect display 
+        UpdateEffectDisplay();
         UpdateCurrentMonsterIcon();
     }
 
@@ -859,15 +839,15 @@ public class RealBattleUIScript : MonoBehaviour
     // this function is specifically for when the skill is not an AOE and target is picked manually
     public void UseSKillTwoSingle()
     {
-        int DamageNumber = 0;
+
         List<MonsterScript> TheTarget = new List<MonsterScript>();
         TheTarget.Add(CurrentMonsterTarget);
 
-        DamageNumber = CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster);
-        //display damage number corutine
+        TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+        StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster)));
         SetMonsterCurrentHealthBar(false);
         BattleManagerRef.EndCurrentTurnAIBattle();
-        // effect display 
+        UpdateEffectDisplay();
         UpdateCurrentMonsterIcon();
     }
 
@@ -876,15 +856,15 @@ public class RealBattleUIScript : MonoBehaviour
     // this function is specifically for when the skill is not an AOE and target is picked manually
     public void USeSkillThreeSingle()
     {
-        int DamageNumber = 0;
+
         List<MonsterScript> TheTarget = new List<MonsterScript>();
         TheTarget.Add(CurrentMonsterTarget);
 
-        DamageNumber = CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster);
-        //display damage number corutine
+        TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+        StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster)));
         SetMonsterCurrentHealthBar(false);
         BattleManagerRef.EndCurrentTurnAIBattle();
-        // effect display 
+        UpdateEffectDisplay();
         UpdateCurrentMonsterIcon();
     }
 
@@ -1140,7 +1120,7 @@ public class RealBattleUIScript : MonoBehaviour
                 {
                     if(TheSkill.ReturnSkillAOE())
                     {
-                        if(CurrentMonster.ReturnMonsterOwner() == "Player")
+                        if(TheCurrentMonsterOwner == "Player")
                         {
                             EnemyMonsterOneDamageText.gameObject.SetActive(true);
                             EnemyMonsterOneDamageText.text = "<color=red>" + DamageNumber + "</color>";
@@ -1163,7 +1143,7 @@ public class RealBattleUIScript : MonoBehaviour
                     else
                     {
 
-                        if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                        if (TheCurrentMonsterOwner == "Player")
                         {
 
                             switch (BattleManagerRef.ReturnTargetMonsterNumber())
@@ -1224,7 +1204,7 @@ public class RealBattleUIScript : MonoBehaviour
                 {
                     if (TheSkill.ReturnSkillAOE())
                     {
-                        if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                        if (TheCurrentMonsterOwner == "Player")
                         {
                             MonsterOneDamageText.gameObject.SetActive(true);
                             MonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
@@ -1245,7 +1225,7 @@ public class RealBattleUIScript : MonoBehaviour
                     }
                     else
                     {
-                        if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                        if (TheCurrentMonsterOwner == "Player")
                         {
                             switch (BattleManagerRef.ReturnTargetMonsterNumber())
                             {
@@ -2052,7 +2032,7 @@ public class RealBattleUIScript : MonoBehaviour
             {
                 if (TheSkill.ReturnSkillAOE())
                 {
-                    if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                    if (TheCurrentMonsterOwner == "Player")
                     {
                         if (TheSkill.GetSkillMainEffect() == "Damage " || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
                         {
@@ -2105,7 +2085,7 @@ public class RealBattleUIScript : MonoBehaviour
                 {
                     if (TheSkill.GetSkillMainEffect() == "Healing" || TheSkill.GetSkillMainEffect() == "BeneficialEffect")
                     {
-                        if (CurrentMonster.ReturnMonsterOwner() == "Player")
+                        if (TheCurrentMonsterOwner == "Player")
                         {
                             if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                             {
