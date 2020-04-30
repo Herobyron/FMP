@@ -835,6 +835,38 @@ public class RealBattleUIScript : MonoBehaviour
         UpdateCurrentMonsterIcon();
     }
 
+    // this is a function specifically suited to the AI monsters 
+    // this function will act similar to the normal skill one but will be able to hold both AOE and non AOE scenarios
+    public void UseSkillOneAI()
+    {
+        if (CurrentMonster.GetMonsterSKills()[0].ReturnSkillAOE())
+        {
+            List<MonsterScript> TheTarget = new List<MonsterScript>();
+            TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
+
+            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster)));
+            SetMonsterCurrentHealthBar(false);
+            BattleManagerRef.EndCurrentTurnAIBattle();
+            UpdateEffectDisplay();
+            UpdateCurrentMonsterIcon();
+
+        }
+        else
+        {
+            List<MonsterScript> TheTarget = new List<MonsterScript>();
+            TheTarget.Add(CurrentMonsterTarget);
+
+            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster)));
+            SetMonsterCurrentHealthBar(false);
+            BattleManagerRef.EndCurrentTurnAIBattle();
+            UpdateEffectDisplay();
+            UpdateCurrentMonsterIcon();
+        }
+    }
+
+
     // a function to use the monster second skill
     // this function is specifically for when the skill is not an AOE and target is picked manually
     public void UseSKillTwoSingle()
@@ -850,6 +882,38 @@ public class RealBattleUIScript : MonoBehaviour
         UpdateEffectDisplay();
         UpdateCurrentMonsterIcon();
     }
+
+    // this is a function specifically suited to the AI monsters 
+    // this function will act similar to the normal skill one but will be able to hold both AOE and non AOE scenarios
+    public void UseSkillTwoAI()
+    {
+        if (CurrentMonster.GetMonsterSKills()[0].ReturnSkillAOE())
+        {
+            List<MonsterScript> TheTarget = new List<MonsterScript>();
+            TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
+
+            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster)));
+            SetMonsterCurrentHealthBar(false);
+            BattleManagerRef.EndCurrentTurnAIBattle();
+            UpdateEffectDisplay();
+            UpdateCurrentMonsterIcon();
+
+        }
+        else
+        {
+            List<MonsterScript> TheTarget = new List<MonsterScript>();
+            TheTarget.Add(CurrentMonsterTarget);
+
+            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster)));
+            SetMonsterCurrentHealthBar(false);
+            BattleManagerRef.EndCurrentTurnAIBattle();
+            UpdateEffectDisplay();
+            UpdateCurrentMonsterIcon();
+        }
+    }
+
 
 
     // a function to use the monster third skill
@@ -867,6 +931,39 @@ public class RealBattleUIScript : MonoBehaviour
         UpdateEffectDisplay();
         UpdateCurrentMonsterIcon();
     }
+
+    // this is a function specifically suited to the AI monsters 
+    // this function will act similar to the normal skill one but will be able to hold both AOE and non AOE scenarios
+    public void UseSkillThreeAI()
+    {
+        if (CurrentMonster.GetMonsterSKills()[0].ReturnSkillAOE())
+        {
+            List<MonsterScript> TheTarget = new List<MonsterScript>();
+            TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
+
+            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster)));
+            SetMonsterCurrentHealthBar(false);
+            BattleManagerRef.EndCurrentTurnAIBattle();
+            UpdateEffectDisplay();
+            UpdateCurrentMonsterIcon();
+
+        }
+        else
+        {
+            List<MonsterScript> TheTarget = new List<MonsterScript>();
+            TheTarget.Add(CurrentMonsterTarget);
+
+            TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster)));
+            SetMonsterCurrentHealthBar(false);
+            BattleManagerRef.EndCurrentTurnAIBattle();
+            UpdateEffectDisplay();
+            UpdateCurrentMonsterIcon();
+        }
+    }
+
+
 
     // a function that uses the monster skills 
     // this is using single target attacks and not AOE skills
@@ -2256,6 +2353,10 @@ public class RealBattleUIScript : MonoBehaviour
         return EnemyThreeSlider;
     }
 
-
+    // a function to set the current monster owner
+    public void SetCurrentMonsterOwner(string CurrentMonsterOwner)
+    {
+        TheCurrentMonsterOwner = CurrentMonsterOwner;
+    }
    
 }
