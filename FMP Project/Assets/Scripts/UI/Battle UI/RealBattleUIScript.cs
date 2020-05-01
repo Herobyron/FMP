@@ -25,6 +25,10 @@ public class RealBattleUIScript : MonoBehaviour
     [SerializeField]
     private MonsterScript CurrentMonsterTarget = null;
 
+    [Tooltip("this is the monster target mainly for the AI")]
+    [SerializeField]
+    private List<MonsterScript> CurrentMonsterTargetsAI = null;
+
     [Tooltip("this is the panel that allows the player to select a monster")]
     [SerializeField]
     private GameObject EnemySelectionPanel = null;
@@ -845,7 +849,7 @@ public class RealBattleUIScript : MonoBehaviour
             TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
 
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster)));
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
             UpdateEffectDisplay();
@@ -858,7 +862,7 @@ public class RealBattleUIScript : MonoBehaviour
             TheTarget.Add(CurrentMonsterTarget);
 
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster)));
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
             UpdateEffectDisplay();
@@ -893,7 +897,7 @@ public class RealBattleUIScript : MonoBehaviour
             TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
 
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster)));
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
             UpdateEffectDisplay();
@@ -906,7 +910,7 @@ public class RealBattleUIScript : MonoBehaviour
             TheTarget.Add(CurrentMonsterTarget);
 
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster)));
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
             UpdateEffectDisplay();
@@ -942,7 +946,11 @@ public class RealBattleUIScript : MonoBehaviour
             TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
 
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster)));
+
+
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
+
+
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
             UpdateEffectDisplay();
@@ -955,7 +963,11 @@ public class RealBattleUIScript : MonoBehaviour
             TheTarget.Add(CurrentMonsterTarget);
 
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster)));
+
+            StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
+
+
+
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
             UpdateEffectDisplay();
@@ -1137,6 +1149,11 @@ public class RealBattleUIScript : MonoBehaviour
         CurrentMonsterTarget = Target;
     }
 
+    public void SetEnemyTargets(List<MonsterScript> Targets)
+    {
+        CurrentMonsterTargetsAI = Targets;
+    }
+
     // a function to set the skill number of the skill that is bieng used for displaying
     public void SetSkillNumber(int Num)
     {
@@ -1209,7 +1226,7 @@ public class RealBattleUIScript : MonoBehaviour
     }
 
     // this function is used to update the damage numvers so when a monster is healed or damaged the number can be seen
-    public void UpdateMonsterDamageNumber(MonsterSkillScript TheSkill, int DamageNumber)
+    public void UpdateMonsterDamageNumber(MonsterSkillScript TheSkill, int DamageNumber, string MonsterOwner)
     {
         switch (TheSkill.GetSkillMainEffect())
         {
@@ -1217,7 +1234,7 @@ public class RealBattleUIScript : MonoBehaviour
                 {
                     if(TheSkill.ReturnSkillAOE())
                     {
-                        if(TheCurrentMonsterOwner == "Player")
+                        if(MonsterOwner == "Player")
                         {
                             EnemyMonsterOneDamageText.gameObject.SetActive(true);
                             EnemyMonsterOneDamageText.text = "<color=red>" + DamageNumber + "</color>";
@@ -1240,7 +1257,7 @@ public class RealBattleUIScript : MonoBehaviour
                     else
                     {
 
-                        if (TheCurrentMonsterOwner == "Player")
+                        if (MonsterOwner == "Player")
                         {
 
                             switch (BattleManagerRef.ReturnTargetMonsterNumber())
@@ -1301,7 +1318,7 @@ public class RealBattleUIScript : MonoBehaviour
                 {
                     if (TheSkill.ReturnSkillAOE())
                     {
-                        if (TheCurrentMonsterOwner == "Player")
+                        if (MonsterOwner == "Player")
                         {
                             MonsterOneDamageText.gameObject.SetActive(true);
                             MonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
@@ -1322,7 +1339,7 @@ public class RealBattleUIScript : MonoBehaviour
                     }
                     else
                     {
-                        if (TheCurrentMonsterOwner == "Player")
+                        if (MonsterOwner == "Player")
                         {
                             switch (BattleManagerRef.ReturnTargetMonsterNumber())
                             {
@@ -2120,28 +2137,31 @@ public class RealBattleUIScript : MonoBehaviour
         EnemythreeSecondaryDamageNumber.text = "";
 
         int Temp = CurrentMonsterNum;
+        string TempCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+        string CurrentMonsterName = CurrentMonster.ReturnMonsterName();
 
-        for(float i = 0; i < DisplayTime; i+= Time.deltaTime)
+        for (float i = 0; i < DisplayTime; i+= Time.deltaTime)
         {
-            UpdateMonsterDamageNumber(TheSkill, DamageNumber);
+            UpdateMonsterDamageNumber(TheSkill, DamageNumber, TempCurrentMonsterOwner);
+           
 
             if (TheSkill.GetSkillSecondaryEffect() == "Healing")
             {
                 if (TheSkill.ReturnSkillAOE())
                 {
-                    if (TheCurrentMonsterOwner == "Player")
+                    if (TempCurrentMonsterOwner == "Player")
                     {
                         if (TheSkill.GetSkillMainEffect() == "Damage " || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
                         {
-                            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                            if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                             {
                                 MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                             {
                                 MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                             {
                                 MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
@@ -2157,15 +2177,15 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if (TheSkill.GetSkillMainEffect() == "Damage " || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
                         {
-                            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                            if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                             {
                                 EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                             {
                                 EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                             {
                                 EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
@@ -2184,30 +2204,30 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if (TheCurrentMonsterOwner == "Player")
                         {
-                            if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                            if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                             {
                                 MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                             {
                                 MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                             {
                                 MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                         else
                         {
-                            if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                            if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                             {
                                 EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                             {
                                 EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
-                            else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                            else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                             {
                                 EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
@@ -2215,27 +2235,27 @@ public class RealBattleUIScript : MonoBehaviour
                     }
                     else if(TheSkill.GetSkillMainEffect() == "Damage" || TheSkill.GetSkillMainEffect() == "HarmfulEffect")
                     {
-                        if(CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+                        if(CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                         {
                             MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
-                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+                        else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                         {
                             MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
-                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+                        else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                         {
                             MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
-                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+                        else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                         {
                             EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
-                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+                        else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                         {
                             EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
-                        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+                        else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                         {
                             EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
@@ -2298,6 +2318,10 @@ public class RealBattleUIScript : MonoBehaviour
         EnemythreeSecondaryDamageNumber.gameObject.SetActive(false);
     }
 
+
+
+
+
     // this function sets what monster is the current monster
     public void SetCurrentMonster(MonsterScript Mon)
     {
@@ -2358,5 +2382,6 @@ public class RealBattleUIScript : MonoBehaviour
     {
         TheCurrentMonsterOwner = CurrentMonsterOwner;
     }
-   
+  
+  
 }

@@ -188,6 +188,59 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private RealBattleUIScript AIBattleUI = null;
 
+    // this is the AI script
+    TheAIScript AIScript;
+
+    TheDecisions TargetDecisions = new TheDecisions();
+
+    bool CorutineEnd = false;
+
+    // this is for initialising the decisions for the tree
+    private void Awake()
+    {
+        // the starting node should be to test if skill three is on cooldown
+        TheDecisions SkillThreeDecision = new TheDecisions();
+        TheDecisionNode SkillThreeDecisionNode = new TheDecisionNode();
+        SkillThreeDecisionNode.DecisionType = "SkillThree";
+        SkillThreeDecisionNode.SetTheDecision(SkillThreeDecision);
+
+        // if the decision is yes then it should be an action node and use the skill three
+        TheActions SkillThreeAction = new TheActions();
+        TheActionNode SkillThreeActionNode = new TheActionNode();
+        SkillThreeActionNode.SetActionName("SkillThree");
+        SkillThreeActionNode.SetAction(SkillThreeAction);
+        SkillThreeDecisionNode.AddNoNode(SkillThreeActionNode);
+
+
+        // if the decision is no then it should be a decsision node for the second skill
+        TheDecisions SkillTwoDecision = new TheDecisions();
+        TheDecisionNode SkillTwoDecsisionNode = new TheDecisionNode();
+        SkillTwoDecsisionNode.DecisionType = "SkillTwo";
+        SkillTwoDecsisionNode.SetTheDecision(SkillTwoDecision);
+        SkillThreeDecisionNode.AddYesNode(SkillTwoDecsisionNode);
+
+        // if the decision for the skill two decsision is yes then should be action node to use skill one
+        TheActions SkillOneAction = new TheActions();
+        TheActionNode SkillOneActionNode = new TheActionNode();
+        SkillOneActionNode.SetActionName("SkillOne");
+        SkillOneActionNode.SetAction(SkillOneAction);
+        SkillTwoDecsisionNode.AddYesNode(SkillOneActionNode);
+
+        // if the decsision for the skill two decision is no then should be action node to use skill two
+        TheActions SkillTwoAction = new TheActions();
+        TheActionNode SkillTwoActionNode = new TheActionNode();
+        SkillTwoActionNode.SetActionName("SkillTwo");
+        SkillTwoActionNode.SetAction(SkillTwoAction);
+        SkillTwoDecsisionNode.AddNoNode(SkillTwoActionNode);
+
+
+        
+
+        AIScript = new TheAIScript(SkillThreeDecisionNode);
+
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -199,7 +252,17 @@ public class BattleManager : MonoBehaviour
     // Update is called once per frame and will check wether to change a monsters turn or not
     void Update()
     {
-       
+        if (CurrentMonster != null)
+        {
+            if (CurrentMonster.ReturnMonsterOwner() == "AI")
+            {
+
+               TheBattleUI.SetEnemyTargets(TargetDecisions.PickEnemyTarget(PlayersMonsters, EnemyMonsters, CurrentMonster.GetMonsterSKills()));
+
+                AIScript.Execute(AIBattleUI, CurrentMonster);
+    
+            }
+        }
     }
 
     public void InitialiseTrainingDummy()
@@ -1021,4 +1084,6 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+
+        
 }

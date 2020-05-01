@@ -36,19 +36,76 @@ public class TheDecisions
         }
     }
 
-    public MonsterScript PickEnemyTarget(List<MonsterScript> AllTargets)
+    // this function sorts all of the targeting for the enemy monster
+    public List<MonsterScript> PickEnemyTarget(List<MonsterScript> AllTargets, List<MonsterScript> Allies, List<MonsterSkillScript> MonsterSkills)
     {
         int temphealth = 1000000;
-        MonsterScript ReturnMonster = null;
+        List<MonsterScript> ReturnMonster = new List<MonsterScript>();
 
-        foreach(MonsterScript M in AllTargets)
+        bool tempAOE = false;
+        MonsterSkillScript TempSkill = null;
+
+        foreach(MonsterSkillScript M in MonsterSkills)
         {
-            if(temphealth > M.ReturnCurrentHealth())
+            if(M.GetSkillCurrentCooldown() <= 0)
             {
-                temphealth = (int)M.ReturnCurrentHealth();
-                ReturnMonster = M;
+                tempAOE = M.ReturnSkillAOE();
+                TempSkill = M;
             }
         }
+
+        if (tempAOE)
+        {
+            if (TempSkill.GetSkillMainEffect() == "Healing" || TempSkill.GetSkillMainEffect() == "BeneficialEffect")
+            {
+                ReturnMonster.AddRange(Allies);
+            }
+            else
+            {
+                ReturnMonster.AddRange(AllTargets);
+            }
+        }
+        else
+        {
+            if (TempSkill.GetSkillMainEffect() == "Healing" || TempSkill.GetSkillMainEffect() == "BeneficialEffect")
+            {
+                foreach (MonsterScript M in Allies)
+                {
+                    if (temphealth > M.ReturnCurrentHealth())
+                    {
+                        temphealth = (int)M.ReturnCurrentHealth();
+
+                        if (ReturnMonster.Count > 0)
+                        {
+                            ReturnMonster.Clear();
+                        }
+
+                        ReturnMonster.Add(M);
+                    }
+                }
+            }
+            else
+            {
+                foreach (MonsterScript M in AllTargets)
+                {
+                    if (temphealth > M.ReturnCurrentHealth())
+                    {
+                        temphealth = (int)M.ReturnCurrentHealth();
+
+                        if (ReturnMonster.Count > 0)
+                        {
+                            ReturnMonster.Clear();
+                        }
+
+                        ReturnMonster.Add(M);
+                    }
+                }
+            }
+            
+            
+            
+        }
+
 
         return ReturnMonster;
     }
@@ -99,7 +156,7 @@ public class TheNode
 
 
     // this function may need to return a node
-    public virtual TheNode MakeDecision()
+    public virtual TheNode MakeDecision(MonsterScript TheMonster)
     {
         return null;
     }
@@ -112,7 +169,7 @@ public class TheNode
 public class TheDecisionNode : TheNode
 {
     // a refernce to the monster whos turn it is
-    public MonsterScript TheMonster;
+    //public MonsterScript TheMonster;
 
     public string DecisionType = "";
 
@@ -120,16 +177,16 @@ public class TheDecisionNode : TheNode
     public TheNode YesNode;
     public TheNode NoNode;
 
-    TheDecisions Decision;
+    TheDecisions Decision = null;
 
-    public TheDecisionNode(MonsterScript Monster)
+    public TheDecisionNode()
     {
         LeafNode = false;
 
         YesNode = null;
         NoNode = null;
 
-        TheMonster = Monster;
+        
     }
 
     public void AddYesNode(TheNode TheYesNode)
@@ -142,9 +199,14 @@ public class TheDecisionNode : TheNode
         NoNode = TheNoNode;
     }
 
+    public void SetTheDecision( TheDecisions NewDecision)
+    {
+        Decision = NewDecision;
+    }
+
     // this function is the one that should make the decision to determine which child to go to 
     // this function will need to return the node that it has decided is next in the list
-    public override TheNode MakeDecision()
+    public override TheNode MakeDecision(MonsterScript TheMonster)
     {
         if(DecisionType == "SkillTwo")
         {
@@ -180,14 +242,26 @@ public class TheActionNode : TheNode
 
     TheActions TheAction;
 
-    string TheActionName;
+    string TheActionName = null;
 
 
 
-    public TheActionNode(MonsterScript Monster)
+    public TheActionNode()
     {
         LeafNode = true;
-        TheMonster = Monster;
+        
+    }
+
+    // a function to set the action for the action node
+    public void SetAction(TheActions Action)
+    {
+        TheAction = Action;
+    }
+
+    // a function to set action name
+    public void SetActionName(string name)
+    {
+        TheActionName = name;
     }
 
     // this is what will use the skill depending on the circumstances
@@ -210,7 +284,7 @@ public class TheActionNode : TheNode
 }
 
 
-public class TheAIScript : MonoBehaviour
+public class TheAIScript
 {
     public TheNode TheRootNode = null;
 
@@ -224,14 +298,14 @@ public class TheAIScript : MonoBehaviour
     }
 
     // this funcion starts the decision tree
-    public void Execute(RealBattleUIScript TheUI)
+    public void Execute(RealBattleUIScript TheUI, MonsterScript CurrentMonster)
     {
-        TraverseTree(TheRootNode, TheUI);
+        TraverseTree(TheRootNode, TheUI, CurrentMonster);
     }
 
 
     // this function goes thorugh the tree testing differnt decsisions until it reaches a leaf node
-    public void TraverseTree(TheNode TheCurrentNode, RealBattleUIScript TheUI)
+    public void TraverseTree(TheNode TheCurrentNode, RealBattleUIScript TheUI, MonsterScript TheMonster)
     {
         if(TheCurrentNode.LeafNode)
         {
@@ -240,10 +314,10 @@ public class TheAIScript : MonoBehaviour
         else
         {
 
-            CurrentNode = CurrentNode.MakeDecision();
+            CurrentNode = TheCurrentNode.MakeDecision(TheMonster);
             // the function does not do anything yet
             //CurrentNode = TheCurrentNode.MakeDecision();
-            TraverseTree(CurrentNode, TheUI);
+            TraverseTree(CurrentNode, TheUI, TheMonster);
         }
     }
 
