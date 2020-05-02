@@ -71,16 +71,20 @@ public class TheDecisions
             {
                 foreach (MonsterScript M in Allies)
                 {
-                    if (temphealth > M.ReturnCurrentHealth())
+                    if (M.ReturnCurrentHealth() > 0)
                     {
-                        temphealth = (int)M.ReturnCurrentHealth();
-
-                        if (ReturnMonster.Count > 0)
+                        if (temphealth > M.ReturnCurrentHealth())
                         {
-                            ReturnMonster.Clear();
-                        }
+                            temphealth = (int)M.ReturnCurrentHealth();
 
-                        ReturnMonster.Add(M);
+                            if (ReturnMonster.Count > 0)
+                            {
+
+                                ReturnMonster.Clear();
+                            }
+
+                            ReturnMonster.Add(M);
+                        }
                     }
                 }
             }
@@ -88,16 +92,19 @@ public class TheDecisions
             {
                 foreach (MonsterScript M in AllTargets)
                 {
-                    if (temphealth > M.ReturnCurrentHealth())
+                    if (M.ReturnCurrentHealth() > 0)
                     {
-                        temphealth = (int)M.ReturnCurrentHealth();
-
-                        if (ReturnMonster.Count > 0)
+                        if (temphealth > M.ReturnCurrentHealth())
                         {
-                            ReturnMonster.Clear();
-                        }
+                            temphealth = (int)M.ReturnCurrentHealth();
 
-                        ReturnMonster.Add(M);
+                            if (ReturnMonster.Count > 0)
+                            {
+                                ReturnMonster.Clear();
+                            }
+
+                            ReturnMonster.Add(M);
+                        }
                     }
                 }
             }

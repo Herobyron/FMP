@@ -552,7 +552,7 @@ public class MonsterScript
 
                 if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.AttackDeBuff)
                 {
-                    AttackDown = 500;
+                    AttackDown = 200;
                 }
 
             }
@@ -570,7 +570,7 @@ public class MonsterScript
 
                 if(B.ReturnBuffType() == BeneficialEffects.Bufftype.AttackBuff)
                 {
-                    AttackUp = 500;
+                    AttackUp = 200;
                 }
             }
         }
@@ -581,7 +581,7 @@ public class MonsterScript
             {
                 if(B.ReturnBuffType() == BeneficialEffects.Bufftype.DefenceBuff)
                 {
-                    DefenceUp = 500;
+                    DefenceUp = 200;
                 }
             }
         }
@@ -592,7 +592,7 @@ public class MonsterScript
             {
                 if(H.ReturnDebuffType() == HarmfulEffects.Bufftype.DefenceDeBuff)
                 {
-                    DefenceDown = 500;
+                    DefenceDown = 200;
                 }
             }
         }
@@ -607,9 +607,15 @@ public class MonsterScript
             // if the number is greater then 20 attack missed
            if(Random.Range(0, 100) >= 20)
            {
-               float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown ;
-               TempDamage *= 0.7f;
-               CurrentHealth -= TempDamage;
+                float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown ;
+                TempDamage *= 0.7f;
+                
+                if((BaseDefence + IncreasedDefence ) >= OtherMonsterAttack)
+                {
+                    TempDamage -= 100;
+                }
+
+                CurrentHealth -= TempDamage;
                 return TempDamage;
            }
            else // else the attack has hit with the debuff and now check crit
@@ -618,15 +624,27 @@ public class MonsterScript
                 {
                     if(Random.Range(0,100) >= (BaseCritRate + 30)) // if the random range is greater then the base crit rate + the extra chance then its regular damage
                     {
-                        float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                        float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown;
+
+                        if ((BaseDefence + IncreasedDefence) >= OtherMonsterAttack)
+                        {
+                            TempDamage -= 100;
+                        }
+
                         CurrentHealth -= TempDamage;
                         return TempDamage;
                     }
                     else // else if the number isnt bigger then the attack landed as a crit
                     {
                         LastSkillCrit = true;
-                        float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
-                        TempDamage +=  (TempDamage * BaseCritDamage);
+                        float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                        TempDamage +=  (TempDamage * (BaseCritDamage/100));
+
+                        if ((BaseDefence + IncreasedDefence) >= OtherMonsterAttack)
+                        {
+                            TempDamage -= 100;
+                        }
+
                         CurrentHealth -= TempDamage;
                         return TempDamage;
                     }
@@ -639,7 +657,13 @@ public class MonsterScript
             {
                 if (Random.Range(0, 100) >= (BaseCritRate + 30)) // if the random range is greater then the base crit rate + the extra chance then its regular damage
                 {
-                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown;
+
+                    if ((BaseDefence + IncreasedDefence) >= OtherMonsterAttack)
+                    {
+                        TempDamage -= 100;
+                    }
+
                     CurrentHealth -= TempDamage;
                     return TempDamage;
                 
@@ -647,8 +671,15 @@ public class MonsterScript
                 else // else if the number isnt bigger then the attack landed as a crit
                 {
                     LastSkillCrit = true;
-                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
-                    TempDamage += (TempDamage * BaseCritDamage);
+                    float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    TempDamage += (TempDamage * (BaseCritDamage/100));
+
+                    if ((BaseDefence + IncreasedDefence) >= OtherMonsterAttack)
+                    {
+                        TempDamage -= 100;
+                    }
+
+
                     CurrentHealth -= TempDamage;
                     return TempDamage;
                 }
@@ -657,15 +688,27 @@ public class MonsterScript
             {
                 if (Random.Range(0, 100) >= BaseCritRate) // if the random range is greater then the base crit rate + the extra chance then its regular damage
                 {
-                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown;
+
+                    if ((BaseDefence + IncreasedDefence) >= OtherMonsterAttack)
+                    {
+                        TempDamage -= 100;
+                    }
+
                     CurrentHealth -= TempDamage;
                     return TempDamage;
                 }
                 else // else if the number isnt bigger then the attack landed as a crit
                 {
                     LastSkillCrit = true;
-                    float TempDamage = OtherMonsterAttack + AttackUp + DefenceDown - DefenceUp - AttackDown;
-                    TempDamage +=  (TempDamage * BaseCritDamage);
+                    float TempDamage = (OtherMonsterAttack/10) + AttackUp + DefenceDown - DefenceUp - AttackDown;
+                    TempDamage +=  (TempDamage * (BaseCritDamage/100));
+
+                    if ((BaseDefence + IncreasedDefence) >= OtherMonsterAttack)
+                    {
+                        TempDamage -= 100;
+                    }
+
                     CurrentHealth -= TempDamage;
                     return TempDamage;
                 }
@@ -685,7 +728,7 @@ public class MonsterScript
     {
         // adds the heal amount to the health (heal amount is calculated in the monsters skill function not in apply heal
         // then if the current health is more then the max health then it sets the current health to the base health
-        CurrentHealth += HealAmount;
+        CurrentHealth += (HealAmount/100);
 
         if(CurrentHealth > BaseHealth)
         {
