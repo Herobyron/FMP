@@ -372,6 +372,51 @@ public class RealBattleUIScript : MonoBehaviour
     [SerializeField]
     private Text SummaryDamageTwo = null;
 
+
+    // this is the animation stuff for the models (to test we will only be using the first enemy mon)
+    [SerializeField]
+    private Animator TheEnenmyOneAnimator = null;
+
+    [SerializeField]
+    private Animator TheEnemyTwoAnimator = null;
+
+    [SerializeField]
+    private Animator TheEnemyThreeAnimator = null;
+
+
+    [SerializeField]
+    private Animator ThePlayerOneAnimator = null;
+
+    [SerializeField]
+    private Animator ThePlayerTwoAnimator = null;
+
+    [SerializeField]
+    private Animator ThePlayerThreeAnimator = null;
+
+    [SerializeField]
+    private bool Animating = false;
+
+    // this is all of the monster stats (used to disapear when the monster is dead)
+
+    [SerializeField]
+    private GameObject PlayerMonOneStats = null;
+
+    [SerializeField]
+    private GameObject PlayerMonTwoStats = null;
+
+    [SerializeField]
+    private GameObject PlayerMonThreeStats = null;
+
+    [SerializeField]
+    private GameObject EnemyMonOneStats = null;
+
+    [SerializeField]
+    private GameObject EnemyMonTwoStats = null;
+
+    [SerializeField]
+    private GameObject EnemyMonThreeStats = null;
+
+
     private void OnEnable()
     {
         SetLevelDisplays();
@@ -408,13 +453,13 @@ public class RealBattleUIScript : MonoBehaviour
     public void SetLevelDisplays()
     {
       
-       //MonsterOneLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterLevel();
-       //MonsterTwoLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterLevel();
-       //MonsterThreeLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterLevel();
-       //
-       //EnemyOneLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterLevel();
-       //EnemyTwoLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterLevel();
-       //EnemyThreeLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterLevel();
+       MonsterOneLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterLevel();
+       MonsterTwoLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterLevel();
+       MonsterThreeLevel.text = "" + BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterLevel();
+       
+       EnemyOneLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterLevel();
+       EnemyTwoLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterLevel();
+       EnemyThreeLevelText.text = "" + BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterLevel();
 
     }
 
@@ -427,8 +472,7 @@ public class RealBattleUIScript : MonoBehaviour
     // this is a function used to update the health bar of the monster when a skill is used
     public void SetMonsterCurrentHealthBar(bool AOE)
     {
-       //if(AOE)
-       // {
+       
                 MonsterOneSlider.value = BattleManagerRef.ReturnPlayerMonsters()[0].ReturnCurrentHealth();
                 MonsterTwoSlider.value = BattleManagerRef.ReturnPlayerMonsters()[1].ReturnCurrentHealth();
                 MonsterThreeSlider.value = BattleManagerRef.ReturnPlayerMonsters()[2].ReturnCurrentHealth();
@@ -437,37 +481,7 @@ public class RealBattleUIScript : MonoBehaviour
                 EnemyTwoSlider.value = BattleManagerRef.ReturnEnemyMonsters()[1].ReturnCurrentHealth();
                 EnemyThreeSlider.value = BattleManagerRef.ReturnEnemyMonsters()[2].ReturnCurrentHealth();
 
-       // }
-        //else
-        //{
-        // 
-        //    if(CurrentMonsterTarget == BattleManagerRef.ReturnPlayerMonsters()[0])
-        //    {
-        //        MonsterOneSlider.value = BattleManagerRef.ReturnPlayerMonsters()[0].ReturnCurrentHealth();
-        //    }
-        //    else if(CurrentMonsterTarget == BattleManagerRef.ReturnPlayerMonsters()[1])
-        //    {
-        //        MonsterTwoSlider.value = BattleManagerRef.ReturnPlayerMonsters()[1].ReturnCurrentHealth();
-        //    }
-        //    else if (CurrentMonsterTarget == BattleManagerRef.ReturnPlayerMonsters()[2])
-        //    {
-        //        MonsterThreeSlider.value = BattleManagerRef.ReturnPlayerMonsters()[2].ReturnCurrentHealth();
-        //    }
-        //    else if(CurrentMonsterTarget == BattleManagerRef.ReturnEnemyMonsters()[0])
-        //    {
-        //        EnemyOneSlider.value = BattleManagerRef.ReturnEnemyMonsters()[0].ReturnCurrentHealth();
-        //    }
-        //    else if (CurrentMonsterTarget == BattleManagerRef.ReturnEnemyMonsters()[1])
-        //    {
-        //        EnemyTwoSlider.value = BattleManagerRef.ReturnEnemyMonsters()[1].ReturnCurrentHealth();
-        //    }
-        //    else if (CurrentMonsterTarget == BattleManagerRef.ReturnEnemyMonsters()[2])
-        //    {
-        //        EnemyThreeSlider.value = BattleManagerRef.ReturnEnemyMonsters()[2].ReturnCurrentHealth();
-        //    }
-        //
-        //
-        //}
+    
     }
 
     // this is a function that will update the skill display when a certain skill is pressed when its the players turn
@@ -847,6 +861,19 @@ public class RealBattleUIScript : MonoBehaviour
         List<MonsterScript> TheTarget = new List<MonsterScript>();
         TheTarget.Add(CurrentMonsterTarget);
 
+        if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+        {
+            ThePlayerOneAnimator.SetBool("Attacking", true);
+        }
+        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+        {
+            ThePlayerTwoAnimator.SetBool("Attacking", true);
+        }
+        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+        {
+            ThePlayerThreeAnimator.SetBool("Attacking", true);
+        }
+
         TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
         StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(TheTarget, CurrentMonster)));
         SetMonsterCurrentHealthBar(false);
@@ -866,6 +893,21 @@ public class RealBattleUIScript : MonoBehaviour
             MonsterSkillScript TempSkill = CurrentMonster.GetMonsterSKills()[0];
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
 
+
+            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+            {
+                TheEnenmyOneAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+            {
+                TheEnemyTwoAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+            {
+                TheEnemyThreeAnimator.SetBool("Attacking", true);
+            }
+
+
             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
@@ -879,6 +921,20 @@ public class RealBattleUIScript : MonoBehaviour
             //TheTarget.Add(CurrentMonsterTarget);
             MonsterSkillScript TempSkill = CurrentMonster.GetMonsterSKills()[0];
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
+
+            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+            {
+                TheEnenmyOneAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+            {
+                TheEnemyTwoAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+            {
+                TheEnemyThreeAnimator.SetBool("Attacking", true);
+            }
+
 
             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[0], CurrentMonster.GetMonsterSKills()[0].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
@@ -898,6 +954,20 @@ public class RealBattleUIScript : MonoBehaviour
         List<MonsterScript> TheTarget = new List<MonsterScript>();
         TheTarget.Add(CurrentMonsterTarget);
 
+        if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+        {
+            ThePlayerOneAnimator.SetBool("Attacking", true);
+        }
+        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+        {
+            ThePlayerTwoAnimator.SetBool("Attacking", true);
+        }
+        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+        {
+            ThePlayerThreeAnimator.SetBool("Attacking", true);
+        }
+
+
         TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
         StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(TheTarget, CurrentMonster)));
         SetMonsterCurrentHealthBar(false);
@@ -916,7 +986,21 @@ public class RealBattleUIScript : MonoBehaviour
             //TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
             MonsterSkillScript TempSkill = CurrentMonster.GetMonsterSKills()[1];
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            
+
+            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+            {
+                TheEnenmyOneAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+            {
+                TheEnemyTwoAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+            {
+                TheEnemyThreeAnimator.SetBool("Attacking", true);
+            }
+
+
             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
@@ -930,7 +1014,21 @@ public class RealBattleUIScript : MonoBehaviour
             //TheTarget.Add(CurrentMonsterTarget);
             MonsterSkillScript TempSkill = CurrentMonster.GetMonsterSKills()[1];
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-            
+
+            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+            {
+                TheEnenmyOneAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+            {
+                TheEnemyTwoAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+            {
+                TheEnemyThreeAnimator.SetBool("Attacking", true);
+            }
+
+
             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[1], CurrentMonster.GetMonsterSKills()[1].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
@@ -949,6 +1047,20 @@ public class RealBattleUIScript : MonoBehaviour
 
         List<MonsterScript> TheTarget = new List<MonsterScript>();
         TheTarget.Add(CurrentMonsterTarget);
+
+        if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
+        {
+            ThePlayerOneAnimator.SetBool("Attacking", true);
+        }
+        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
+        {
+            ThePlayerTwoAnimator.SetBool("Attacking", true);
+        }
+        else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
+        {
+            ThePlayerThreeAnimator.SetBool("Attacking", true);
+        }
+
 
         TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
         StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(TheTarget, CurrentMonster)));
@@ -972,6 +1084,18 @@ public class RealBattleUIScript : MonoBehaviour
 
             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
 
+            if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+            {
+                TheEnenmyOneAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+            {
+                TheEnemyTwoAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+            {
+                TheEnemyThreeAnimator.SetBool("Attacking", true);
+            }
 
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
@@ -988,7 +1112,18 @@ public class RealBattleUIScript : MonoBehaviour
 
             StartCoroutine(DamageDisplayTextTIme(3.0f, CurrentMonster.GetMonsterSKills()[2], CurrentMonster.GetMonsterSKills()[2].UseSkill(CurrentMonsterTargetsAI, CurrentMonster)));
 
-
+            if(CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
+            {
+                TheEnenmyOneAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
+            {
+                TheEnemyTwoAnimator.SetBool("Attacking", true);
+            }
+            else if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
+            {
+                TheEnemyThreeAnimator.SetBool("Attacking", true);
+            }
 
             SetMonsterCurrentHealthBar(false);
             BattleManagerRef.EndCurrentTurnAIBattle();
@@ -1023,7 +1158,7 @@ public class RealBattleUIScript : MonoBehaviour
                         
                         foreach(string H in TheSkill.GetSkillEffects())
                         {
-                            SummaryMoveOne.text += "<color=darkblue> " + H + " </color>";
+                            SummaryMoveOne.text += "<color=darkblue> " + H + " " + " </color>";
                         }
 
                         SummaryMoveOne.text += "To all your monsters";
@@ -1035,7 +1170,7 @@ public class RealBattleUIScript : MonoBehaviour
 
                         foreach (string H in TheSkill.GetSkillEffects())
                         {
-                            SummaryMoveOne.text += "<color=darkblue> " + H + " </color>";
+                            SummaryMoveOne.text += "<color=darkblue> " + H + " " + " </color>";
                         }
 
                         SummaryMoveOne.text += "To all Thier monsters";
@@ -1064,7 +1199,7 @@ public class RealBattleUIScript : MonoBehaviour
 
                             foreach (string H in TheSkill.GetSkillEffects())
                             {
-                                SummaryMoveTwo.text += "<color=darkblue> " + H + " </color>";
+                                SummaryMoveTwo.text += "<color=darkblue> " + H + " " + " </color>";
                             }
 
                             SummaryMoveTwo.text += "To all your monsters";
@@ -1076,13 +1211,17 @@ public class RealBattleUIScript : MonoBehaviour
 
                             foreach (string H in TheSkill.GetSkillEffects())
                             {
-                                SummaryMoveTwo.text += "<color=darkblue> " + H + " </color>";
+                                SummaryMoveTwo.text += "<color=darkblue> " + H + " " + " </color>";
                             }
 
                             SummaryMoveTwo.text += "To all Thier monsters";
                             break;
                         }
                 }
+            }
+            else
+            {
+                SummaryMoveTwo.text = "";
             }
 
 
@@ -1107,7 +1246,7 @@ public class RealBattleUIScript : MonoBehaviour
 
                         foreach (string H in TheSkill.GetSkillEffects())
                         {
-                            SummaryMoveOne.text += "<color=darkblue>" + H + "</color>";
+                            SummaryMoveOne.text += "<color=darkblue>" + H + " " + "</color>";
                         }
 
                         SummaryMoveOne.text += "To One your monsters";
@@ -1119,7 +1258,7 @@ public class RealBattleUIScript : MonoBehaviour
 
                         foreach (string H in TheSkill.GetSkillEffects())
                         {
-                            SummaryMoveOne.text += "<color=darkblue>" + H + "</color>";
+                            SummaryMoveOne.text += "<color=darkblue>" + H + " " + "</color>";
                         }
 
                         SummaryMoveOne.text += "To One Thier monsters";
@@ -1148,7 +1287,7 @@ public class RealBattleUIScript : MonoBehaviour
 
                             foreach (string H in TheSkill.GetSkillEffects())
                             {
-                                SummaryMoveTwo.text += "<color=darkblue>" + H + "</color>";
+                                SummaryMoveTwo.text += "<color=darkblue>" + H + " " + "</color>";
                             }
 
                             SummaryMoveTwo.text += "To One your monsters";
@@ -1160,7 +1299,7 @@ public class RealBattleUIScript : MonoBehaviour
 
                             foreach (string H in TheSkill.GetSkillEffects())
                             {
-                                SummaryMoveTwo.text += "<color=darkblue>" + H + "</color>";
+                                SummaryMoveTwo.text += "<color=darkblue>" + H + " " + "</color>";
                             }
 
                             SummaryMoveTwo.text += "To One Thier monsters";
@@ -2732,4 +2871,65 @@ public class RealBattleUIScript : MonoBehaviour
         return CurrentMonsterTargetsAI;
     }
   
+    public void SetAnimating(int anim)
+    {
+        if(anim == 1)
+        {
+            Animating = true;
+
+        }
+        else
+        {
+            Animating = false;
+            TheEnenmyOneAnimator.SetBool("Attacking", false);
+            TheEnemyTwoAnimator.SetBool("Attacking", false);
+            TheEnemyThreeAnimator.SetBool("Attacking", false);
+            ThePlayerOneAnimator.SetBool("Attacking", false);
+            ThePlayerTwoAnimator.SetBool("Attacking", false);
+            ThePlayerThreeAnimator.SetBool("Attacking", false);
+        }
+    }
+
+    public bool ReturnAnimating()
+    {
+        return Animating;
+    }
+
+
+    public void PlayerMonOneDead()
+    {
+        MonsterOneEffectDisplay.SetActive(false);
+        PlayerMonOneStats.SetActive(false);
+        
+    }
+
+    public void PlayerMonTwoDead()
+    {
+        MonsterTwoEffectDisplay.SetActive(false);
+        PlayerMonTwoStats.SetActive(false);
+    }
+
+    public void PlayerMonThreeDead()
+    {
+        MonsterThreeEffectDisplay.SetActive(false);
+        PlayerMonThreeStats.SetActive(false);
+    }
+
+    public void EnemyMonOneDead()
+    {
+        EnemyOneEffectDisplay.SetActive(false);
+        EnemyMonOneStats.SetActive(false);
+    }
+
+    public void EnemyMonTwoDead()
+    {
+        EnemyTwoEffectDisplay.SetActive(false);
+        EnemyMonTwoStats.SetActive(false);
+    }
+
+    public void EnemyMonThreeDead()
+    {
+        EnemyThreeEffectDisplay.SetActive(false);
+        EnemyMonThreeStats.SetActive(false);
+    }
 }

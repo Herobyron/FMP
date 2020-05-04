@@ -240,6 +240,45 @@ public class BattleManager : MonoBehaviour
     private bool SixthMonsterDead = false;
 
 
+    // these are the gameobjects for the monsters and their graves
+    [SerializeField]
+    private GameObject PlayerMonObjectOne = null;
+
+    [SerializeField]
+    private GameObject PlayerMonObjectTwo = null;
+
+    [SerializeField]
+    private GameObject PlayerMonObjectThree = null;
+
+    [SerializeField]
+    private GameObject EnemyMonObjectOne = null;
+
+    [SerializeField]
+    private GameObject EnemyMonObjectTwo = null;
+
+    [SerializeField]
+    private GameObject EnemyMonObjectThree = null;
+
+    [SerializeField]
+    private GameObject PlayerOneGrave = null;
+
+    [SerializeField]
+    private GameObject PlayerTwoGrave = null;
+
+    [SerializeField]
+    private GameObject PlayerThreeGrave = null;
+
+    [SerializeField]
+    private GameObject EnemyOneGrave = null;
+
+    [SerializeField]
+    private GameObject EnemyTwoGrave = null;
+
+    [SerializeField]
+    private GameObject EnemyThreeGrave = null;
+
+
+
     // this is for initialising the decisions for the tree
     private void Awake()
     {
@@ -249,7 +288,8 @@ public class BattleManager : MonoBehaviour
         SkillThreeDecisionNode.DecisionType = "SkillThree";
         SkillThreeDecisionNode.SetTheDecision(SkillThreeDecision);
 
-        // if the decision is yes then it should be an action node and use the skill three
+        // if the decision is no then it should be an action node and use the skill three
+        // as the question it is asking is... is skill three on cooldown?
         TheActions SkillThreeAction = new TheActions();
         TheActionNode SkillThreeActionNode = new TheActionNode();
         SkillThreeActionNode.SetActionName("SkillThree");
@@ -257,7 +297,8 @@ public class BattleManager : MonoBehaviour
         SkillThreeDecisionNode.AddNoNode(SkillThreeActionNode);
 
 
-        // if the decision is no then it should be a decsision node for the second skill
+        // if the decision is yes then it should be a decsision node for the second skill
+        // because if skill three is on cooldown then it needs to check
         TheDecisions SkillTwoDecision = new TheDecisions();
         TheDecisionNode SkillTwoDecsisionNode = new TheDecisionNode();
         SkillTwoDecsisionNode.DecisionType = "SkillTwo";
@@ -311,49 +352,54 @@ public class BattleManager : MonoBehaviour
         {
             if (BattleStart)
             {
+
+
                 if (BattleSummary == false)
                 {
-
-                    if (CurrentMonster.ReturnMonsterOwner() == "AI")
+                    if (!AIBattleUI.ReturnAnimating())
                     {
 
-                        TheBattleUI.SetEnemyTargets(TargetDecisions.PickEnemyTarget(PlayersMonsters, EnemyMonsters, CurrentMonster.GetMonsterSKills()));
-
-                        if (TheBattleUI.ReturnMonsterTargets().Count > 1)
+                        if (CurrentMonster.ReturnMonsterOwner() == "AI")
                         {
 
+                            TheBattleUI.SetEnemyTargets(TargetDecisions.PickEnemyTarget(PlayersMonsters, EnemyMonsters, CurrentMonster.GetMonsterSKills()));
+
+                            if (TheBattleUI.ReturnMonsterTargets().Count > 1)
+                            {
+
+                            }
+                            else
+                            {
+                                if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == EnemyMonsters[0].ReturnMonsterName())
+                                {
+                                    TargetMonsterNumber = 0;
+                                }
+                                else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == EnemyMonsters[1].ReturnMonsterName())
+                                {
+                                    TargetMonsterNumber = 1;
+                                }
+                                else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == EnemyMonsters[2].ReturnMonsterName())
+                                {
+                                    TargetMonsterNumber = 2;
+                                }
+                                else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == PlayersMonsters[0].ReturnMonsterName())
+                                {
+                                    TargetMonsterNumber = 0;
+                                }
+                                else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == PlayersMonsters[1].ReturnMonsterName())
+                                {
+                                    TargetMonsterNumber = 1;
+                                }
+                                else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == PlayersMonsters[2].ReturnMonsterName())
+                                {
+                                    TargetMonsterNumber = 2;
+                                }
+                            }
+
+
+                            AIScript.Execute(AIBattleUI, CurrentMonster);
+
                         }
-                        else
-                        {
-                            if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == EnemyMonsters[0].ReturnMonsterName())
-                            {
-                                TargetMonsterNumber = 0;
-                            }
-                            else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == EnemyMonsters[1].ReturnMonsterName())
-                            {
-                                TargetMonsterNumber = 1;
-                            }
-                            else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == EnemyMonsters[2].ReturnMonsterName())
-                            {
-                                TargetMonsterNumber = 2;
-                            }
-                            else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == PlayersMonsters[0].ReturnMonsterName())
-                            {
-                                TargetMonsterNumber = 0;
-                            }
-                            else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == PlayersMonsters[1].ReturnMonsterName())
-                            {
-                                TargetMonsterNumber = 1;
-                            }
-                            else if (TheBattleUI.ReturnMonsterTargets()[0].ReturnMonsterName() == PlayersMonsters[2].ReturnMonsterName())
-                            {
-                                TargetMonsterNumber = 2;
-                            }
-                        }
-
-
-                        AIScript.Execute(AIBattleUI, CurrentMonster);
-
                     }
                 }
             }
@@ -365,6 +411,9 @@ public class BattleManager : MonoBehaviour
         }
         
     }
+
+
+
 
     public void InitialiseTrainingDummy()
     {
@@ -652,7 +701,7 @@ public class BattleManager : MonoBehaviour
     {
         int Temp = 0;
 
-        if (FirstMonsterHadTurn && SecondMonsterHadTurn && ThirdMonsterHadTurn && FourthMonsterHadTurn && FifthMonsterHadTurn && SixthMonsterHadTurn)
+        if(FirstMonsterHadTurn && SecondMonsterHadTurn && ThirdMonsterHadTurn && FourthMonsterHadTurn && FifthMonsterHadTurn && SixthMonsterHadTurn)
         {
             FirstMonsterHadTurn = false;
             SecondMonsterHadTurn = false;
@@ -660,14 +709,41 @@ public class BattleManager : MonoBehaviour
             FourthMonsterHadTurn = false;
             FifthMonsterHadTurn = false;
             SixthMonsterHadTurn = false;
+        }
 
-            if(FirstMonsterDead)
-            {
-                FirstMonsterHadTurn = true;
-                CurrentTurnCalculationAIBattle();
-            }
-            else
-            {
+        if(TheFirstMonsterScript.ReturnCurrentHealth() <= 0)
+        {
+            FirstMonsterHadTurn = true;
+        }
+        
+        if(TheSecondMonsterScript.ReturnCurrentHealth() <= 0)
+        {
+            SecondMonsterHadTurn = true;
+        }
+
+        if(TheThirdMonsterScript.ReturnCurrentHealth() <=0)
+        {
+            ThirdMonsterHadTurn = true;
+        }
+
+        if(TheForthMonsterScript.ReturnCurrentHealth() <= 0)
+        {
+            FourthMonsterHadTurn = true;
+        }
+
+        if(TheFifthMonsterScript.ReturnCurrentHealth() <= 0)
+        {
+            FifthMonsterHadTurn = true;
+        }
+
+        if(TheSixthMonsterScript.ReturnCurrentHealth() <= 0)
+        {
+            SixthMonsterHadTurn = true;
+        }
+
+        if (!FirstMonsterHadTurn )
+        {
+
                 CurrentMonster = TheFirstMonsterScript;
 
                 // update all monster turns
@@ -707,7 +783,7 @@ public class BattleManager : MonoBehaviour
                         Temp++;
                     }
                 }
-            }
+            
 
             
 
@@ -738,16 +814,10 @@ public class BattleManager : MonoBehaviour
                 }
             }
         }
-        else if (FirstMonsterHadTurn && !SecondMonsterHadTurn && !ThirdMonsterHadTurn && !FourthMonsterHadTurn && !FifthMonsterHadTurn && !SixthMonsterHadTurn)
+        else if ( !SecondMonsterHadTurn )
         {
 
-            if(SecondMonsterDead)
-            {
-                SecondMonsterHadTurn = true;
-                CurrentTurnCalculationAIBattle();
-            }
-            else
-            {
+           
                 CurrentMonster = TheSecondMonsterScript;
 
                 // update all monster turns
@@ -784,21 +854,15 @@ public class BattleManager : MonoBehaviour
                         Temp++;
                     }
                 }
-            }
+            
 
 
             
         }
-        else if (FirstMonsterHadTurn && SecondMonsterHadTurn && !ThirdMonsterHadTurn && !FourthMonsterHadTurn && !FifthMonsterHadTurn && !SixthMonsterHadTurn)
+        else if (!ThirdMonsterHadTurn )
         {
 
-            if(ThirdMonsterDead)
-            {
-                ThirdMonsterHadTurn = true;
-                CurrentTurnCalculationAIBattle();
-            }
-            else
-            {
+           
                 CurrentMonster = TheThirdMonsterScript;
                 if (CurrentMonster.ReturnMonsterOwner() == "Player")
                 {
@@ -832,20 +896,14 @@ public class BattleManager : MonoBehaviour
                         Temp++;
                     }
                 }
-            }
+            
 
 
            
         }
-        else if (FirstMonsterHadTurn && SecondMonsterHadTurn && ThirdMonsterHadTurn && !FourthMonsterHadTurn && !FifthMonsterHadTurn && !SixthMonsterHadTurn)
+        else if (!FourthMonsterHadTurn)
         {
-            if(FourthMonsterDead)
-            {
-                FourthMonsterHadTurn = true;
-                CurrentTurnCalculationAIBattle();
-            }
-            else
-            {
+            
                 CurrentMonster = TheForthMonsterScript;
                 if (CurrentMonster.ReturnMonsterOwner() == "Player")
                 {
@@ -879,20 +937,14 @@ public class BattleManager : MonoBehaviour
                         Temp++;
                     }
                 }
-            }
+            
 
             
         }
-        else if (FirstMonsterHadTurn && SecondMonsterHadTurn && ThirdMonsterHadTurn && FourthMonsterHadTurn && !FifthMonsterHadTurn && !SixthMonsterHadTurn)
+        else if ( !FifthMonsterHadTurn)
         {
 
-            if(FifthMonsterDead)
-            {
-                FifthMonsterHadTurn = true;
-                CurrentTurnCalculationAIBattle();
-            }
-            else
-            {
+            
                 CurrentMonster = TheFifthMonsterScript;
                 if (CurrentMonster.ReturnMonsterOwner() == "Player")
                 {
@@ -926,18 +978,12 @@ public class BattleManager : MonoBehaviour
                         Temp++;
                     }
                 }
-            }
+            
             
         }
-        else if (FirstMonsterHadTurn && SecondMonsterHadTurn && ThirdMonsterHadTurn && FourthMonsterHadTurn && FifthMonsterHadTurn && !SixthMonsterHadTurn)
+        else if (!SixthMonsterHadTurn)
         {
-            if(SixthMonsterDead)
-            {
-                SixthMonsterHadTurn = true;
-                CurrentTurnCalculationAIBattle();
-            }
-            else
-            {
+            
                 CurrentMonster = TheSixthMonsterScript;
                 if (CurrentMonster.ReturnMonsterOwner() == "Player")
                 {
@@ -971,7 +1017,7 @@ public class BattleManager : MonoBehaviour
                         Temp++;
                     }
                 }
-            }
+            
 
             
         }
@@ -1276,6 +1322,9 @@ public class BattleManager : MonoBehaviour
             if (PlayersMonsters[0].ReturnCurrentHealth() <= 0)
             {
                 PlayerMonOneDead = true;
+                PlayerMonObjectOne.SetActive(false);
+                PlayerOneGrave.GetComponent<Rigidbody>().useGravity = true;
+                AIBattleUI.PlayerMonOneDead();
             }
         }
 
@@ -1285,6 +1334,9 @@ public class BattleManager : MonoBehaviour
             if(PlayersMonsters[1].ReturnCurrentHealth() <= 0)
             {
                 PlayerMonTwoDead = true;
+                PlayerMonObjectTwo.SetActive(false);
+                PlayerTwoGrave.GetComponent<Rigidbody>().useGravity = true;
+                AIBattleUI.PlayerMonTwoDead();
             }
         }
 
@@ -1293,6 +1345,9 @@ public class BattleManager : MonoBehaviour
             if(PlayersMonsters[2].ReturnCurrentHealth() <= 0)
             {
                 PlayerMonThreeDead = true;
+                PlayerMonObjectThree.SetActive(false);
+                PlayerThreeGrave.GetComponent<Rigidbody>().useGravity = true;
+                AIBattleUI.PlayerMonThreeDead();
             }
         }
 
@@ -1301,6 +1356,9 @@ public class BattleManager : MonoBehaviour
             if(EnemyMonsters[0].ReturnCurrentHealth() <= 0)
             {
                 EnemyMonOneDead = true;
+                EnemyMonObjectOne.SetActive(false);
+                EnemyOneGrave.GetComponent<Rigidbody>().useGravity = true;
+                AIBattleUI.EnemyMonOneDead();
             }
         }
 
@@ -1309,6 +1367,9 @@ public class BattleManager : MonoBehaviour
             if (EnemyMonsters[1].ReturnCurrentHealth() <= 0)
             {
                 EnemyMonTwoDead = true;
+                EnemyMonObjectTwo.SetActive(false);
+                EnemyTwoGrave.GetComponent<Rigidbody>().useGravity = true;
+                AIBattleUI.EnemyMonTwoDead();
             }
         }
 
@@ -1317,6 +1378,9 @@ public class BattleManager : MonoBehaviour
             if (EnemyMonsters[2].ReturnCurrentHealth() <= 0)
             {
                 EnemyMonThreeDead = true;
+                EnemyMonObjectThree.SetActive(false);
+                EnemyThreeGrave.GetComponent<Rigidbody>().useGravity = true;
+                AIBattleUI.EnemyMonThreeDead();
             }
         }
 

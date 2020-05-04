@@ -13,7 +13,7 @@ public class TheDecisions
 {
     public bool SkillTwoOnCoolDown(MonsterScript TheMonster)
     {
-        if(TheMonster.ReturnSkillTwoCoolDown() > 0)
+        if(TheMonster.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
         {
             return true;
         }
@@ -26,7 +26,7 @@ public class TheDecisions
     
     public bool SkillThreeOnCoolDown(MonsterScript TheMonster)
     {
-        if (TheMonster.ReturnSkillThreeCoolDown() > 0)
+        if (TheMonster.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
         {
             return true;
         }
@@ -83,7 +83,10 @@ public class TheDecisions
                                 ReturnMonster.Clear();
                             }
 
-                            ReturnMonster.Add(M);
+                            if (M.ReturnCurrentHealth() > 0)
+                            {
+                                ReturnMonster.Add(M);
+                            }
                         }
                     }
                 }
@@ -103,7 +106,10 @@ public class TheDecisions
                                 ReturnMonster.Clear();
                             }
 
-                            ReturnMonster.Add(M);
+                            if (M.ReturnCurrentHealth() > 0)
+                            {
+                                ReturnMonster.Add(M);
+                            }
                         }
                     }
                 }
