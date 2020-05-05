@@ -4222,6 +4222,12 @@ PrefabInstance:
       propertyPath: TheManager
       value: 
       objectReference: {fileID: 2026362636}
+    - target: {fileID: 830664199765966979, guid: 661da88517109a74b85fea5b50458ed2,
+        type: 3}
+      propertyPath: MonsterImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 2083464259699928970, guid: 763f3cbf5c237a449b0da7f733290d6e,
+        type: 3}
     - target: {fileID: 4416972905413991445, guid: 661da88517109a74b85fea5b50458ed2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

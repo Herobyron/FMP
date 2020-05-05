@@ -1728,7 +1728,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 27e2c5f44b19532438c61a60abcdeb97, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5719,7 +5719,18 @@ MonoBehaviour:
   SummaryDamageOne: {fileID: 8107989472484855107}
   SummaryDamageTwo: {fileID: 2192673225341915164}
   TheEnenmyOneAnimator: {fileID: 0}
+  TheEnemyTwoAnimator: {fileID: 0}
+  TheEnemyThreeAnimator: {fileID: 0}
+  ThePlayerOneAnimator: {fileID: 0}
+  ThePlayerTwoAnimator: {fileID: 0}
+  ThePlayerThreeAnimator: {fileID: 0}
   Animating: 0
+  PlayerMonOneStats: {fileID: 0}
+  PlayerMonTwoStats: {fileID: 0}
+  PlayerMonThreeStats: {fileID: 0}
+  EnemyMonOneStats: {fileID: 0}
+  EnemyMonTwoStats: {fileID: 0}
+  EnemyMonThreeStats: {fileID: 0}
 --- !u!1 &3404459820755281343
 GameObject:
   m_ObjectHideFlags: 0

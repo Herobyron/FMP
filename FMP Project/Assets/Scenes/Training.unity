@@ -230,7 +230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &117925059
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -413,7 +413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &428365122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1112,7 +1112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1427918458
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1918,6 +1918,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1091392878967749665, guid: 661da88517109a74b85fea5b50458ed2,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
     - target: {fileID: 8912169372614767850, guid: 661da88517109a74b85fea5b50458ed2,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1926,6 +1931,11 @@ PrefabInstance:
     - target: {fileID: 8912169372614767850, guid: 661da88517109a74b85fea5b50458ed2,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8912169372614767850, guid: 661da88517109a74b85fea5b50458ed2,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2747681431262907194, guid: 661da88517109a74b85fea5b50458ed2,
@@ -2203,6 +2213,12 @@ PrefabInstance:
       propertyPath: TheManager
       value: 
       objectReference: {fileID: 1648136674}
+    - target: {fileID: 830664199765966979, guid: 661da88517109a74b85fea5b50458ed2,
+        type: 3}
+      propertyPath: MonsterImages.Array.data[2]
+      value: 
+      objectReference: {fileID: 2083464259699928970, guid: 763f3cbf5c237a449b0da7f733290d6e,
+        type: 3}
     - target: {fileID: 4416972905413991445, guid: 661da88517109a74b85fea5b50458ed2,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2277,6 +2293,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2720416084419266202, guid: 661da88517109a74b85fea5b50458ed2,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6656665716617490935, guid: 661da88517109a74b85fea5b50458ed2,
         type: 3}

@@ -311,6 +311,8 @@ public class BattleUIScript : MonoBehaviour
     [SerializeField]
     private Text CritText = null;
 
+    // this bool is made to make sure that the tutorial only runs once at the begining
+    private bool once = false;
 
     // Start is called before the first frame update
     void Start()
@@ -322,7 +324,11 @@ public class BattleUIScript : MonoBehaviour
     {
         LevelDisplaySet();
 
-        StartCoroutine(BattleTutorialPlay());
+        if (!once)
+        {
+            StartCoroutine(BattleTutorialPlay());
+            once = true;
+        }
     }
 
     // Update is called once per frame
