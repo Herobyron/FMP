@@ -19,6 +19,7 @@ public class BatAnimation : MonoBehaviour
 
     public void SetAttacking(int number)
     {
+        if(FindObjectOfType<RealBattleUIScript>())
         FindObjectOfType<RealBattleUIScript>().SetAnimating(number);
     }
 

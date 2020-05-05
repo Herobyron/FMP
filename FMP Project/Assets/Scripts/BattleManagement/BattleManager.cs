@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BattleManager : MonoBehaviour
 {
@@ -278,6 +279,26 @@ public class BattleManager : MonoBehaviour
     private GameObject EnemyThreeGrave = null;
 
 
+    // these are the components for the end game screen
+    [Tooltip("this is the game object that is linked to the end game screen when the battle has ended")]
+    [SerializeField]
+    private GameObject EndGameScreen = null;
+
+    [Tooltip("this is the text component for the Title Text of the end screen. changed depending on the outcome of battle")]
+    [SerializeField]
+    private Text EndScreenTitleText = null;
+
+    [Tooltip("this is the GameObject holding the vicotry image that dispalys at the end of the game")]
+    [SerializeField]
+    private GameObject VictoryImage = null;
+
+    [Tooltip("this is the GameObject holding the defeat image that displays at the end of the game")]
+    [SerializeField]
+    private GameObject DefeatImage = null;
+
+    [Tooltip("this is the battle UI screen that was used previously")]
+    [SerializeField]
+    private GameObject BattleUIScreen = null;
 
     // this is for initialising the decisions for the tree
     private void Awake()
@@ -340,11 +361,44 @@ public class BattleManager : MonoBehaviour
     {
         if(PlayerMonOneDead && PlayerMonTwoDead && PlayerMonThreeDead)
         {
-            SceneManager.LoadScene("Monster");
+            BattleStart = false;
+            EndGameScreen.SetActive(true);
+            BattleUIScreen.SetActive(false);
+            DefeatImage.SetActive(true);
+
+            if(EnemyMonOneDead && EnemyMonTwoDead || EnemyMonOneDead && EnemyMonThreeDead || EnemyMonTwoDead && EnemyMonThreeDead)
+            {
+                EndScreenTitleText.text = "Close Defeat";
+            }
+            else if(EnemyMonThreeDead || EnemyMonTwoDead || EnemyMonOneDead)
+            {
+                EndScreenTitleText.text = "Agonising Loss";
+            }
+            else
+            {
+                EndScreenTitleText.text = "Humiliating Defeat";
+            }
+
         }
         else if(EnemyMonOneDead && EnemyMonTwoDead && EnemyMonThreeDead)
         {
-            SceneManager.LoadScene("Monster");
+            BattleStart = false;
+            EndGameScreen.SetActive(true);
+            BattleUIScreen.SetActive(false);
+            VictoryImage.SetActive(true);
+
+            if (PlayerMonOneDead && PlayerMonTwoDead || PlayerMonOneDead && PlayerMonThreeDead || PlayerMonTwoDead && PlayerMonThreeDead)
+            {
+                EndScreenTitleText.text = "Hard Fought Victory";
+            }
+            else if (PlayerMonThreeDead || PlayerMonTwoDead || PlayerMonOneDead)
+            {
+                EndScreenTitleText.text = "Tactical Win";
+            }
+            else
+            {
+                EndScreenTitleText.text = "Astonishing Vicotry";
+            }
         }
 
 
@@ -1468,4 +1522,9 @@ public class BattleManager : MonoBehaviour
         return EnemyMonThreeDead;
     }
 
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Monster");
+    }
 }

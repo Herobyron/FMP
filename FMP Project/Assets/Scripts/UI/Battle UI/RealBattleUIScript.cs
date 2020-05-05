@@ -1681,20 +1681,20 @@ public class RealBattleUIScript : MonoBehaviour
                         {
                             if (!BattleManagerRef.ReturnPlayerMonOneDead())
                             {
-                                MonsterOneDamageText.gameObject.SetActive(true);
-                                MonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                MonsterOneSecondaryDamageNumber.gameObject.SetActive(true);
+                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnPlayerMonTwoDead())
                             {
-                                MonsterTwoDamageText.gameObject.SetActive(true);
-                                MonsterTwoDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                MonsterTwoSecondaryDamageNumber.gameObject.SetActive(true);
+                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnPlayerMonThreeDead())
                             {
-                                MonsterThreeDamageText.gameObject.SetActive(true);
-                                MonsterThreeDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                MonsterThreeSeoncdaryDamageNumber.gameObject.SetActive(true);
+                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                             }
                         }
                         else
@@ -1702,21 +1702,21 @@ public class RealBattleUIScript : MonoBehaviour
 
                             if (!BattleManagerRef.ReturnEnemyMonOneDead())
                             {
-                                EnemyMonsterOneDamageText.gameObject.SetActive(true);
-                                EnemyMonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                EnemyOneSecondaryDamageNumber.gameObject.SetActive(true);
+                                EnemyOneSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnEnemyMonTwoDead())
                             {
-                                EnemyMonsterTwoDamageText.gameObject.SetActive(true);
-                                EnemyMonsterTwoDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                EnemyTwoSecondaryDamageNumber.gameObject.SetActive(true);
+                                EnemyTwoSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                             }
 
 
                             if (!BattleManagerRef.ReturnEnemyMonThreeDead())
                             {
-                                EnemyMonsterThreeDamageText.gameObject.SetActive(true);
-                                EnemyMonsterThreeDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                EnemythreeSecondaryDamageNumber.gameObject.SetActive(true);
+                                EnemythreeSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                             }
                         }
                     }
@@ -1728,20 +1728,20 @@ public class RealBattleUIScript : MonoBehaviour
                             {
                                 case (0):
                                     {
-                                        MonsterOneDamageText.gameObject.SetActive(true);
-                                        MonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                        MonsterOneSecondaryDamageNumber.gameObject.SetActive(true);
+                                        MonsterOneSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                                         break;
                                     }
                                 case (1):
                                     {
-                                        MonsterTwoDamageText.gameObject.SetActive(true);
-                                        MonsterTwoDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                        MonsterTwoSecondaryDamageNumber.gameObject.SetActive(true);
+                                        MonsterTwoSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                                         break;
                                     }
                                 case (2):
                                     {
-                                        MonsterThreeDamageText.gameObject.SetActive(true);
-                                        MonsterThreeDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                        MonsterThreeSeoncdaryDamageNumber.gameObject.SetActive(true);
+                                        MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                                         break;
                                     }
                             }
@@ -1756,20 +1756,20 @@ public class RealBattleUIScript : MonoBehaviour
                             {
                                 case (0):
                                     {
-                                        EnemyMonsterOneDamageText.gameObject.SetActive(true);
-                                        EnemyMonsterOneDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                        EnemyOneSecondaryDamageNumber.gameObject.SetActive(true);
+                                        EnemyOneSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                                         break;
                                     }
                                 case (1):
                                     {
-                                        EnemyMonsterTwoDamageText.gameObject.SetActive(true);
-                                        EnemyMonsterTwoDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                        EnemyTwoSecondaryDamageNumber.gameObject.SetActive(true);
+                                        EnemyTwoSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                                         break;
                                     }
                                 case (2):
                                     {
-                                        EnemyMonsterThreeDamageText.gameObject.SetActive(true);
-                                        EnemyMonsterThreeDamageText.text = "<color=green>" + DamageNumber + "</color>";
+                                        EnemythreeSecondaryDamageNumber.gameObject.SetActive(true);
+                                        EnemythreeSecondaryDamageNumber.text = "<color=green>" + DamageNumber + "</color>";
                                         break;
                                     }
                             }
@@ -2615,32 +2615,32 @@ public class RealBattleUIScript : MonoBehaviour
                         {
                             if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                             {
-                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterOneSecondaryDamageNumber.text += "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                             {
-                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                             {
-                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterThreeSeoncdaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                         else
                         {
                             if (!BattleManagerRef.ReturnPlayerMonOneDead())
                             {
-                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterOneSecondaryDamageNumber.text += "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnPlayerMonTwoDead())
                             {
-                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnPlayerMonThreeDead())
                             {
-                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterThreeSeoncdaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                     }
@@ -2650,32 +2650,32 @@ public class RealBattleUIScript : MonoBehaviour
                         {
                             if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                             {
-                                EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemyOneSecondaryDamageNumber.text += "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                             {
-                                EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemyTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                             {
-                                EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemythreeSecondaryDamageNumber.text += "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                         else
                         {
                             if (!BattleManagerRef.ReturnEnemyMonOneDead())
                             {
-                                EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemyOneSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnEnemyMonTwoDead())
                             {
-                                EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemyTwoSecondaryDamageNumber.text += "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
 
                             if (!BattleManagerRef.ReturnEnemyMonThreeDead())
                             {
-                                EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemythreeSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                     }
@@ -2688,30 +2688,30 @@ public class RealBattleUIScript : MonoBehaviour
                         {
                             if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                             {
-                                MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterOneSecondaryDamageNumber.text +=    "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                             {
-                                MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                             {
-                                MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                MonsterThreeSeoncdaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                         else
                         {
                             if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                             {
-                                EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemyOneSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                             {
-                                EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemyTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                             else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                             {
-                                EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                                EnemythreeSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                             }
                         }
                     }
@@ -2719,27 +2719,27 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if(CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                         {
-                            MonsterOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            MonsterOneSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
                         else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                         {
-                            MonsterTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            MonsterTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
                         else if (CurrentMonsterName == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                         {
-                            MonsterThreeSeoncdaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            MonsterThreeSeoncdaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
                         else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                         {
-                            EnemyOneSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            EnemyOneSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
                         else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                         {
-                            EnemyTwoSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            EnemyTwoSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
                         else if (CurrentMonsterName == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                         {
-                            EnemythreeSecondaryDamageNumber.text = "<color=green>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                            EnemythreeSecondaryDamageNumber.text +=  "<color=green>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                         }
                     }
                 }
@@ -2750,29 +2750,29 @@ public class RealBattleUIScript : MonoBehaviour
 
                 if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[0].ReturnMonsterName())
                 {
-                    MonsterOneSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                    MonsterOneSecondaryDamageNumber.text +=  "<color=red>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                 }
                 else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[1].ReturnMonsterName())
                 {
-                    MonsterTwoSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                    MonsterTwoSecondaryDamageNumber.text +=  "<color=red>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                 }
                 else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnPlayerMonsters()[2].ReturnMonsterName())
                 {
-                    MonsterThreeSeoncdaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                    MonsterThreeSeoncdaryDamageNumber.text +=  "<color=red>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                 }
             
       
                 if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
                 {
-                    EnemyOneSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                    EnemyOneSecondaryDamageNumber.text +=  "<color=red>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                 }
                 else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[1].ReturnMonsterName())
                 {
-                    EnemyTwoSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                    EnemyTwoSecondaryDamageNumber.text +=  "<color=red>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                 }
                 else if (CurrentMonsterTarget.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[2].ReturnMonsterName())
                 {
-                    EnemythreeSecondaryDamageNumber.text = "<color=red>" + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
+                    EnemythreeSecondaryDamageNumber.text +=  "<color=red>" + " + " + TheSkill.ReturnSecondaryEffectDamageNumber() + "</color>";
                 }
 
 

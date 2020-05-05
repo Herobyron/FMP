@@ -18,6 +18,7 @@ public class GhostAnimation : MonoBehaviour
 
     public void SetAttacking(int number)
     {
-        FindObjectOfType<RealBattleUIScript>().SetAnimating(number);
+        if (FindObjectOfType<RealBattleUIScript>())
+            FindObjectOfType<RealBattleUIScript>().SetAnimating(number);
     }
 }
