@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Training.unity
     guid: bbebde0d9f0f5554c9470b8efe4e2030
+  - enabled: 1
+    path: Assets/Scenes/AI Battle.unity
+    guid: 51f588eb86525c545bc245246f4a6e44
   m_configObjects: {}

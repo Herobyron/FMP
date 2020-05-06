@@ -247,6 +247,10 @@ public class GameManagment : MonoBehaviour
         SceneManager.LoadScene("Training");
     }
 
+    public void LoadAIBattleScene()
+    {
+        SceneManager.LoadScene("AI Battle");
+    }
 }
 
 
