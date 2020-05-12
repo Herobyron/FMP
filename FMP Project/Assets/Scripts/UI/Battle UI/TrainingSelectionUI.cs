@@ -102,6 +102,15 @@ public class TrainingSelectionUI : MonoBehaviour
     [SerializeField]
     private GameObject MonsterAlreadySelectedPanel = null;
 
+    [Tooltip("this is the panel that displays a message when the player trys to select a monster when none have been loaded in ")]
+    [SerializeField]
+    private GameObject NoMonsterInViewPanel = null;
+
+    [Tooltip("this is the audio source for the music")]
+    [SerializeField]
+    private AudioSource Music = null;
+
+
 
     // this function uses the game manager to load in the information from the manager to here
     public void LoadInformation()
@@ -139,7 +148,8 @@ public class TrainingSelectionUI : MonoBehaviour
     // this function adds the monster bieng viewed to the selected monster list
     public void AddMonsterToSelection()
     {
-        SelectedMonsters.Add(MonsterBiengDisplayed);
+        if(MonsterBiengDisplayed.ReturnMonsterName() != "Blank")
+            SelectedMonsters.Add(MonsterBiengDisplayed);
     }
 
     // this function adds the selected monster to the viewed monster so the runes can be viewed
@@ -265,6 +275,13 @@ public class TrainingSelectionUI : MonoBehaviour
     public void AddViewedMonsterToSelected()
     {
         bool CanAddMonster = true;
+        bool NoMonsterInView = false;
+
+        if (MonsterBiengDisplayed.ReturnMonsterName() == "Blank")
+        {
+            CanAddMonster = false;
+            NoMonsterInView = true;
+        }
 
         for(int i = 0; i < SelectedMonsters.Count; i++)
         {
@@ -304,7 +321,14 @@ public class TrainingSelectionUI : MonoBehaviour
             }
             else
             {
-                MonsterAlreadySelectedPanel.SetActive(true);
+                if (NoMonsterInView)
+                {
+                    NoMonsterInViewPanel.SetActive(true);
+                }
+                else
+                {
+                    MonsterAlreadySelectedPanel.SetActive(true);
+                }
             }
             
         }
@@ -402,7 +426,7 @@ public class TrainingSelectionUI : MonoBehaviour
         FindObjectOfType<BattleManager>().SetPlayerBattleMonsters(SelectedMonsters);
 
         // here i want a bettle effect to be a transition.
-
+        Music.Play();
         gameObject.SetActive(false);
     }
 

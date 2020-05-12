@@ -95,8 +95,9 @@ public class GameManagment : MonoBehaviour
     // function used to clear players data to load in the rune for testing
     public void ClearData()
     {
-        GameData.PlayerInformation.ClearRunes();
-        GameData.PlayerInformation.ClearMonsters();
+        GameData = new Data();
+        //GameData.PlayerInformation.ClearRunes();
+        //GameData.PlayerInformation.ClearMonsters();
     }
 
     public void LoadRuneIn()

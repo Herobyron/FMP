@@ -278,6 +278,16 @@ public class MonsterRuneUI : MonoBehaviour
 
     private void OnEnable()
     {
+        Once = false;
+        TheManager.Load();
+        ClearUI();
+
+        if (TheManager.ReturnPlayerMonsters().Count > 0 || TheManager.ReturnPlayerRunes().Count > 0)
+        {
+            Once = true;
+        }
+
+
         if (Once)
         {
             TheManager.Load();
@@ -288,7 +298,9 @@ public class MonsterRuneUI : MonoBehaviour
         }
         else
         {
+            GenerateRuneButtons();
             FirstTimePanelCombined.SetActive(true);
+          
         }
     }
 
@@ -423,6 +435,8 @@ public class MonsterRuneUI : MonoBehaviour
         }
 
     }
+
+
 
     // a function that updates the rune UI section of this 
     public void RefreshRuneUI()
@@ -726,6 +740,27 @@ public class MonsterRuneUI : MonoBehaviour
         }
     }
 
+
+    public void ClearUI()
+    {
+        MonsterBiengUsed = null;
+        RuneBiengUsed = null;
+
+        MonsterLevel.text = "Level: ";
+        MonstersName.text = "Name: ";
+        MonsterHealth.text = "Health: ";
+        MonsterDamage.text = "Attack: ";
+        MonsterDefence.text = "Defence: ";
+        MonsterSpeed.text = "Speed: ";
+        MonsterAccuracy.text = "Accuracy: ";
+        MonsterResistance.text = "Resistance: ";
+        MonsterCritRate.text = "Crit Rate: ";
+        MonsterCritDamage.text = "Crit Damage: ";
+
+        MonsterType.text = "Type: ";
+        MonsterAwakening.text = "Awakened: ";
+        MonsterStars.text = "Stars: ";
+    }
 
     //this function will change the monster stats ui to display the increased stats
     public void RefreshRuneEquipedMonsterUI()

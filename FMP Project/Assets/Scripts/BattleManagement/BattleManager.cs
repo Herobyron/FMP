@@ -278,7 +278,6 @@ public class BattleManager : MonoBehaviour
     [SerializeField]
     private GameObject EnemyThreeGrave = null;
 
-
     // these are the components for the end game screen
     [Tooltip("this is the game object that is linked to the end game screen when the battle has ended")]
     [SerializeField]
@@ -299,6 +298,9 @@ public class BattleManager : MonoBehaviour
     [Tooltip("this is the battle UI screen that was used previously")]
     [SerializeField]
     private GameObject BattleUIScreen = null;
+
+
+
 
     // this is for initialising the decisions for the tree
     private void Awake()
@@ -351,8 +353,7 @@ public class BattleManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
+     
         InitialiseTrainingDummy();
     }
 
@@ -763,6 +764,32 @@ public class BattleManager : MonoBehaviour
             FourthMonsterHadTurn = false;
             FifthMonsterHadTurn = false;
             SixthMonsterHadTurn = false;
+
+            foreach (MonsterScript M in PlayersMonsters)
+            {
+                if (M.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
+                {
+                    M.GetMonsterSKills()[1].SetSkillCurrentCooldown(M.GetMonsterSKills()[1].GetSkillCurrentCooldown() - 1);
+                }
+
+                if (M.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
+                {
+                    M.GetMonsterSKills()[2].SetSkillCurrentCooldown(M.GetMonsterSKills()[2].GetSkillCurrentCooldown() - 1);
+                }
+            }
+
+            foreach (MonsterScript M in EnemyMonsters)
+            {
+                if (M.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
+                {
+                    M.GetMonsterSKills()[1].SetSkillCurrentCooldown(M.GetMonsterSKills()[1].GetSkillCurrentCooldown() - 1);
+                }
+
+                if (M.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
+                {
+                    M.GetMonsterSKills()[2].SetSkillCurrentCooldown(M.GetMonsterSKills()[2].GetSkillCurrentCooldown() - 1);
+                }
+            }
         }
 
         if(TheFirstMonsterScript.ReturnCurrentHealth() <= 0)
@@ -842,31 +869,7 @@ public class BattleManager : MonoBehaviour
             
 
             // decrese all skill cooldowns by one turn
-            foreach (MonsterScript M in PlayersMonsters)
-            {
-                if (M.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
-                {
-                    M.GetMonsterSKills()[1].SetSkillCurrentCooldown(M.GetMonsterSKills()[1].GetSkillCurrentCooldown() - 1);
-                }
-
-                if (M.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
-                {
-                    M.GetMonsterSKills()[2].SetSkillCurrentCooldown(M.GetMonsterSKills()[2].GetSkillCurrentCooldown() - 1);
-                }
-            }
-
-            foreach (MonsterScript M in EnemyMonsters)
-            {
-                if (M.GetMonsterSKills()[1].GetSkillCurrentCooldown() > 0)
-                {
-                    M.GetMonsterSKills()[1].SetSkillCurrentCooldown(M.GetMonsterSKills()[1].GetSkillCurrentCooldown() - 1);
-                }
-
-                if (M.GetMonsterSKills()[2].GetSkillCurrentCooldown() > 0)
-                {
-                    M.GetMonsterSKills()[2].SetSkillCurrentCooldown(M.GetMonsterSKills()[2].GetSkillCurrentCooldown() - 1);
-                }
-            }
+            
         }
         else if ( !SecondMonsterHadTurn )
         {

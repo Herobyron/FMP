@@ -147,7 +147,7 @@ public class GenerateRunes : MonoBehaviour
         }
 
         // this randomly makes the runes slot 
-        RuneScriptGenerated.SetRuneSlot(Random.Range(1, 6));
+        RuneScriptGenerated.SetRuneSlot(Random.Range(1, 7));
 
         // the next part goes into detail on creating the main stat of the rune 
         RuneScriptGenerated.GenerateMainRuneStat();

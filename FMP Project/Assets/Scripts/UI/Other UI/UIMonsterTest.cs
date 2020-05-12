@@ -84,6 +84,17 @@ public class UIMonsterTest : MonoBehaviour
 
     private void OnEnable()
     {
+        Once = false;
+        ClearUI();
+        TheManager = FindObjectOfType<GameManagment>();
+
+        TheManager.Load();
+
+        if(TheManager.ReturnPlayerMonsters().Count > 0)
+        {
+            Once = true;
+        }
+
         if(Once)
         {
             TheManager.Load();
@@ -93,7 +104,9 @@ public class UIMonsterTest : MonoBehaviour
         }
         else
         {
+            MonsterBiengUsed = null;
             FirstTimePanelMonster.SetActive(true);
+            GenerateMonsterButtons();
         }
     }
 
@@ -101,7 +114,7 @@ public class UIMonsterTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TheManager = FindObjectOfType<GameManagment>();
+        
 
         ImportanceSelectionOptions.Add("Importance 1");
         ImportanceSelectionOptions.Add("Importance 2");
@@ -148,6 +161,28 @@ public class UIMonsterTest : MonoBehaviour
             MonsterButtons.Add(NewMonster);
         }
 
+    }
+
+    public void ClearUI()
+    {
+        
+        MonsterName.text = "Monster Name : ";
+        MonsterHealth.text = "Monster Health : ";
+        MonsterDefence.text = "Monster Defence : ";
+        MonsterAttack.text = "Monster Attack : ";
+        MonsterSpeed.text = "Monster Speed : ";
+        MonsterCritRate.text = "Monster CritRate : ";
+        MonsterCritDamage.text = "Monster CritDamage : ";
+        MonsterAccuracy.text = "Monster Accuracy : ";
+        MonsterResistance.text = "Monster Resistance : ";
+        MonsterStars.text = "Stars : " ;
+        MonsterType.text = "Type : " ;
+        MonsterAwakened.text = "Awakened : " ;
+        MonsterLevel.text = "Level : ";
+
+        SkillOneDescription.text = "";
+        SkillTwoDescription.text = "";
+        SkillThreeDescription.text = "";
     }
 
     // this updates the UI for the monsters stats

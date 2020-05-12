@@ -1184,7 +1184,7 @@ PrefabInstance:
     - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
         type: 3}
@@ -1224,6 +1224,31 @@ PrefabInstance:
     - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1506256429}
+    - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Save
+      objectReference: {fileID: 0}
+    - target: {fileID: 8521790137387599840, guid: fa9e20e62241dfa409dd45ed989c7ad0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6272175580735370989, guid: fa9e20e62241dfa409dd45ed989c7ad0,
@@ -1576,6 +1601,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: TheGameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: MonsterUI
+      value: 
+      objectReference: {fileID: 2005534675}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: RuneUI
+      value: 
+      objectReference: {fileID: 933192237}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: MonsterAndRuneUI
+      value: 
+      objectReference: {fileID: 1387210979}
+    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
+        type: 3}
+      propertyPath: SwitchUIPanel
+      value: 
+      objectReference: {fileID: 1273027}
     - target: {fileID: 2419853704525750071, guid: baf075445253fdf4b80e3eeb1159b690,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1631,26 +1676,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: MonsterUI
-      value: 
-      objectReference: {fileID: 2005534675}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: RuneUI
-      value: 
-      objectReference: {fileID: 933192237}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: MonsterAndRuneUI
-      value: 
-      objectReference: {fileID: 1387210979}
-    - target: {fileID: 2419853704525750070, guid: baf075445253fdf4b80e3eeb1159b690,
-        type: 3}
-      propertyPath: SwitchUIPanel
-      value: 
-      objectReference: {fileID: 1273027}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf075445253fdf4b80e3eeb1159b690, type: 3}
 --- !u!1001 &3502001567377347630

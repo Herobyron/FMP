@@ -71,6 +71,16 @@ public class UITest : MonoBehaviour
 
     private void OnEnable()
     {
+        Once = false;
+        TheManager = FindObjectOfType<GameManagment>();
+        TheManager.Load();
+        ClearUI();
+
+        if (TheManager.ReturnPlayerRunes().Count > 0)
+        {
+            Once = true;
+        }
+
         if(Once)
         {
             TheManager.Load();
@@ -80,7 +90,9 @@ public class UITest : MonoBehaviour
         }
         else
         {
+            GenerateRuneButtons();
             FirstTimeRunePanel.SetActive(true);
+
         }
     }
 
@@ -117,6 +129,25 @@ public class UITest : MonoBehaviour
 
     }
 
+
+    public void ClearUI()
+    {
+        RuneBiengUsed = null;
+        NoRuneUsed.gameObject.SetActive(true);
+
+        RuneName.text = "Rune Name:";
+        RuneLevelText.text = "Rune Level: ";
+        RuneStar.text = "Rune Star: ";
+        RuneGrade.text = "Rune Rarity: ";
+        RuneSlot.text = "Rune Slot:";
+
+        MainRuneStat.text = "0";
+        RuneOneStat.text =  "0";
+        RuneTwoStat.text =  "0";
+        RuneThreeStat.text = "0";
+        RuneFourStat.text = "0"; 
+    }
+
     // refreshes the UI of the rune to display everything.
     public void ChangeUI()
     {
@@ -132,11 +163,145 @@ public class UITest : MonoBehaviour
             RuneGrade.text = "Rune Rarity: <color=darkblue>" + RuneBiengUsed.ReturnRuneRarity() + "</color>";
             RuneSlot.text = "Rune Slot: <color=darkblue>" + RuneBiengUsed.ReturnRuneSlot() + "</color>";
 
-            MainRuneStat.text = RuneBiengUsed.ReturnMainRuneStatType() + ": <color=darkblue>" + RuneBiengUsed.ReturnMainRuneStat() + "</color>";
-            RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatOne() + "</color>";
-            RuneTwoStat.text = RuneBiengUsed.ReturnRuneStatTwoType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatTwo() + "</color>";
-            RuneThreeStat.text = RuneBiengUsed.ReturnRuneStatThreeType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatThree() + "</color>";
-            RuneFourStat.text = RuneBiengUsed.ReturnRuneStatFourType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatFour() + "</color>";
+            if(RuneBiengUsed.ReturnMainRuneStatType() == "HealthPercentage" || RuneBiengUsed.ReturnMainRuneStatType() == "DefencePercentage" || RuneBiengUsed.ReturnMainRuneStatType() == "AttackPercentage")
+            {
+                switch (RuneBiengUsed.ReturnMainRuneStatType())
+                {
+                    case ("HealthPercentage"):
+                        {
+                            MainRuneStat.text = "Health Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnMainRuneStat() + "</color>";
+                            break;
+                        }
+                    case ("DefencePercentage"):
+                        {
+                            MainRuneStat.text = "Defence Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnMainRuneStat() + "</color>";
+                            break;
+                        }
+                    case ("AttackPercentage"):
+                        {
+                            MainRuneStat.text = "Attack Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnMainRuneStat() + "</color>";
+                            break;
+                        }
+                }
+
+            }
+            else
+            {
+                MainRuneStat.text = RuneBiengUsed.ReturnMainRuneStatType() + ": <color=darkblue>" + RuneBiengUsed.ReturnMainRuneStat() + "</color>";
+            }
+
+
+            if (RuneBiengUsed.ReturnRuneStatOneType() == "HealthPercentage" || RuneBiengUsed.ReturnRuneStatOneType() == "DefencePercentage" || RuneBiengUsed.ReturnRuneStatOneType() == "AttackPercentage")
+            {
+                switch (RuneBiengUsed.ReturnRuneStatOneType())
+                {
+                    case ("HealthPercentage"):
+                        {
+                            RuneOneStat.text = "Health Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatOne() + "</color>";
+                            break;
+                        }
+                    case ("DefencePercentage"):
+                        {
+                            RuneOneStat.text = "Defence Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatOne() + "</color>";
+                            break;
+                        }
+                    case ("AttackPercentage"):
+                        {
+                            RuneOneStat.text = "Attack Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatOne() + "</color>";
+                            break;
+                        }
+                }
+
+            }
+            else
+            {
+                RuneOneStat.text = RuneBiengUsed.ReturnRuneStatOneType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatOne() + "</color>";
+            }
+
+            if (RuneBiengUsed.ReturnRuneStatTwoType() == "HealthPercentage" || RuneBiengUsed.ReturnRuneStatTwoType() == "DefencePercentage" || RuneBiengUsed.ReturnRuneStatTwoType() == "AttackPercentage")
+            {
+                switch (RuneBiengUsed.ReturnRuneStatTwoType())
+                {
+                    case ("HealthPercentage"):
+                        {
+                            RuneTwoStat.text = "Health Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatTwo() + "</color>";
+                            break;
+                        }
+                    case ("DefencePercentage"):
+                        {
+                            RuneTwoStat.text = "Defence Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatTwo() + "</color>";
+                            break;
+                        }
+                    case ("AttackPercentage"):
+                        {
+                            RuneTwoStat.text = "Attack Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatTwo() + "</color>";
+                            break;
+                        }
+                }
+
+            }
+            else
+            {
+                RuneTwoStat.text = RuneBiengUsed.ReturnRuneStatTwoType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatTwo() + "</color>";
+            }
+
+
+            if (RuneBiengUsed.ReturnRuneStatThreeType() == "HealthPercentage" || RuneBiengUsed.ReturnRuneStatThreeType() == "DefencePercentage" || RuneBiengUsed.ReturnRuneStatThreeType() == "AttackPercentage")
+            {
+                switch (RuneBiengUsed.ReturnRuneStatThreeType())
+                {
+                    case ("HealthPercentage"):
+                        {
+                            RuneThreeStat.text = "Health Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatThree() + "</color>";
+                            break;
+                        }
+                    case ("DefencePercentage"):
+                        {
+                            RuneThreeStat.text = "Defence Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatThree() + "</color>";
+                            break;
+                        }
+                    case ("AttackPercentage"):
+                        {
+                            RuneThreeStat.text = "Attack Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatThree() + "</color>";
+                            break;
+                        }
+                }
+
+            }
+            else
+            {
+                RuneThreeStat.text = RuneBiengUsed.ReturnRuneStatThreeType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatThree() + "</color>";
+            }
+
+            if (RuneBiengUsed.ReturnRuneStatFourType() == "HealthPercentage" || RuneBiengUsed.ReturnRuneStatFourType() == "DefencePercentage" || RuneBiengUsed.ReturnRuneStatFourType() == "AttackPercentage")
+            {
+                switch (RuneBiengUsed.ReturnRuneStatFourType())
+                {
+                    case ("HealthPercentage"):
+                        {
+                            RuneFourStat.text = "Health Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatFour() + "</color>";
+                            break;
+                        }
+                    case ("DefencePercentage"):
+                        {
+                            RuneFourStat.text = "Defence Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatFour() + "</color>";
+                            break;
+                        }
+                    case ("AttackPercentage"):
+                        {
+                            RuneFourStat.text = "Attack Percentage" + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatFour() + "</color>";
+                            break;
+                        }
+                }
+
+            }
+            else
+            {
+                RuneFourStat.text = RuneBiengUsed.ReturnRuneStatFourType() + ": <color=darkblue>" + RuneBiengUsed.ReturnRuneStatFour() + "</color>";
+            }
+
+            
+            
 
             NoRuneUsed.gameObject.SetActive(false);
         }
