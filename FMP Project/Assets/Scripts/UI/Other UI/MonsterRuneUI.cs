@@ -997,6 +997,67 @@ public class MonsterRuneUI : MonoBehaviour
 
     }
 
+    public void IncreaseLevelByTen()
+    {
+        bool HasBeenLeveling = false;
+
+        if(!LevelCorutineRun)
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                if(i == 9)
+                {
+                    if (MonsterBiengUsed.ReturnMonsterLevel() != MonsterBiengUsed.ReturnMonsterMaxLevel())
+                    {
+                        PreviousMonsterDamage = MonsterBiengUsed.ReturnBaseDamage();
+                        PreviousMonsterDefence = MonsterBiengUsed.ReturnBaseDefence();
+                        PreviousMonsterHealth = MonsterBiengUsed.ReturnBaseHealth();
+                        PreviousMonsterLevel = MonsterBiengUsed.ReturnMonsterLevel();
+                        PreviousMonsterMaxLevel = MonsterBiengUsed.ReturnMonsterMaxLevel();
+
+                        RefreshIncreasedStatDecrease();
+
+                        MonsterBiengUsed.LevelUpMonster();
+
+                        RefreshIncreasedStatIncrease();
+
+
+                        //refresh ui
+                        RefreshRuneEquipedMonsterUI();
+
+                        StartCoroutine(LevelUpDisplayChange(2));
+                        HasBeenLeveling = true;
+                    }
+                    else if(HasBeenLeveling)
+                    {
+                        StartCoroutine(LevelUpDisplayChange(2));
+                    }
+                    
+                }
+                else
+                {
+                    if (MonsterBiengUsed.ReturnMonsterLevel() != MonsterBiengUsed.ReturnMonsterMaxLevel())
+                    {
+                        RefreshIncreasedStatDecrease();
+
+                        MonsterBiengUsed.LevelUpMonster();
+
+                        RefreshIncreasedStatIncrease();
+
+
+                        //refresh ui
+                        RefreshRuneEquipedMonsterUI();
+                        HasBeenLeveling = true;
+                    }
+                    else if (HasBeenLeveling)
+                    {
+                        StartCoroutine(LevelUpDisplayChange(2));
+                    }
+                }
+            }
+        }
+    }
+
     // a function to close the upgrade panel
     public void CloseUpgradPanel()
     {

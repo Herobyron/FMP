@@ -110,7 +110,39 @@ public class TrainingSelectionUI : MonoBehaviour
     [SerializeField]
     private AudioSource Music = null;
 
+    // these are the text elements for monsters stats
+    [Tooltip("this is the monsters health")]
+    [SerializeField]
+    private Text HealthText = null;
 
+
+    [Tooltip("this is the monsters Damage")]
+    [SerializeField]
+    private Text AttackText = null;
+
+    [Tooltip("this is the monsters defence stat")]
+    [SerializeField]
+    private Text DefenceText = null;
+
+    [Tooltip("this is the monsters speed ")]
+    [SerializeField]
+    private Text SpeedText = null;
+
+    [Tooltip("this is the monster crit rate")]
+    [SerializeField]
+    private Text CritRateText = null;
+
+    [Tooltip("this is the monsters crit damage")]
+    [SerializeField]
+    private Text CritDamage = null;
+
+    [Tooltip("this is the monsters Accuracy")]
+    [SerializeField]
+    private Text AccuracyText = null;
+
+    [Tooltip("this is the monsters Resiatance")]
+    [SerializeField]
+    private Text ResisatnceText = null;
 
     // this function uses the game manager to load in the information from the manager to here
     public void LoadInformation()
@@ -142,6 +174,23 @@ public class TrainingSelectionUI : MonoBehaviour
             MonsterButtons.Add(NewButton);
 
             //something to set the image of the button after (generating a number for monster)
+        }
+    }
+
+    // this function Updates the UI everyTime a monster is changed
+    public void UpdateMonsterSats()
+    {
+        if(MonsterBiengDisplayed != null)
+        {
+            HealthText.text = " Health: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseHealth() + " + " + MonsterBiengDisplayed.ReturnIncreasedHealth() + "</color>";
+            AttackText.text = " Damage: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseDamage() + " + " + MonsterBiengDisplayed.ReturnIncreasedAttack() + "</color>";
+            DefenceText.text = " Defence: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseDefence() + " + " + MonsterBiengDisplayed.ReturnIncreasedDefence() + "</color>";
+            SpeedText.text = " Speed: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseSpeed() + " + " + MonsterBiengDisplayed.ReturnIncreasedSpeed() + "</color>";
+            CritRateText.text = " Crit Rate: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseCritRate() + " + " + MonsterBiengDisplayed.ReturnIncreasedCritRate() + "</color>";
+            CritDamage.text = " Crit Damage: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseCritDamage() + " + " + MonsterBiengDisplayed.ReturnIncreasedCritDamage() + "</color>";
+            AccuracyText.text = " Accuracy: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseAccuracy() + " + " + MonsterBiengDisplayed.ReturnIncreasedAccuracy() + "</color>";
+            ResisatnceText.text = " Resistance: " + "<color=darkblue>" + MonsterBiengDisplayed.ReturnBaseResistance() + " + " + MonsterBiengDisplayed.ReturnIncreasedResistance() + "</color>";
+
         }
     }
 
