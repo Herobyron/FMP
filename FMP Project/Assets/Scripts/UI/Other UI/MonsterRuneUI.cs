@@ -295,6 +295,8 @@ public class MonsterRuneUI : MonoBehaviour
             TheManager.LoadMonsterInformation();
             StoreMonsters();
             RefreshMonsterStats();
+            RefreshRuneEquipedMonsterUI();
+            
         }
         else
         {
