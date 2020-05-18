@@ -296,6 +296,7 @@ public class MonsterRuneUI : MonoBehaviour
             StoreMonsters();
             RefreshMonsterStats();
             RefreshRuneEquipedMonsterUI();
+            RefreshRuneImageUI();
             
         }
         else

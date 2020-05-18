@@ -1854,8 +1854,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -231, y: 138}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -203, y: 141}
+  m_SizeDelta: {x: 148.7, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1227020207831596441
 CanvasRenderer:
@@ -1898,7 +1898,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 12345
 --- !u!114 &3170620879825074428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10855,8 +10855,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 108, y: 141}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 76, y: 142}
+  m_SizeDelta: {x: 144.5, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3175308863423087406
 CanvasRenderer:
@@ -10899,7 +10899,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'test
+  m_Text: '12345
 
 '
 --- !u!114 &5946063542953928268
