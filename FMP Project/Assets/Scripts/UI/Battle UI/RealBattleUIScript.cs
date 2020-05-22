@@ -895,7 +895,7 @@ public class RealBattleUIScript : MonoBehaviour
             //TheTarget.AddRange(BattleManagerRef.ReturnPlayerMonsters());
             MonsterSkillScript TempSkill = CurrentMonster.GetMonsterSKills()[0];
             TheCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
-
+            MonsterScript TempMon = CurrentMonster;
 
             if (CurrentMonster.ReturnMonsterName() == BattleManagerRef.ReturnEnemyMonsters()[0].ReturnMonsterName())
             {
@@ -1140,6 +1140,9 @@ public class RealBattleUIScript : MonoBehaviour
     {
         BattleManagerRef.BattleSummarySet(true);
         SummaryButtonPanel.SetActive(true);
+
+        SummaryMoveOne.text = "";
+        SummaryMoveTwo.text = "";
 
         if(TheSkill.ReturnSkillAOE())
         {
@@ -1565,7 +1568,7 @@ public class RealBattleUIScript : MonoBehaviour
     }
 
     // this function is used to update the damage numvers so when a monster is healed or damaged the number can be seen
-    public void UpdateMonsterDamageNumber(MonsterSkillScript TheSkill, int DamageNumber, string MonsterOwner)
+    public void UpdateMonsterDamageNumber(MonsterSkillScript TheSkill, int DamageNumber, string MonsterOwner, int TargetNumber)
     {
         switch (TheSkill.GetSkillMainEffect())
         {
@@ -1624,7 +1627,7 @@ public class RealBattleUIScript : MonoBehaviour
                         if (MonsterOwner == "Player")
                         {
 
-                            switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                            switch (TargetNumber)
                             {
                                 case (0):
                                     {
@@ -1649,7 +1652,7 @@ public class RealBattleUIScript : MonoBehaviour
                         else
                         {
                             
-                            switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                            switch (TargetNumber)
                             {
                                 case (0):
                                     {
@@ -1729,7 +1732,7 @@ public class RealBattleUIScript : MonoBehaviour
                     {
                         if (MonsterOwner == "Player")
                         {
-                            switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                            switch (TargetNumber)
                             {
                                 case (0):
                                     {
@@ -1757,7 +1760,7 @@ public class RealBattleUIScript : MonoBehaviour
                         else
                         {
 
-                            switch (BattleManagerRef.ReturnTargetMonsterNumber())
+                            switch (TargetNumber)
                             {
                                 case (0):
                                     {
@@ -2620,7 +2623,7 @@ public class RealBattleUIScript : MonoBehaviour
         string TempCurrentMonsterOwner = CurrentMonster.ReturnMonsterOwner();
         string CurrentMonsterName = CurrentMonster.ReturnMonsterName();
         bool CrititcalHit = CurrentMonster.ReturnLastSkillCrit();
-
+        int TempTargetNumber = BattleManagerRef.ReturnTargetMonsterNumber();
         
        
         if(CrititcalHit)
@@ -2628,11 +2631,16 @@ public class RealBattleUIScript : MonoBehaviour
             CriticalHitText.gameObject.SetActive(true);
         }
 
-        for(float i = 0; i < DisplayTime; i+= Time.deltaTime)
+        
+
+        for (float i = 0; i < DisplayTime; i+= Time.deltaTime)
         {
-            UpdateMonsterDamageNumber(TheSkill, tempdamage, TempCurrentMonsterOwner);
-           
-                switch (TheSkill.GetSkillSecondaryEffect())
+            if (!calculated)
+            {
+                UpdateMonsterDamageNumber(TheSkill, tempdamage, TempCurrentMonsterOwner, TempTargetNumber);
+                calculated = false;
+            }
+            switch (TheSkill.GetSkillSecondaryEffect())
                 {
                     case ("Damage"):
                         {
@@ -2874,16 +2882,26 @@ public class RealBattleUIScript : MonoBehaviour
                            
                             break;
                         }
-                }
-            
-        
+            }
+
+
             
             yield return null;
             
         }
 
+        //if (CurrentMonster.ReturnMonsterOwner() == "AI")
+        //    EnableBattleSummary(TheSkill);
 
-       
+        //if (CurrentMonster.ReturnMonsterOwner() == "AI")
+        //{
+        //    SetMonsterCurrentHealthBar(false);
+        //    BattleManagerRef.EndCurrentTurnAIBattle();
+        //    UpdateEffectDisplay();
+        //    UpdateCurrentMonsterIcon();
+        //}
+        
+
 
         MonsterOneDamageText.text = "";
         MonsterTwoDamageText.text = "";
